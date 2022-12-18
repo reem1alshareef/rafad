@@ -1,7 +1,7 @@
-// ignore_for_file: camel_case_types
+// ignore_for_file: camel_case_types, avoid_print, duplicate_ignore
 
 import 'package:flutter/material.dart';
-// ignore: depend_on_referenced_packages
+// ignore: depend_on_referenced_packages, unused_import
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -26,9 +26,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     try{
       await FirebaseAuth.instance.sendPasswordResetEmail(email: _emailController.text.trim());
     } on FirebaseAuthException catch(e){
+      // ignore: avoid_print
       print(e);
       showDialog(context: context, builder: (context){
-        return AlertDialog(content: Text('Password reset link sent! Check your email'),
+        return const AlertDialog(content: Text('Password reset link sent! Check your email'),
         );
         }
         );
