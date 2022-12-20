@@ -8,8 +8,8 @@ void main() async {
 WidgetsFlutterBinding.ensureInitialized();
 // ignore: unused_local_variable
 var DefaultFirebaseOptions;
-FirebaseApp app = await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,); // initializing the firebase app
+var currentPlatform = DefaultFirebaseOptions.currentPlatform;
+// initializing the firebase app
 runApp(const GoogleSignIn()); // calling runApp
 }
 
