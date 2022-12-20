@@ -3,7 +3,6 @@
 import 'package:flutter/material.dart';
 import 'package:rafad1/widgets/my_button.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:rafad1/widgets/custom_input_field.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
@@ -15,7 +14,7 @@ class ForgotPasswordPage extends StatefulWidget {
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   final _emailController =TextEditingController();
-  
+
   @override 
   void dispose(){
     _emailController.dispose();
@@ -51,37 +50,19 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
         const SizedBox(height: 10,),
 
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 25.0),
-          child: TextField(
-            controller: _emailController,
-            decoration: InputDecoration(
-              enabledBorder: OutlineInputBorder(
-                borderSide: const BorderSide(color: Colors.blue),
-                borderRadius: BorderRadius.circular(12),
-              ),
-              hintText: 'Email' ,
-              fillColor: Colors.grey[200],
-              filled: true,
-              ),
-            ),
-          ),
-
           const SizedBox(height: 10,),
-          CustomInputField(
-                            labelText: 'Email',
-                            hintText: 'Your email id',
-                            isDense: true,
-                            validator: (textValue) {
-                              if(textValue == null || textValue.isEmpty) {
-                                return 'Email is required!';
-                              }
-                              if(!EmailValidator.validate(textValue)) {
-                                return 'Please enter a valid email';
-                              }
-                              return null;
-                            }
-                        ),
+          TextFormField(
+            controller: _emailController,
+            cursorColor: Colors.white,
+            textInputAction: TextInputAction. done,
+            decoration: InputDecoration(labelText: 'Email'),
+            autovalidateMode:AutovalidateMode.onUserInteraction,
+            validator: (email) =>
+              email != null && !EmailValidator. validate(email)
+                  ? 'Enter a valid email'
+                      : null,
+            ),
+
          MyButton(
               color: const Color(0xFF455D83),
               title: 'Reset Password',
@@ -95,3 +76,4 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
  
 }
+
