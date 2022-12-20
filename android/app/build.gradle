@@ -29,6 +29,10 @@ apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
 android {
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
+    
+    defaultConfig{
+        minSdkVersion 19
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -53,7 +57,7 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
-
+    
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
