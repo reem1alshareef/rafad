@@ -10,6 +10,14 @@ class SignUpCampaign extends StatefulWidget {
 }
 
 class _SignUpCampaignState extends State<SignUpCampaign> {
+  late String nameC;
+  late String phoneNumberC;
+  late String emailC;
+  late String address;
+  late String commercialID;
+  late String capacity;
+  late String password;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +35,9 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
             SizedBox(height: 50),
             TextField(
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                nameC = value;
+              },
               decoration: InputDecoration(
                 labelText: 'campaign name',
                 hintText: 'your campaign name',
@@ -63,7 +73,9 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
             SizedBox(height: 8),
             TextField(
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                phoneNumberC = value;
+              },
               decoration: InputDecoration(
                 hintText: 'your phone number',
                 labelText: 'phone number',
@@ -99,7 +111,9 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
             SizedBox(height: 8),
             TextField(
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                emailC = value;
+              },
               decoration: InputDecoration(
                 hintText: 'your email',
                 labelText: 'email',
@@ -135,7 +149,9 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
             SizedBox(height: 8),
             TextField(
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                address = value;
+              },
               decoration: InputDecoration(
                 hintText: 'your campaign address',
                 labelText: 'address',
@@ -171,7 +187,9 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
             SizedBox(height: 8),
             TextField(
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                commercialID = value;
+              },
               decoration: InputDecoration(
                 hintText: 'your commercial registraion ID',
                 labelText: 'commercial registraion ID',
@@ -207,7 +225,9 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
             SizedBox(height: 8),
             TextField(
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                capacity = value;
+              },
               decoration: InputDecoration(
                 hintText: 'The number of campaign capacity',
                 labelText: 'campaign capacity',
@@ -243,7 +263,9 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
             SizedBox(height: 8),
             TextField(
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                password = value;
+              },
               decoration: InputDecoration(
                 hintText: 'your password',
                 labelText: 'password',
@@ -280,7 +302,9 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
             MyButton(
               color: const Color(0xFF455D83),
               title: 'register',
-              onPressed: () {},
+              onPressed: () {
+                //  Navigator.pushNamed(context, logOutCampaign.screenRoute);
+              },
             )
           ],
         ),

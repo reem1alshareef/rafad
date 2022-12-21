@@ -1,5 +1,8 @@
+//import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:rafad1/widgets/my_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+//import 'package:';هنا لازم احط صفحة ريم لوق اوت بعد ماتسوي التعريف
 
 class SignUpPilgrim extends StatefulWidget {
   static const String screenRoute = 'signUP_pilgrim';
@@ -10,6 +13,16 @@ class SignUpPilgrim extends StatefulWidget {
 }
 
 class _SignUpPilgrimState extends State<SignUpPilgrim> {
+  final _auth = FirebaseAuth.instance;
+  late String name;
+  late String phoneNumber;
+  late String email;
+  late String hajPermission;
+  late String chronicDisease;
+  late String pharmaceutical;
+  late String password;
+//هذي عشان نخزن البيانات فيها
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,16 +40,8 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
             SizedBox(height: 50),
             TextFormField(
               textAlign: TextAlign.center,
-              onChanged: (value) {},
-              validator: (value) {
-                // code valditer
-                /* if (value!.isEmpty ||
-                    !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                  //allow upper and lower case alphabets and space
-                  return "Enter Correct Name";
-                } else {
-                  return null;
-                }*/
+              onChanged: (value) {
+                name = value; //هنا الفاليو اذا دخل الاسم بينحفظ
               },
               decoration: InputDecoration(
                 labelText: 'pilgrim name',
@@ -51,7 +56,6 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                   ),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  //لون حدود الحقل
                   borderSide: BorderSide(
                     color: const Color(0xFF7D8DBA), //color: Colors.blue,
                     width: 1,
@@ -61,7 +65,6 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  // لما يختار هذا الحقل
                   borderSide: BorderSide(
                     color: Colors.blue,
                     width: 2,
@@ -75,7 +78,9 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
             SizedBox(height: 8),
             TextField(
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                phoneNumber = value;
+              },
               decoration: InputDecoration(
                 hintText: 'your phone number',
                 labelText: 'phone number',
@@ -111,7 +116,9 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
             SizedBox(height: 8),
             TextField(
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                email = value;
+              },
               decoration: InputDecoration(
                 hintText: 'your Email',
                 labelText: 'email',
@@ -147,7 +154,9 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
             SizedBox(height: 8),
             TextField(
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                hajPermission = value;
+              },
               decoration: InputDecoration(
                 hintText: 'your haj permission ID',
                 labelText: 'haj permission ID',
@@ -183,7 +192,9 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
             SizedBox(height: 8),
             TextField(
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                chronicDisease = value;
+              },
               decoration: InputDecoration(
                 hintText: 'if you suffer from any chronic disease',
                 labelText: 'chronic disease',
@@ -219,7 +230,9 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
             SizedBox(height: 8),
             TextField(
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                pharmaceutical = value;
+              },
               decoration: InputDecoration(
                 hintText: 'if you are taking any pharmaceutical',
                 labelText: 'pharmaceutical',
@@ -254,8 +267,11 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
             ),
             SizedBox(height: 8),
             TextFormField(
+              obscureText: true,
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                password = value;
+              },
               decoration: InputDecoration(
                 hintText: 'your password',
                 labelText: 'password',
@@ -296,9 +312,29 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
             ),
             SizedBox(height: 10),
             MyButton(
-              color: const Color(0xFF455D83), // color: Colors.blue[800]!,
+              color: const Color(0xFF455D83),
               title: 'register',
-              onPressed: () {},
+              onPressed: () async {
+                //اجرب احط هنا كود الفاليديتر
+
+                try {
+                  final newUser = await _auth.createUserWithEmailAndPassword(
+                      //اويت عشان يشيك هل الاميل والباس موجوده ؟ عشان يقدر يكمل تعبئة بيانات
+                      email: email,
+                      password:
+                          password); //يرجع لي في السمتقبل هل هو موجود الايميل او لا
+                  //  Navigator.pushNamed(context, logOutPilgrim.screenRoute); لازم ملف ريم موجود + تسوي التعريف في صفحتها
+                } catch (e) {
+                  print(e);
+                }
+                /* print(name); //طباعة عشان اتاكد من الكونسول هل فعلا حفظها او لا
+                print(phoneNumber);
+                print(email);
+                print(hajPermission);
+                print(chronicDisease);
+                print(pharmaceutical);
+                print(password);*/
+              },
             )
           ],
         ),
