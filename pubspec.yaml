@@ -38,6 +38,9 @@ dependencies:
   cupertino_icons: ^1.0.2
   screens: ^2.5.0
   email_validator: ^2.1.17
+  firebase_storage: ^11.0.8
+  firebase_auth: ^4.2.1
+  cloud_firestore: ^4.2.0
   
 
 dev_dependencies:
