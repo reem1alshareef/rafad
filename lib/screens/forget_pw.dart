@@ -45,6 +45,10 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
  @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF455D83),
+        elevation: 0,
+      ),
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -53,7 +57,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             SizedBox(
-              height: 180,
+              height: 300,
               child: Image.asset('assets/images/logo.png'),
             ),
         const Padding(
