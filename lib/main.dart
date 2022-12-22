@@ -112,16 +112,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }}
-class RequestPage extends StatefulWidget {
-@override
 
-Widget build(BuildContext context){
-Return scaffold (
-
-body: Center(child: Text( ‘Requests Page’ ),),
-);
-}
-}
 
 
 
