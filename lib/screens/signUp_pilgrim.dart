@@ -28,16 +28,6 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
             TextFormField(
               textAlign: TextAlign.center,
               onChanged: (value) {},
-              validator: (value) {
-                // code valditer
-                /* if (value!.isEmpty ||
-                    !RegExp(r'^[a-z A-Z]+$').hasMatch(value)) {
-                  //allow upper and lower case alphabets and space
-                  return "Enter Correct Name";
-                } else {
-                  return null;
-                }*/
-              },
               decoration: InputDecoration(
                 labelText: 'pilgrim name',
                 hintText: 'your full name',
@@ -255,7 +245,10 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
             SizedBox(height: 8),
             TextFormField(
               textAlign: TextAlign.center,
-              onChanged: (value) {},
+              onChanged: (value) {
+                
+
+              },
               decoration: InputDecoration(
                 hintText: 'your password',
                 labelText: 'password',
