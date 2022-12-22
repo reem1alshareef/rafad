@@ -6,6 +6,7 @@ import 'package:rafad1/widgets/my_button.dart';
 import 'package:email_validator/email_validator.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
+  static const String screenRoute = 'forget_pw';
   const ForgotPasswordPage({super.key});
 
   @override
