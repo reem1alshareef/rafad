@@ -196,7 +196,7 @@ class _LoginPageState extends State<LoginPage> {
     }on FirebaseAuthException catch (e){
       showDialog(context: context, builder: (context){
       return const AlertDialog(
-        content: Text('Email or Password is not correct, try again.'),
+        content: Text('Email or Password is not correct, try again please.'),
       );
     });
     }
