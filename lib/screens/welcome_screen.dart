@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:rafad1/screens/signUP_pilgrim.dart'; //سويت امبورت عشان الربط مع البتن
 import 'package:rafad1/screens/signUp_campaign.dart'; // same
 import 'package:rafad1/widgets/my_button.dart';
+import 'package:rafad1/screens/forget_pw.dart';
+import 'package:rafad1/screens/LoginPage.dart';
 
 class WelcomeScreen extends StatefulWidget {
   static const String screenRoute = 'welcome_screen'; // للربط بين الصفحات
@@ -59,19 +61,34 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 TextButton(
                   child: const Text(
                     'log in',
-                    style: TextStyle(fontSize: 20),
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  onPressed: () {
+                    
+                    Navigator.pushNamed(context, LoginPage.screenRoute);
+                  },
+                ),
+              
+               /* Row(
+              children: <Widget>[
+                TextButton(
+                  child: const Text(
+                    'Forgot Password',
+                    style: TextStyle(fontSize: 15),
                   ),
                   onPressed: () {
                     //log in screen هنا ربط مع صفحة شادن
                     //Navigator.pushNamed(context, .screenRoute);
+                    Navigator.pushNamed(context, ForgotPasswordPage.screenRoute);
                   },
                 )
               ],
               mainAxisAlignment: MainAxisAlignment.center,
-            ),
+            ),*/
           ],
         ),
-      ),
+      ]),
+    ),
     );
   }
 }
