@@ -1,4 +1,4 @@
-//import 'package:email_validator/email_validator.dart';
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:rafad1/widgets/my_button.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -26,6 +26,10 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF455D83),
+        elevation: 0,
+      ),
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -33,11 +37,35 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: 180,
-              child: Image.asset('assets/images/logo.png'),
+            Column(
+              children: [
+                SizedBox(
+                  height: 300,
+                  child: Image.asset('assets/images/logo.png'),
+                ),
+                const Text(
+                  'Sign up as Pilgrim',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF788AA4),
+                  ),
+                ),
+              ],
             ),
             SizedBox(height: 50),
+            RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                text: 'MARKED TO',
+                children: <TextSpan>[
+                  TextSpan(
+                    text: '*',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ],
+              ),
+            ),
             TextFormField(
               textAlign: TextAlign.center,
               onChanged: (value) {
@@ -57,7 +85,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                    color: const Color(0xFF7D8DBA), //color: Colors.blue,
+                    color: const Color(0xFF7D8DBA),
                     width: 1,
                   ),
                   borderRadius: BorderRadius.all(
@@ -315,25 +343,13 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
               color: const Color(0xFF455D83),
               title: 'register',
               onPressed: () async {
-                //اجرب احط هنا كود الفاليديتر
-
                 try {
                   final newUser = await _auth.createUserWithEmailAndPassword(
-                      //اويت عشان يشيك هل الاميل والباس موجوده ؟ عشان يقدر يكمل تعبئة بيانات
-                      email: email,
-                      password:
-                          password); //يرجع لي في السمتقبل هل هو موجود الايميل او لا
+                      email: email, password: password);
                   //  Navigator.pushNamed(context, logOutPilgrim.screenRoute); لازم ملف ريم موجود + تسوي التعريف في صفحتها
                 } catch (e) {
                   print(e);
                 }
-                /* print(name); //طباعة عشان اتاكد من الكونسول هل فعلا حفظها او لا
-                print(phoneNumber);
-                print(email);
-                print(hajPermission);
-                print(chronicDisease);
-                print(pharmaceutical);
-                print(password);*/
               },
             )
           ],
@@ -342,3 +358,10 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
     );
   }
 }
+/* print(name); //طباعة عشان اتاكد من الكونسول هل فعلا حفظها او لا
+                print(phoneNumber);
+                print(email);
+                print(hajPermission);
+                print(chronicDisease);
+                print(pharmaceutical);
+                print(password);*/

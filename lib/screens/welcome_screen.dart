@@ -25,7 +25,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             Column(
               children: [
                 SizedBox(
-                  height: 180,
+                  height: 300,
                   child: Image.asset('assets/images/logo.png'),
                 ),
                 const Text(
@@ -41,14 +41,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             const SizedBox(height: 30),
             MyButton(
               color: const Color(0xFF455D83),
-              title: 'pilgrim',
+              title: 'Pilgrim',
               onPressed: () {
                 Navigator.pushNamed(context, SignUpPilgrim.screenRoute);
               },
             ),
             MyButton(
               color: const Color(0xFF455D83),
-              title: 'campaign',
+              title: 'Campaign',
               onPressed: () {
                 Navigator.pushNamed(context, SignUpCampaign.screenRoute);
               },
@@ -57,13 +57,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               children: <Widget>[
                 const Text('Already a member?'),
                 TextButton(
-                  child: const Text(
-                    'log in',
-                    style: TextStyle(fontSize: 20),
-                  ),
+                  child: const Text('log in',
+                      //style: TextStyle(fontSize: 20),
+                      style: TextStyle(
+                        decoration:
+                            TextDecoration.underline, //اضافة شادن عشان الخط
+                        fontSize: 20,
+                      )),
                   onPressed: () {
-                    //log in screen هنا ربط مع صفحة شادن
-                    //Navigator.pushNamed(context, .screenRoute);
+                    //هنا ربط مع صفحة شادن
+                    //Navigator.pushNamed(context, log in screen.screenRoute);
                   },
                 )
               ],

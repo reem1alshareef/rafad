@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rafad1/widgets/my_button.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpCampaign extends StatefulWidget {
   static const String screenRoute = 'signUp_campaign';
@@ -21,6 +22,10 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF455D83),
+        elevation: 0,
+      ),
       backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -28,10 +33,26 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(
-              height: 180,
-              child: Image.asset('assets/images/logo.png'),
+            Column(
+              children: [
+                SizedBox(
+                  height: 300,
+                  child: Image.asset('assets/images/logo.png'),
+                ),
+                const Text(
+                  'Sign up as Pilgrim',
+                  style: TextStyle(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w900,
+                    color: Color(0xFF788AA4),
+                  ),
+                ),
+              ],
             ),
+            /* SizedBox(
+              height: 300,
+              child: Image.asset('assets/images/logo.png'),
+            ),*/
             SizedBox(height: 50),
             TextField(
               textAlign: TextAlign.center,
