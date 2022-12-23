@@ -19,8 +19,8 @@ void main() {
         , 
         ElevatedButton( child: Text('delet') ,onPressed:(){fetchdata("commercial_ID" , false);}, )
 
-       ],
-         
+],
+
         
       )
 
@@ -72,8 +72,7 @@ await FirebaseFirestore.instance.collection("campaigns").add({
       'password': password,
       'phoneNumber': phoneNumber,
       'seatingCapacity': seatingCapacity,
-  }); 
-  
+});
 
- }
-  }
+}
+}

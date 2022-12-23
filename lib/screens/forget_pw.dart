@@ -43,7 +43,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
 
   }
 
- @override
+@override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -84,8 +84,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ? 'Enter a valid email'
                       : null,
             ),
-
-         MyButton(
+            MyButton(
               color: const Color(0xFF455D83),
               title: 'Reset Password',
               onPressed: passwordReset,
@@ -95,7 +94,5 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     ),
     );
   }
-
- 
 }
 
