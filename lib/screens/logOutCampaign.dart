@@ -20,10 +20,12 @@ class logOutCampaign extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: const Color(0xFF455D83),
+        elevation: 0,
         actions: [
           const SizedBox(height: 30),
           MyButton(
-            color: const Color(0xFF455D83),
+            color: Color.fromARGB(255, 250, 73, 13),
             title: 'Sign Out ',
             onPressed: () {
               FirebaseAuth.instance.signOut();
@@ -38,7 +40,8 @@ class logOutCampaign extends StatelessWidget {
       ),
       body: Center(
           child: Text(
-        "you have logged in As" + user.email!,
+        "hello ! you have logged in As campign" ,
+        //+ user.email!,
         style: TextStyle(fontSize: 20),
       )),
     );
