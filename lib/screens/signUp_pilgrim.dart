@@ -1,7 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 //import '';   لوق ان شادن الخاص بالحاج
-//import ;  حقت الحاج مهم يودي لوق اوت
+import 'package:rafad1/screens/logOutPilgrim.dart'; //شادن سوي النفقيتر له
 //import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpPilgrim extends StatefulWidget {
@@ -376,7 +376,7 @@ class PageHeader extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.3,
-      //child: Image.asset('assets/images/friendship.png'),احط خلفية شادن
+      //child: Image.asset('assets/images/friendship.png'), خلفية شادن
     );
   }
 }
@@ -398,4 +398,3 @@ class PageHeading extends StatelessWidget {
     );
   }
 }
-

@@ -1,7 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 //import '';   لوق ان شادن الخاص بالحملة
-//import ;  حقت الحملة مهم يودي لوق اوت
+import 'package:rafad1/screens/logOutCampaign.dart'; //شادن سوي نفقيتر له
 //import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpCampaign extends StatefulWidget {
@@ -237,7 +237,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                             ),
                             GestureDetector(
                               onTap: () => {
-                                //Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()))صفحة شادن هنا
+                                //Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()))صفحة شادن هنا حقت الحملة
                               },
                               child: const Text(
                                 'Log-in',
@@ -266,7 +266,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
   }
 
   void _handleSignupUser() {
-    //مهم جدا هل اغير  اسمم ويصير حق الحملة لانه موجود عند الحاج
+    //مهم جدا هل يتغير  اسمم ويصير حق الحملة لانه موجود عند الحاج
     // signup user campaign Be careful
     if (_signupFormKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -389,7 +389,7 @@ class PageHeader extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.3,
-      //child: Image.asset('assets/images/friendship.png'),احط خلفية شادن
+      //child: Image.asset('assets/images/friendship.png'), خلفية شادن
     );
   }
 }

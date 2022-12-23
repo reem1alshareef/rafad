@@ -4,6 +4,10 @@ import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/signUp_campaign.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rafad1/screens/logOutAdmin.dart';
+import 'package:rafad1/screens/logOutPilgrim.dart';
+import 'package:rafad1/screens/logOutCampaign.dart';
+//شادن سوي كذا لوق ان حقك هنا import
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,12 +28,15 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: WelcomeScreen.screenRoute, //بدل الهوم
+        initialRoute: WelcomeScreen.screenRoute,
         routes: {
-          WelcomeScreen.screenRoute: (context) => WelcomeScreen(),
-          SignUpPilgrim.screenRoute: (context) => SignUpPilgrim(),
-          SignUpCampaign.screenRoute: (context) => SignUpCampaign(),
-          //LoginPage.screenRoute: (context) => LoginPage(),
+          WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
+          SignUpPilgrim.screenRoute: (context) => const SignUpPilgrim(),
+          SignUpCampaign.screenRoute: (context) => const SignUpCampaign(),
+          logOutAdmin.screenRoute: (context) => logOutAdmin(),
+          logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
+          logOutCampaign.screenRoute: (context) => logOutCampaign(),
+          // LoginPage.screenRoute: (context) => LoginPage(), شادن
         });
   }
 }
