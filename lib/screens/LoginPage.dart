@@ -179,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
           await auth.signInWithEmailAndPassword(email: emailAddress, password: userPassword);
           emailAddress='';
           userPassword='';
-          Navigator.push(context, MaterialPageRoute(builder: (context) =>  logOutPilgrim()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) =>  logOutAdmin()));
                                     ///home_screen_owner
       } else if(isCampaign){//on case of campaign
           isCampaign=false;
