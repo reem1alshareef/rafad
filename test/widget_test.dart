@@ -7,8 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:rafad1/main.dart';
+import 'package:rafad1/main.dart'; //كان فيه ايرور وهذا الحل اللي حطه
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
