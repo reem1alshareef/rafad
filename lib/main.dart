@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:rafad1/screens/LoginPage.dart';
 import 'package:rafad1/screens/signUP_pilgrim.dart'; //اضفت هذي عشان اشغل الاسين اب
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/signUp_campaign.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:rafad1/screens/forget_pw.dart';
+import 'package:rafad1/screens/logOutAdmin.dart';
+import 'package:rafad1/screens/logOutPilgrim.dart';
+import 'package:rafad1/screens/logOutCampaign.dart';
+//شادن سوي كذا لوق ان حقك هنا import
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,7 +18,7 @@ Future main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -26,13 +28,15 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: WelcomeScreen.screenRoute, //بدل الهوم
+        initialRoute: WelcomeScreen.screenRoute,
         routes: {
-          WelcomeScreen.screenRoute: (context) => WelcomeScreen(),
-          SignUpPilgrim.screenRoute: (context) => SignUpPilgrim(),
-          SignUpCampaign.screenRoute: (context) => SignUpCampaign(),
-          LoginPage.screenRoute: (context) => const LoginPage(),
-          //ForgotPasswordPage.screenRoute: (context) => const ForgotPasswordPage(),
+          WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
+          SignUpPilgrim.screenRoute: (context) => const SignUpPilgrim(),
+          SignUpCampaign.screenRoute: (context) => const SignUpCampaign(),
+          logOutAdmin.screenRoute: (context) => logOutAdmin(),
+          logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
+          logOutCampaign.screenRoute: (context) => logOutCampaign(),
+          // LoginPage.screenRoute: (context) => LoginPage(), شادن
         });
   }
 }

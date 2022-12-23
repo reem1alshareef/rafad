@@ -5,15 +5,15 @@ import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/widgets/my_button.dart';
 
 // ignore: camel_case_types
-class logOutAdmin extends StatelessWidget {
-  static const String screenRoute = 'logOutAdmin';
-  logOutAdmin({super.key});
+class logOutPilgrim extends StatelessWidget {
+  static const String screenRoute = 'logOutPilgrim';
+  logOutPilgrim({super.key});
 
   final user = FirebaseAuth.instance.currentUser!;
 
-  /* void signUserOut() {
+  /*void signUserOut() {
     FirebaseAuth.instance.signOut();
-    //Navigator.pushNamed(context, WelcomeScreen.screenRoute);
+    //Navigator.pushNamed(context, WelcomeScreen.screenRoute);, هذي الطريقة ماضبطت حقي ان شاء الله يضبط,  بتول ضبطي النافيقيتر
   }*/
 
   @override
@@ -30,6 +30,10 @@ class logOutAdmin extends StatelessWidget {
               Navigator.pushNamed(context, WelcomeScreen.screenRoute);
             },
           ),
+          /*IconButton(
+            onPressed: signUserOut,
+            icon: Icon(Icons.logout),
+          )*/
         ],
       ),
       body: Center(
