@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:rafad1/screens/LoginPage.dart';
 import 'package:rafad1/screens/signUP_pilgrim.dart'; //اضفت هذي عشان اشغل الاسين اب
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/signUp_campaign.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+//import 'package:rafad1/screens/forget_pw.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized;
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp();
+
   runApp(const MyApp());
 }
 
@@ -27,7 +31,8 @@ class MyApp extends StatelessWidget {
           WelcomeScreen.screenRoute: (context) => WelcomeScreen(),
           SignUpPilgrim.screenRoute: (context) => SignUpPilgrim(),
           SignUpCampaign.screenRoute: (context) => SignUpCampaign(),
-          //LoginPage.screenRoute: (context) => LoginPage(),
+          LoginPage.screenRoute: (context) => const LoginPage(),
+          //ForgotPasswordPage.screenRoute: (context) => const ForgotPasswordPage(),
         });
   }
 }

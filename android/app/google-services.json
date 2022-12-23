@@ -1,18 +1,27 @@
 {
   "project_info": {
     "project_number": "379454219644",
+    "firebase_url": "https://reemdatabase-default-rtdb.firebaseio.com",
     "project_id": "reemdatabase",
     "storage_bucket": "reemdatabase.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:379454219644:android:16d1267a3bce41083870f9",
+        "mobilesdk_app_id": "1:379454219644:android:ddabaa3aedb35e383870f9",
         "android_client_info": {
-          "package_name": "com.reem.rafad1"
+          "package_name": "com.example.rafad1"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "379454219644-ed6lg95rcts753lvcjkme92123cmap6h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rafad1",
+            "certificate_hash": "edd6c1d75e19db3d34a48b202b5f0290f9a8d6db"
+          }
+        },
         {
           "client_id": "379454219644-jl4h85mt9psum45f6vd7qv0lgnb7n55f.apps.googleusercontent.com",
           "client_type": 3
