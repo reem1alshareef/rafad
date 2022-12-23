@@ -12,7 +12,7 @@ import 'package:rafad1/screens/logOutCampaign.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp();
+  //await Firebase.initializeApp();
 
   runApp(const MyApp());
 }
