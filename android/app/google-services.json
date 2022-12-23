@@ -42,6 +42,35 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379454219644:android:5f419fc7b7d123d63870f9",
+        "android_client_info": {
+          "package_name": "com.reem.rafad1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "379454219644-jl4h85mt9psum45f6vd7qv0lgnb7n55f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFI9ICH58se0xSvDuV9BBaa_ZkrX6jUys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "379454219644-jl4h85mt9psum45f6vd7qv0lgnb7n55f.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

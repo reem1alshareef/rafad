@@ -7,11 +7,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rafad1/screens/logOutAdmin.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
+
+import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 //شادن سوي كذا لوق ان حقك هنا import
 
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
+WidgetsFlutterBinding.ensureInitialized();
+await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform, //هذا عشان تحميل الفايربيس لا اصيدكم شايلينه
+);
   await Firebase.initializeApp();
 
   runApp(const MyApp());
