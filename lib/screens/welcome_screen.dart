@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rafad1/screens/signUP_pilgrim.dart';
 import 'package:rafad1/screens/signUp_campaign.dart';
 import 'package:rafad1/widgets/my_button.dart';
+import 'package:rafad1/screens/LoginPage.dart';
 //import شادن لوق ان مهممم بس اي لوق ان ؟ عندنا 2
 
 class WelcomeScreen extends StatefulWidget {
@@ -68,7 +69,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                   GestureDetector(
                     onTap: () => {
-                      //Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()))  صفحة شادن هنا بس اي وحده
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage())) 
                     },
                     child: const Text(
                       'Log-in',

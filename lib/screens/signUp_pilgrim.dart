@@ -67,10 +67,10 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                       const SizedBox(
                         height: 16,
                       ),
-                      SizedBox(
-                        height: 130,
-                        child: Image.asset('assets/images/logo.png'),
-                      ), //هنا حق الللوقو
+                      // SizedBox(
+                      //   height: 130,
+                      //   child: Image.asset('assets/images/logo.png'),
+                      // ), //هنا حق الللوقو
                       CustomInputField(
                           labelText: 'Pilgrim Name *',
                           hintText: 'Your full name',
@@ -141,8 +141,8 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                             if (!textValue.contains(RegExp(r'[0-9]'))) {
                               return 'Please enter valid ID';
                             }
-                            if (textValue.length != 5) {
-                              return 'ID must be of 5 digit';
+                            if (textValue.length != 10) {
+                              return 'ID must be of 10 digit';
                             }
                             return null;
                           }),
@@ -376,7 +376,7 @@ class PageHeader extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.3,
-      //child: Image.asset('assets/images/friendship.png'), خلفية شادن
+      child: Image.asset('assets/images/logo.png'), 
     );
   }
 }

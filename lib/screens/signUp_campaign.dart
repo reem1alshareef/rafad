@@ -281,8 +281,18 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
         _auth.signInWithEmailAndPassword(email: emailC, password: password);//sign in to add the information
         final userCurrent=FirebaseAuth.instance.currentUser;//get the current user
         
+        //missing data save
 
 
+
+        //clean variables
+        emailC='';
+        phoneNumberC='';
+        nameC='';
+        address='';
+        commercialID='';
+        capacity='';
+        password='';
 
         //after sign up
         FirebaseAuth.instance.userChanges().listen((User? userr) {
