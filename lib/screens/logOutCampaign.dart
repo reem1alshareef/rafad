@@ -20,6 +20,7 @@ class logOutCampaign extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("campaign main home page"),
         backgroundColor: const Color(0xFF455D83),
         elevation: 0,
         actions: [

@@ -20,6 +20,7 @@ class logOutAdmin extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("admin main home page"),
         backgroundColor: const Color(0xFF455D83),
         elevation: 0,
         actions: [
