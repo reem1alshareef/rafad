@@ -5,16 +5,19 @@ import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/widgets/my_button.dart';
 
 // ignore: camel_case_types
+void main(){
+  runApp(logOutAdmin());
+}
 class logOutAdmin extends StatelessWidget {
   static const String screenRoute = 'logOutAdmin';
   logOutAdmin({super.key});
 
   final user = FirebaseAuth.instance.currentUser!;
 
-  /* void signUserOut() {
-    FirebaseAuth.instance.signOut();
+  // void signUserOut() {
+    //FirebaseAuth.instance.signOut();
     //Navigator.pushNamed(context, WelcomeScreen.screenRoute);
-  }*/
+  //}
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +38,20 @@ class logOutAdmin extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
-          child: Text(
-        "hello ! you have logged in As admin" ,
-        //+ user.email!,
-        style: TextStyle(fontSize: 20),
-      )),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assts/images/background.png"),
+            fit: BoxFit.cover
+          )
+        ),
+      // body: Center(
+      //     child: Text(
+      //   "hello ! you have logged in As admin" ,
+      //   //+ user.email!,
+      //   style: TextStyle(fontSize: 20),
+      // )),
+      ),
     );
   }
 }
