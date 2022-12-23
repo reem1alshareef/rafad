@@ -1,13 +1,12 @@
-import 'dart:js';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/widgets/my_button.dart';
+//import 'dart:js';
 
-// ignore: camel_case_types
-void main(){
-  runApp(logOutAdmin());
-}
+// void main(){
+//   runApp(logOutAdmin());
+// }
 class logOutAdmin extends StatelessWidget {
   static const String screenRoute = 'logOutAdmin';
   logOutAdmin({super.key});
