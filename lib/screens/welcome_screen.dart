@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:rafad1/screens/signUP_pilgrim.dart'; //سويت امبورت عشان الربط مع البتن
 import 'package:rafad1/screens/signUp_campaign.dart'; // same
 import 'package:rafad1/widgets/my_button.dart';
+//import شادن لوق ان مهممم بس اي لوق ان ؟ عندنا 2
 
 class WelcomeScreen extends StatefulWidget {
   static const String screenRoute = 'welcome_screen'; // للربط بين الصفحات
@@ -41,36 +42,45 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             const SizedBox(height: 30),
             MyButton(
               color: const Color(0xFF455D83),
-              title: 'Pilgrim',
+              title: 'As Pilgrim',
               onPressed: () {
                 Navigator.pushNamed(context, SignUpPilgrim.screenRoute);
               },
             ),
             MyButton(
               color: const Color(0xFF455D83),
-              title: 'Campaign',
+              title: 'As Campaign',
               onPressed: () {
                 Navigator.pushNamed(context, SignUpCampaign.screenRoute);
               },
             ),
-            Row(
-              children: <Widget>[
-                const Text('Already a member?'),
-                TextButton(
-                  child: const Text('log in',
-                      //style: TextStyle(fontSize: 20),
+            SizedBox(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Already have an account ? ',
+                    style: TextStyle(
+                        fontSize: 13,
+                        color: Color(0xff939393),
+                        fontWeight: FontWeight.bold),
+                  ),
+                  GestureDetector(
+                    onTap: () => {
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()))  صفحة شادن هنا بس اي وحده
+                    },
+                    child: const Text(
+                      'Log-in',
                       style: TextStyle(
-                        decoration:
-                            TextDecoration.underline, //اضافة شادن عشان الخط
-                        fontSize: 20,
-                      )),
-                  onPressed: () {
-                    //هنا ربط مع صفحة شادن
-                    //Navigator.pushNamed(context, log in screen.screenRoute);
-                  },
-                )
-              ],
-              mainAxisAlignment: MainAxisAlignment.center,
+                          fontSize: 15,
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline,
+                          fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
