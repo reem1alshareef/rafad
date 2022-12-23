@@ -1,6 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
-//import '';   لوق ان شادن الخاص بالحاج
+import 'package:rafad1/screens/LoginPage.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart'; //شادن سوي النفقيتر له
 //import 'package:firebase_auth/firebase_auth.dart';
 
@@ -225,7 +225,11 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                             ),
                             GestureDetector(
                               onTap: () => {
-                                //Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage())) صفحة شادن هنا حقت الحاج انتهبييي
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginPage()))
                               },
                               child: const Text(
                                 'Log-in',
@@ -376,7 +380,7 @@ class PageHeader extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.3,
-      child: Image.asset('assets/images/logo.png'), 
+      child: Image.asset('assets/images/logo.png'),
     );
   }
 }
