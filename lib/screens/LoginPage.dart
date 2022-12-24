@@ -6,6 +6,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rafad1/screens/forget_pw.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/logOutAdmin.dart';
+import 'package:rafad1/screens/logOutCampaign.dart';
+import 'package:rafad1/screens/logOutPilgrim.dart';
 
 
 // void main() {
@@ -45,6 +47,11 @@ class _LoginPageState extends State<LoginPage> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: const Color(0xFF455D83),
+          elevation: 0,
+        ), 
+
         backgroundColor: const Color(0xffEEF1F3),
         body: Column(
           children: [
@@ -72,6 +79,7 @@ class _LoginPageState extends State<LoginPage> {
                               }
                               if(textValue=="adminofrafadapp@admin.rafad"){
                                 print('reached bool');
+                                //print('reached bool');
                                 isAdmin=true;
                               }
                               if(!EmailValidator.validate(textValue)) {
@@ -109,6 +117,7 @@ class _LoginPageState extends State<LoginPage> {
                                 color: Color(0xff939393),
                                 fontSize: 13,
                                 fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
                               ),
                             ),
                           ),
@@ -163,40 +172,41 @@ class _LoginPageState extends State<LoginPage> {
     // login user
     if (_loginFormKey.currentState!.validate()) {
       print('reached first if');
+      //print('reached first if');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Submitting data..')),
         
       );
     }
     if (_loginFormKey.currentState!.validate()) {
-      print('reached second if');
-      print(isAdmin);
-      final FirebaseAuth auth=FirebaseAuth.instance;
-      print('reached create user');
+      //print('reached second if');
+      //print(isAdmin);
+      final FirebaseAuth _auth=FirebaseAuth.instance;
+      //print('reached create user');
       try{
       if (isAdmin) {//in case of an admin
           isAdmin = false;
-          await auth.signInWithEmailAndPassword(email: emailAddress, password: userPassword);
+          await _auth.signInWithEmailAndPassword(email: emailAddress, password: userPassword);
           emailAddress='';
           userPassword='';
           Navigator.push(context, MaterialPageRoute(builder: (context) =>  logOutAdmin()));
                                     ///home_screen_owner
       } else if(isCampaign){//on case of campaign
           isCampaign=false;
-          await auth.signInWithEmailAndPassword(email: emailAddress, password: userPassword);
+          await _auth.signInWithEmailAndPassword(email: emailAddress, password: userPassword);
           emailAddress='';
           userPassword='';
-          //Navigator.push(context, MaterialPageRoute(builder: (context) => const LogOutCampaign()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => logOutCampaign()));
       }else{//in case of pilgrim
-      await auth.signInWithEmailAndPassword(email: emailAddress, password: userPassword);
+      await _auth.signInWithEmailAndPassword(email: emailAddress, password: userPassword);
       emailAddress='';
       userPassword='';
-      //Navigator.push(context, MaterialPageRoute(builder: (context) => const LogOutPilgrim()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => logOutPilgrim()));
       }
     }on FirebaseAuthException catch (e){
       showDialog(context: context, builder: (context){
       return const AlertDialog(
-        content: Text('Email or Password is not correct, try again.'),
+        content: Text('Email or Password is not correct, try again please.'),
       );
     });
     }
@@ -237,8 +247,9 @@ class PageHeader extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return SizedBox(
       width: double.infinity,
-      height: size.height * 0.3,
+      height: size.height * 0.5,
       child: Image.asset('assets/images/logo.png'),
+      
     );
   }
 }

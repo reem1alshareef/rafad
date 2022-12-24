@@ -1,8 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-//import '';   لوق ان شادن الخاص بالحاج
+import 'package:rafad1/screens/LoginPage.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart'; //شادن سوي النفقيتر له
-//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class SignUpPilgrim extends StatefulWidget {
   static const String screenRoute = 'signUP_pilgrim';
@@ -13,28 +15,36 @@ class SignUpPilgrim extends StatefulWidget {
 }
 
 class _SignUpPilgrimState extends State<SignUpPilgrim> {
-//final _auth = FirebaseAuth.instance;
-  late String name;
+  // 1 in insert data
+  // 2 i put controller in each feild
+  // 3 in line 286 i write Map
+  final TextEditingController name = TextEditingController();
+  final TextEditingController email = TextEditingController();
+  final TextEditingController number = TextEditingController();
+  final TextEditingController hajId = TextEditingController();
+  final TextEditingController disease = TextEditingController();
+  final TextEditingController pharma = TextEditingController();
+  final TextEditingController password = TextEditingController();
+
+  final _signupFormKey = GlobalKey<FormState>();
+  //FirebaseAuth.instanse.createUserWithEmailAndPassword
+
+  //late DatabaseReference dbRef;
+//final _auth = FirebaseAuth.instance; بالمقطع ما حطه
+  /*late String name;
   late String phoneNumber;
   late String email;
   late String hajPermission;
   late String chronicDisease;
   late String pharmaceutical;
-  late String password;
+  late String password;*/
 //هذي عشان نخزن البيانات فيها
-  final _signupFormKey = GlobalKey<FormState>();
 
-  // Future _pickProfileImage() async {
-  //   try {
-  //     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-  //     if(image == null) return;
-
-  //     final imageTemporary = File(image.path);
-  //     setState(() => _profileImage = imageTemporary);
-  //   } on PlatformException catch (e) {
-  //     debugPrint('Failed to pick image error: $e');
-  //   }
-  // }
+  //كان حاط اوفررايد
+  /*void iniState() {
+    super.initState();
+    dbRef = FirebaseDatabase.instance.ref().child('pilgrim-signUP');
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -67,14 +77,15 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                       const SizedBox(
                         height: 16,
                       ),
-                      SizedBox(
-                        height: 130,
-                        child: Image.asset('assets/images/logo.png'),
-                      ), //هنا حق الللوقو
+                      // SizedBox(
+                      //   height: 130,
+                      //   child: Image.asset('assets/images/logo.png'),
+                      // ), //هنا حق الللوقو
                       CustomInputField(
                           labelText: 'Pilgrim Name *',
                           hintText: 'Your full name',
                           isDense: true,
+                          controller: name,
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Name field is required!';
@@ -94,6 +105,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                           labelText: 'Email *',
                           hintText: 'Your email id',
                           isDense: true,
+                          controller: email,
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Email is required!';
@@ -110,6 +122,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                           labelText: 'Phone number *',
                           hintText: 'Your phone number',
                           isDense: true,
+                          controller: number,
                           validator: (textValue) {
                             //الحمدلله ضبط
 
@@ -134,6 +147,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                           labelText: 'haj permission ID*',
                           hintText: 'your haj permission ID',
                           isDense: true,
+                          controller: hajId,
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'ID is required!';
@@ -141,8 +155,8 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                             if (!textValue.contains(RegExp(r'[0-9]'))) {
                               return 'Please enter valid ID';
                             }
-                            if (textValue.length != 5) {
-                              return 'ID must be of 5 digit';
+                            if (textValue.length != 10) {
+                              return 'ID must be of 10 digit';
                             }
                             return null;
                           }),
@@ -153,6 +167,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                           labelText: 'chronic disease',
                           hintText: 'if you suffer from any chronic disease',
                           isDense: true,
+                          controller: disease,
                           validator: (textValue) {
                             //تأكدي  هل صحيح لاني مافيه شرط هنا اساسا
                             return null;
@@ -164,6 +179,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                           labelText: 'pharmaceutical',
                           hintText: 'if you are taking any pharmaceutical',
                           isDense: true,
+                          controller: pharma,
                           validator: (textValue) {
                             //تأكدي  هل صحيح لاني مافيه شرط هنا اساسا
 
@@ -177,6 +193,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                         hintText: 'Your password',
                         isDense: true,
                         obscureText: true,
+                        controller: password,
                         validator: (textValue) {
                           if (textValue == null || textValue.isEmpty) {
                             return 'Password is required!';
@@ -225,7 +242,11 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                             ),
                             GestureDetector(
                               onTap: () => {
-                                //Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage())) صفحة شادن هنا حقت الحاج انتهبييي
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginPage()))
                               },
                               child: const Text(
                                 'Log-in',
@@ -261,7 +282,22 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
       );
     }
     if (_signupFormKey.currentState!.validate()) {
-      //اوش يسوي اذا انقبل الطلب، رفع البيانات
+      FirebaseAuth.instance.createUserWithEmailAndPassword(
+          email: email.text, password: password.text);
+
+      Map<String, dynamic> pilgrims = {
+        'name': name,
+        'email': email,
+        'number': number,
+        'hajId': hajId,
+        'disease': disease,
+        'pharma': pharma,
+        'password': password,
+      };
+      FirebaseFirestore.instance
+          .collection('pilgrims')
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .set(pilgrims);
     }
   }
 }
@@ -308,7 +344,8 @@ class CustomInputField extends StatefulWidget {
       required this.validator,
       this.suffixIcon = false,
       this.isDense,
-      this.obscureText = false})
+      this.obscureText = false,
+      required TextEditingController controller})
       : super(key: key);
 
   @override
@@ -376,7 +413,7 @@ class PageHeader extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.3,
-      //child: Image.asset('assets/images/friendship.png'), خلفية شادن
+      child: Image.asset('assets/images/logo.png'),
     );
   }
 }
