@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'haj App',
+        //home: logOutAdmin(),
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
