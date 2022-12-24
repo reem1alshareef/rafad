@@ -30,12 +30,12 @@ android {
     compileSdkVersion flutter.compileSdkVersion
     ndkVersion flutter.ndkVersion
     
-    defaultConfig{
+    /*defaultConfig{
         minSdkVersion 21
         targetSdkVersion 30
         versionCode flutterVersionCode 
         versionCode flutterVersionName 
-    }
+    }*/
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
