@@ -7,9 +7,9 @@ import 'package:rafad1/widgets/my_button.dart';
 // void main(){
 //   runApp(logOutAdmin());
 // }
-class logOutAdmin extends StatelessWidget {
-  static const String screenRoute = 'logOutAdmin';
-  logOutAdmin({super.key});
+class logOutCampaign extends StatelessWidget {
+  static const String screenRoute = 'logOutCampaign';
+  logOutCampaign({super.key});
 
   final user = FirebaseAuth.instance.currentUser!;
   // void signUserOut() {
