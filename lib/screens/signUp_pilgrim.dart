@@ -48,6 +48,9 @@ String ?password ;
                 const PageHeader(),
                 Container(
                   decoration: const BoxDecoration(
+                    image: DecorationImage(
+            image: AssetImage("assests/images/background.png"),
+            fit: BoxFit.cover),
                     color: Colors.white,
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),
