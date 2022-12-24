@@ -1,20 +1,21 @@
-//import 'dart:js';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/widgets/my_button.dart';
+//import 'dart:js';
 
-// ignore: camel_case_types
-class logOutPilgrim extends StatelessWidget {
-  static const String screenRoute = 'logOutPilgrim';
-  logOutPilgrim({super.key});
+// void main(){
+//   runApp(logOutAdmin());
+// }
+class logOutAdmin extends StatelessWidget {
+  static const String screenRoute = 'logOutAdmin';
+  logOutAdmin({super.key});
 
   final user = FirebaseAuth.instance.currentUser!;
-
-  /*void signUserOut() {
-    FirebaseAuth.instance.signOut();
-    //Navigator.pushNamed(context, WelcomeScreen.screenRoute);, هذي الطريقة ماضبطت حقي ان شاء الله يضبط,  بتول ضبطي النافيقيتر
-  }*/
+  // void signUserOut() {
+    //FirebaseAuth.instance.signOut();
+    //Navigator.pushNamed(context, WelcomeScreen.screenRoute);
+  //}
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +26,22 @@ class logOutPilgrim extends StatelessWidget {
         elevation: 0,
         actions: [
           const SizedBox(height: 30),
-          MyButton(
+        ],
+      ),
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assests/images/background.png"),
+            fit: BoxFit.cover
+          )
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Column(
+              children: [
+                  MyButton(
             color: Color.fromARGB(255, 250, 73, 13),
             title: 'Sign Out',
             onPressed: () {
@@ -33,18 +49,23 @@ class logOutPilgrim extends StatelessWidget {
               Navigator.pushNamed(context, WelcomeScreen.screenRoute);
             },
           ),
-          /*IconButton(
-            onPressed: signUserOut,
-            icon: Icon(Icons.logout),
-          )*/
-        ],
-      ),
-      body: Center(
-          child: Text(
-        "hello! you have logged in As pilgrim" ,
-        //+ user.email!,
-        style: TextStyle(fontSize: 20),
-      )),
-    );
+                // const Text(
+                //   "hello ! you have logged in successfully",
+                //   style: TextStyle(
+                //     fontSize: 20,
+                //     fontWeight: FontWeight.w900,
+                //     color: Color(0xFF788AA4),
+                //   ),
+                // ),
+              ],
+            ),
+      // body: Center(
+      //     child: Text(
+      //   "hello ! you have logged in As admin" ,
+      //   //+ user.email!,
+      //   style: TextStyle(fontSize: 20),
+      // )),
+  ]),
+    ));
   }
 }
