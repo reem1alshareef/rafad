@@ -9,7 +9,6 @@ class SignUpCampaign extends StatefulWidget {
   static const String screenRoute = 'signUp_campaign';
   const SignUpCampaign({Key? key}) : super(key: key);
 
-  @override
   State<SignUpCampaign> createState() => _SignUpCampaignState();
 }
 
