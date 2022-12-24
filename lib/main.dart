@@ -7,18 +7,21 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rafad1/screens/logOutAdmin.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
-
-import 'firebase_options.dart';
+import 'package:rafad1/screens/LoginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
-//شادن سوي كذا لوق ان حقك هنا import
+import 'firebase_options.dart';
+
+// ...
+
 
 Future main() async {
-WidgetsFlutterBinding.ensureInitialized();
-await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform, //هذا عشان تحميل الفايربيس لا اصيدكم شايلينه
-);
-  await Firebase.initializeApp();
+  WidgetsFlutterBinding.ensureInitialized();
 
+  //await Firebase.initializeApp();
+
+await Firebase.initializeApp(
+   options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(const MyApp());
 }
 
@@ -41,7 +44,7 @@ class MyApp extends StatelessWidget {
           logOutAdmin.screenRoute: (context) => logOutAdmin(),
           logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
           logOutCampaign.screenRoute: (context) => logOutCampaign(),
-          // LoginPage.screenRoute: (context) => LoginPage(), شادن
+          LoginPage.screenRoute: (context) => LoginPage(), 
         });
   }
 }

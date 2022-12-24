@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:fluttertoast_example/toast_context.dart';
 //import 'test.dart';
 import 'package:rafad1/screens/forget_pw.dart';
+import 'package:rafad1/screens/logOutCampaign.dart';
+import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/logOutAdmin.dart';
 
@@ -186,12 +188,12 @@ class _LoginPageState extends State<LoginPage> {
           await auth.signInWithEmailAndPassword(email: emailAddress, password: userPassword);
           emailAddress='';
           userPassword='';
-          //Navigator.push(context, MaterialPageRoute(builder: (context) => const LogOutCampaign()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => logOutCampaign()));
       }else{//in case of pilgrim
       await auth.signInWithEmailAndPassword(email: emailAddress, password: userPassword);
       emailAddress='';
       userPassword='';
-      //Navigator.push(context, MaterialPageRoute(builder: (context) => const LogOutPilgrim()));
+      Navigator.push(context, MaterialPageRoute(builder: (context) => logOutPilgrim()));
       }
     }on FirebaseAuthException catch (e){
       showDialog(context: context, builder: (context){

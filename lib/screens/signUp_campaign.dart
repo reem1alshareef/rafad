@@ -1,8 +1,10 @@
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-//import '';   لوق ان شادن الخاص بالحملة
+import 'package:rafad1/screens/LoginPage.dart';
 import 'package:rafad1/screens/logOutCampaign.dart'; //شادن سوي نفقيتر له
 //import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class SignUpCampaign extends StatefulWidget {
   static const String screenRoute = 'signUp_campaign';
@@ -50,15 +52,15 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                   child: Column(
                     children: [
                       const PageHeading(
-                        title: 'Sign up as Campaign',
+                        title: 'Registration request for Campaign',
                       ),
                       const SizedBox(
                         height: 16,
                       ),
-                      SizedBox(
-                        height: 130,
-                        child: Image.asset('assets/images/logo.png'),
-                      ), //هنا حق الللوقو
+                      //SizedBox(
+                        //height: 130,
+                        //child: Image.asset('assets/images/logo.png'),
+                     // ), //هنا حق الللوقو
                       CustomInputField(
                           labelText: 'Campaign Name *',
                           hintText: 'your campaign name',
@@ -125,7 +127,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                           validator: (textValue) {
                             //يقبل من3 بشرط يكون فيها حرف عالاقل +رقم
                             if (textValue == null || textValue.isEmpty) {
-                              return 'address is required!';
+                              return 'Address is required!';
                             }
                             if (!textValue.contains(RegExp(r'[0-9]'))) {
                               return "Please enter valid address, Ex:B02";
@@ -135,7 +137,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                             }
 
                             if (textValue.length != 3) {
-                              return 'address must be of 3 characters in length ';
+                              return 'Address must be of 3 characters in length at least';
                             }
                             return null;
                           }),
@@ -237,7 +239,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                             ),
                             GestureDetector(
                               onTap: () => {
-                                //Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()))صفحة شادن هنا حقت الحملة
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()))
                               },
                               child: const Text(
                                 'Log-in',
@@ -265,7 +267,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
     );
   }
 
-  void _handleSignupUser() {
+  void _handleSignupUser() async{
     //مهم جدا هل يتغير  اسمم ويصير حق الحملة لانه موجود عند الحاج
     // signup user campaign Be careful
     if (_signupFormKey.currentState!.validate()) {
@@ -273,9 +275,65 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
         const SnackBar(content: Text('Submitting data..')),
       );
     }
+    //start from here
     if (_signupFormKey.currentState!.validate()) {
-      //اوش يسوي اذا انقبل الطلب، رفع البيانات
+      final FirebaseAuth _auth=FirebaseAuth.instance;
+      try{
+        //_auth.createUserWithEmailAndPassword(email: emailC, password: password);//create account
+        //_auth.signInWithEmailAndPassword(email: emailC, password: password);//sign in to add the information
+        //final userCurrent=FirebaseAuth.instance.currentUser;//get the current user
+        DatabaseReference ref=FirebaseDatabase.instance.ref('campaigns');
+        // await ref.set({
+        // 'email'=emailC,
+        // 'phone number'=phoneNumberC,
+        // 'name'=nameC,
+        // 'address'=address,
+        // 'commercial ID'=commercialID,
+        // 'capacity'=capacity,
+        // 'password'=password
+        // }
+        // )
+
+        //missing data save
+
+
+
+        //clean variables
+        emailC='';
+        phoneNumberC='';
+        nameC='';
+        address='';
+        commercialID='';
+        capacity='';
+        password='';
+
+        //after sign up
+        FirebaseAuth.instance.userChanges().listen((User? userr) {
+          if(userr==null){
+          showDialog(context: context, builder: (context){
+            return const AlertDialog(
+              content: Text('Registeration request been sent to the admin, you will receive an email soon with the statusof your request.'),
+              );
+              });}
+          else{
+            Navigator.push(context, MaterialPageRoute(builder: (context) => logOutCampaign()));
+          }
+        });
+
+
+
+
+      }on FirebaseAuthException catch (e){
+      showDialog(context: context, builder: (context){
+      return const AlertDialog(
+        content: Text('Account has not been created, try again later.\nThe email might be used already for another account'),
+      );
+    });
     }
+
+
+
+    }//ends here
   }
 }
 
@@ -389,7 +447,7 @@ class PageHeader extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.3,
-      //child: Image.asset('assets/images/friendship.png'), خلفية شادن
+      child: Image.asset('assets/images/logo.png'), 
     );
   }
 }
