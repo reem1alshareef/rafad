@@ -40,7 +40,12 @@ class logOutAdmin extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assts/images/background.png"),
+            //image: AssetImage("assets/images/background1.png"),
+            image: Image.network(
+                                  "https://cdn4.iconfinder.com/data/icons/social-media-2210/24/Medium-512.png",
+                                  // "assets/" + "article.imageAssetName",
+                                  fit: BoxFit.cover,
+                                )
             fit: BoxFit.cover
           )
         ),
