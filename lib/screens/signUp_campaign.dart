@@ -29,6 +29,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          title: Text("sign up as campaign"),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
         ), //عشان سهم رجوع

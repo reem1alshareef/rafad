@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_database/firebase_database.dart';
+//import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart'; //شادن سوي النفقيتر له
@@ -51,6 +51,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          title: Text("sign up as pilgrim"),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
         ), //عشان سهم رجوع

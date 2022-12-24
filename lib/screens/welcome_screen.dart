@@ -43,14 +43,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             const SizedBox(height: 30),
             MyButton(
               color: const Color(0xFF455D83),
-              title: 'As Pilgrim',
+              title: 'Sign up As Pilgrim',
               onPressed: () {
                 Navigator.pushNamed(context, SignUpPilgrim.screenRoute);
               },
             ),
             MyButton(
               color: const Color(0xFF455D83),
-              title: 'As Campaign',
+              title: 'Sign up As Campaign',
               onPressed: () {
                 Navigator.pushNamed(context, SignUpCampaign.screenRoute);
               },
