@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/widgets/my_button.dart';
+
 //import 'dart:js';
 
 // void main(){
@@ -40,12 +41,7 @@ class logOutAdmin extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            //image: AssetImage("assets/images/background1.png"),
-            image: Image.network(
-                                  "https://cdn4.iconfinder.com/data/icons/social-media-2210/24/Medium-512.png",
-                                  // "assets/" + "article.imageAssetName",
-                                  fit: BoxFit.cover,
-                                )
+            image: AssetImage("assets/images/background1.png"),
             fit: BoxFit.cover
           )
         ),

@@ -28,7 +28,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               children: [
                 SizedBox(
                   height: 300,
-                  child: Image.asset('assets/images/logo.png'),
+                  child: Image.asset('assests/images/logo.png'),
                 ),
                 const Text(
                   'Welcome !',

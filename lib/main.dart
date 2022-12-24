@@ -30,7 +30,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'haj App',
+    title: 'haj App', 
+    debugShowCheckedModeBanner: false,
         //home: logOutAdmin(),
         theme: ThemeData(
           primarySwatch: Colors.blue,
