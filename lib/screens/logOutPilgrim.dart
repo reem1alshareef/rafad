@@ -11,11 +11,6 @@ class logOutPilgrim extends StatelessWidget {
 
   final user = FirebaseAuth.instance.currentUser!;
 
-  /*void signUserOut() {
-    FirebaseAuth.instance.signOut();
-    //Navigator.pushNamed(context, WelcomeScreen.screenRoute);, هذي الطريقة ماضبطت حقي ان شاء الله يضبط,  بتول ضبطي النافيقيتر
-  }*/
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +36,7 @@ class logOutPilgrim extends StatelessWidget {
       ),
       body: Center(
           child: Text(
-        "hello! you have logged in As pilgrim" ,
+        "hello! you have logged in As pilgrim",
         //+ user.email!,
         style: TextStyle(fontSize: 20),
       )),

@@ -14,11 +14,6 @@ class logOutAdmin extends StatelessWidget {
 
   final user = FirebaseAuth.instance.currentUser!;
 
-  // void signUserOut() {
-    //FirebaseAuth.instance.signOut();
-    //Navigator.pushNamed(context, WelcomeScreen.screenRoute);
-  //}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,17 +35,15 @@ class logOutAdmin extends StatelessWidget {
       ),
       body: Container(
         decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/background1.png"),
-            fit: BoxFit.cover
-          )
-        ),
-      // body: Center(
-      //     child: Text(
-      //   "hello ! you have logged in As admin" ,
-      //   //+ user.email!,
-      //   style: TextStyle(fontSize: 20),
-      // )),
+            image: DecorationImage(
+                image: AssetImage("assets/images/background1.png"),
+                fit: BoxFit.cover)),
+        // body: Center(
+        //     child: Text(
+        //   "hello ! you have logged in As admin" ,
+        //   //+ user.email!,
+        //   style: TextStyle(fontSize: 20),
+        // )),
       ),
     );
   }

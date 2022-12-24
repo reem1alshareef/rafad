@@ -11,11 +11,6 @@ class logOutCampaign extends StatelessWidget {
 
   final user = FirebaseAuth.instance.currentUser!;
 
-  /*void signUserOut() {
-    FirebaseAuth.instance.signOut();
-    // Navigator.pushNamed(context, WelcomeScreen.screenRoute);
-  }
-*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,15 +28,11 @@ class logOutCampaign extends StatelessWidget {
               Navigator.pushNamed(context, WelcomeScreen.screenRoute);
             },
           ),
-          /*  IconButton(
-            onPressed: signUserOut,
-            icon: Icon(Icons.logout),
-          )*/
         ],
       ),
       body: Center(
           child: Text(
-        "hello ! you have logged in As campign" ,
+        "hello ! you have logged in As campign",
         //+ user.email!,
         style: TextStyle(fontSize: 20),
       )),
