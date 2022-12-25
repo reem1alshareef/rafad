@@ -3,11 +3,11 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:rafad1/screens/LoginPage.dart';
-import 'package:rafad1/screens/logOutCampaign.dart';
+//import 'package:rafad1/screens/LoginPage.dart';
+//import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:toast/toast.dart';
+//import 'package:toast/toast.dart';
 
 class SignUpCampaign extends StatefulWidget {
   static const String screenRoute = 'signUp_campaign';
@@ -49,8 +49,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                   padding: EdgeInsets.symmetric(horizontal: 50),
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assests/images/background.png"),
-                        fit: BoxFit.cover),
+                        image: AssetImage("assests/images/background.png"), fit: BoxFit.cover),
                     color: Colors.white,
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),
@@ -68,8 +67,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
 
                         TextFormField(
                           inputFormatters: [
-                            FilteringTextInputFormatter.allow(
-                                RegExp("[a-zA-Z- -]"))
+                            FilteringTextInputFormatter.allow(RegExp("[a-zA-Z- -]"))
                           ],
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
@@ -92,31 +90,6 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                           decoration: InputDecoration(
                             labelText: 'Campaign Name *',
                             hintText: 'your campaign name',
-                            isDense: true,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        TextFormField(
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {
-                            setState(() {
-                              emailC = value;
-                            });
-                          },
-                          validator: (textValue) {
-                            if (textValue == null || textValue.isEmpty) {
-                              return 'Email is required!';
-                            }
-                            if (!EmailValidator.validate(textValue)) {
-                              return 'Please enter a valid email';
-                            }
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            labelText: 'Email *',
-                            hintText: 'Your email id',
                             isDense: true,
                           ),
                         ),
@@ -163,9 +136,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
 
                         TextFormField(
                           maxLength: 10,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.allow(RegExp("[0-9]"))
-                          ],
+                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             setState(() {
@@ -234,9 +205,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                         ),
 
                         TextFormField(
-                          inputFormatters: [
-                            FilteringTextInputFormatter.allow(RegExp("[0-9]"))
-                          ],
+                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             setState(() {
@@ -247,8 +216,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                             if (textValue == null || textValue.isEmpty) {
                               return 'number of campaign capacity is required!';
                             }
-                            String patttern =
-                                (r'^\d+\.?\d{0,1}'); //يكون بس ارقام
+                            String patttern = (r'^\d+\.?\d{0,1}'); //يكون بس ارقام
                             RegExp regExp = new RegExp(patttern);
                             if (!regExp.hasMatch(textValue)) {
                               return 'Please enter valid capacity number';
@@ -306,43 +274,19 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                           onPressed: () async {
                             if (_signupFormKey.currentState!.validate()) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Submitting data..')),
+                                const SnackBar(content: Text('Submitting data..')),
                               );
-                              await FirebaseAuth.instance
-                                  .createUserWithEmailAndPassword(
-                                      email: emailC.toString(),
-                                      password: password.toString())
-                                  .then((value) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                        'Registeration request been sent to the admin, you will receive an email soon with the statusof your request.'),
-                                    backgroundColor: Colors.green,
-                                  ),
-                                );
-
-                                Navigator.pushNamed(
-                                    context, logOutCampaign.screenRoute);
-                              }).catchError((onError) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('$onError'),
-                                    backgroundColor: Colors.red,
-                                  ),
-                                );
-                              });
 
                               await FirebaseFirestore.instance
                                   .collection("Campaign-Account")
-                                  .add({
+                                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                                  .set({
                                 'nameCampaign': nameCampaign,
-                                'emailC': emailC,
+                                'UID': FirebaseAuth.instance.currentUser!.uid,
                                 'phoneNumberC': phoneNumberC,
                                 'commercialID': commercialID,
                                 'address': address,
                                 'capacity': capacity,
-                                'password': password,
                               });
                             }
                           },
@@ -365,10 +309,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                               GestureDetector(
                                 onTap: () => {
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              const LoginPage()))
+                                      context, MaterialPageRoute(builder: (context) => LoginPage()))
                                 },
                                 child: const Text(
                                   'Log-in',
@@ -423,8 +364,7 @@ class PageHeading extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 25),
       child: Text(
         title,
-        style: const TextStyle(
-            fontSize: 30, fontWeight: FontWeight.bold, fontFamily: 'NotoSerif'),
+        style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, fontFamily: 'NotoSerif'),
       ),
     );
   }
