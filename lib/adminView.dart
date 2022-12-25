@@ -6,7 +6,7 @@ import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 
 class View extends StatefulWidget {
-  //static const String screenRoute = 'welcome_screen';
+  //static const String screenRoute = '_ViewState';
   @override
   _ViewState createState() => _ViewState();
 }
@@ -32,6 +32,7 @@ class _ViewState extends State<View> {
     final text = fieldText.value.text;
     // Note: you can do your own custom validation here
     // Move this logic this outside the widget for more testable code
+    
     if (text.isEmpty) {
       return 'Can\'t be empty';
     }

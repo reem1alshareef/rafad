@@ -45,6 +45,7 @@ dependencies:
   firebase_core: ^2.4.0
   firebase_database: ^10.0.8
   toast: ^0.3.0
+  expansion_tile_card: ^2.0.0
 
   #firebase:
   #cloud_firestore: ^3.1.5

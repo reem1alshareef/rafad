@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 //import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:rafad1/screens/LoginPage.dart';
 //import 'package:toast/toast.dart';
 
 class SignUpCampaign extends StatefulWidget {
@@ -309,7 +310,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                               GestureDetector(
                                 onTap: () => {
                                   Navigator.push(
-                                      context, MaterialPageRoute(builder: (context) => LoginPage()))
+                                      context, MaterialPageRoute(builder: (context) => const LoginPage()))
                                 },
                                 child: const Text(
                                   'Log-in',

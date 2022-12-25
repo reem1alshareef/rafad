@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rafad1/firebase_options.dart';
-import 'package:rafad1/screens/adminView.dart';
+import 'package:rafad1/adminView.dart';
 import 'package:rafad1/screens/signUP_pilgrim.dart'; //اضفت هذي عشان اشغل الاسين اب
-import 'package:rafad1/screens/splash_page.dart';
+import 'package:rafad1/splash_page.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/signUp_campaign.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -12,7 +12,7 @@ import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import '../firebase_options.dart';
 
 // ...
 
@@ -54,8 +54,8 @@ class MyApp extends StatelessWidget {
     logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
     logOutCampaign.screenRoute: (context) => logOutCampaign(),
     LoginPage.screenRoute: (context) => LoginPage(),
-    Splash.screenRoute: (context) => Splash(),
-    View.screenRoute.(context) => View(),
+    //Splash.screenRoute: (context) => Splash(),
+    //View.screenRoute.(context) => View(),
     });
   }
 }

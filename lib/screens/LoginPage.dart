@@ -10,6 +10,7 @@ import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/logOutAdmin.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
+import 'package:rafad1/adminView.dart';
 
 // void main() {
 //   runApp(const MyApp());
@@ -68,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
                     key: _loginFormKey,
                     child: Column(
                       children: [
-                        //const PageHeading(title: 'Log-in',),
+                        const PageHeading(title: 'Sign in page',),
                         CustomInputField(
                             labelText: 'Email',
                             hintText: 'Your email id',
@@ -225,9 +226,10 @@ class _LoginPageState extends State<LoginPage> {
               email: emailAddress, password: userPassword);
           emailAddress = '';
           userPassword = '';
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => logOutAdmin()));
-
+          //Navigator.push(
+            //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
+              Navigator.push(
+              context, MaterialPageRoute(builder: (context) => View()));
           ///home_screen_owner
         }else if(isCampaign) {
           //on case of campaign
@@ -372,6 +374,27 @@ class _CustomInputFieldState extends State<CustomInputField> {
             validator: widget.validator,
           ),
         ],
+      ),
+    );
+  }
+}
+
+class PageHeading extends StatelessWidget {
+  final String title;
+  const PageHeading({Key? key, required this.title}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerLeft,
+      padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 25),
+      child: Text(
+        title,
+        style: const TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'NotoSerif'
+        ),
       ),
     );
   }

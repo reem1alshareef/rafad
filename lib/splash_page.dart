@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:rafad1/screens/adminView.dart';
+import 'package:rafad1/adminView.dart';
 
 class Splash extends StatefulWidget {
   @override
