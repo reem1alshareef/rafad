@@ -3,7 +3,8 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
 
-//import 'package:rafad1/screens/LoginPage.dart';
+import 'package:rafad1/screens/LoginPage.dart';
+
 class View extends StatefulWidget {
   //static const String screenRoute = 'welcome_screen';
   @override
@@ -68,7 +69,7 @@ class _ViewState extends State<View> {
                 color: Colors.white,
               ),
               onPressed: () {
-                //  Navigator.pushNamed(context, LoginPage.screenRoute);
+                Navigator.pushNamed(context, LoginPage.screenRoute);
               },
             )
           ],
