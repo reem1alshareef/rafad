@@ -18,7 +18,6 @@ class _ViewState extends State<View> {
     fieldText.clear();
   }
 
-  bool card = false;
   bool isVisible = true;
   bool _submitted = false;
 
@@ -44,7 +43,7 @@ class _ViewState extends State<View> {
 
   bool visibilityController = true;
   void DataStreams() async {
-    await for (var snapshot in _firestore.collection('campaigns').snapshots()) {
+    await for (var snapshot in _firestore.collection('Campaign-Account').snapshots()) {
       for (var campaign in snapshot.docs) {
         print(campaign.data());
       }
@@ -54,7 +53,7 @@ class _ViewState extends State<View> {
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
-        FirebaseFirestore.instance.collection('campaigns').snapshots();
+        FirebaseFirestore.instance.collection('Campaign-Account').snapshots();
 
     return Scaffold(
         appBar: AppBar(
@@ -77,12 +76,10 @@ class _ViewState extends State<View> {
         body: SingleChildScrollView(
             child: Column(children: [
           Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
               child: StreamBuilder<QuerySnapshot>(
                   stream: dataStream,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot> snapshot) {
+                  builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasError) {
                       // TODO : add snackbar
                     }
@@ -105,18 +102,16 @@ class _ViewState extends State<View> {
                                     visible: isVisible,
                                     child: ExpansionTileCard(
                                       elevation: 2,
-                                      initialPadding:
-                                          EdgeInsets.only(bottom: 7, top: 7),
+                                      initialPadding: EdgeInsets.only(bottom: 7, top: 7),
                                       baseColor: Colors.blueGrey[50],
                                       expandedColor: Colors.blueGrey[50],
                                       //key: cardA,
                                       leading: CircleAvatar(
-                                        child: Image.asset(
-                                            "assets/images/kaaba.png"),
+                                        child: Image.asset("assets/images/kaaba.png"),
                                         backgroundColor: Color(0xFF788AA4),
                                       ),
                                       title: Text(
-                                        storedocs[i]['name'],
+                                        storedocs[i]['nameCampaign'],
                                       ),
                                       subtitle: Text(
                                         "Click to view campaign's details",
@@ -138,114 +133,80 @@ class _ViewState extends State<View> {
                                               child: Column(children: [
                                                 Column(children: [
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            bottom: 10),
+                                                    padding: const EdgeInsets.only(bottom: 10),
                                                     child: Column(
                                                       children: [
                                                         Text(
                                                           'Campaign\'s email:  ',
                                                           style: TextStyle(
-                                                              color: Color(
-                                                                  0xFF455D83),
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
+                                                              color: Color(0xFF455D83),
+                                                              fontWeight: FontWeight.w500),
                                                         ),
                                                         Text(
-                                                          storedocs[i]['email'],
-                                                          style: TextStyle(
-                                                              fontSize: 12),
-                                                          textAlign:
-                                                              TextAlign.center,
+                                                          storedocs[i]['emailC'],
+                                                          style: TextStyle(fontSize: 12),
+                                                          textAlign: TextAlign.center,
                                                         ),
                                                       ],
                                                     ),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            bottom: 10),
+                                                    padding: const EdgeInsets.only(bottom: 10),
                                                     child: Column(children: [
                                                       Text(
                                                         'Campaign\'s address: ',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w500),
+                                                            color: Color(0xFF455D83),
+                                                            fontWeight: FontWeight.w500),
                                                       ),
                                                       Text(
                                                         storedocs[i]['address'],
-                                                        style: TextStyle(
-                                                            fontSize: 12),
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
                                                     ]),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            bottom: 10),
+                                                    padding: const EdgeInsets.only(bottom: 10),
                                                     child: Column(children: [
                                                       Text(
                                                         'Campaign\'s commercial ID:  ',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w500),
+                                                            color: Color(0xFF455D83),
+                                                            fontWeight: FontWeight.w500),
                                                       ),
                                                       Text(
-                                                        storedocs[i]
-                                                            ['commercial_ID'],
-                                                        style: TextStyle(
-                                                            fontSize: 12),
+                                                        storedocs[i]['commercialID'],
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
                                                     ]),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            bottom: 10),
+                                                    padding: const EdgeInsets.only(bottom: 10),
                                                     child: Column(children: [
                                                       Text(
                                                         'Campaign\s Phone Number:  ',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w500),
+                                                            color: Color(0xFF455D83),
+                                                            fontWeight: FontWeight.w500),
                                                       ),
                                                       Text(
-                                                        storedocs[i]
-                                                            ['phoneNumber'],
-                                                        style: TextStyle(
-                                                            fontSize: 12),
+                                                        storedocs[i]['phoneNumberC'],
+                                                        style: TextStyle(fontSize: 12),
                                                       ),
                                                     ]),
                                                   ),
                                                   Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            bottom: 10),
+                                                    padding: const EdgeInsets.only(bottom: 10),
                                                     child: Column(children: [
                                                       Text(
                                                         'Campaign\'s Seating Capacity:  ',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w500),
+                                                            color: Color(0xFF455D83),
+                                                            fontWeight: FontWeight.w500),
                                                       ),
                                                       Text(
-                                                        storedocs[i]
-                                                            ['seatingCapacity'],
-                                                        style: TextStyle(
-                                                            fontSize: 12),
+                                                        storedocs[i]['capacity'],
+                                                        style: TextStyle(fontSize: 12),
                                                       )
                                                     ]),
                                                   ),
@@ -255,48 +216,34 @@ class _ViewState extends State<View> {
                                           ),
                                         ),
                                         ButtonBar(
-                                          alignment:
-                                              MainAxisAlignment.spaceAround,
+                                          alignment: MainAxisAlignment.spaceAround,
                                           buttonHeight: 52.0,
                                           buttonMinWidth: 90.0,
                                           children: <Widget>[
                                             TextButton(
                                               style: TextButton.styleFrom(
-                                                  shape:
-                                                      const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(2.0)),
+                                                  shape: const RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.all(Radius.circular(2.0)),
                                               )),
                                               onPressed: () {
-                                                _firestore
-                                                    .collection(
-                                                        'AcceptedCampaigns')
-                                                    .add({
+                                                _firestore.collection('AcceptedCampaigns').add({
                                                   'status': 'accepted',
                                                   'name': storedocs[i]['name'],
-                                                  'email': storedocs[i]
-                                                      ['email'],
-                                                  'address': storedocs[i]
-                                                      ['address'],
-                                                  'commercial_ID': storedocs[i]
-                                                      ['commercial_ID'],
-                                                  'password': storedocs[i]
-                                                      ['password'],
-                                                  'phoneNumber': storedocs[i]
-                                                      ['phoneNumber'],
-                                                  'seatingCapacity':
-                                                      storedocs[i]
-                                                          ['seatingCapacity'],
+                                                  'email': storedocs[i]['email'],
+                                                  'address': storedocs[i]['address'],
+                                                  'commercial_ID': storedocs[i]['commercial_ID'],
+                                                  'password': storedocs[i]['password'],
+                                                  'phoneNumber': storedocs[i]['phoneNumber'],
+                                                  'seatingCapacity': storedocs[i]
+                                                      ['seatingCapacity'],
                                                 });
                                                 showDialog(
                                                     context: context,
-                                                    builder:
-                                                        (BuildContext context) {
+                                                    builder: (BuildContext context) {
                                                       return AlertDialog(
-                                                        title: const Text(
-                                                            "Accept Request"),
-                                                        content: const Text(
-                                                            "Are you sure?"),
+                                                        title: const Text("Accept Request"),
+                                                        content: const Text("Are you sure?"),
                                                         actions: [
                                                           ElevatedButton(
                                                               style: ElevatedButton.styleFrom(
@@ -305,15 +252,11 @@ class _ViewState extends State<View> {
                                                                           BorderRadius.circular(
                                                                               30.0)),
                                                                   backgroundColor:
-                                                                      Color(
-                                                                          0xFF455D83)),
+                                                                      Color(0xFF455D83)),
                                                               onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
+                                                                Navigator.of(context).pop();
                                                               },
-                                                              child: const Text(
-                                                                  "Cancel")),
+                                                              child: const Text("Cancel")),
                                                           ElevatedButton(
                                                               style: ElevatedButton.styleFrom(
                                                                   shape: RoundedRectangleBorder(
@@ -321,19 +264,11 @@ class _ViewState extends State<View> {
                                                                           BorderRadius.circular(
                                                                               30.0)),
                                                                   backgroundColor:
-                                                                      Color(
-                                                                          0xFF455D83)),
+                                                                      Color(0xFF455D83)),
                                                               onPressed: () {
-                                                                setState(() {
-                                                                  //?
-                                                                });
-
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
+                                                                Navigator.of(context).pop();
                                                               },
-                                                              child: const Text(
-                                                                  "Yes")),
+                                                              child: const Text("Yes")),
                                                         ],
                                                       );
                                                     });
@@ -345,9 +280,8 @@ class _ViewState extends State<View> {
                                                     color: Colors.green,
                                                   ),
                                                   Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 2.0),
+                                                    padding:
+                                                        const EdgeInsets.symmetric(vertical: 2.0),
                                                   ),
                                                   Text('Accept'),
                                                 ],
@@ -355,30 +289,24 @@ class _ViewState extends State<View> {
                                             ),
                                             TextButton(
                                               style: TextButton.styleFrom(
-                                                  shape:
-                                                      const RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(2.0)),
+                                                  shape: const RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.all(Radius.circular(2.0)),
                                               )),
                                               onPressed: () {
                                                 showDialog(
                                                     context: context,
-                                                    builder:
-                                                        (BuildContext context) {
+                                                    builder: (BuildContext context) {
                                                       return AlertDialog(
-                                                        title: const Text(
-                                                            "Reject Request"),
+                                                        title: const Text("Reject Request"),
                                                         content: TextField(
                                                           maxLines: 7,
                                                           onChanged: (value) {
-                                                            rejectionReason =
-                                                                value;
+                                                            rejectionReason = value;
                                                           },
                                                           controller: fieldText,
-                                                          decoration:
-                                                              InputDecoration(
-                                                            hintText:
-                                                                "Enter reason of rejection",
+                                                          decoration: InputDecoration(
+                                                            hintText: "Enter reason of rejection",
                                                           ),
                                                         ),
                                                         actions: [
@@ -389,56 +317,30 @@ class _ViewState extends State<View> {
                                                                           BorderRadius.circular(
                                                                               30.0)),
                                                                   backgroundColor:
-                                                                      Color(
-                                                                          0xFF455D83)),
+                                                                      Color(0xFF455D83)),
                                                               onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
+                                                                Navigator.of(context).pop();
                                                               },
-                                                              child: Text(
-                                                                  'Cancel')),
+                                                              child: Text('Cancel')),
                                                           ElevatedButton(
-                                                            style:
-                                                                ElevatedButton
-                                                                    .styleFrom(
+                                                            style: ElevatedButton.styleFrom(
                                                               shape: RoundedRectangleBorder(
                                                                   borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              30.0)),
-                                                              backgroundColor:
-                                                                  Color(
-                                                                      0xFF455D83),
+                                                                      BorderRadius.circular(30.0)),
+                                                              backgroundColor: Color(0xFF455D83),
                                                             ), // background
                                                             onPressed: () {
                                                               _firestore
-                                                                  .collection(
-                                                                      'campaigns')
-                                                                  .where(
-                                                                      'phoneNumber',
-                                                                      isEqualTo:
-                                                                          '${storedocs[i]['phoneNumber']}')
-                                                                  ._firestore
-                                                                  .collection(
-                                                                      'RejectedCampaigns')
+                                                                  .collection('RejectedCampaigns')
                                                                   .add({
-                                                                'name':
-                                                                    storedocs[i]
-                                                                        [
-                                                                        'name'],
-                                                                'reason':
-                                                                    rejectionReason,
-                                                                'status':
-                                                                    'rejected'
+                                                                'name': storedocs[i]['name'],
+                                                                'reason': rejectionReason,
+                                                                'status': 'rejected'
                                                               });
                                                               setState(() {});
-                                                              Navigator.of(
-                                                                      context)
-                                                                  .pop();
+                                                              Navigator.of(context).pop();
                                                             },
-                                                            child: const Text(
-                                                                "Submit"),
+                                                            child: const Text("Submit"),
                                                           )
                                                         ],
                                                       );
@@ -449,9 +351,8 @@ class _ViewState extends State<View> {
                                                   Icon(Icons.cancel_rounded,
                                                       color: Colors.redAccent),
                                                   Padding(
-                                                    padding: const EdgeInsets
-                                                            .symmetric(
-                                                        vertical: 2.0),
+                                                    padding:
+                                                        const EdgeInsets.symmetric(vertical: 2.0),
                                                   ),
                                                   Text('Reject'),
                                                 ],
