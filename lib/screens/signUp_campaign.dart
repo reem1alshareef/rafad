@@ -21,8 +21,8 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
   String? nameCampaign;
   String? emailC;
   String? phoneNumberC;
-  String? address;
   String? commercialID;
+  String? address;
   String? capacity;
   String? password;
   final _signupFormKey = GlobalKey<FormState>();
@@ -49,9 +49,8 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                   padding: EdgeInsets.symmetric(horizontal: 50),
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-            image: AssetImage("assests/images/background.png"),
-            fit: BoxFit.cover
-          ),
+                        image: AssetImage("assests/images/background.png"),
+                        fit: BoxFit.cover),
                     color: Colors.white,
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),
@@ -337,12 +336,12 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                               await FirebaseFirestore.instance
                                   .collection("Campaign-Account")
                                   .add({
-                                'name': nameCampaign,
-                                'email': emailC,
-                                'number': phoneNumberC,
-                                'hajId': commercialID,
-                                'disease': address,
-                                'pharma': capacity,
+                                'nameCampaign': nameCampaign,
+                                'emailC': emailC,
+                                'phoneNumberC': phoneNumberC,
+                                'commercialID': commercialID,
+                                'address': address,
+                                'capacity': capacity,
                                 'password': password,
                               });
                             }
