@@ -11,6 +11,7 @@ import 'package:rafad1/screens/logOutAdmin.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/adminView.dart';
+import 'package:rafad1/splash_page.dart';
 
 // void main() {
 //   runApp(const MyApp());
@@ -69,7 +70,9 @@ class _LoginPageState extends State<LoginPage> {
                     key: _loginFormKey,
                     child: Column(
                       children: [
-                        const PageHeading(title: 'Sign in page',),
+                        const PageHeading(
+                          title: 'Sign in page',
+                        ),
                         CustomInputField(
                             labelText: 'Email',
                             hintText: 'Your email id',
@@ -117,8 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) =>
-                                          const ForgotPasswordPage()))
+                                      builder: (context) => const ForgotPasswordPage()))
                             },
                             child: const Text(
                               'Forget password?',
@@ -174,8 +176,7 @@ class _LoginPageState extends State<LoginPage> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              const WelcomeScreen()))
+                                          builder: (context) => const WelcomeScreen()))
                                 },
                                 child: const Text(
                                   'Sign-up',
@@ -222,40 +223,34 @@ class _LoginPageState extends State<LoginPage> {
         if (isAdmin) {
           //in case of an admin
           isAdmin = false;
-          await _auth.signInWithEmailAndPassword(
-              email: emailAddress, password: userPassword);
+          await _auth.signInWithEmailAndPassword(email: emailAddress, password: userPassword);
           emailAddress = '';
           userPassword = '';
           //Navigator.push(
-            //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
-              Navigator.push(
-              context, MaterialPageRoute(builder: (context) => View()));
+          //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => Splash()));
+
           ///home_screen_owner
-        }else if(isCampaign) {
+        } else if (isCampaign) {
           //on case of campaign
           isCampaign = false;
-          await _auth.signInWithEmailAndPassword(
-              email: emailAddress, password: userPassword);
+          await _auth.signInWithEmailAndPassword(email: emailAddress, password: userPassword);
           emailAddress = '';
           userPassword = '';
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => logOutCampaign()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => logOutCampaign()));
         } else {
           //in case of pilgrim
-          await _auth.signInWithEmailAndPassword(
-              email: emailAddress, password: userPassword);
+          await _auth.signInWithEmailAndPassword(email: emailAddress, password: userPassword);
           emailAddress = '';
           userPassword = '';
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => logOutPilgrim()));
+          Navigator.push(context, MaterialPageRoute(builder: (context) => logOutPilgrim()));
         }
       } on FirebaseAuthException catch (e) {
         showDialog(
             context: context,
             builder: (context) {
               return const AlertDialog(
-                content:
-                    Text('Email or Password is not correct, try again please.'),
+                content: Text('Email or Password is not correct, try again please.'),
               );
             });
       }
@@ -267,8 +262,7 @@ class _LoginPageState extends State<LoginPage> {
 class CustomFormButton extends StatelessWidget {
   final String innerText;
   final void Function()? onPressed;
-  const CustomFormButton(
-      {Key? key, required this.innerText, required this.onPressed})
+  const CustomFormButton({Key? key, required this.innerText, required this.onPressed})
       : super(key: key);
 
   @override
@@ -354,9 +348,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
               suffixIcon: widget.suffixIcon
                   ? IconButton(
                       icon: Icon(
-                        _obscureText
-                            ? Icons.visibility_off_outlined
-                            : Icons.remove_red_eye,
+                        _obscureText ? Icons.visibility_off_outlined : Icons.remove_red_eye,
                         color: Colors.black54,
                       ),
                       onPressed: () {
@@ -366,9 +358,8 @@ class _CustomInputFieldState extends State<CustomInputField> {
                       },
                     )
                   : null,
-              suffixIconConstraints: (widget.isDense != null)
-                  ? const BoxConstraints(maxHeight: 33)
-                  : null,
+              suffixIconConstraints:
+                  (widget.isDense != null) ? const BoxConstraints(maxHeight: 33) : null,
             ),
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: widget.validator,
@@ -390,11 +381,7 @@ class PageHeading extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 25),
       child: Text(
         title,
-        style: const TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'NotoSerif'
-        ),
+        style: const TextStyle(fontSize: 30, fontWeight: FontWeight.bold, fontFamily: 'NotoSerif'),
       ),
     );
   }
