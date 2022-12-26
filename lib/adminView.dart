@@ -245,7 +245,7 @@ class _ViewState extends State<View> {
                                                     builder: (BuildContext context) {
                                                       return AlertDialog(
                                                         title: const Text("Accept Request"),
-                                                        content: const Text("Are you sure?"),
+                                                        content: const Text("Are you sure you want to accept?"),
                                                         actions: [
                                                           ElevatedButton(
                                                               style: ElevatedButton.styleFrom(
