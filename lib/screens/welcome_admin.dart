@@ -1,13 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:rafad1/adminView.dart';
+import 'package:rafad1/screens/adminView.dart';
 
-class Splash extends StatefulWidget {
+class welcomedmin extends StatefulWidget {
   @override
   VideoState createState() => VideoState();
 }
 
-class VideoState extends State<Splash> with SingleTickerProviderStateMixin {
+class VideoState extends State<welcomedmin>
+    with SingleTickerProviderStateMixin {
   var _visible = true;
 
   late AnimationController animationController;
@@ -72,7 +73,7 @@ class VideoState extends State<Splash> with SingleTickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Image.asset(
-                'assets/images/logo.png',
+                'assests/images/logo.png',
                 width: animation.value * 250,
                 height: animation.value * 250,
               ),
