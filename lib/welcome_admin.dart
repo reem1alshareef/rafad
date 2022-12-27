@@ -13,4 +13,5 @@ class _welcomeadminState extends State<welcomeadmin> {
   Widget build(BuildContext context) {
     return Splash();
   }
+  
 }
