@@ -72,7 +72,7 @@ class VideoState extends State<Splash> with SingleTickerProviderStateMixin {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new Image.asset(
-                'assets/images/logo.png',
+                'assests/images/logo.png',
                 width: animation.value * 250,
                 height: animation.value * 250,
               ),

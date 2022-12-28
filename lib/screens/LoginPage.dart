@@ -12,6 +12,8 @@ import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/adminView.dart';
 
+import '../splash_page.dart';
+
 // void main() {
 //   runApp(const MyApp());
 // }
@@ -229,7 +231,7 @@ class _LoginPageState extends State<LoginPage> {
           //Navigator.push(
             //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
               Navigator.push(
-              context, MaterialPageRoute(builder: (context) => View()));
+              context, MaterialPageRoute(builder: (context) => Splash()));
           ///home_screen_owner
         }else if(isCampaign) {
           //on case of campaign
