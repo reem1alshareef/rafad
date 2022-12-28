@@ -10,9 +10,8 @@ import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/logOutAdmin.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
-import 'package:rafad1/adminView.dart';
-
-import '../splash_page.dart';
+import 'package:rafad1/screens/adminView.dart';
+import 'package:rafad1/screens/welcome_admin.dart';
 
 // void main() {
 //   runApp(const MyApp());
@@ -71,7 +70,9 @@ class _LoginPageState extends State<LoginPage> {
                     key: _loginFormKey,
                     child: Column(
                       children: [
-                        const PageHeading(title: 'Sign in page',),
+                        const PageHeading(
+                          title: 'Sign in page',
+                        ),
                         CustomInputField(
                             labelText: 'Email',
                             hintText: 'Your email id',
@@ -229,11 +230,12 @@ class _LoginPageState extends State<LoginPage> {
           emailAddress = '';
           userPassword = '';
           //Navigator.push(
-            //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
-              Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Splash()));
+          //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => welcomedmin()));
+
           ///home_screen_owner
-        }else if(isCampaign) {
+        } else if (isCampaign) {
           //on case of campaign
           isCampaign = false;
           await _auth.signInWithEmailAndPassword(
@@ -393,10 +395,7 @@ class PageHeading extends StatelessWidget {
       child: Text(
         title,
         style: const TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'NotoSerif'
-        ),
+            fontSize: 30, fontWeight: FontWeight.bold, fontFamily: 'NotoSerif'),
       ),
     );
   }
