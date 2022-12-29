@@ -101,28 +101,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           title: 'Reset Password',
                           onPressed: passwordReset,
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          child: GestureDetector(
-                            onTap: () => {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const LoginPage()))
-                            },
-                            child: const Text(
-                              'Back to login',
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Color(0xff939393),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
