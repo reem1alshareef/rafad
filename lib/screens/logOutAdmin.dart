@@ -11,47 +11,35 @@ class logOutAdmin extends StatelessWidget {
   static const String screenRoute = 'logOutAdmin';
   logOutAdmin({super.key});
 
-  final user = FirebaseAuth.instance.currentUser!;
   // void signUserOut() {
-  //FirebaseAuth.instance.signOut();
-  //Navigator.pushNamed(context, WelcomeScreen.screenRoute);
-  //}
+  // FirebaseAuth.instance.signOut();
+  // Navigator.pushNamed(context, WelcomeScreen.screenRoute);
+  // }
+  
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(
-          title: Text("admin main home page"),
+          actions: [
+            IconButton(
+              onPressed:() {
+                        FirebaseAuth.instance.signOut();
+                        Navigator.pushNamed(context, WelcomeScreen.screenRoute);
+                      }, icon: const Icon(Icons.logout),//hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+                      ), 
+                      ],
+          title: Text("Admin main home page"),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
-          actions: [
-            const SizedBox(height: 30),
-          ],
         ),
         body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assests/images/background.png"),
                   fit: BoxFit.cover)),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Column(
-                  children: [
-                    MyButton(
-                      color: Color.fromARGB(255, 250, 73, 13),
-                      title: 'Sign Out',
-                      onPressed: () {
-                        FirebaseAuth.instance.signOut();
-                        Navigator.pushNamed(context, WelcomeScreen.screenRoute);
-                      },
-                    ),
-
-                  ],
-                ),
-
-              ]),
+        
         ));
   }
 }
