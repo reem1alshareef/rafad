@@ -3,10 +3,9 @@ import 'package:rafad1/screens/signUP_pilgrim.dart';
 import 'package:rafad1/screens/signUp_campaign.dart';
 import 'package:rafad1/widgets/my_button.dart';
 import 'package:rafad1/screens/LoginPage.dart';
-//import شادن لوق ان مهممم بس اي لوق ان ؟ عندنا 2
 
 class WelcomeScreen extends StatefulWidget {
-  static const String screenRoute = 'welcome_screen'; // للربط بين الصفحات
+  static const String screenRoute = 'welcome_screen';
   const WelcomeScreen({super.key});
 
   @override
@@ -18,6 +17,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
@@ -28,7 +28,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               children: [
                 SizedBox(
                   height: 300,
-                  child: Image.asset('assets/images/logo.png'),
+                  child: Image.asset('assests/images/logo.png'),
                 ),
                 const Text(
                   'Welcome !',
@@ -43,14 +43,14 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             const SizedBox(height: 30),
             MyButton(
               color: const Color(0xFF455D83),
-              title: 'As Pilgrim',
+              title: 'Sign up As Pilgrim',
               onPressed: () {
                 Navigator.pushNamed(context, SignUpPilgrim.screenRoute);
               },
             ),
             MyButton(
               color: const Color(0xFF455D83),
-              title: 'As Campaign',
+              title: 'Sign up As Campaign',
               onPressed: () {
                 Navigator.pushNamed(context, SignUpCampaign.screenRoute);
               },
@@ -69,7 +69,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   ),
                   GestureDetector(
                     onTap: () => {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage())) 
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()))
                     },
                     child: const Text(
                       'Log-in',

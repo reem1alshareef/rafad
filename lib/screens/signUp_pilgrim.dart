@@ -1,8 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-//import '';   لوق ان شادن الخاص بالحاج
-import 'package:rafad1/screens/logOutPilgrim.dart'; //شادن سوي النفقيتر له
-//import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
+import 'package:rafad1/screens/LoginPage.dart';
+import 'package:rafad1/screens/logOutPilgrim.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:toast/toast.dart';
 
 class SignUpPilgrim extends StatefulWidget {
   static const String screenRoute = 'signUP_pilgrim';
@@ -13,87 +18,96 @@ class SignUpPilgrim extends StatefulWidget {
 }
 
 class _SignUpPilgrimState extends State<SignUpPilgrim> {
-//final _auth = FirebaseAuth.instance;
-  late String name;
-  late String phoneNumber;
-  late String email;
-  late String hajPermission;
-  late String chronicDisease;
-  late String pharmaceutical;
-  late String password;
-//هذي عشان نخزن البيانات فيها
+  String? name;
+  String? email;
+  String? number;
+  String? hajId;
+  String? disease;
+  String? pharma;
+  String? password;
   final _signupFormKey = GlobalKey<FormState>();
-
-  // Future _pickProfileImage() async {
-  //   try {
-  //     final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-  //     if(image == null) return;
-
-  //     final imageTemporary = File(image.path);
-  //     setState(() => _profileImage = imageTemporary);
-  //   } on PlatformException catch (e) {
-  //     debugPrint('Failed to pick image error: $e');
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          title: Text("sign up as pilgrim"),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
         ), //عشان سهم رجوع
 
         backgroundColor: const Color(0xffEEF1F3),
         body: SingleChildScrollView(
+          //للسكرولنق ممتاز
           child: Form(
             key: _signupFormKey,
             child: Column(
               children: [
                 const PageHeader(),
                 Container(
+                  padding: EdgeInsets.symmetric(horizontal: 50),
                   decoration: const BoxDecoration(
+                    image: DecorationImage(
+            image: AssetImage("assests/images/background.png"),
+            fit: BoxFit.cover),
                     color: Colors.white,
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),
                     ),
                   ),
-                  child: Column(
-                    children: [
-                      const PageHeading(
-                        title: 'Sign up as Pilgrim',
-                      ),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      // SizedBox(
-                      //   height: 130,
-                      //   child: Image.asset('assets/images/logo.png'),
-                      // ), //هنا حق الللوقو
-                      CustomInputField(
-                          labelText: 'Pilgrim Name *',
-                          hintText: 'Your full name',
-                          isDense: true,
-                          validator: (textValue) {
-                            if (textValue == null || textValue.isEmpty) {
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        const PageHeading(
+                          title: 'Sign up as Pilgrim',
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+
+                        TextFormField(
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp("[a-zA-Z- -]"))
+                          ],
+                          keyboardType: TextInputType.text,
+                          onChanged: (value) {
+                            setState(() {
+                              name = value;
+                            });
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
                               return 'Name field is required!';
+                            } else if (value.length < 8) {
+                              return 'Please enter valid name';
                             }
+
                             String patttern =
                                 (r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$");
                             RegExp regExp = RegExp(patttern);
-                            if (!regExp.hasMatch(textValue)) {
+                            if (!regExp.hasMatch(value)) {
                               return 'Please enter valid name';
                             }
                             return null;
-                          }),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      CustomInputField(
-                          labelText: 'Email *',
-                          hintText: 'Your email id',
-                          isDense: true,
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'Pilgrim Name *',
+                            hintText: 'Your full name',
+                            isDense: true,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        TextFormField(
+                          keyboardType: TextInputType.text,
+                          onChanged: (value) {
+                            setState(() {
+                              email = value;
+                            });
+                          },
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Email is required!';
@@ -102,38 +116,65 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                               return 'Please enter a valid email';
                             }
                             return null;
-                          }),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      CustomInputField(
-                          labelText: 'Phone number *',
-                          hintText: 'Your phone number',
-                          isDense: true,
-                          validator: (textValue) {
-                            //الحمدلله ضبط
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'Email *',
+                            hintText: 'Your email id',
+                            isDense: true,
+                          ),
+                        ),
 
-                            if (textValue == null || textValue.isEmpty) {
+                        const SizedBox(
+                          height: 16,
+                        ),
+
+                        TextFormField(
+                          maxLength: 10,
+                          inputFormatters: <TextInputFormatter>[
+                            FilteringTextInputFormatter.digitsOnly
+                          ],
+                          keyboardType: TextInputType.text,
+                          onChanged: (value) {
+                            setState(() {
+                              number = value;
+                            });
+                          },
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
                               return 'Phone number is required!';
                             }
                             String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
                             RegExp regExp = new RegExp(patttern);
-                            if (!regExp.hasMatch(textValue)) {
+                            if (!regExp.hasMatch(value)) {
                               return 'Please enter valid Phone number';
                             }
-                            if (textValue.length != 10) {
+                            if (value.length != 10) {
                               return 'Phone Number must be of 10 digit';
                             }
 
                             return null;
-                          }),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      CustomInputField(
-                          labelText: 'haj permission ID*',
-                          hintText: 'your haj permission ID',
-                          isDense: true,
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'Phone number *',
+                            hintText: 'Your phone number',
+                            isDense: true,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+
+                        TextFormField(
+                          maxLength: 10,
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(RegExp("[0-9]"))
+                          ],
+                          keyboardType: TextInputType.text,
+                          onChanged: (value) {
+                            setState(() {
+                              hajId = value;
+                            });
+                          },
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'ID is required!';
@@ -145,104 +186,180 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                               return 'ID must be of 10 digit';
                             }
                             return null;
-                          }),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      CustomInputField(
-                          labelText: 'chronic disease',
-                          hintText: 'if you suffer from any chronic disease',
-                          isDense: true,
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'haj permission ID*',
+                            hintText: 'your haj permission ID',
+                            isDense: true,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+
+                        TextFormField(
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp("[a-zA-Z- -]"))
+                          ],
+                          keyboardType: TextInputType.text,
+                          onChanged: (value) {
+                            setState(() {
+                              disease = value;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'chronic disease',
+                            hintText: 'if you suffer from any chronic disease',
+                            isDense: true,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+
+                        TextFormField(
+                          inputFormatters: [
+                            FilteringTextInputFormatter.allow(
+                                RegExp("[a-zA-Z- -]"))
+                          ],
+                          keyboardType: TextInputType.text,
+                          onChanged: (value) {
+                            setState(() {
+                              pharma = value;
+                            });
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'pharmaceutical',
+                            hintText: 'if you are taking any pharmaceutical',
+                            isDense: true,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+
+                        TextFormField(
+                          onChanged: (value) {
+                            setState(() {
+                              password = value;
+                            });
+                          },
+                          obscureText: true,
                           validator: (textValue) {
-                            //تأكدي  هل صحيح لاني مافيه شرط هنا اساسا
-                            return null;
-                          }),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      CustomInputField(
-                          labelText: 'pharmaceutical',
-                          hintText: 'if you are taking any pharmaceutical',
-                          isDense: true,
-                          validator: (textValue) {
-                            //تأكدي  هل صحيح لاني مافيه شرط هنا اساسا
+                            if (textValue == null || textValue.isEmpty) {
+                              return 'Password is required!';
+                            }
+                            if (!textValue.contains(RegExp(r'[0-9]'))) {
+                              return "Password must contain a digit";
+                            }
+                            if (!textValue.contains(RegExp(r'[A-Z]'))) {
+                              return "Password must contain at least one upper case";
+                            }
+                            if (!textValue.contains(RegExp(r'[a-z]'))) {
+                              return "Password must contain at least one lower case";
+                            }
+                            if (textValue.length < 6) {
+                              return "Password must be at least 6 characters in length";
+                            }
 
                             return null;
-                          }),
-                      const SizedBox(
-                        height: 16,
-                      ),
-                      CustomInputField(
-                        labelText: 'Password *',
-                        hintText: 'Your password',
-                        isDense: true,
-                        obscureText: true,
-                        validator: (textValue) {
-                          if (textValue == null || textValue.isEmpty) {
-                            return 'Password is required!';
-                          }
-                          if (!textValue.contains(RegExp(r'[0-9]'))) {
-                            return "Password must contain a digit";
-                          }
-                          if (!textValue.contains(RegExp(r'[A-Z]'))) {
-                            return "Password must contain at least one upper case";
-                          }
-                          if (!textValue.contains(RegExp(r'[a-z]'))) {
-                            return "Password must contain at least one lower case";
-                          }
-                          if (textValue.length < 6) {
-                            return "Password must be at least 6 characters in length";
-                          }
+                          },
+                          decoration: InputDecoration(
+                            labelText: 'Password *',
+                            hintText: 'Your password',
+                            isDense: true,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        //-------------------------------------------------------------------------------
+                        CustomFormButton(
+                          innerText: 'Sign up',
+                          onPressed: () async {
+                            if (_signupFormKey.currentState!.validate()) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                    content: Text('Submitting data..')),
+                              );
+                              await FirebaseAuth.instance
+                                  .createUserWithEmailAndPassword(
+                                      email: email.toString(),
+                                      password: password.toString())
+                                  .then((value) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('success regestraion'),
+                                    backgroundColor: Colors.green,
+                                  ),
+                                );
 
-                          if (textValue != null) {
-                            String userPassword = textValue;
-                          }
-                          return null;
-                        },
-                        suffixIcon: true,
-                      ),
-                      const SizedBox(
-                        height: 22,
-                      ),
-                      CustomFormButton(
-                        innerText: 'Sign up',
-                        onPressed: _handleSignupUser,
-                      ),
-                      const SizedBox(
-                        height: 18,
-                      ),
-                      SizedBox(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            const Text(
-                              'Already have an account ? ',
-                              style: TextStyle(
-                                  fontSize: 13,
-                                  color: Color(0xff939393),
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            GestureDetector(
-                              onTap: () => {
-                                //Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage())) صفحة شادن هنا حقت الحاج انتهبييي
-                              },
-                              child: const Text(
-                                'Log-in',
+                                Navigator.pushNamed(
+                                    context, logOutPilgrim.screenRoute);
+                              }).catchError((onError) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('$onError'),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              });
+
+                              await FirebaseFirestore.instance
+                                  .collection("Pilgrims-Account")
+                                  .add({
+                                'name': name,
+                                'email': email,
+                                'number': number,
+                                'hajId': hajId,
+                                'disease': disease,
+                                'pharma': pharma,
+                                'password': password,
+                              });
+                            }
+                          },
+                        ),
+                        const SizedBox(
+                          height: 18,
+                        ),
+                        SizedBox(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              const Text(
+                                'Already have an account ? ',
                                 style: TextStyle(
-                                    fontSize: 15,
-                                    color: Colors.blue,
-                                    decoration: TextDecoration.underline,
+                                    fontSize: 13,
+                                    color: Color(0xff939393),
                                     fontWeight: FontWeight.bold),
                               ),
-                            ),
-                          ],
+                              GestureDetector(
+                                onTap: () => {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const LoginPage()))
+                                },
+                                child: const Text(
+                                  'Log-in',
+                                  style: TextStyle(
+                                      fontSize: 15,
+                                      color: Colors.blue,
+                                      decoration: TextDecoration.underline,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 30,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],
@@ -252,19 +369,9 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
       ),
     );
   }
-
-  void _handleSignupUser() {
-    // signup user pilgrim Be careful
-    if (_signupFormKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Submitting data..')),
-      );
-    }
-    if (_signupFormKey.currentState!.validate()) {
-      //اوش يسوي اذا انقبل الطلب، رفع البيانات
-    }
-  }
 }
+
+/*
 
 class CustomFormButton extends StatelessWidget {
   final String innerText;
@@ -301,15 +408,15 @@ class CustomInputField extends StatefulWidget {
   final bool? isDense;
   final bool obscureText;
 
-  const CustomInputField(
-      {Key? key,
-      required this.labelText,
-      required this.hintText,
-      required this.validator,
-      this.suffixIcon = false,
-      this.isDense,
-      this.obscureText = false})
-      : super(key: key);
+  const CustomInputField({
+    Key? key,
+    required this.labelText,
+    required this.hintText,
+    required this.validator,
+    this.suffixIcon = false,
+    this.isDense,
+    this.obscureText = false,
+  }) : super(key: key);
 
   @override
   State<CustomInputField> createState() => _CustomInputFieldState();
@@ -365,7 +472,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
       ),
     );
   }
-}
+}*/
 
 class PageHeader extends StatelessWidget {
   const PageHeader({Key? key}) : super(key: key);
@@ -376,7 +483,7 @@ class PageHeader extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.3,
-      child: Image.asset('assets/images/logo.png'), 
+      child: Image.asset('assests/images/logo.png'),
     );
   }
 }

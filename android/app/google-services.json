@@ -8,7 +8,7 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:379454219644:android:ddabaa3aedb35e383870f9",
+        "mobilesdk_app_id": "1:379454219644:android:b82f70a4691fbd8b3870f9",
         "android_client_info": {
           "package_name": "com.example.rafad1"
         }
@@ -22,6 +22,78 @@
             "certificate_hash": "edd6c1d75e19db3d34a48b202b5f0290f9a8d6db"
           }
         },
+        {
+          "client_id": "379454219644-jl4h85mt9psum45f6vd7qv0lgnb7n55f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFI9ICH58se0xSvDuV9BBaa_ZkrX6jUys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "379454219644-jl4h85mt9psum45f6vd7qv0lgnb7n55f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "379454219644-nkcdemgd131shtl2rb269jtods8e32h7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.rafad1"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379454219644:android:5f419fc7b7d123d63870f9",
+        "android_client_info": {
+          "package_name": "com.reem.rafad1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "379454219644-jl4h85mt9psum45f6vd7qv0lgnb7n55f.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFI9ICH58se0xSvDuV9BBaa_ZkrX6jUys"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "379454219644-jl4h85mt9psum45f6vd7qv0lgnb7n55f.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "379454219644-nkcdemgd131shtl2rb269jtods8e32h7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.rafad1"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:379454219644:android:5f419fc7b7d123d63870f9",
+        "android_client_info": {
+          "package_name": "com.reem.rafad1"
+        }
+      },
+      "oauth_client": [
         {
           "client_id": "379454219644-jl4h85mt9psum45f6vd7qv0lgnb7n55f.apps.googleusercontent.com",
           "client_type": 3
