@@ -57,6 +57,17 @@ class _LoginPageState extends State<LoginPage> {
         body: Column(
           children: [
             const PageHeader(),
+            Container(//من هنا يبدا كود الخلفيه
+                  padding: EdgeInsets.symmetric(horizontal: 50),
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+            image: AssetImage("assests/images/background.png"),
+            fit: BoxFit.cover),
+                    color: Colors.white,
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
+                  ),),//نهايه كود الخلفيه
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
@@ -71,7 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       children: [
                         const PageHeading(
-                          title: 'Sign in page',
+                          title: 'log in page',
                         ),
                         CustomInputField(
                             labelText: 'Email',
@@ -304,7 +315,7 @@ class PageHeader extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.5,
-      child: Image.asset('assests/images/logo.png'),
+     child: Image.asset('assests/images/logo.png'),
     );
   }
 }

@@ -47,22 +47,10 @@ class logOutAdmin extends StatelessWidget {
                         Navigator.pushNamed(context, WelcomeScreen.screenRoute);
                       },
                     ),
-                    // const Text(
-                    //   "hello ! you have logged in successfully",
-                    //   style: TextStyle(
-                    //     fontSize: 20,
-                    //     fontWeight: FontWeight.w900,
-                    //     color: Color(0xFF788AA4),
-                    //   ),
-                    // ),
+
                   ],
                 ),
-                // body: Center(
-                //     child: Text(
-                //   "hello ! you have logged in As admin" ,
-                //   //+ user.email!,
-                //   style: TextStyle(fontSize: 20),
-                // )),
+
               ]),
         ));
   }
