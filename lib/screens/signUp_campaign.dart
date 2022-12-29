@@ -337,6 +337,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                                   .collection("Campaign-Account")
                                   .add({
                                 'nameCampaign': nameCampaign,
+                                'UID': FirebaseAuth.instance.currentUser!.uid,
                                 'emailC': emailC,
                                 'phoneNumberC': phoneNumberC,
                                 'commercialID': commercialID,

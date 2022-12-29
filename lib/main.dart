@@ -13,22 +13,23 @@ import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../firebase_options.dart';
+import 'package:rafad1/screens/newAcc.dart';
 
 // ...
-
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform, //هذا عشان تحميل الفايربيس لا اصيدكم شايلينه
+    options: DefaultFirebaseOptions
+        .currentPlatform, //هذا عشان تحميل الفايربيس لا اصيدكم شايلينه
   );
   await Firebase.initializeApp();
 
   //await Firebase.initializeApp();
 
-await Firebase.initializeApp(
-   options: DefaultFirebaseOptions.currentPlatform,
-);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -47,15 +48,16 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: WelcomeScreen.screenRoute,
         routes: {
-    WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
-    SignUpPilgrim.screenRoute: (context) => const SignUpPilgrim(),
-    SignUpCampaign.screenRoute: (context) => const SignUpCampaign(),
-    logOutAdmin.screenRoute: (context) => logOutAdmin(),
-    logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
-    logOutCampaign.screenRoute: (context) => logOutCampaign(),
-    LoginPage.screenRoute: (context) => LoginPage(),
-    //Splash.screenRoute: (context) => Splash(),
-    //View.screenRoute.(context) => View(),
-    });
+          WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
+          SignUpPilgrim.screenRoute: (context) => const SignUpPilgrim(),
+          SignUpCampaign.screenRoute: (context) => const SignUpCampaign(),
+          logOutAdmin.screenRoute: (context) => logOutAdmin(),
+          logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
+          logOutCampaign.screenRoute: (context) => logOutCampaign(),
+          LoginPage.screenRoute: (context) => LoginPage(),
+          NewAcc.screenRoute: (context) => NewAcc(),
+          //Splash.screenRoute: (context) => Splash(),
+          //View.screenRoute.(context) => View(),
+        });
   }
 }
