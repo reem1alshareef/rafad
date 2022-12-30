@@ -315,7 +315,7 @@ class PageHeader extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.5,
-     child: Image.asset('assests/images/logo.png'),
+      child: Image.asset('assests/images/logo.png'),
     );
   }
 }

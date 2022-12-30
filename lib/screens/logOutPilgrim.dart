@@ -2,20 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/widgets/my_button.dart';
-//import 'dart:js';
 
-// void main(){
-//   runApp(logOutAdmin());
-// }
 class logOutPilgrim extends StatelessWidget {
   static const String screenRoute = 'logOutPilgrim';
   logOutPilgrim({super.key});
-
-  // void signUserOut() {
-  // FirebaseAuth.instance.signOut();
-  // Navigator.pushNamed(context, WelcomeScreen.screenRoute);
-  // }
-  
 
   @override
   Widget build(BuildContext context) {
