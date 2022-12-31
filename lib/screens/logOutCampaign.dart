@@ -11,11 +11,6 @@ class logOutCampaign extends StatelessWidget {
   static const String screenRoute = 'logOutCampaign';
   logOutCampaign({super.key});
 
-  // void signUserOut() {
-  // FirebaseAuth.instance.signOut();
-  // Navigator.pushNamed(context, WelcomeScreen.screenRoute);
-  // }
-  
 
   @override
   Widget build(BuildContext context) {
