@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rafad1/firebase_options.dart';
-import 'package:rafad1/adminView.dart';
-import 'package:rafad1/screens/signUP_pilgrim.dart'; //اضفت هذي عشان اشغل الاسين اب
-import 'package:rafad1/splash_page.dart';
+import 'package:rafad1/screens/adminView.dart';
+import 'package:rafad1/screens/signUP_pilgrim.dart';
+import 'package:rafad1/screens/welcome_admin.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/signUp_campaign.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -20,8 +20,7 @@ import 'package:rafad1/screens/newAcc.dart';
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions
-        .currentPlatform, //هذا عشان تحميل الفايربيس لا اصيدكم شايلينه
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   await Firebase.initializeApp();
 
@@ -55,9 +54,6 @@ class MyApp extends StatelessWidget {
           logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
           logOutCampaign.screenRoute: (context) => logOutCampaign(),
           LoginPage.screenRoute: (context) => LoginPage(),
-          NewAcc.screenRoute: (context) => NewAcc(),
-          //Splash.screenRoute: (context) => Splash(),
-          //View.screenRoute.(context) => View(),
         });
   }
 }

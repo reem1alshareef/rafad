@@ -335,15 +335,16 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
 
                               await FirebaseFirestore.instance
                                   .collection("Campaign-Account")
-                                  .add({
+                                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                                  .set({
                                 'nameCampaign': nameCampaign,
                                 'UID': FirebaseAuth.instance.currentUser!.uid,
                                 'emailC': emailC,
+                                'UID': FirebaseAuth.instance.currentUser!.uid,
                                 'phoneNumberC': phoneNumberC,
                                 'commercialID': commercialID,
                                 'address': address,
                                 'capacity': capacity,
-                                'password': password,
                               });
                             }
                           },
