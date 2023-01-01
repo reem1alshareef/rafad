@@ -17,8 +17,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: Colors.white,
+      
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
@@ -27,13 +27,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: [
             Column(
               children: [
-///////////////////////////////////////////////////////////////////////
-                Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assests/images/background.png"),
-                  fit: BoxFit.cover)),),
-/////////////////////////////////////////////////////////////////////
                 SizedBox(
                   height: 300,
                   child: Image.asset('assests/images/logo.png'),
