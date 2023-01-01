@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rafad1/screens/newAcc.dart';
 import 'package:rafad1/screens/signUP_pilgrim.dart';
 import 'package:rafad1/screens/signUp_campaign.dart';
 import 'package:rafad1/widgets/my_button.dart';
@@ -17,8 +16,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: Colors.white,
+      
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
@@ -27,13 +26,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: [
             Column(
               children: [
-///////////////////////////////////////////////////////////////////////
-                Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assests/images/background.png"),
-                  fit: BoxFit.cover)),),
-/////////////////////////////////////////////////////////////////////
                 SizedBox(
                   height: 300,
                   child: Image.asset('assests/images/logo.png'),
@@ -60,7 +52,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               color: const Color(0xFF455D83),
               title: 'Sign up As Campaign',
               onPressed: () {
-                Navigator.pushNamed(context, NewAcc.screenRoute);
+                Navigator.pushNamed(context, SignUpCampaign.screenRoute);
               },
             ),
             SizedBox(
