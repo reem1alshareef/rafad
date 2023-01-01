@@ -1,17 +1,13 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-//import 'package:fluttertoast_example/toast_context.dart';
-//import 'test.dart';
 import 'package:rafad1/screens/forget_pw.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
-import 'package:rafad1/screens/logOutAdmin.dart';
-import 'package:rafad1/screens/logOutCampaign.dart';
-import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/welcome_admin.dart';
+
 
 // void main() {
 //   runApp(const MyApp());
@@ -221,7 +217,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _handleLoginUser() async {
     // login user
     if (_loginFormKey.currentState!.validate()) {
-      print('reached first if');
+      //print('reached first if');
       //print('reached first if');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Submitting data..')),
@@ -243,7 +239,7 @@ class _LoginPageState extends State<LoginPage> {
           //Navigator.push(
           //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => welcomedmin()));
+              context, MaterialPageRoute(builder: (context) => View()));
 
           ///home_screen_owner
         } else if (isCampaign) {
