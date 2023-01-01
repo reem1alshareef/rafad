@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:rafad1/screens/newAcc.dart';
+//import 'package:rafad1/screens/newAcc.dart';
 import 'package:rafad1/screens/signUP_pilgrim.dart';
 import 'package:rafad1/screens/signUp_campaign.dart';
 import 'package:rafad1/widgets/my_button.dart';
@@ -60,7 +60,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               color: const Color(0xFF455D83),
               title: 'Sign up As Campaign',
               onPressed: () {
-                Navigator.pushNamed(context, NewAcc.screenRoute);
+                Navigator.pushNamed(context, SignUpCampaign.screenRoute);
               },
             ),
             SizedBox(

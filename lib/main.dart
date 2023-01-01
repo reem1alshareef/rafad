@@ -13,7 +13,7 @@ import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../firebase_options.dart';
-import 'package:rafad1/screens/newAcc.dart';
+//import 'package:rafad1/screens/newAcc.dart';
 
 // ...
 
