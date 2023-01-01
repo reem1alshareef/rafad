@@ -52,6 +52,7 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: const Color(0xffEEF1F3),
         body: Column(
           children: [
+            
             const PageHeader(),
             Container(//من هنا يبدا كود الخلفيه
                   padding: EdgeInsets.symmetric(horizontal: 50),
@@ -64,6 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                       top: Radius.circular(20),
                     ),
                   ),),//نهايه كود الخلفيه
+                  
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
