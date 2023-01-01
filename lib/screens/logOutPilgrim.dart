@@ -66,6 +66,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
         FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
 
     return Scaffold(
+
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('pilgrim main home page'),
@@ -86,6 +87,13 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
         ),
         body: SingleChildScrollView(
             child: Column(children: [
+
+            Container(//كود الخلفيه 
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assests/images/background.png"),
+                  fit: BoxFit.cover),),),//كود الخلفيه لين هنا اللي ما اشتغلت 
+
           Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
