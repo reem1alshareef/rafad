@@ -77,7 +77,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                               nameCampaign = value;
                             });
                           },
-                          validator: (textValue) {
+                          validator: (textValue) { 
                             if (textValue == null || textValue.isEmpty) {
                               return 'Name field is required!';
                             }

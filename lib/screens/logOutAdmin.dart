@@ -7,9 +7,28 @@ import 'package:rafad1/widgets/my_button.dart';
 // void main(){
 //   runApp(logOutAdmin());
 // }
-class logOutAdmin extends StatelessWidget {
+class logOutAdmin extends StatefulWidget {
   static const String screenRoute = 'logOutAdmin';
   logOutAdmin({super.key});
+
+  @override
+  State<logOutAdmin> createState() => _logOutAdmin();
+}
+
+class _logOutAdmin extends State<logOutAdmin> {
+
+  int _selectedIndex = 0;
+  
+  static const List<Widget> _widgetOptions = <Widget> [
+    //DeleteCampaign(),
+    //DeletePilgrim(),
+  ];
+
+  void _onItemTapped(int index) {  
+    setState(() {  
+      _selectedIndex = index;  
+    });  
+  }  
 
   final user = FirebaseAuth.instance.currentUser!;
   // void signUserOut() {
@@ -28,6 +47,31 @@ class logOutAdmin extends StatelessWidget {
             const SizedBox(height: 30),
           ],
         ),
+
+
+         bottomNavigationBar: BottomNavigationBar(  
+        items: const <BottomNavigationBarItem>[  
+          BottomNavigationBarItem(  
+            icon: Icon(Icons.person_remove),  
+            label: 'Campaigns',  
+            backgroundColor: Color(0xFF455D83)  
+          ),  
+          BottomNavigationBarItem(  
+            icon: Icon(Icons.person_remove),  
+            label:'Pilgrims',  
+            backgroundColor: Color(0xFF455D83) 
+          )  
+        ],  
+        type: BottomNavigationBarType.shifting,  
+        currentIndex: _selectedIndex,  
+        selectedItemColor: Colors.white,  
+        iconSize: 40,  
+        onTap: _onItemTapped,  
+        elevation: 5  
+      ), 
+
+
+
         body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
@@ -39,6 +83,10 @@ class logOutAdmin extends StatelessWidget {
               children: [
                 Column(
                   children: [
+
+                    _widgetOptions.elementAt(_selectedIndex),
+
+
                     MyButton(
                       color: Color.fromARGB(255, 250, 73, 13),
                       title: 'Sign Out',
