@@ -84,6 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                         const PageHeading(
                           title: 'log in page',
                         ),
+                        
                         CustomInputField(
                             labelText: 'Email',
                             hintText: 'Your email id',
