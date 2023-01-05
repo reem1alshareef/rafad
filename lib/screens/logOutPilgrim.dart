@@ -341,7 +341,7 @@ Padding(
                                           // seat = storedocs[i]['seatingCapacity'];
                                           // quantityref = _firestore.collection("seatingCapacity").seat;
                                           // quantityref.update({"quantity" : _firestore.firebase.FieldValue.decrement(1)});
-                                         //: null ,)
+                                         ////: null ,)
                                        ) ////////////////buton
                                 ],
                                 ),
