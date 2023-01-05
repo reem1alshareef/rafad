@@ -289,6 +289,7 @@ class _ViewState extends State<View> {
                                                     ['phoneNumberC'],
                                                 'seatingCapacity': storedocs[i]
                                                     ['capacity'],
+                                                    'UID': FirebaseAuth.instance.currentUser!.uid,
                                               });
 
                                               showDialog(
