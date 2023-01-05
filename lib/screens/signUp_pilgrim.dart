@@ -290,7 +290,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                                   .then((value) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
-                                    content: Text('success regestraion'),
+                                    content: Text('success registeraion'),
                                     backgroundColor: Colors.green,
                                   ),
                                 );

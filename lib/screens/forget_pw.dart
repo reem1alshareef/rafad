@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rafad1/widgets/my_button.dart';
@@ -145,7 +143,7 @@ class PageHeader extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.3,
-      child: Image.asset('assets/images/logo.png'),
+      child: Image.asset('assests/images/logo.png'),
     );
   }
 }
