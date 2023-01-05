@@ -41,14 +41,14 @@ class _AddDescriptionState extends State<AddDescription> {
       content: Text('Submitting data..')),
     );
       await FirebaseFirestore.instance
-            .collection("campaign_description")
+            .collection("AcceptedCampaigns")
             .doc(FirebaseAuth.instance.currentUser!.uid)
             .set({
               'description': description,
-              'posted_by': FirebaseAuth.instance.currentUser!.uid,
+
             });
-            Navigator.push(
-              context, MaterialPageRoute(builder: (context) => ViewDescription()));
+            /*Navigator.push(
+              context, MaterialPageRoute(builder: (context) => ViewDescription()));*/
   }
 
   
@@ -149,7 +149,7 @@ class _AddDescriptionState extends State<AddDescription> {
   }
   }
   
-class ViewDescription extends StatefulWidget {
+/*class ViewDescription extends StatefulWidget {
   const ViewDescription({super.key});
 
   @override
@@ -163,8 +163,8 @@ class _ViewDescriptionState extends State<ViewDescription> {
 
 final Stream<QuerySnapshot> dataStream =
         FirebaseFirestore.instance
-        .collection('campaign_description')
-        .where("posted_by", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .collection('AcceptedCampaigns')
+        .where("UID", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .snapshots();
 
 
@@ -180,6 +180,7 @@ final Stream<QuerySnapshot> dataStream =
           ],
         ),
         body: Container(
+          
           decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assests/images/background.png"),
@@ -198,17 +199,26 @@ final Stream<QuerySnapshot> dataStream =
                         child: CircularProgressIndicator(),
                       );
                     }
+                    if(dataStream == null){
+
+                      Navigator.push(
+              context, MaterialPageRoute(builder: (context) => AddDescription()));
+                    }
                     final List storedocs = [];
                     snapshot.data!.docs.map((DocumentSnapshot document) {
                       Map a = document.data() as Map<String, dynamic>;
                       storedocs.add(a);
-                      a['posted_by'] = document.id;
-                    }).toList();
+                      a['UID'] = document.id;
+                    }
+                    
+                    
+                    
+                    ).toList();
                     return Column(
                         children: List.generate(
                             storedocs.length,
                             (i) => SingleChildScrollView(
-
+                                
 
           child: ExpansionTileCard(
                                     elevation: 2,
@@ -264,19 +274,25 @@ final Stream<QuerySnapshot> dataStream =
                                                         textAlign:
                                                             TextAlign.center,
                                                       ),
+                                  
                                                     ],
                                                   ),
                                                 ),
         ],),],),),),),
-          ],),),
-        ));
+          ],),
+          
+          ),
+        )
+        );
   }
   )
-  ));
+  )
+  
+  );
   }
   
   
   
   
-  }
+  }*/
  

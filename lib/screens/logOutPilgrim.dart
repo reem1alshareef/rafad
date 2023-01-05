@@ -8,8 +8,8 @@ import 'package:rafad1/widgets/my_button.dart';
 //   runApp(logOutAdmin());
 // }
 class logOutPilgrim extends StatefulWidget {
-  static const String screenRoute = 'logOutPilgrim';
-  logOutPilgrim({super.key});
+  //static const String screenRoute = 'logOutPilgrim';
+  const logOutPilgrim({super.key});
 
 @override
   State<logOutPilgrim> createState() => _logOutPilgrim();

@@ -50,9 +50,9 @@ class MyApp extends StatelessWidget {
           SignUpPilgrim.screenRoute: (context) => const SignUpPilgrim(),
           SignUpCampaign.screenRoute: (context) => const SignUpCampaign(),
           logOutAdmin.screenRoute: (context) => logOutAdmin(),
-          logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
-          logOutCampaign.screenRoute: (context) => logOutCampaign(),
-          LoginPage.screenRoute: (context) => LoginPage(),
+          //logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
+          //logOutCampaign.screenRoute: (context) => logOutCampaign(),
+          LoginPage.screenRoute: (context) => const LoginPage(),
         });
   }
 }

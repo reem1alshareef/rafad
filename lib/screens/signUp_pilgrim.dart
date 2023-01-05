@@ -3,6 +3,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rafad1/navigation/nav_bar.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -295,8 +296,9 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                                   ),
                                 );
 
-                                Navigator.pushNamed(
-                                    context, logOutPilgrim.screenRoute);
+                               Navigator.push(
+              context, MaterialPageRoute(builder: (context) => nav_pilgrim()));
+
                               }).catchError((onError) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(

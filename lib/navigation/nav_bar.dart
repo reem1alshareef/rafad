@@ -1,10 +1,14 @@
 // ignore_for_file: camel_case_types
 
 import "package:flutter/material.dart";
+import 'package:rafad1/screens/adminView.dart';
+import 'package:rafad1/screens/forget_pw.dart';
 import '../screens/add_description.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutAdmin.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
+
+import '../screens/welcome_admin.dart';
 
 
 class nav_admin extends StatefulWidget {
@@ -22,8 +26,7 @@ int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget> [
     Center(child: Text('pilgrims', style: TextStyle(fontSize: 72),),),//DeleteCampaign(),
     Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),//DeletePilgrim(),
-    //logOutAdmin()
-    
+    View()
       ];
 
   void _onItemTapped(int index) {  
@@ -52,8 +55,8 @@ int _selectedIndex = 0;
             backgroundColor: Color(0xFF455D83) 
           ),
           BottomNavigationBarItem(  
-            icon: Icon(Icons.person),  
-            label:'Profile',  
+            icon: Icon(Icons.request_page),  
+            label:'Requests',  
             backgroundColor: Color(0xFF455D83)  
           ),    
         ],   
@@ -88,8 +91,8 @@ class _nav_campaignState extends State<nav_campaign> {
     Center(child: Text('requests', style: TextStyle(fontSize: 72),),),
     Center(child: Text('pilgrims', style: TextStyle(fontSize: 72),),),
     Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),
-    ViewDescription(),
-    //logOutCampaign()
+    AddDescription(),
+    logOutCampaign()
     
     
       ];
@@ -166,7 +169,7 @@ int _selectedIndex = 0;
     Center(child: Text('campaigns', style: TextStyle(fontSize: 72),),),
     Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),
     Center(child: Text('emergency', style: TextStyle(fontSize: 72),),),
-    Center(child: Text('profile', style: TextStyle(fontSize: 72),),),//logOutPilgrim()
+    logOutPilgrim()
   ];
 
   void _onItemTapped(int index) {  

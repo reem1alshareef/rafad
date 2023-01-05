@@ -7,6 +7,7 @@ import 'package:rafad1/screens/logOutAdmin.dart';
 //import 'package:rafad1/screens/LoginPage.dart';
 class View extends StatefulWidget {
   //static const String screenRoute = 'welcome_screen';
+const View({super.key});
 
   @override
   _ViewState createState() => _ViewState();

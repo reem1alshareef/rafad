@@ -11,8 +11,8 @@ import 'add_description.dart';
 //   runApp(logOutAdmin());
 // }
 class logOutCampaign extends StatefulWidget {
-  static const String screenRoute = 'logOutCampaign';
-  logOutCampaign({super.key});
+  //static const String screenRoute = 'logOutCampaign';
+   const logOutCampaign({super.key});
 
   @override
   State<logOutCampaign> createState() => _logOutCampaign();
