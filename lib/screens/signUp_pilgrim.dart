@@ -310,6 +310,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                                   .collection("Pilgrims-Account")
                                   .add({
                                 'name': name,
+                                'UID': FirebaseAuth.instance.currentUser!.uid,////////هذا يا شادن ضبطناه
                                 'email': email,
                                 'number': number,
                                 'hajId': hajId,
