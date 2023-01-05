@@ -5,7 +5,6 @@ import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/forget_pw.dart';
 import '../screens/add_description.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
-import 'package:rafad1/screens/logOutAdmin.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 
 import '../screens/welcome_admin.dart';

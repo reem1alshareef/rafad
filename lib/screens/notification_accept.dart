@@ -13,7 +13,6 @@ class NotificationAccept {
 
         importance: Importance.max,
       ),
-     
     );
   }
 

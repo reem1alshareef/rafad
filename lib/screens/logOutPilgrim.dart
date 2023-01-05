@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
-import 'package:rafad1/screens/logOutAdmin.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 
 import '../widgets/my_button.dart';
@@ -20,7 +19,7 @@ static const String screenRoute = 'logOutPilgrim.dart';
 class _logOutPilgrimState extends State<logOutPilgrim> {
   final _firestore = FirebaseFirestore.instance;
   String? rejectionReason;
-  bool isButtonActive = true;
+  bool isButtonActive = true;////// حق شرط البوتون انه مايسمح للحاج يضغط اكثر من مره
   final _controller = TextEditingController();
 
 
@@ -289,6 +288,26 @@ Padding(
                                                     )
                                                   ]),
                                                 ),
+                                                 Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 10),
+                                                  child: Column(children: [
+                                                    Text(
+                                                      'Campaign\'s description :  ',
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xFF455D83),
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                    Text(
+                                                      storedocs[i]['description'],
+                                                      style: TextStyle(
+                                                          fontSize: 12),
+                                                    )
+                                                  ]),
+                                                ),
                                               ]),
                                             ]),
                                           ),
@@ -299,23 +318,25 @@ Padding(
                                       MyButton(
                                         color: const Color(0xFF455D83),
                                         title: 'book',
-                                        onPressed: () async {
+                                        onPressed:  () async  {
                                         _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").add({
                                                 'bookStatus': 'booked',
                                                 'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
-                                                'name':  FirebaseFirestore.instance.collection('Pilgrims-Account').doc(storedocs[i]['name']),
-                                                // 'number': storedocs[i]['number'],
+                                                //'name':  FirebaseFirestore.instance.collection('Pilgrims-Account').doc(storedocs[i]['name']),
+                                                // 'number': storedocs[i]['number'],//   في الكولكشن حقها باقي هنا اسوي ريتريف لبيانات الحاج من الكلوكشن حقه واحطها عند الحمله
                                                 // 'hajId': storedocs[i]['hajId'],
                                                 // 'pharma': storedocs[i]['pharma'],
                                               },
                                               );
-                                          //FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': FieldValue.increment(-1),});
+                                        FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': FieldValue.increment(-1),});
+
                                         _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").add({
                                                 'bookStatus': 'pending',
                                                 'campaignID': storedocs[i]['UID'],
+                                                
                                               },
                                               );
-                                        }
+                                        },
                                        ) ////////////////buton
                                 ],
                                 ),
