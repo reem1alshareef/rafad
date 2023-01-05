@@ -70,9 +70,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
         FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
-        ///////////////////////////////////
-//final Stream<QuerySnapshot> dataStream2 = FirebaseFirestore.instance.collection('campaign_description').where('posted_by', isEqualTo: FirebaseAuth.instance.currentUser!.uid).snapshots();
-////////////////////////////
+        
     return Scaffold(
 
         appBar: AppBar(
@@ -302,46 +300,22 @@ Padding(
                                         color: const Color(0xFF455D83),
                                         title: 'book',
                                         onPressed: () async {
-                                          // User? user = await FirebaseAuth.instance.currentUser;
-                                          // var vari =FirebaseFirestore.instance.collection("Pilgrims-Account").doc(user!.uid).get();
-                                          // Map<String,dynamic> userData = vari as Map<String,dynamic>;
-                                          // setState (() {
-                                          //  String name = userData['name'];
-                                          //  print(name);
-                                          //  //String name = userData['name']; //or name = userData['name']
-                                          //   }
-                                          //   );
                                         _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").add({
                                                 'bookStatus': 'booked',
                                                 'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
-                                                ///////////////////////////here
-                                                // 'name': name,//userData['name'],
-                                                // 'email': 'asdfghjkldfghj',
-                                                // 'number': storedocs[i]['numberP'],
-                                                // 'hajId': storedocs[i]['hajIdP'],
-                                                // 'disease': storedocs[i]['diseaseP'],
-                                                // 'pharma': storedocs[i]['pharmaP'],
+                                                'name':  FirebaseFirestore.instance.collection('Pilgrims-Account').doc(storedocs[i]['name']),
+                                                // 'number': storedocs[i]['number'],
+                                                // 'hajId': storedocs[i]['hajId'],
+                                                // 'pharma': storedocs[i]['pharma'],
                                               },
                                               );
                                           //FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': FieldValue.increment(-1),});
                                         _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").add({
                                                 'bookStatus': 'pending',
                                                 'campaignID': storedocs[i]['UID'],
-                                                ///////////////////////////here
-                                                // 'name': name,//userData['name'],
-                                                // 'email': 'asdfghjkldfghj',
-                                                // 'number': storedocs[i]['numberP'],
-                                                // 'hajId': storedocs[i]['hajIdP'],
-                                                // 'disease': storedocs[i]['diseaseP'],
-                                                // 'pharma': storedocs[i]['pharmaP'],
                                               },
                                               );
                                         }
-                                          // var seat , quantityref;
-                                          // seat = storedocs[i]['seatingCapacity'];
-                                          // quantityref = _firestore.collection("seatingCapacity").seat;
-                                          // quantityref.update({"quantity" : _firestore.firebase.FieldValue.decrement(1)});
-                                         ////: null ,)
                                        ) ////////////////buton
                                 ],
                                 ),
