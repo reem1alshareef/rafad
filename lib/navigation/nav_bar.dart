@@ -169,7 +169,7 @@ int _selectedIndex = 0;
     Center(child: Text('campaigns', style: TextStyle(fontSize: 72),),),
     Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),
     Center(child: Text('emergency', style: TextStyle(fontSize: 72),),),
-    logOutPilgrim()
+    //logOutPilgrim()
   ];
 
   void _onItemTapped(int index) {  
