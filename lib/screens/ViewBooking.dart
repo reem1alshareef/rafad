@@ -49,19 +49,39 @@ class _ViewState extends State<ViewBooking> {
   }
 
   void DataStreams() async {
-    await for (var snapshot
-        in _firestore.collection('Campaign-Account').snapshots()) {
-      for (var campaign in snapshot.docs) {
-        print(campaign.data());
-      }
-    }
+    FirebaseFirestore.instance.collection ("AcceptedCampaigns").get().then((value) {
+value.docs. forEach ((result) {
+
+FirebaseFirestore.instance.collection ("AcceptedCampaigns")
+.doc (result.id)
+.collection ("pilgrimsRequest")
+.get()
+. then ((subcol) {
+subcol.docs .forEach ((element) {
+print (element. data());
+});
+
+    });
+     } );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
-        FirebaseFirestore.instance.collection('Campaign-Account').snapshots();
+        FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
 
+/*FirebaseFirestore.instance.collection ("users") .get () . then((value) {
+value. docs. forEach ((result) {
+FirebaseFirestore.instance.collection ("users")
+.doc (result.1d)
+.collection ("pets")
+.get()
+. then ((subcol) {
+subcol.docs .forEach ((element) {
+print (element. data());l
+});
+]);*/ 
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -120,7 +140,7 @@ class _ViewState extends State<ViewBooking> {
                                       backgroundColor: Color(0xFF788AA4),
                                     ),
                                     title: Text(
-                                      storedocs[i]['nameCampaign'],
+                                      storedocs[i]['bookStatus'],
                                     ),
                                     subtitle: Text(
                                       "Click to view requests's details",
@@ -202,25 +222,7 @@ class _ViewState extends State<ViewBooking> {
                                                   Radius.circular(2.0)),
                                             )),
                                             onPressed: () {
-                                              _firestore
-                                                  .collection(
-                                                      'AcceptedCampaigns')
-                                                  .add({
-                                                'status': 'accepted',
-                                                'name': storedocs[i]
-                                                    ['nameCampaign'],
-                                                'email': storedocs[i]['emailC'],
-                                                'address': storedocs[i]
-                                                    ['address'],
-                                                'commercial_ID': storedocs[i]
-                                                    ['commercialID'],
-                                                'password': storedocs[i]
-                                                    ['password'],
-                                                'phoneNumber': storedocs[i]
-                                                    ['phoneNumberC'],
-                                                'seatingCapacity': storedocs[i]
-                                                    ['capacity'],
-                                              });
+                                              
 
                                               showDialog(
                                                   context: context,
