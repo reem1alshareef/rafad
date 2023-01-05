@@ -305,7 +305,6 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                                   ),
                                 );
                               });
-
                               await FirebaseFirestore.instance
                                   .collection("Pilgrims-Account")
                                   .add({
