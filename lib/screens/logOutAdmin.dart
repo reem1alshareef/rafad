@@ -17,19 +17,6 @@ class logOutAdmin extends StatefulWidget {
 
 class _logOutAdmin extends State<logOutAdmin> {
 
-  int _selectedIndex = 0;
-  
-  static const List<Widget> _widgetOptions = <Widget> [
-    //DeleteCampaign(),
-    //DeletePilgrim(),
-  ];
-
-  void _onItemTapped(int index) {  
-    setState(() {  
-      _selectedIndex = index;  
-    });  
-  }  
-
   final user = FirebaseAuth.instance.currentUser!;
   // void signUserOut() {
   //FirebaseAuth.instance.signOut();
@@ -48,30 +35,6 @@ class _logOutAdmin extends State<logOutAdmin> {
           ],
         ),
 
-
-         bottomNavigationBar: BottomNavigationBar(  
-        items: const <BottomNavigationBarItem>[  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.person_remove),  
-            label: 'Campaigns',  
-            backgroundColor: Color(0xFF455D83)  
-          ),  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.person_remove),  
-            label:'Pilgrims',  
-            backgroundColor: Color(0xFF455D83) 
-          )  
-        ],  
-        type: BottomNavigationBarType.shifting,  
-        currentIndex: _selectedIndex,  
-        selectedItemColor: Colors.white,  
-        iconSize: 40,  
-        onTap: _onItemTapped,  
-        elevation: 5  
-      ), 
-
-
-
         body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
@@ -83,10 +46,6 @@ class _logOutAdmin extends State<logOutAdmin> {
               children: [
                 Column(
                   children: [
-
-                    _widgetOptions.elementAt(_selectedIndex),
-
-
                     MyButton(
                       color: Color.fromARGB(255, 250, 73, 13),
                       title: 'Sign Out',

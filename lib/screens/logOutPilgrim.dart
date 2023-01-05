@@ -21,24 +21,6 @@ class _logOutPilgrim extends State<logOutPilgrim> {
 
 
 
- int _selectedIndex = 0;
-  
-  static const List<Widget> _widgetOptions = <Widget> [
-    Center(child: Text('bookings', style: TextStyle(fontSize: 72),),),
-    Center(child: Text('campaigns', style: TextStyle(fontSize: 72),),),
-    Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),
-    Center(child: Text('emergency', style: TextStyle(fontSize: 72),),),
-    Center(child: Text('profile', style: TextStyle(fontSize: 72),),),
-  ];
-
-  void _onItemTapped(int index) {  
-    setState(() {  
-      _selectedIndex = index;  
-    });  
-  }
-
-
-
   final user = FirebaseAuth.instance.currentUser!;
   // void signUserOut() {
   //FirebaseAuth.instance.signOut();
@@ -57,45 +39,7 @@ class _logOutPilgrim extends State<logOutPilgrim> {
           ],
         ),
 
-     bottomNavigationBar: BottomNavigationBar(  
-        items: const <BottomNavigationBarItem>[  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.home),  
-            label: 'Bookings',  
-            backgroundColor: Color(0xFF455D83)  
-          ),  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.search),  
-            label:'Campaigns',  
-            backgroundColor: Color(0xFF455D83) 
-          ),  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.announcement),  
-            label:'Announcement',  
-            backgroundColor: Color(0xFF455D83)  
-          ),  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.description),  
-            label:'Emergency',  
-            backgroundColor: Color(0xFF455D83)  
-          ),  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.person),  
-            label:'Profile',  
-            backgroundColor: Color(0xFF455D83)  
-          ),  
-        ],  
-        type: BottomNavigationBarType.shifting,  
-        currentIndex: _selectedIndex,  
-        selectedItemColor: Colors.white,  
-        iconSize: 40,  
-        onTap: _onItemTapped,  
-        elevation: 5  
-      ),
-
-
-
-
+     
         body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
@@ -107,10 +51,6 @@ class _logOutPilgrim extends State<logOutPilgrim> {
               children: [
                 Column(
                   children: [
-
-                     _widgetOptions.elementAt(_selectedIndex),
-
-
                     MyButton(
                       color: Color.fromARGB(255, 250, 73, 13),
                       title: 'Sign Out',

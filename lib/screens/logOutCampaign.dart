@@ -22,21 +22,7 @@ class _logOutCampaign extends State<logOutCampaign> {
 
 
 
-  int _selectedIndex = 0;
   
-  static const List<Widget> _widgetOptions = <Widget> [
-    Center(child: Text('requests', style: TextStyle(fontSize: 72),),),
-    Center(child: Text('pilgrims', style: TextStyle(fontSize: 72),),),
-    Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),
-    AddDescription(),
-    Center(child: Text('profile', style: TextStyle(fontSize: 72),),),
-  ];
-
-  void _onItemTapped(int index) {  
-    setState(() {  
-      _selectedIndex = index;  
-    });  
-  }  
   
   final user = FirebaseAuth.instance.currentUser!;
   // void signUserOut() {
@@ -55,42 +41,6 @@ class _logOutCampaign extends State<logOutCampaign> {
             const SizedBox(height: 30),
           ],
         ),
-
-        bottomNavigationBar: BottomNavigationBar(  
-        items: const <BottomNavigationBarItem>[  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.home),  
-            label: 'Requests',  
-            backgroundColor: Color(0xFF455D83)  
-          ),  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.search),  
-            label:'Pilgrims',  
-            backgroundColor: Color(0xFF455D83) 
-          ),  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.announcement),  
-            label:'Announcement',  
-            backgroundColor: Color(0xFF455D83)  
-          ),  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.description),  
-            label:'Description',  
-            backgroundColor: Color(0xFF455D83)  
-          ),  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.person),  
-            label:'Profile',  
-            backgroundColor: Color(0xFF455D83)  
-          ),  
-        ],  
-        type: BottomNavigationBarType.shifting,  
-        currentIndex: _selectedIndex,  
-        selectedItemColor: Colors.white,  
-        iconSize: 30,  
-        onTap: _onItemTapped,  
-        elevation: 5  
-      ),  
         
         body: Container(
           decoration: BoxDecoration(
@@ -102,12 +52,8 @@ class _logOutCampaign extends State<logOutCampaign> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Column(
-                  children: [
-
-                    _widgetOptions.elementAt(_selectedIndex),
-                    
-                    
-                    MyButton(
+                  children: [                   
+                  MyButton(
                       color: Color.fromARGB(255, 250, 73, 13),
                       title: 'Sign Out',
                       onPressed: () {
