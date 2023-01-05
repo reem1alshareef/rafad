@@ -7,6 +7,8 @@ import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:rafad1/screens/logOutAdmin.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 
+import '../widgets/my_button.dart';
+
 //import 'package:rafad1/screens/LoginPage.dart';
 class logOutPilgrim extends StatefulWidget {
 static const String screenRoute = 'logOutPilgrim.dart';
@@ -15,7 +17,7 @@ static const String screenRoute = 'logOutPilgrim.dart';
   _logOutPilgrimState createState() => _logOutPilgrimState();
 }
 
-class _logOutPilgrimState extends State<logOutPilgrim> {
+abstract class _logOutPilgrimState extends State<logOutPilgrim> {
   final _firestore = FirebaseFirestore.instance;
   String? rejectionReason;
 
@@ -59,7 +61,26 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
       }
     }
   }
-
+///////////////
+Future<List<DocumentSnapshot>> getcampID() async{
+    var data = await FirebaseFirestore.instance.collection('campaign_description').document(widget.posted_by).collection('AcceptedCampaigns').getDocuments();
+    var campId = data.documents;
+    return campId;
+  }
+  var doc;
+  getcampID().then((data){
+  for(int i = 0; i < s.length; i++) {
+    doc = Firestore.instance.collection('campaign_description')
+        .document(data[i]['description'])
+        .snapshots();
+    if (doc != null) {
+      products.forEach((doc) {
+        print(doc.data.values);
+      });
+    }
+  }
+});
+/////////////
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
@@ -87,18 +108,35 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
         ),
         body: SingleChildScrollView(
             child: Column(children: [
-
+Padding(
+  padding: const EdgeInsets.only(top: 30),
+  child:   Container(
+  //margin: EdgeInsets.all(60), 
+    color: Color.fromARGB(255, 179, 181, 183),
+  
+    child:   Padding(
+      padding: const EdgeInsets.all(17),
+      child: Text('available campaign' , style: TextStyle(
+        fontSize: 50,
+        fontWeight: FontWeight.w900,
+        fontStyle: FontStyle.normal,
+        color: Color(0xFF455D83),
+      ),
+      ),
+    ),
+  ),
+),
             Container(//كود الخلفيه 
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assests/images/background.png"),
-                  fit: BoxFit.cover),),),//كود الخلفيه لين هنا اللي ما اشتغلت 
+                  fit: BoxFit.cover),),),//كود الخلفيه لين هنا بس ما اشتغلت 
 
           Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
               child: StreamBuilder<QuerySnapshot>(
-                  stream: dataStream,
+                  stream: dataStream, 
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasError) {
@@ -240,6 +278,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                                     ),
                                                   ]),
                                                 ),
+                                               
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
@@ -265,220 +304,32 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                           ),
                                         ),
                                       ),
-                                      // ButtonBar(
-                                      //   alignment:
-                                      //       MainAxisAlignment.spaceAround,
-                                      //   buttonHeight: 52.0,
-                                      //   buttonMinWidth: 90.0,
-                                      //   children: <Widget>[
-                                      //     TextButton(
-                                      //       style: TextButton.styleFrom(
-                                      //           shape:
-                                      //               const RoundedRectangleBorder(
-                                      //         borderRadius: BorderRadius.all(
-                                      //             Radius.circular(2.0)),
-                                      //       )),
-                                      //       onPressed: () {
-                                      //         _firestore
-                                      //             .collection(
-                                      //                 'AcceptedCampaigns')
-                                      //             .add({
-                                      //           'status': 'accepted',
-                                      //           'name': storedocs[i]
-                                      //               ['nameCampaign'],
-                                      //           'email': storedocs[i]['emailC'],
-                                      //           'address': storedocs[i]
-                                      //               ['address'],
-                                      //           'commercial_ID': storedocs[i]
-                                      //               ['commercialID'],
-                                      //           'password': storedocs[i]
-                                      //               ['password'],
-                                      //           'phoneNumber': storedocs[i]
-                                      //               ['phoneNumberC'],
-                                      //           'seatingCapacity': storedocs[i]
-                                      //               ['capacity'],
-                                      //         });
+                                      /////////////////buton
+                                      
+                                      MyButton(
+                                        color: const Color(0xFF455D83),
+                                        title: 'book',
+                                      
+                                        onPressed: () {
+                                          // var seat , quantityref;
+                                          // seat = storedocs[i]['seatingCapacity'];
+                                          // quantityref = _firestore.collection("seatingCapacity").seat;
+                                          // quantityref.update({"quantity" : _firestore.firebase.FieldValue.decrement(1)});
+                                          FirebaseFirestore.instance.collection('users').doc(currentUser?.id).update({'bronzeBadges': FieldValue.decrement(1),});
 
-                                              // showDialog(
-                                              //     context: context,
-                                              //     builder:
-                                              //         (BuildContext context) {
-                                              //       return AlertDialog(
-                                              //         title: const Text(
-                                              //             "Accept Request"),
-                                              //         content: const Text(
-                                              //             "Are you sure you want to accept?"),
-                                              //         actions: [
-                                              //           ElevatedButton(
-                                              //               style: ElevatedButton.styleFrom(
-                                              //                   shape: RoundedRectangleBorder(
-                                              //                       borderRadius:
-                                              //                           BorderRadius.circular(
-                                              //                               30.0)),
-                                              //                   backgroundColor:
-                                              //                       Color(
-                                              //                           0xFF455D83)),
-                                              //               onPressed: () {
-                                              //                 Navigator.of(
-                                              //                         context)
-                                              //                     .pop();
-                                              //               },
-                                //                             child: const Text(
-                                //                                 "Cancel")),
-                                //                         ElevatedButton(
-                                //                             style: ElevatedButton.styleFrom(
-                                //                                 shape: RoundedRectangleBorder(
-                                //                                     borderRadius:
-                                //                                         BorderRadius.circular(
-                                //                                             30.0)),
-                                //                                 backgroundColor:
-                                //                                     Color(
-                                //                                         0xFF455D83)),
-                                //                             onPressed: () {
-                                //                               Navigator.of(
-                                //                                       context)
-                                //                                   .pop();
-                                //                               setState(
-                                //                                   () async {
-                                //                                 await FirebaseFirestore
-                                //                                     .instance
-                                //                                     .collection(
-                                //                                         'Campaign-Account')
-                                //                                     .doc(storedocs[
-                                //                                             i]
-                                //                                         ['UID'])
-                                //                                     .delete();
-                                //                               });
-                                //                             },
-                                //                             child: const Text(
-                                //                                 "Yes")),
-                                //                       ],
-                                //                     );
-                                //                   });
-                                //             },
-                                //             child: Column(
-                                //               children: <Widget>[
-                                //                 Icon(
-                                //                   Icons.check_circle,
-                                //                   color: Colors.green,
-                                //                 ),
-                                //                 Padding(
-                                //                   padding: const EdgeInsets
-                                //                       .symmetric(vertical: 2.0),
-                                //                 ),
-                                //                 Text('Accept'),
-                                //               ],
-                                //             ),
-                                //           ),
-                                //           TextButton(
-                                //             style: TextButton.styleFrom(
-                                //                 shape:
-                                //                     const RoundedRectangleBorder(
-                                //               borderRadius: BorderRadius.all(
-                                //                   Radius.circular(2.0)),
-                                //             )),
-                                //             onPressed: () {
-                                //               showDialog(
-                                //                   context: context,
-                                //                   builder:
-                                //                       (BuildContext context) {
-                                //                     return AlertDialog(
-                                //                       title: const Text(
-                                //                           "Reject Request"),
-                                //                       content: TextField(
-                                //                         controller: _controller,
-                                //                         //  errorText: _errorText,
-                                //                         maxLines: 7,
-                                //                         onChanged: (value) {
-                                //                           rejectionReason =
-                                //                               value;
-                                //                         },
-                                //                         decoration:
-                                //                             InputDecoration(
-                                //                           hintText:
-                                //                               "Enter reason of rejection",
-                                //                         ),
-                                //                       ),
-                                //                       actions: [
-                                //                         ElevatedButton(
-                                //                             style: ElevatedButton.styleFrom(
-                                //                                 shape: RoundedRectangleBorder(
-                                //                                     borderRadius:
-                                //                                         BorderRadius.circular(
-                                //                                             30.0)),
-                                //                                 backgroundColor:
-                                //                                     Color(
-                                //                                         0xFF455D83)),
-                                //                             onPressed: () {
-                                //                               Navigator.of(
-                                //                                       context)
-                                //                                   .pop();
-                                //                             },
-                                //                             child:
-                                //                                 Text('Cancel')),
-                                //                         ElevatedButton(
-                                //                           style: ElevatedButton
-                                //                               .styleFrom(
-                                //                             shape: RoundedRectangleBorder(
-                                //                                 borderRadius:
-                                //                                     BorderRadius
-                                //                                         .circular(
-                                //                                             30.0)),
-                                //                             backgroundColor:
-                                //                                 Color(
-                                //                                     0xFF455D83),
-                                //                           ), // background
-                                //                           onPressed: () {
-                                //                             Navigator.of(
-                                //                                     context)
-                                //                                 .pop();
-                                //                             setState(() async {
-                                //                               await FirebaseFirestore
-                                //                                   .instance
-                                //                                   .collection(
-                                //                                       'Campaign-Account')
-                                //                                   .doc(storedocs[
-                                //                                       i]['UID'])
-                                //                                   .delete();
-                                //                               _firestore
-                                //                                   .collection(
-                                //                                       'RejectedCampaigns')
-                                //                                   .add({
-                                //                                 'name': storedocs[
-                                //                                         i][
-                                //                                     'nameCampaign'],
-                                //                                 'reason':
-                                //                                     rejectionReason,
-                                //                                 'status':
-                                //                                     'rejected',
-                                //                               });
-                                //                             });
-                                //                           },
-                                //                           child: const Text(
-                                //                               "Submit"),
-                                //                         )
-                                //                       ],
-                                //                     );
-                                //                   });
-                                //             },
-                                //             child: Column(
-                                //               children: <Widget>[
-                                //                 Icon(Icons.cancel_rounded,
-                                //                     color: Colors.redAccent),
-                                //                 Padding(
-                                //                   padding: const EdgeInsets
-                                //                       .symmetric(vertical: 2.0),
-                                //                 ),
-                                //                 Text('Reject'),
-                                //               ],
-                                //             ),
-                                //           ),
-                                //         ],
-                                //       ),
+                                        },)
+                                        ////////////////buton
                                 ],
                                 ),
-                                )));
-                  }))
-        ])));
+                                ),
+                                ),
+                                );
+                  },
+                  ),
+                  ),
+        ],
+        ),
+        ),
+        );
   }
 }

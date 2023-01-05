@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: const BoxDecoration(
                     image: DecorationImage(
             image: AssetImage("assests/images/background.png"),
-            fit: BoxFit.cover),
+            fit: BoxFit.cover),//هنا يخلص كود الخلفيه اللي ما اشتغل اصلا 
                     color: Colors.white,
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),
