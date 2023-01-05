@@ -287,17 +287,6 @@ class _ViewPendingState extends State<ViewPending> {
                                                                 Color(
                                                                     0xFF455D83)),
                                                         onPressed: () {
-
-                                                              await NotificationAccept
-                                                              .showNotification(
-                                                                  id: 0,
-                                                                  title:
-                                                                      'campaign message',
-                                                                  body:
-                                                                      'Congratulations!, you have been accepted into our campaign. We wish you a blessed Hajj');
-                                                          //try loacl notification---- Navigator.pushNamed(context, SignUpPilgrim.screenRoute);
-
-
                                                           // This whole code will be when campaign presses Accept
                                                           // Albatouls Notification
 
