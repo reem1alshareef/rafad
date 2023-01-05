@@ -10,12 +10,30 @@ class NotificationAccept {
       android: AndroidNotificationDetails(
         'channel id',
         'channel name',
-        //'channel description', هذي اذكر حقت البيلود
+
         importance: Importance.max,
       ),
-      //iOS: IOSNotificationDetails(),
+     
     );
   }
+
+
+static Future init({bool initScheduled = false}) async {
+    final android = AndroidInitializationSettings('@mipmap/ic_launcher');
+
+    final settings = InitializationSettings(
+      android: android,
+     
+    );
+    await _notifications.initialize(
+      settings,
+      
+    );
+  }
+
+
+
+
 
   static Future showNotification({
     int id = 0,
