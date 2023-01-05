@@ -1,46 +1,119 @@
+//هذي اول بيج تطلع للحاج اذا سوا لوق ان
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/src/widgets/editable_text.dart';
+import 'package:rafad1/screens/logOutAdmin.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
-import 'package:rafad1/widgets/my_button.dart';
-//import 'dart:js';
 
-// void main(){
-//   runApp(logOutAdmin());
-// }
+import '../widgets/my_button.dart';
+
+//import 'package:rafad1/screens/LoginPage.dart';
 class logOutPilgrim extends StatefulWidget {
-  //static const String screenRoute = 'logOutPilgrim';
-  const logOutPilgrim({super.key});
+static const String screenRoute = 'logOutPilgrim.dart';
 
-@override
-  State<logOutPilgrim> createState() => _logOutPilgrim();
+  @override
+  _logOutPilgrimState createState() => _logOutPilgrimState();
 }
 
-class _logOutPilgrim extends State<logOutPilgrim> {
+class _logOutPilgrimState extends State<logOutPilgrim> {
+  final _firestore = FirebaseFirestore.instance;
+  String? rejectionReason;
+  bool isButtonActive = true;
+  final _controller = TextEditingController();
 
 
 
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
+  bool card = false;
+  bool isVisible = true;
+  bool _submitted = false;
+  String? name;
 
-  final user = FirebaseAuth.instance.currentUser!;
-  // void signUserOut() {
-  //FirebaseAuth.instance.signOut();
-  //Navigator.pushNamed(context, WelcomeScreen.screenRoute);
-  //}
+  void _submit() {
+    setState(() => _submitted = true);
+    if (_errorText == null) {}
+  }
+
+  String? get _errorText {
+    // at any time, we can get the text from _controller.value.text
+    final text = _controller.value.text;
+    // Note: you can do your own custom validation here
+    // Move this logic this outside the widget for more testable code
+    if (text.isEmpty) {
+      return 'Can\'t be empty ';
+    }
+    if (text.length < 4) {
+      return 'Too short';
+    }
+    // return null if the text is valid
+    return null;
+  }
+
+  void DataStreams() async {
+    await for (var snapshot
+        in _firestore.collection('AcceptedCampaigns')
+        .snapshots()) {
+      for (var campaign in snapshot.docs) {
+        print(campaign.data());
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final Stream<QuerySnapshot> dataStream =
+        FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
+        ///////////////////////////////////
+//final Stream<QuerySnapshot> dataStream2 = FirebaseFirestore.instance.collection('campaign_description').where('posted_by', isEqualTo: FirebaseAuth.instance.currentUser!.uid).snapshots();
+////////////////////////////
     return Scaffold(
+
         appBar: AppBar(
-          title: Text("pilgrim main home page"),
+          automaticallyImplyLeading: false,
+          title: Text('pilgrim main home page'),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
-          actions: [
-            const SizedBox(height: 30),
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushNamed(context, WelcomeScreen.screenRoute);
+              },
+            )
           ],
         ),
-
-     
-        body: Container(
+        body: SingleChildScrollView(
+            child: Column(children: [
+Padding(
+  padding: const EdgeInsets.only(top: 30),
+  child:   Container(
+  //margin: EdgeInsets.all(60), 
+    color: Color.fromARGB(255, 179, 181, 183),
+  
+    child:   Padding(
+      padding: const EdgeInsets.all(17),
+      child: Text('available campaign' , style: TextStyle(
+        fontSize: 50,
+        fontWeight: FontWeight.w900,
+        fontStyle: FontStyle.normal,
+        color: Color(0xFF455D83),
+      ),
+      ),
+    ),
+  ),
+),
+            Container(//كود الخلفيه 
           decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assests/images/background.png"),
