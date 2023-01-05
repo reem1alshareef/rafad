@@ -17,11 +17,13 @@ static const String screenRoute = 'logOutPilgrim.dart';
   _logOutPilgrimState createState() => _logOutPilgrimState();
 }
 
-abstract class _logOutPilgrimState extends State<logOutPilgrim> {
+class _logOutPilgrimState extends State<logOutPilgrim> {
   final _firestore = FirebaseFirestore.instance;
   String? rejectionReason;
-
+  bool isButtonActive = true;
   final _controller = TextEditingController();
+
+
 
   @override
   void dispose() {
@@ -32,6 +34,7 @@ abstract class _logOutPilgrimState extends State<logOutPilgrim> {
   bool card = false;
   bool isVisible = true;
   bool _submitted = false;
+  String? name;
 
   void _submit() {
     setState(() => _submitted = true);
@@ -55,37 +58,21 @@ abstract class _logOutPilgrimState extends State<logOutPilgrim> {
 
   void DataStreams() async {
     await for (var snapshot
-        in _firestore.collection('AcceptedCampaigns').snapshots()) {
+        in _firestore.collection('AcceptedCampaigns')
+        .snapshots()) {
       for (var campaign in snapshot.docs) {
         print(campaign.data());
       }
     }
   }
-///////////////
-Future<List<DocumentSnapshot>> getcampID() async{
-    var data = await FirebaseFirestore.instance.collection('campaign_description').document(widget.posted_by).collection('AcceptedCampaigns').getDocuments();
-    var campId = data.documents;
-    return campId;
-  }
-  var doc;
-  getcampID().then((data){
-  for(int i = 0; i < s.length; i++) {
-    doc = Firestore.instance.collection('campaign_description')
-        .document(data[i]['description'])
-        .snapshots();
-    if (doc != null) {
-      products.forEach((doc) {
-        print(doc.data.values);
-      });
-    }
-  }
-});
-/////////////
+
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
         FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
-
+        ///////////////////////////////////
+//final Stream<QuerySnapshot> dataStream2 = FirebaseFirestore.instance.collection('campaign_description').where('posted_by', isEqualTo: FirebaseAuth.instance.currentUser!.uid).snapshots();
+////////////////////////////
     return Scaffold(
 
         appBar: AppBar(
@@ -151,7 +138,7 @@ Padding(
                     snapshot.data!.docs.map((DocumentSnapshot document) {
                       Map a = document.data() as Map<String, dynamic>;
                       storedocs.add(a);
-                      a['id'] = document.id;
+                      a['UID'] = document.id;
                     }).toList();
                     return Column(
                         children: List.generate(
@@ -170,7 +157,12 @@ Padding(
                                       backgroundColor: Color(0xFF788AA4),
                                     ),
                                     title: Text(
-                                      storedocs[i]['name'],
+                                      storedocs[i]['name'],//storedocs[i]['UID']
+    //                                   _firestore.collection("acceptedCampaigns")
+    // .doc(storedocs[i]['UID'])
+    // .collection("pilgrimsRequest").add
+    //
+    // .doc(pilgrim ID);
                                     ),
                                     subtitle: Text(
                                       "Click to view campaign's details",
@@ -278,7 +270,7 @@ Padding(
                                                     ),
                                                   ]),
                                                 ),
-                                               
+
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
@@ -309,16 +301,48 @@ Padding(
                                       MyButton(
                                         color: const Color(0xFF455D83),
                                         title: 'book',
-                                      
-                                        onPressed: () {
+                                        onPressed: () async {
+                                          // User? user = await FirebaseAuth.instance.currentUser;
+                                          // var vari =FirebaseFirestore.instance.collection("Pilgrims-Account").doc(user!.uid).get();
+                                          // Map<String,dynamic> userData = vari as Map<String,dynamic>;
+                                          // setState (() {
+                                          //  String name = userData['name'];
+                                          //  print(name);
+                                          //  //String name = userData['name']; //or name = userData['name']
+                                          //   }
+                                          //   );
+                                        _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").add({
+                                                'bookStatus': 'booked',
+                                                'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
+                                                ///////////////////////////here
+                                                // 'name': name,//userData['name'],
+                                                // 'email': 'asdfghjkldfghj',
+                                                // 'number': storedocs[i]['numberP'],
+                                                // 'hajId': storedocs[i]['hajIdP'],
+                                                // 'disease': storedocs[i]['diseaseP'],
+                                                // 'pharma': storedocs[i]['pharmaP'],
+                                              },
+                                              );
+                                          //FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': FieldValue.increment(-1),});
+                                        _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").add({
+                                                'bookStatus': 'pending',
+                                                'campaignID': storedocs[i]['UID'],
+                                                ///////////////////////////here
+                                                // 'name': name,//userData['name'],
+                                                // 'email': 'asdfghjkldfghj',
+                                                // 'number': storedocs[i]['numberP'],
+                                                // 'hajId': storedocs[i]['hajIdP'],
+                                                // 'disease': storedocs[i]['diseaseP'],
+                                                // 'pharma': storedocs[i]['pharmaP'],
+                                              },
+                                              );
+                                        }
                                           // var seat , quantityref;
                                           // seat = storedocs[i]['seatingCapacity'];
                                           // quantityref = _firestore.collection("seatingCapacity").seat;
                                           // quantityref.update({"quantity" : _firestore.firebase.FieldValue.decrement(1)});
-                                          FirebaseFirestore.instance.collection('users').doc(currentUser?.id).update({'bronzeBadges': FieldValue.decrement(1),});
-
-                                        },)
-                                        ////////////////buton
+                                         //: null ,)
+                                       ) ////////////////buton
                                 ],
                                 ),
                                 ),
@@ -330,6 +354,8 @@ Padding(
         ],
         ),
         ),
+      
         );
+        
   }
 }
