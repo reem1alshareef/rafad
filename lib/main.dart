@@ -13,6 +13,7 @@ import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../firebase_options.dart';
+//import 'package:rafad1/screens/newAcc.dart';
 
 // ...
 
@@ -50,9 +51,9 @@ class MyApp extends StatelessWidget {
           SignUpPilgrim.screenRoute: (context) => const SignUpPilgrim(),
           SignUpCampaign.screenRoute: (context) => const SignUpCampaign(),
           logOutAdmin.screenRoute: (context) => logOutAdmin(),
-          logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
-          logOutCampaign.screenRoute: (context) => logOutCampaign(),
-          LoginPage.screenRoute: (context) => LoginPage(),
+          //logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
+          //logOutCampaign.screenRoute: (context) => logOutCampaign(),
+          LoginPage.screenRoute: (context) => const LoginPage(),
         });
   }
 }

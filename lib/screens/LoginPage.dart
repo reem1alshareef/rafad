@@ -1,13 +1,18 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rafad1/navigation/nav_bar.dart';
+//import 'package:fluttertoast_example/toast_context.dart';
+//import 'test.dart';
 import 'package:rafad1/screens/forget_pw.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
+import 'package:rafad1/screens/logOutAdmin.dart';
+import 'package:rafad1/screens/logOutCampaign.dart';
+import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/welcome_admin.dart';
-
 
 // void main() {
 //   runApp(const MyApp());
@@ -52,7 +57,6 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: const Color(0xffEEF1F3),
         body: Column(
           children: [
-            
             const PageHeader(),
             Container(//من هنا يبدا كود الخلفيه
                   padding: EdgeInsets.symmetric(horizontal: 50),
@@ -80,7 +84,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: Column(
                       children: [
                         const PageHeading(
-                          title: 'log in page',
+                          title: 'Sign in page',
                         ),
                         CustomInputField(
                             labelText: 'Email',
@@ -219,7 +223,7 @@ class _LoginPageState extends State<LoginPage> {
   Future<void> _handleLoginUser() async {
     // login user
     if (_loginFormKey.currentState!.validate()) {
-      //print('reached first if');
+      print('reached first if');
       //print('reached first if');
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Submitting data..')),
@@ -241,7 +245,7 @@ class _LoginPageState extends State<LoginPage> {
           //Navigator.push(
           //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => View()));
+              context, MaterialPageRoute(builder: (context) => nav_admin()));
 
           ///home_screen_owner
         } else if (isCampaign) {
@@ -252,7 +256,7 @@ class _LoginPageState extends State<LoginPage> {
           emailAddress = '';
           userPassword = '';
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => logOutCampaign()));
+              MaterialPageRoute(builder: (context) => nav_campaign()));
         } else {
           //in case of pilgrim
           await _auth.signInWithEmailAndPassword(
@@ -260,7 +264,7 @@ class _LoginPageState extends State<LoginPage> {
           emailAddress = '';
           userPassword = '';
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => logOutPilgrim()));
+              MaterialPageRoute(builder: (context) => nav_pilgrim()));
         }
       } on FirebaseAuthException catch (e) {
         showDialog(
@@ -313,7 +317,7 @@ class PageHeader extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.5,
-     child: Image.asset('assests/images/logo.png'),
+      child: Image.asset('assests/images/logo.png'),
     );
   }
 }

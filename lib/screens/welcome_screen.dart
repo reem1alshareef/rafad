@@ -3,7 +3,13 @@ import 'package:rafad1/screens/signUP_pilgrim.dart';
 import 'package:rafad1/screens/signUp_campaign.dart';
 import 'package:rafad1/widgets/my_button.dart';
 import 'package:rafad1/screens/LoginPage.dart';
+import 'package:screens/screens.dart';
+//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+//import 'notification_accept.dart';
+//final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin= FlutterLocalNotificationsPlugin();
+//1- بصفحة سديم سوي زي كذا لازم امبورت لفايل الرفض والقبول واربطهم بالزر
 
+//3- كيف الاشعار يروح للحاج ؟؟؟
 class WelcomeScreen extends StatefulWidget {
   static const String screenRoute = 'welcome_screen';
   const WelcomeScreen({super.key});
@@ -13,12 +19,14 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  /*void initState(){
+    super.initState();
+    NotificationAccept.init();
+  }*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       backgroundColor: Colors.white,
-      
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
@@ -27,13 +35,6 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           children: [
             Column(
               children: [
-///////////////////////////////////////////////////////////////////////
-                Container(
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assests/images/background.png"),
-                  fit: BoxFit.cover)),),
-/////////////////////////////////////////////////////////////////////
                 SizedBox(
                   height: 300,
                   child: Image.asset('assests/images/logo.png'),
