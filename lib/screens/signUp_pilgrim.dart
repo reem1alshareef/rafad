@@ -301,7 +301,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text('$onError'),
-                                    backgroundColor: Colors.red,
+                                    backgroundColor: Colors.red, //try
                                   ),
                                 );
                               });
