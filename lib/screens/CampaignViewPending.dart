@@ -3,6 +3,11 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'notification_accept.dart';
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 //import 'package:rafad1/screens/LoginPage.dart';
 class ViewPending extends StatefulWidget {
@@ -13,6 +18,11 @@ class ViewPending extends StatefulWidget {
 }
 
 class _ViewPendingState extends State<ViewPending> {
+  void initState() {
+    super.initState();
+    NotificationAccept.init();
+  }
+
   final _firestore = FirebaseFirestore.instance;
   String? rejectionReason;
 
@@ -286,9 +296,18 @@ class _ViewPendingState extends State<ViewPending> {
                                                             backgroundColor:
                                                                 Color(
                                                                     0xFF455D83)),
-                                                        onPressed: () {
+                                                        onPressed: () async {
                                                           // This whole code will be when campaign presses Accept
                                                           // Albatouls Notification
+
+                                                          await NotificationAccept
+                                                              .showNotification(
+                                                                  id: 0,
+                                                                  title:
+                                                                      'campaign message',
+                                                                  body:
+                                                                      'Congratulations!, you have been accepted into our campaign. We wish you a blessed Hajj');
+                                                          //try loacl notification---- Navigator.pushNamed(context, SignUpPilgrim.screenRoute);
 
                                                           Navigator.of(context)
                                                               .pop();
@@ -420,7 +439,15 @@ class _ViewPendingState extends State<ViewPending> {
                                                         backgroundColor:
                                                             Color(0xFF455D83),
                                                       ), // background
-                                                      onPressed: () {
+                                                      onPressed: () async {
+                                                        await NotificationAccept
+                                                            .showNotification(
+                                                                id: 0,
+                                                                title:
+                                                                    'campaign message',
+                                                                body:
+                                                                    'Sorry!, your requst is rejected in our campaign');
+
                                                         //When campaign presses Reject , i think notification caller should be here
                                                         Navigator.of(context)
                                                             .pop();

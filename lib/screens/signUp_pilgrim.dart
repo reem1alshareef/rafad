@@ -49,8 +49,8 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                   padding: EdgeInsets.symmetric(horizontal: 50),
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-            image: AssetImage("assests/images/background.png"),
-            fit: BoxFit.cover),
+                        image: AssetImage("assests/images/background.png"),
+                        fit: BoxFit.cover),
                     color: Colors.white,
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),
@@ -310,6 +310,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                                   .collection("Pilgrims-Account")
                                   .add({
                                 'name': name,
+                                'UID': FirebaseAuth.instance.currentUser!.uid,
                                 'email': email,
                                 'number': number,
                                 'hajId': hajId,

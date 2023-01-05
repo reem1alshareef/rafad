@@ -4,9 +4,9 @@ import 'package:rafad1/screens/signUp_campaign.dart';
 import 'package:rafad1/widgets/my_button.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:screens/screens.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'notification_accept.dart';
- final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin= FlutterLocalNotificationsPlugin();
+//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+//import 'notification_accept.dart';
+//final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin= FlutterLocalNotificationsPlugin();
 //1- بصفحة سديم سوي زي كذا لازم امبورت لفايل الرفض والقبول واربطهم بالزر
 
 //3- كيف الاشعار يروح للحاج ؟؟؟
@@ -19,10 +19,10 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  void initState(){
+  /*void initState(){
     super.initState();
     NotificationAccept.init();
-  }
+  }*/
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,11 +52,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             const SizedBox(height: 30),
             MyButton(
               color: const Color(0xFF455D83),
-              title:
-                  'Sign up As Pilgrim',
+              title: 'Sign up As Pilgrim',
               onPressed: () {
-              Navigator.pushNamed(context, SignUpPilgrim.screenRoute);
-              }, 
+                Navigator.pushNamed(context, SignUpPilgrim.screenRoute);
+              },
             ),
             MyButton(
               color: const Color(0xFF455D83),
