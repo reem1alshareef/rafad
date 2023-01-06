@@ -8,7 +8,7 @@ import 'package:rafad1/screens/welcome_screen.dart';
 
 
 class View extends StatefulWidget {
-const View({super.key});
+
 
   @override
   _ViewState createState() => _ViewState();
@@ -292,7 +292,8 @@ class _ViewState extends State<View> {
                                                   .collection(
                                                       'AcceptedCampaigns')
                                                   .doc(storedocs[i]['UID'])
-                                                  .set({ // To add it to the accepted collection
+                                                  .set({ 
+                                                    'UID': storedocs[i]['UID'],// To add it to the accepted collection
                                                 'status': 'accepted',
                                                 'name': storedocs[i]
                                                     ['nameCampaign'],
@@ -402,7 +403,8 @@ class _ViewState extends State<View> {
                                                                       'RejectedCampaigns')
                                                                   .doc(storedocs[
                                                                       i]['UID'])
-                                                                  .set({ // to add it to rejected collection
+                                                                  .set({ 
+                                                                     'UID': storedocs[i]['UID'],// to add it to rejected collection
                                                                 'name': storedocs[
                                                                         i][
                                                                     'nameCampaign'],
