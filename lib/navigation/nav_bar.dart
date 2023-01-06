@@ -25,7 +25,7 @@ int _selectedIndex = 0;
   static const List<Widget> _widgetOptions = <Widget> [
     Center(child: Text('pilgrims', style: TextStyle(fontSize: 72),),),//DeleteCampaign(),
     Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),//DeletePilgrim(),
-    View()
+    //View()
       ];
 
   void _onItemTapped(int index) {  

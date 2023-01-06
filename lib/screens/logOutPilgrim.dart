@@ -298,26 +298,26 @@ Padding(
                                                     )
                                                   ]),
                                                 ),
-                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 10),
-                                                  child: Column(children: [
-                                                    Text(
-                                                      'Campaign\'s description :  ',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xFF455D83),
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                    Text(
-                                                      storedocs[i]['description'],
-                                                      style: TextStyle(
-                                                          fontSize: 12),
-                                                    )
-                                                  ]),
-                                                ),
+                                                //  Padding(
+                                                //   padding:
+                                                //       const EdgeInsets.only(
+                                                //           bottom: 10),
+                                                //   child: Column(children: [
+                                                //     Text(
+                                                //       'Campaign\'s description :  ',
+                                                //       style: TextStyle(
+                                                //           color:
+                                                //               Color(0xFF455D83),
+                                                //           fontWeight:
+                                                //               FontWeight.w500),
+                                                //     ),
+                                                //     Text(
+                                                //       storedocs[i]['description'],
+                                                //       style: TextStyle(
+                                                //           fontSize: 12),
+                                                //     )
+                                                //   ]),
+                                                // ),
                                               ]),
                                             ]),
                                           ),
@@ -332,7 +332,6 @@ Padding(
                                         _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").add({
                                                 'bookStatus': 'booked',
                                                 'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
-                                                
                                                 //User user = FirebaseAuth.instance.currentUser;
                                                // DocumentSnapshot snap = FirebaseFirestore.instance.collection('Pilgrims-Account').doc(user.uid).get();
                                                 // String 'pilgrinID' = snap['uid'];
@@ -347,7 +346,6 @@ Padding(
                                               },
                                               );
                                         //FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': FieldValue.increment(-1),});
-
                                         _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").add({
                                                 'bookStatus': 'pending',
                                                 'campaignID': storedocs[i]['UID'],
