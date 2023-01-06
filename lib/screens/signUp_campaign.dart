@@ -309,6 +309,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                                 const SnackBar(
                                     content: Text('Submitting data..')),
                               );
+                              //  Firebase method creating user account
                               await FirebaseAuth.instance
                                   .createUserWithEmailAndPassword(
                                       email: emailC.toString(),
@@ -331,8 +332,8 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                                     backgroundColor: Colors.red,
                                   ),
                                 );
-                              });
-
+                              });// 
+                              // Firestore method -- assign a sub dir from Campaign-Account doc for the current user
                               await FirebaseFirestore.instance
                                   .collection("Campaign-Account")
                                   .doc(FirebaseAuth.instance.currentUser!.uid)

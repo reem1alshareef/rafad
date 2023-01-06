@@ -48,6 +48,24 @@ class _ViewState extends State<ViewBooking> {
     return null;
   }
 
+  //data streeeeeeeeeeeeeemmmms
+
+
+  void DataStreams() async {
+    await for (var snapshot
+        in _firestore.collection('AcceptedCampaigns')
+        .snapshots()) {
+      for (var campaign in snapshot.docs) {
+        print(campaign.data());
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final Stream<QuerySnapshot> dataStream =
+        FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
+/*
   void DataStreams() async {
     FirebaseFirestore.instance.collection ("AcceptedCampaigns").get().then((value) {
 value.docs. forEach ((result) {
@@ -71,7 +89,7 @@ print (element. data());
     final Stream<QuerySnapshot> dataStream =
         FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
 
-/*FirebaseFirestore.instance.collection ("users") .get () . then((value) {
+FirebaseFirestore.instance.collection ("users") .get () . then((value) {
 value. docs. forEach ((result) {
 FirebaseFirestore.instance.collection ("users")
 .doc (result.1d)
@@ -121,12 +139,15 @@ print (element. data());l
                     snapshot.data!.docs.map((DocumentSnapshot document) {
                       Map a = document.data() as Map<String, dynamic>;
                       storedocs.add(a);
-                      a['id'] = document.id;
+                      a['UID'] = document.id;
+
+
                     }).toList();
                     return Column(
                         children: List.generate(
                             storedocs.length,
                             (i) => SingleChildScrollView(
+                              
                                   child: ExpansionTileCard(
                                     elevation: 2,
                                     initialPadding:
@@ -140,7 +161,7 @@ print (element. data());l
                                       backgroundColor: Color(0xFF788AA4),
                                     ),
                                     title: Text(
-                                      storedocs[i]['bookStatus'],
+                                      storedocs[i]['name'],
                                     ),
                                     subtitle: Text(
                                       "Click to view requests's details",
@@ -166,7 +187,7 @@ print (element. data());l
                                                       const EdgeInsets.only(
                                                           bottom: 10),
                                                   child: Column(
-                                                    children: [
+                                                    children: const [
                                                       Text(
                                                         'Request has been Submitted  successfully',
                                                         style: TextStyle(
@@ -180,6 +201,7 @@ print (element. data());l
                                                     ],
                                                   ),
                                                 ),
+                                                
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
@@ -193,6 +215,7 @@ print (element. data());l
                                                           fontWeight:
                                                               FontWeight.w500),
                                                     ),
+                                                   
                                                     Text(
                                                       storedocs[i]['address'],
                                                       style: TextStyle(
@@ -265,6 +288,7 @@ print (element. data());l
                                                                   .pop();
                                                               setState(
                                                                   () async {
+                                                                    // حذف البيانات الخاصه باليوزر من الفايرستور
                                                                 await FirebaseFirestore
                                                                     .instance
                                                                     .collection(
@@ -282,11 +306,11 @@ print (element. data());l
                                                   });
                                             },
                                             child: Column(
-                                              children: <Widget>[
+                                              children: const <Widget>[
                                                 Icon(Icons.cancel_rounded,
                                                     color: Colors.redAccent),
                                                 Padding(
-                                                  padding: const EdgeInsets
+                                                  padding: EdgeInsets
                                                       .symmetric(vertical: 2.0),
                                                 ),
                                                 Text('Cansel'),
