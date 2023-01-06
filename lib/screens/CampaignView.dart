@@ -8,7 +8,7 @@ import 'package:rafad1/screens/welcome_screen.dart';
 
 class CampaignView extends StatelessWidget {
   static const String screenRoute = 'CampaignView';
-  CampaignView({super.key});
+  const CampaignView({super.key});
 
   @override
   Widget build(BuildContext context) {

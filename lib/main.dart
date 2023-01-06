@@ -36,22 +36,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'haj App',
-      debugShowCheckedModeBanner: false,
-      //home: logOutAdmin(),
-      theme: ThemeData(
-        primarySwatch: Colors.blueGrey,
-      ),
-      initialRoute: WelcomeScreen.screenRoute,
-      routes: {
-        WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
-        SignUpPilgrim.screenRoute: (context) => const SignUpPilgrim(),
-        SignUpCampaign.screenRoute: (context) => const SignUpCampaign(),
-    
-        logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
-        logOutCampaign.screenRoute: (context) => logOutCampaign(),
-        LoginPage.screenRoute: (context) => LoginPage(),
-      }
-    );
+        title: 'haj App',
+        debugShowCheckedModeBanner: false,
+        //home: logOutAdmin(),
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: WelcomeScreen.screenRoute,
+        routes: {
+          WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
+          SignUpPilgrim.screenRoute: (context) => const SignUpPilgrim(),
+          SignUpCampaign.screenRoute: (context) => const SignUpCampaign(),
+          //logOutAdmin.screenRoute: (context) => logOutAdmin(),
+          //logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
+          //logOutCampaign.screenRoute: (context) => logOutCampaign(),
+          LoginPage.screenRoute: (context) => const LoginPage(),
+        });
   }
 }
