@@ -330,7 +330,7 @@ Padding(
                                         title: 'book',
                                         onPressed:  () async  {
                                         _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").add({
-                                                'bookStatus': 'booked',
+                                                'bookStatus': 'pending',
                                                 'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
                                                 //User user = FirebaseAuth.instance.currentUser;
                                                // DocumentSnapshot snap = FirebaseFirestore.instance.collection('Pilgrims-Account').doc(user.uid).get();
