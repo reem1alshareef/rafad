@@ -322,10 +322,10 @@ Padding(
                                         _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").add({
                                                 'bookStatus': 'booked',
                                                 'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
-                                                //'name':  FirebaseFirestore.instance.collection('Pilgrims-Account').doc(storedocs[i]['name']),
-                                                // 'number': storedocs[i]['number'],//   في الكولكشن حقها باقي هنا اسوي ريتريف لبيانات الحاج من الكلوكشن حقه واحطها عند الحمله
-                                                // 'hajId': storedocs[i]['hajId'],
-                                                // 'pharma': storedocs[i]['pharma'],
+                                                'name':  storedocsP[i]['name'],
+                                                'number': storedocsP[i]['number'],//   في الكولكشن حقها باقي هنا اسوي ريتريف لبيانات الحاج من الكلوكشن حقه واحطها عند الحمله
+                                                'hajId': storedocsP[i]['hajId'],
+                                                'pharma': storedocsP[i]['pharma'],
                                               },
                                               );
                                         FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': FieldValue.increment(-1),});
@@ -333,7 +333,6 @@ Padding(
                                         _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").add({
                                                 'bookStatus': 'pending',
                                                 'campaignID': storedocs[i]['UID'],
-                                                
                                               },
                                               );
                                         },

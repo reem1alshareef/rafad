@@ -91,9 +91,7 @@ class _nav_campaignState extends State<nav_campaign> {
     Center(child: Text('pilgrims', style: TextStyle(fontSize: 72),),),
     Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),
     AddDescription(),
-    logOutCampaign()
-    
-    
+    logOutCampaign(),
       ];
 
   void _onItemTapped(int index) {  
@@ -168,7 +166,7 @@ int _selectedIndex = 0;
     Center(child: Text('campaigns', style: TextStyle(fontSize: 72),),),
     Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),
     Center(child: Text('emergency', style: TextStyle(fontSize: 72),),),
-    //logOutPilgrim()
+    //logOutPilgrim(),
   ];
 
   void _onItemTapped(int index) {  
