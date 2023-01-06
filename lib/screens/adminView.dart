@@ -293,6 +293,8 @@ class _ViewState extends State<View> {
                                                       'AcceptedCampaigns')
                                                   .doc(storedocs[i]['UID'])
                                                   .set({ // To add it to the accepted collection
+                                                'UID': storedocs[i]['UID'],
+                                                'description' : '',
                                                 'status': 'accepted',
                                                 'name': storedocs[i]
                                                     ['nameCampaign'],
@@ -403,6 +405,8 @@ class _ViewState extends State<View> {
                                                                   .doc(storedocs[
                                                                       i]['UID'])
                                                                   .set({ // to add it to rejected collection
+                                                                     'UID': storedocs[i]['UID'],
+                                                                     'description' : '',
                                                                 'name': storedocs[
                                                                         i][
                                                                     'nameCampaign'],
