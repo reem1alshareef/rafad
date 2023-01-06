@@ -32,14 +32,20 @@ class _logOutCampaign extends State<logOutCampaign> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(
+          actions: [
+            IconButton(
+              onPressed:() {
+                        FirebaseAuth.instance.signOut();
+                        Navigator.pushNamed(context, WelcomeScreen.screenRoute);
+                      }, icon: const Icon(Icons.logout),//hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+                      ), 
+                      ],
           title: Text("campaign main home page"),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
-          actions: [
-            const SizedBox(height: 30),
-          ],
         ),
         
         body: Container(

@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../widgets/my_button.dart';
@@ -47,6 +48,16 @@ class _AddDescriptionState extends State<AddDescription> {
               'description': description,
 
             });
+
+            showDialog(
+          context: context,
+          builder: (context) {
+            return const AlertDialog(
+              content: Text(
+                  'Description added successfully!'),
+                  icon: Icon(Icons.check),
+            );
+          });
             /*Navigator.push(
               context, MaterialPageRoute(builder: (context) => ViewDescription()));*/
   }
@@ -111,6 +122,13 @@ class _AddDescriptionState extends State<AddDescription> {
                       children: [
                     TextFormField(
                           //controller: _descController,
+                          maxLines: 3,
+                          maxLength: 50,
+                          
+                          inputFormatters: [
+                            FilteringTextInputFormatter.deny
+                            (RegExp(r"\s\s"),)
+                          ],
                           cursorColor: Colors.white,
                           style: TextStyle(color: Colors.grey[500],) ,
                           textInputAction: TextInputAction.done,
@@ -123,11 +141,19 @@ class _AddDescriptionState extends State<AddDescription> {
                           decoration: const InputDecoration(labelText: 'Description'),
                           autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (textValue) {
+                            
                             if (textValue == null || textValue.isEmpty) {
                               return 'Description is required!';
                             }
+                            //return null;
+                            if(textValue.trim().isEmpty){
+                            return "Description cannot be empty.";
+                            }
+
                             return null;
+
                           }
+                          
                            ),
                     const SizedBox(
                           height: 20,
