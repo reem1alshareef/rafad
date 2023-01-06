@@ -10,7 +10,7 @@ import '../widgets/my_button.dart';
 
 //import 'package:rafad1/screens/LoginPage.dart';
 class logOutPilgrim extends StatefulWidget {
-//static const String screenRoute = 'logOutPilgrim.dart';
+static const String screenRoute = 'logOutPilgrim.dart';
 const logOutPilgrim({super.key});
 /*@override
   State<logOutPilgrim> createState() => _logOutPilgrim();
@@ -68,7 +68,8 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
 
   void DataStreams() async {
     await for (var snapshot
-        in _firestore.collection('AcceptedCampaigns').snapshots()) {
+        in _firestore.collection('AcceptedCampaigns')
+        .snapshots()) {
       for (var campaign in snapshot.docs) {
         print(campaign.data());
       }
@@ -79,6 +80,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
         FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
+        
     return Scaffold(
 
         appBar: AppBar(
@@ -296,7 +298,7 @@ Padding(
                                                     )
                                                   ]),
                                                 ),
-                                                Padding(
+                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
                                                           bottom: 10),
@@ -344,7 +346,7 @@ Padding(
                                                 // 'pharma': storedocsP[i]['pharma'],
                                               },
                                               );
-                                        FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': FieldValue.increment(-1),});
+                                        //FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': FieldValue.increment(-1),});
 
                                         _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").add({
                                                 'bookStatus': 'pending',
@@ -352,7 +354,7 @@ Padding(
                                               },
                                               );
                                         },
-                                      ),
+                                       ) ////////////////buton
                                 ],
                                 ),
                                 ),
