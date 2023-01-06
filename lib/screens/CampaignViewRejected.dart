@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,39 +15,7 @@ class ViewRejected extends StatefulWidget {
 
 class _ViewRejectedState extends State<ViewRejected> {
   final _firestore = FirebaseFirestore.instance;
-  String? rejectionReason;
 
-  final _controller = TextEditingController();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  String? get _errorText {
-    // at any time, we can get the text from _controller.value.text
-    final text = _controller.value.text;
-    // Note: you can do your own custom validation here
-    // Move this logic this outside the widget for more testable code
-    if (text.isEmpty) {
-      return 'Can\'t be empty ';
-    }
-    if (text.length < 4) {
-      return 'Too short';
-    }
-    // return null if the text is valid
-    return null;
-  }
-
-  // void DataStreams() async {
-  //   await for (var snapshot
-  //       in _firestore.collection('Bookings').snapshots()) {
-  //     for (var campaign in snapshot.docs) {
-  //       print(campaign.data());
-  //     }
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -54,23 +23,7 @@ class _ViewRejectedState extends State<ViewRejected> {
         FirebaseFirestore.instance.collection('Bookings').snapshots();
 
     return Scaffold(
-        // appBar: AppBar(
-        //   automaticallyImplyLeading: false,
-        //   title: Text('Pilgrim booking requests'),
-        //   backgroundColor: const Color(0xFF455D83),
-        //   elevation: 0,
-        //   actions: <Widget>[
-        //     IconButton(
-        //       icon: Icon(
-        //         Icons.logout,
-        //         color: Colors.white,
-        //       ),
-        //       onPressed: () {
-        //         Navigator.pushNamed(context, logOutCampaign.screenRoute);
-        //       },
-        //     )
-        //   ],
-        // ),
+  
         body: SingleChildScrollView(
             child: Column(children: [
       Padding(

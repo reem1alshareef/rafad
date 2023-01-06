@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -54,23 +55,23 @@ class _ViewAcceptedState extends State<ViewAccepted> {
         FirebaseFirestore.instance.collection('Bookings').snapshots();
 
     return Scaffold(
-        appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text('Pilgrim booking requests'),
-          backgroundColor: const Color(0xFF455D83),
-          elevation: 0,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.logout,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                Navigator.pushNamed(context, logOutCampaign.screenRoute);
-              },
-            )
-          ],
-        ),
+        // appBar: AppBar(
+        //   automaticallyImplyLeading: false,
+        //   title: Text('Pilgrim booking requests'),
+        //   backgroundColor: const Color(0xFF455D83),
+        //   elevation: 0,
+        //   actions: <Widget>[
+        //     IconButton(
+        //       icon: Icon(
+        //         Icons.logout,
+        //         color: Colors.white,
+        //       ),
+        //       onPressed: () {
+        //         Navigator.pushNamed(context, logOutCampaign.screenRoute);
+        //       },
+        //     )
+        //   ],
+        // ),
         body: SingleChildScrollView(
             child: Column(children: [
           Padding(

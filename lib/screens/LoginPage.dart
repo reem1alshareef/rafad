@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rafad1/screens/CampaignView.dart';
 import 'package:rafad1/screens/forget_pw.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
@@ -252,7 +253,7 @@ class _LoginPageState extends State<LoginPage> {
           emailAddress = '';
           userPassword = '';
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => logOutCampaign()));
+              MaterialPageRoute(builder: (context) => CampaignView()));
         } else {
           //in case of pilgrim
           await _auth.signInWithEmailAndPassword(
