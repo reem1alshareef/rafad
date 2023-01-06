@@ -36,7 +36,7 @@ class CampaignView extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     //First Tab
-                    View(),
+                    ViewPending(),
                     ViewAccepted(),
                     ViewRejected(),
                     // Second Tab
