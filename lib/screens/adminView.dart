@@ -8,7 +8,7 @@ import 'package:rafad1/screens/welcome_screen.dart';
 
 
 class View extends StatefulWidget {
-
+const View({super.key});
 
   @override
   _ViewState createState() => _ViewState();

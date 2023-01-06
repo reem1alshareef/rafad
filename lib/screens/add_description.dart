@@ -28,6 +28,11 @@ class _AddDescriptionState extends State<AddDescription> {
   final TextEditingController _descController = TextEditingController();
   final _addDescKey = GlobalKey<FormState>();
   String? description;
+  final _firestore = FirebaseFirestore.instance;
+  final String uid= FirebaseAuth.instance.currentUser!.uid;
+  final CollectionReference collectionReference = FirebaseFirestore.instance.collection('AcceptedCampaigns');
+
+  final docUser = FirebaseFirestore.instance.collection('AcceptedCampaigns').doc('uid');
 
   @override
   void dispose() {
@@ -36,18 +41,34 @@ class _AddDescriptionState extends State<AddDescription> {
   }
 
   Future addDescription() async{
+
+
     if (_addDescKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
       content: Text('Submitting data..')),
     );
-      await FirebaseFirestore.instance
-            .collection("AcceptedCampaigns")
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .set({
-              'description': description,
+    //DocumentReference doc_id = _firestore.collection("AcceptedCampaigns").document();
 
-            });
+
+        //docUser.update({'description': description, });
+
+      /*await FirebaseFirestore.instance
+            .collection("AcceptedCampaigns")
+            .doc('uid')
+            .update({
+              'description': description,
+              
+            })
+
+            ;*/
+
+            await FirebaseFirestore.instance
+                                  .collection("Campaign-Account")
+                                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                                  .update({
+                                      'description': description,
+                                  });
 
             showDialog(
           context: context,
@@ -67,6 +88,9 @@ class _AddDescriptionState extends State<AddDescription> {
 
   @override
   Widget build(BuildContext context) {  
+     final Stream<QuerySnapshot> dataStream =
+        FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
+
         return Scaffold(
         appBar: AppBar(
           title: const Text("Add Description"),
@@ -76,6 +100,7 @@ class _AddDescriptionState extends State<AddDescription> {
             SizedBox(height: 30),
           ],
         ),
+        
         /*body: screens[index],
         bottomNavigationBar: 
         NavigationBar(
@@ -104,6 +129,7 @@ class _AddDescriptionState extends State<AddDescription> {
         ],),*/
        
           body: Container(
+            
           decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assests/images/background.png"),
@@ -123,7 +149,7 @@ class _AddDescriptionState extends State<AddDescription> {
                     TextFormField(
                           //controller: _descController,
                           maxLines: 3,
-                          maxLength: 50,
+                          maxLength: 100,
                           
                           inputFormatters: [
                             FilteringTextInputFormatter.deny
