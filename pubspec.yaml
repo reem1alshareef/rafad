@@ -49,14 +49,7 @@ dependencies:
   toast: ^0.3.0
   expansion_tile_card: ^2.0.0
   flutter_local_notifications: ^13.0.0
-  flutter_launcher_icons: ^0.11.0
-flutter_icons:
-  android: "launcher_icon"
-  image_path: "assests/images/logo.png"
-  min_sdk_android: 33 # android min sdk min:16, default 21
-
-
-
+  persistent_bottom_nav_bar: ^5.0.2
   #firebase:
   #cloud_firestore: ^3.1.5
   #firebase_auth: ^3.3.14

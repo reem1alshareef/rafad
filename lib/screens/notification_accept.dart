@@ -13,7 +13,6 @@ class NotificationAccept {
 
         importance: Importance.max,
       ),
-     
     );
   }
 
@@ -23,7 +22,6 @@ static Future init({bool initScheduled = false}) async {
 
     final settings = InitializationSettings(
       android: android,
-     
     );
     await _notifications.initialize(
       settings,
