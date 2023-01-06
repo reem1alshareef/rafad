@@ -231,24 +231,7 @@ class _ViewState extends State<View> {
                                                   Radius.circular(2.0)),
                                             )),
                                             onPressed: () {
-                                              _firestore
-                                                  .collection(
-                                                      'AcceptedCampaigns')
-                                                  .doc(storedocs[i]['UID'])
-                                                  .set({
-                                                'status': 'accepted',
-                                                'name': storedocs[i]
-                                                    ['nameCampaign'],
-                                                'email': storedocs[i]['emailC'],
-                                                'address': storedocs[i]
-                                                    ['address'],
-                                                'commercial_ID': storedocs[i]
-                                                    ['commercialID'],
-                                                'phoneNumber': storedocs[i]
-                                                    ['phoneNumberC'],
-                                                'seatingCapacity': storedocs[i]
-                                                    ['capacity'],
-                                              });
+                                              
 
                                               showDialog(
                                                   context: context,
@@ -286,6 +269,12 @@ class _ViewState extends State<View> {
                                                                     Color(
                                                                         0xFF455D83)),
                                                             onPressed: () {
+
+
+
+
+
+                                                              
                                                               Navigator.of(
                                                                       context)
                                                                   .pop();
@@ -298,7 +287,25 @@ class _ViewState extends State<View> {
                                                                     .doc(storedocs[
                                                                             i]
                                                                         ['UID'])
-                                                                    .delete();
+                                                                    .delete(); // to remove it from UI
+                                                                    _firestore
+                                                  .collection(
+                                                      'AcceptedCampaigns')
+                                                  .doc(storedocs[i]['UID'])
+                                                  .set({ // To add it to the accepted collection
+                                                'status': 'accepted',
+                                                'name': storedocs[i]
+                                                    ['nameCampaign'],
+                                                'email': storedocs[i]['emailC'],
+                                                'address': storedocs[i]
+                                                    ['address'],
+                                                'commercial_ID': storedocs[i]
+                                                    ['commercialID'],
+                                                'phoneNumber': storedocs[i]
+                                                    ['phoneNumberC'],
+                                                'seatingCapacity': storedocs[i]
+                                                    ['capacity'],
+                                              });
                                                               });
                                                             },
                                                             child: const Text(
@@ -389,13 +396,13 @@ class _ViewState extends State<View> {
                                                                       'Campaign-Account')
                                                                   .doc(storedocs[
                                                                       i]['UID'])
-                                                                  .delete();
+                                                                  .delete(); // to remove it from UI
                                                               _firestore
                                                                   .collection(
                                                                       'RejectedCampaigns')
                                                                   .doc(storedocs[
                                                                       i]['UID'])
-                                                                  .set({
+                                                                  .set({ // to add it to rejected collection
                                                                 'name': storedocs[
                                                                         i][
                                                                     'nameCampaign'],
