@@ -1,20 +1,18 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
-import 'package:rafad1/screens/welcome_screen.dart';
+import 'package:rafad1/screens/logOutCampaign.dart';
 
 //import 'package:rafad1/screens/LoginPage.dart';
-class View extends StatefulWidget {
-  //static const String screenRoute = 'welcome_screen';
-const View({super.key});
+class ViewAccepted extends StatefulWidget {
+static const String screenRoute = 'CampaignViewAccepted';
 
   @override
-  _ViewState createState() => _ViewState();
+  _ViewAcceptedState createState() => _ViewAcceptedState();
 }
 
-class _ViewState extends State<View> {
+class _ViewAcceptedState extends State<ViewAccepted> {
   final _firestore = FirebaseFirestore.instance;
   String? rejectionReason;
 
@@ -24,15 +22,6 @@ class _ViewState extends State<View> {
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
-
-  bool card = false;
-  bool isVisible = true;
-  bool _submitted = false;
-
-  void _submit() {
-    setState(() => _submitted = true);
-    if (_errorText == null) {}
   }
 
   String? get _errorText {
@@ -50,24 +39,24 @@ class _ViewState extends State<View> {
     return null;
   }
 
-  void DataStreams() async {
-    await for (var snapshot
-        in _firestore.collection('Campaign-Account').snapshots()) {
-      for (var campaign in snapshot.docs) {
-        print(campaign.data());
-      }
-    }
-  }
+  // void DataStreams() async {
+  //   await for (var snapshot
+  //       in _firestore.collection('Bookings').snapshots()) {
+  //     for (var campaign in snapshot.docs) {
+  //       print(campaign.data());
+  //     }
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
-        FirebaseFirestore.instance.collection('Campaign-Account').snapshots();
+        FirebaseFirestore.instance.collection('Bookings').snapshots();
 
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text('Registration requests'),
+          title: Text('Pilgrim booking requests'),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
           actions: <Widget>[
@@ -77,8 +66,7 @@ class _ViewState extends State<View> {
                 color: Colors.white,
               ),
               onPressed: () {
-                FirebaseAuth.instance.signOut();
-                Navigator.pushNamed(context, WelcomeScreen.screenRoute);
+                Navigator.pushNamed(context, logOutCampaign.screenRoute);
               },
             )
           ],
@@ -119,14 +107,14 @@ class _ViewState extends State<View> {
                                     //key: cardA,
                                     leading: CircleAvatar(
                                       child: Image.asset(
-                                          "assests/images/kaaba.png"),
+                                          "assests/images/hajj.png"),
                                       backgroundColor: Color(0xFF788AA4),
                                     ),
                                     title: Text(
-                                      storedocs[i]['nameCampaign'],
+                                      storedocs[i]['name'],
                                     ),
                                     subtitle: Text(
-                                      "Click to view campaign's details",
+                                      "Click to view pilgrim's details",
                                       style: TextStyle(fontSize: 11),
                                     ),
                                     children: [
@@ -144,38 +132,58 @@ class _ViewState extends State<View> {
                                           child: Center(
                                             child: Column(children: [
                                               Column(children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 10),
-                                                  child: Column(
-                                                    children: [
-                                                      Text(
-                                                        'Campaign\'s email:  ',
-                                                        style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w500),
-                                                      ),
-                                                      Text(
-                                                        storedocs[i]['emailC'],
-                                                        style: TextStyle(
-                                                            fontSize: 12),
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
+                                                // Padding(
+                                                //   padding:
+                                                //       const EdgeInsets.only(
+                                                //           bottom: 10),
+                                                //   child: Column(
+                                                //     children: [
+                                                //       Text(
+                                                //         'Campaign\'s email:  ',
+                                                //         style: TextStyle(
+                                                //             color: Color(
+                                                //                 0xFF455D83),
+                                                //             fontWeight:
+                                                //                 FontWeight
+                                                //                     .w500),
+                                                //       ),
+                                                //       Text(
+                                                //         storedocs[i]['emailP'],
+                                                //         style: TextStyle(
+                                                //             fontSize: 12),
+                                                //         textAlign:
+                                                //             TextAlign.center,
+                                                //       ),
+                                                //     ],
+                                                //   ),
+                                                // ),
+                                                // Padding(
+                                                //   padding:
+                                                //       const EdgeInsets.only(
+                                                //           bottom: 10),
+                                                //   child: Column(children: [
+                                                //     Text(
+                                                //       'Campaign\'s address: ',
+                                                //       style: TextStyle(
+                                                //           color:
+                                                //               Color(0xFF455D83),
+                                                //           fontWeight:
+                                                //               FontWeight.w500),
+                                                //     ),
+                                                //     Text(
+                                                //       storedocs[i]['address'],
+                                                //       style: TextStyle(
+                                                //           fontSize: 12),
+                                                //     ),
+                                                //   ]),
+                                                // ),
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
                                                           bottom: 10),
                                                   child: Column(children: [
                                                     Text(
-                                                      'Campaign\'s address: ',
+                                                      'Pilgrim\'s Hajj ID:  ',
                                                       style: TextStyle(
                                                           color:
                                                               Color(0xFF455D83),
@@ -183,55 +191,34 @@ class _ViewState extends State<View> {
                                                               FontWeight.w500),
                                                     ),
                                                     Text(
-                                                      storedocs[i]['address'],
+                                                      storedocs[i]['id'],
                                                       style: TextStyle(
                                                           fontSize: 12),
                                                     ),
                                                   ]),
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 10),
-                                                  child: Column(children: [
-                                                    Text(
-                                                      'Campaign\'s commercial ID:  ',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xFF455D83),
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                    Text(
-                                                      storedocs[i]
-                                                          ['commercialID'],
-                                                      style: TextStyle(
-                                                          fontSize: 12),
-                                                    ),
-                                                  ]),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 10),
-                                                  child: Column(children: [
-                                                    Text(
-                                                      'Campaign\s Phone Number:  ',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xFF455D83),
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                    Text(
-                                                      storedocs[i]
-                                                          ['phoneNumberC'],
-                                                      style: TextStyle(
-                                                          fontSize: 12),
-                                                    ),
-                                                  ]),
-                                                ),
-                                                Padding(
+                                                // Padding(
+                                                //   padding:
+                                                //       const EdgeInsets.only(
+                                                //           bottom: 10),
+                                                //   child: Column(children: [
+                                                //     Text(
+                                                //       'Campaign\s Phone Number:  ',
+                                                //       style: TextStyle(
+                                                //           color:
+                                                //               Color(0xFF455D83),
+                                                //           fontWeight:
+                                                //               FontWeight.w500),
+                                                //     ),
+                                                //     Text(
+                                                //       storedocs[i]
+                                                //           ['phoneNumberP'],
+                                                //       style: TextStyle(
+                                                //           fontSize: 12),
+                                                //     ),
+                                                //   ]),
+                                                // ),
+                                                /* Padding(
                                                   padding:
                                                       const EdgeInsets.only(
                                                           bottom: 10),
@@ -250,7 +237,7 @@ class _ViewState extends State<View> {
                                                           fontSize: 12),
                                                     )
                                                   ]),
-                                                ),
+                                                ),*/
                                               ]),
                                             ]),
                                           ),
@@ -270,27 +257,6 @@ class _ViewState extends State<View> {
                                                   Radius.circular(2.0)),
                                             )),
                                             onPressed: () {
-                                              _firestore
-                                                  .collection(
-                                                      'AcceptedCampaigns')
-                                                  .add({
-                                                'status': 'accepted',
-                                                'name': storedocs[i]
-                                                    ['nameCampaign'],
-                                                'email': storedocs[i]['emailC'],
-                                                'address': storedocs[i]
-                                                    ['address'],
-                                                'commercial_ID': storedocs[i]
-                                                    ['commercialID'],
-                                                'password': storedocs[i]
-                                                    ['password'],
-                                                'phoneNumber': storedocs[i]
-                                                    ['phoneNumberC'],
-                                                'seatingCapacity': storedocs[i]
-                                                    ['capacity'],
-                                                    'UID': FirebaseAuth.instance.currentUser!.uid,
-                                              });
-
                                               showDialog(
                                                   context: context,
                                                   builder:
@@ -299,7 +265,7 @@ class _ViewState extends State<View> {
                                                       title: const Text(
                                                           "Accept Request"),
                                                       content: const Text(
-                                                          "Are you sure you want to accept?"),
+                                                          "Are you sure you want to accept pilgrim's request?"),
                                                       actions: [
                                                         ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
@@ -327,18 +293,65 @@ class _ViewState extends State<View> {
                                                                     Color(
                                                                         0xFF455D83)),
                                                             onPressed: () {
+                                                              // This whole code will be when campaign presses Accept
+                                                              // Albatouls Notification
+
                                                               Navigator.of(
                                                                       context)
                                                                   .pop();
+
                                                               setState(
                                                                   () async {
+// This part will make a new collection for accepted pilgrims for this specific campaign who accepted the pilgrim?????
+                                                                _firestore
+                                                                    .collection(
+                                                                        'AcceptedBookings') // for this specific campaign
+                                                                    .add({
+                                                                  'status':
+                                                                      'accepted',
+                                                                  'name':
+                                                                      storedocs[
+                                                                              i]
+                                                                          [
+                                                                          'name'],
+                                                                  // 'email':
+                                                                  //     storedocs[
+                                                                  //             i]
+                                                                  //         [
+                                                                  //         'emailP'],
+                                                                  // 'address':
+                                                                  //     storedocs[
+                                                                  //             i]
+                                                                  //         [
+                                                                  //         'address'],
+                                                                  'HajjID':
+                                                                      storedocs[
+                                                                              i]
+                                                                          [
+                                                                          'id'],
+                                                                  // 'password':
+                                                                  //     storedocs[
+                                                                  //             i]
+                                                                  //         [
+                                                                  //         'password'],
+                                                                  // 'phoneNumber':
+                                                                  //     storedocs[
+                                                                  //             i]
+                                                                  //         [
+                                                                  //         'phoneNumberP'],
+                                                                  //  'seatingCapacity': storedocs[i]
+                                                                  // ['capacity'],
+                                                                });
+
+// This will delete the pilgrim account from the collection with pilgrims pending bookings
+
                                                                 await FirebaseFirestore
                                                                     .instance
                                                                     .collection(
-                                                                        'Campaign-Account')
+                                                                        'Bookings')
                                                                     .doc(storedocs[
-                                                                            i]
-                                                                        ['UID'])
+                                                                            i][
+                                                                        'UID']) // مفروض حق الحاج نفس لما سجل
                                                                     .delete();
                                                               });
                                                             },
@@ -376,21 +389,23 @@ class _ViewState extends State<View> {
                                                       (BuildContext context) {
                                                     return AlertDialog(
                                                       title: const Text(
-                                                          "Reject Request"),
-                                                      content: TextField(
-                                                        controller: _controller,
-                                                        //  errorText: _errorText,
-                                                        maxLines: 7,
-                                                        onChanged: (value) {
-                                                          rejectionReason =
-                                                              value;
-                                                        },
-                                                        decoration:
-                                                            InputDecoration(
-                                                          hintText:
-                                                              "Enter reason of rejection",
-                                                        ),
-                                                      ),
+                                                          "Reject Pilgrim"),
+                                                      content: Text(
+                                                          'Are you sure you want to reject pilgrim\'s booking request?'),
+                                                      // content: TextField(
+                                                      //   controller: _controller,
+                                                      //   //  errorText: _errorText,
+                                                      //   maxLines: 7,
+                                                      //   onChanged: (value) {
+                                                      //     rejectionReason =
+                                                      //         value;
+                                                      //   },
+                                                      //   decoration:
+                                                      //       InputDecoration(
+                                                      //     hintText:
+                                                      //         "Enter reason of rejection",
+                                                      //   ),
+                                                      // ),
                                                       actions: [
                                                         ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
@@ -421,6 +436,7 @@ class _ViewState extends State<View> {
                                                                     0xFF455D83),
                                                           ), // background
                                                           onPressed: () {
+                                                            //When campaign presses Reject , i think notification caller should be here
                                                             Navigator.of(
                                                                     context)
                                                                 .pop();
@@ -428,26 +444,26 @@ class _ViewState extends State<View> {
                                                               await FirebaseFirestore
                                                                   .instance
                                                                   .collection(
-                                                                      'Campaign-Account')
+                                                                      'BOOKING COLLECTION??????')
                                                                   .doc(storedocs[
                                                                       i]['UID'])
                                                                   .delete();
                                                               _firestore
                                                                   .collection(
-                                                                      'RejectedCampaigns')
+                                                                      'RejectedPilgrim') // Why should i delete it then add it to a rejected collection??
+                                                                  // another campaign might accapt it......
                                                                   .add({
-                                                                'name': storedocs[
-                                                                        i][
-                                                                    'nameCampaign'],
-                                                                'reason':
-                                                                    rejectionReason,
+                                                                'namePilgrim':
+                                                                    storedocs[i]
+                                                                        [
+                                                                        'namePilgrim'],
                                                                 'status':
                                                                     'rejected',
                                                               });
                                                             });
                                                           },
-                                                          child: const Text(
-                                                              "Submit"),
+                                                          child:
+                                                              const Text("Yes"),
                                                         )
                                                       ],
                                                     );

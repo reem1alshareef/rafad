@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
-import 'package:rafad1/screens/logOutAdmin.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
-
 //import 'package:rafad1/screens/LoginPage.dart';
 class DeleteCampaign extends StatefulWidget {
-  //static const String screenRoute = 'welcome_screen';
+static const String screenRoute = 'DeleteCampaign';
 
   @override
   deleteCampaign createState() => deleteCampaign();
@@ -260,111 +258,6 @@ class deleteCampaign extends State<DeleteCampaign> {
                                         buttonHeight: 52.0,
                                         buttonMinWidth: 90.0,
                                         children: <Widget>[
-                                          // TextButton(
-                                          //   style: TextButton.styleFrom(
-                                          //       shape:
-                                          //           const RoundedRectangleBorder(
-                                          //     borderRadius: BorderRadius.all(
-                                          //         Radius.circular(2.0)),
-                                          //   )),
-                                          //   onPressed: () {
-                                          //     _firestore
-                                          //         .collection(
-                                          //             'AcceptedCampaigns')
-                                          //         .add({
-                                          //       'status': 'accepted',
-                                          //       'name': storedocs[i]
-                                          //           ['nameCampaign'],
-                                          //       'email': storedocs[i]['emailC'],
-                                          //       'address': storedocs[i]
-                                          //           ['address'],
-                                          //       'commercial_ID': storedocs[i]
-                                          //           ['commercialID'],
-                                          //       'password': storedocs[i]
-                                          //           ['password'],
-                                          //       'phoneNumber': storedocs[i]
-                                          //           ['phoneNumberC'],
-                                          //       'seatingCapacity': storedocs[i]
-                                          //           ['capacity'],
-                                          //     });
-
-                                          //     showDialog(
-                                          //         context: context,
-                                          //         builder:
-                                          //             (BuildContext context) {
-                                          //           return AlertDialog(
-                                          //             title: const Text(
-                                          //                 "Accept Request"),
-                                          //             content: const Text(
-                                          //                 "Are you sure you want to accept?"),
-                                          //             actions: [
-                                          //               ElevatedButton(
-                                          //                   style: ElevatedButton.styleFrom(
-                                          //                       shape: RoundedRectangleBorder(
-                                          //                           borderRadius:
-                                          //                               BorderRadius.circular(
-                                          //                                   30.0)),
-                                          //                       backgroundColor:
-                                          //                           Color(
-                                          //                               0xFF455D83)),
-                                          //                   onPressed: () {
-                                          //                     Navigator.of(
-                                          //                             context)
-                                          //                         .pop();
-                                          //                   },
-                                          //                   child: const Text(
-                                          //                       "Cancel")),
-                                          //               ElevatedButton(
-                                          //                   style: ElevatedButton.styleFrom(
-                                          //                       shape: RoundedRectangleBorder(
-                                          //                           borderRadius:
-                                          //                               BorderRadius.circular(
-                                          //                                   30.0)),
-                                          //                       backgroundColor:
-                                          //                           Color(
-                                          //                               0xFF455D83)),
-                                          //                   onPressed: () {
-                                          //                     Navigator.of(
-                                          //                             context)
-                                          //                         .pop();
-                                          //                     setState(
-                                          //                         () async {
-                                          //                       await FirebaseFirestore
-                                          //                           .instance
-                                          //                           .collection(
-                                          //                               'Campaign-Account')
-                                          //                           .doc(storedocs[
-                                          //                                   i]
-                                          //                               ['UID'])
-                                          //                           .delete();
-                                          //                     });
-                                          //                     Text('gfkjdijg');
-                                          //                     print('object');
-                                          //                   },
-                                          //                   child: const Text(
-                                          //                       "Yes")),
-                                          //             ],
-                                          //           );
-                                          //         });
-                                          //   },
-                                          //   child: Column(
-                                          //     children: <Widget>[
-                                          //       Icon(
-                                          //         Icons.check_circle,
-                                          //         color: Colors.green,
-                                          //       ),
-                                          //       Padding(
-                                          //         padding: const EdgeInsets
-                                          //             .symmetric(vertical: 2.0),
-                                          //       ),
-                                          //       Text('Accept'),
-                                          //     ],
-                                          //   ),
-                                          // ),
-
-
-
-                                          
                                           TextButton(
                                             style: TextButton.styleFrom(shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2.0)),)),
                                             onPressed: () {
