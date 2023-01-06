@@ -16,14 +16,12 @@ class ViewRejected extends StatefulWidget {
 class _ViewRejectedState extends State<ViewRejected> {
   final _firestore = FirebaseFirestore.instance;
 
-
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
         FirebaseFirestore.instance.collection('Bookings').snapshots();
 
     return Scaffold(
-  
         body: SingleChildScrollView(
             child: Column(children: [
       Padding(
@@ -65,8 +63,9 @@ class _ViewRejectedState extends State<ViewRejected> {
                                   storedocs[i]['name'],
                                 ),
                                 subtitle: Text(
-                                  "Click to view pilgrim's details",
-                                  style: TextStyle(fontSize: 11),
+                                  "Rejected Pilgrim",
+                                  style: TextStyle(
+                                      fontSize: 11, color: Colors.redAccent),
                                 ),
                                 children: [
                                   Divider(

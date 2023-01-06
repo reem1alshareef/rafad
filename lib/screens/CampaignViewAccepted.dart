@@ -115,8 +115,8 @@ class _ViewAcceptedState extends State<ViewAccepted> {
                                       storedocs[i]['name'],
                                     ),
                                     subtitle: Text(
-                                      "Click to view pilgrim's details",
-                                      style: TextStyle(fontSize: 11),
+                                      "Accepted Pilgrim",
+                                      style: TextStyle(fontSize: 11,color: Colors.lightGreen),
                                     ),
                                     children: [
                                       Divider(

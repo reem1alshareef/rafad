@@ -88,6 +88,7 @@ class _ViewPendingState extends State<ViewPending> {
                                   "Click to view pilgrim's details",
                                   style: TextStyle(fontSize: 11),
                                 ),
+                                
                                 children: [
                                   Divider(
                                     thickness: 1.7,
