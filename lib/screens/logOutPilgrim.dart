@@ -10,7 +10,8 @@ import '../widgets/my_button.dart';
 
 //import 'package:rafad1/screens/LoginPage.dart';
 class logOutPilgrim extends StatefulWidget {
-static const String screenRoute = 'logOutPilgrim.dart';
+//static const String screenRoute = 'logOutPilgrim.dart';
+const logOutPilgrim({super.key});
 
   @override
   _logOutPilgrimState createState() => _logOutPilgrimState();
