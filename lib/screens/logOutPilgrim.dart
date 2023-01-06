@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
-
 import 'package:rafad1/screens/welcome_screen.dart';
 
 import '../widgets/my_button.dart';
@@ -12,7 +11,7 @@ import '../widgets/my_button.dart';
 //import 'package:rafad1/screens/LoginPage.dart';
 class logOutPilgrim extends StatefulWidget {
 //static const String screenRoute = 'logOutPilgrim.dart';
-
+const logOutPilgrim({super.key});
 /*@override
   State<logOutPilgrim> createState() => _logOutPilgrim();
 }
@@ -80,8 +79,6 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
         FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
-        
-
     return Scaffold(
 
         appBar: AppBar(
@@ -299,7 +296,7 @@ Padding(
                                                     )
                                                   ]),
                                                 ),
-                                                 Padding(
+                                                Padding(
                                                   padding:
                                                       const EdgeInsets.only(
                                                           bottom: 10),
@@ -332,7 +329,7 @@ Padding(
                                         onPressed:  () async  {
                                         _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").add({
                                                 'bookStatus': 'booked',
-                                                ///'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
+                                                'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
                                                 
                                                 //User user = FirebaseAuth.instance.currentUser;
                                                // DocumentSnapshot snap = FirebaseFirestore.instance.collection('Pilgrims-Account').doc(user.uid).get();
@@ -355,7 +352,7 @@ Padding(
                                               },
                                               );
                                         },
-                                       ) ////////////////buton
+                                      ),
                                 ],
                                 ),
                                 ),
@@ -369,5 +366,6 @@ Padding(
         ),
       
         );
-          }
+        
+  }
 }
