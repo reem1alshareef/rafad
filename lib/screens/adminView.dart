@@ -269,12 +269,6 @@ class _ViewState extends State<View> {
                                                                     Color(
                                                                         0xFF455D83)),
                                                             onPressed: () {
-
-
-
-
-
-                                                              
                                                               Navigator.of(
                                                                       context)
                                                                   .pop();
@@ -284,9 +278,7 @@ class _ViewState extends State<View> {
                                                                     .instance
                                                                     .collection(
                                                                         'Campaign-Account')
-                                                                    .doc(storedocs[
-                                                                            i]
-                                                                        ['UID'])
+                                                                    .doc(storedocs[i]['UID'])
                                                                     .delete(); // to remove it from UI
                                                                     _firestore
                                                   .collection(

@@ -345,7 +345,8 @@ Padding(
                                                 // 'pharma': storedocsP[i]['pharma'],
                                               },
                                               );
-                                        //FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': FieldValue.increment(-1),});
+                                              int counter = int.parse(storedocs[i]['seatingCapacity'])-1;
+                                        FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': counter.toString(),});
                                         _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").add({
                                                 'bookStatus': 'pending',
                                                 'campaignID': storedocs[i]['UID'],
