@@ -18,18 +18,18 @@ class CampaignView extends StatelessWidget {
           appBar: AppBar(
             backgroundColor: const Color(0xFF455D83),
             title: Text('Pilgrims Bookings'),
-            actions: <Widget>[
-              IconButton(
-                icon: Icon(
-                  Icons.logout,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  FirebaseAuth.instance.signOut();
-                  Navigator.pushNamed(context, WelcomeScreen.screenRoute);
-                },
-              )
-            ],
+            // actions: <Widget>[
+            //   IconButton(
+            //     icon: Icon(
+            //       Icons.logout,
+            //       color: Colors.white,
+            //     ),
+            //     onPressed: () {
+            //       FirebaseAuth.instance.signOut();
+            //       Navigator.pushNamed(context, WelcomeScreen.screenRoute);
+            //     },
+            //   )
+            // ],
           ),
           body: Column(
             children: [
