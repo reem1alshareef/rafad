@@ -163,7 +163,7 @@ int _selectedIndex = 0;
   
   static const List<Widget> _widgetOptions = <Widget> [
     Center(child: Text('bookings', style: TextStyle(fontSize: 72),),),
-    Center(child: Text('campaigns', style: TextStyle(fontSize: 72),),),
+    logOutPilgrim(),
     Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),
     Center(child: Text('emergency', style: TextStyle(fontSize: 72),),),
     //logOutPilgrim(),

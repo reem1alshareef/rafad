@@ -21,6 +21,8 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
   String? rejectionReason;
   bool isButtonActive = true;////// حق شرط البوتون انه مايسمح للحاج يضغط اكثر من مره
   final _controller = TextEditingController();
+  
+  User? user;
 
 
 
@@ -321,11 +323,19 @@ Padding(
                                         onPressed:  () async  {
                                         _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").add({
                                                 'bookStatus': 'booked',
-                                                'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
-                                                'name':  storedocsP[i]['name'],
-                                                'number': storedocsP[i]['number'],//   في الكولكشن حقها باقي هنا اسوي ريتريف لبيانات الحاج من الكلوكشن حقه واحطها عند الحمله
-                                                'hajId': storedocsP[i]['hajId'],
-                                                'pharma': storedocsP[i]['pharma'],
+                                                ///'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
+                                                
+                                                //User user = FirebaseAuth.instance.currentUser;
+                                               // DocumentSnapshot snap = FirebaseFirestore.instance.collection('Pilgrims-Account').doc(user.uid).get();
+                                                // String 'pilgrinID' = snap['uid'];
+                                                // String 'name' = snap['name'];
+                                                // String 'number' = snap['number'];
+                                                // String 'hajId' = snap['hajId'];
+                                                // String 'pharma' = snap['pharma'];
+                                                // 'name':  storedocsP[i]['name'],
+                                                // 'number': storedocsP[i]['number'],//   في الكولكشن حقها باقي هنا اسوي ريتريف لبيانات الحاج من الكلوكشن حقه واحطها عند الحمله
+                                                // 'hajId': storedocsP[i]['hajId'],
+                                                // 'pharma': storedocsP[i]['pharma'],
                                               },
                                               );
                                         FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': FieldValue.increment(-1),});
