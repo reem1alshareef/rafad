@@ -28,6 +28,9 @@ class _AddDescriptionState extends State<AddDescription> {
   final TextEditingController _descController = TextEditingController();
   final _addDescKey = GlobalKey<FormState>();
   String? description;
+  //final _firestore = FirebaseFirestore.instance;
+  final String uid= FirebaseAuth.instance.currentUser!.uid;
+  final CollectionReference collectionReference = FirebaseFirestore.instance.collection('AcceptedCampaigns');
 
   @override
   void dispose() {
@@ -36,18 +39,22 @@ class _AddDescriptionState extends State<AddDescription> {
   }
 
   Future addDescription() async{
+    
     if (_addDescKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
       content: Text('Submitting data..')),
     );
+    //DocumentReference doc = _firestore.collection("AcceptedCampaigns").doc(uid);
+
       await FirebaseFirestore.instance
             .collection("AcceptedCampaigns")
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .set({
+            .doc(uid)
+            .update({
               'description': description,
-
-            });
+            })
+            //.whenComplete(() async {})
+            ;
 
             showDialog(
           context: context,
@@ -123,7 +130,7 @@ class _AddDescriptionState extends State<AddDescription> {
                     TextFormField(
                           //controller: _descController,
                           maxLines: 3,
-                          maxLength: 50,
+                          maxLength: 100,
                           
                           inputFormatters: [
                             FilteringTextInputFormatter.deny

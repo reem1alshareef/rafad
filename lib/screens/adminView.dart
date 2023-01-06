@@ -272,6 +272,7 @@ class _ViewState extends State<View> {
                                                   .collection(
                                                       'AcceptedCampaigns')
                                                   .add({
+                                                'description': '',
                                                 'status': 'accepted',
                                                 'name': storedocs[i]
                                                     ['nameCampaign'],
