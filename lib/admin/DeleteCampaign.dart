@@ -3,18 +3,19 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:rafad1/screens/logOutAdmin.dart';
+import 'package:rafad1/screens/welcome_screen.dart';
 
 //import 'package:rafad1/screens/LoginPage.dart';
-class View extends StatefulWidget {
+class DeleteCampaign extends StatefulWidget {
   //static const String screenRoute = 'welcome_screen';
 
   @override
-  _ViewState createState() => _ViewState();
+  deleteCampaign createState() => deleteCampaign();
 }
 
-class _ViewState extends State<View> {
+class deleteCampaign extends State<DeleteCampaign> {
   final _firestore = FirebaseFirestore.instance;
-  String? rejectionReason;
+  //String? rejectionReason;
 
   final _controller = TextEditingController();
 
@@ -50,7 +51,7 @@ class _ViewState extends State<View> {
 
   void DataStreams() async {
     await for (var snapshot
-        in _firestore.collection('Campaign-Account').snapshots()) {
+        in _firestore.collection('AcceptedCampaigns').snapshots()) {
       for (var campaign in snapshot.docs) {
         print(campaign.data());
       }
@@ -60,12 +61,12 @@ class _ViewState extends State<View> {
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
-        FirebaseFirestore.instance.collection('Campaign-Account').snapshots();
+        FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
 
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text('Registration requests'),
+          title: Text('Delete Campaign Account'),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
           actions: <Widget>[
@@ -75,7 +76,7 @@ class _ViewState extends State<View> {
                 color: Colors.white,
               ),
               onPressed: () {
-                Navigator.pushNamed(context, logOutAdmin.screenRoute);
+                Navigator.pushNamed(context, WelcomeScreen.screenRoute);
               },
             )
           ],
@@ -120,7 +121,7 @@ class _ViewState extends State<View> {
                                       backgroundColor: Color(0xFF788AA4),
                                     ),
                                     title: Text(
-                                      storedocs[i]['nameCampaign'],
+                                      storedocs[i]['name'],
                                     ),
                                     subtitle: Text(
                                       "Click to view campaign's details",
@@ -157,7 +158,7 @@ class _ViewState extends State<View> {
                                                                     .w500),
                                                       ),
                                                       Text(
-                                                        storedocs[i]['emailC'],
+                                                        storedocs[i]['email'],
                                                         style: TextStyle(
                                                             fontSize: 12),
                                                         textAlign:
@@ -201,7 +202,7 @@ class _ViewState extends State<View> {
                                                     ),
                                                     Text(
                                                       storedocs[i]
-                                                          ['commercialID'],
+                                                          ['commercial_ID'],
                                                       style: TextStyle(
                                                           fontSize: 12),
                                                     ),
@@ -213,7 +214,7 @@ class _ViewState extends State<View> {
                                                           bottom: 10),
                                                   child: Column(children: [
                                                     Text(
-                                                      'Campaign\s Phone Number:  ',
+                                                      'Campaign\'s Phone Number:  ',
                                                       style: TextStyle(
                                                           color:
                                                               Color(0xFF455D83),
@@ -222,7 +223,7 @@ class _ViewState extends State<View> {
                                                     ),
                                                     Text(
                                                       storedocs[i]
-                                                          ['phoneNumberC'],
+                                                          ['phoneNumber'],
                                                       style: TextStyle(
                                                           fontSize: 12),
                                                     ),
@@ -242,7 +243,7 @@ class _ViewState extends State<View> {
                                                               FontWeight.w500),
                                                     ),
                                                     Text(
-                                                      storedocs[i]['capacity'],
+                                                      storedocs[i]['seatingCapacity'],
                                                       style: TextStyle(
                                                           fontSize: 12),
                                                     )
@@ -337,6 +338,8 @@ class _ViewState extends State<View> {
                                           //                               ['UID'])
                                           //                           .delete();
                                           //                     });
+                                          //                     Text('gfkjdijg');
+                                          //                     print('object');
                                           //                   },
                                           //                   child: const Text(
                                           //                       "Yes")),
@@ -365,18 +368,83 @@ class _ViewState extends State<View> {
                                           TextButton(
                                             style: TextButton.styleFrom(shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2.0)),)),
                                             onPressed: () {
-
-
-                                              //delete action
+                                              showDialog(
+                                                   context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                title: Row(
+                                                  children:  [
+                                                    Text('Delete '),
+                                                    Text(storedocs[i]['name'], style: TextStyle(fontWeight: FontWeight.bold),),
+                                                    Text(' account'),
+                                                  ],
+                                                ),
+                                                content: Row(
+                                                  children: const [
+                                                    Text('Deleting this account '),
+                                                    Text('cannot ', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),),
+                                                    Text('be undone, Are you sure you want to delete the account?')
+                                                  ],
+                                                ),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                                                    child: const Text('Cancel'),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () async {
+                                                      //firebase
+                                                      try{
+                                                        //await FirebaseFirestore.instance
+                                                        //.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).delete();
+                                                        //.then((doc) => print("Document deleted"));
+                                                        setState(
+                                                                  () async {
+                                                                await FirebaseFirestore
+                                                                    .instance
+                                                                    .collection(
+                                                                        'AcceptedCampaigns')
+                                                                    .doc(storedocs[i]['UID'])
+                                                                    .delete();
+                                                              });
+                                                         
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return const AlertDialog(
+                                                              content: 
+                                                              Text('Account been deleted succesfully', style: TextStyle(color: Colors.green),),
+                                                              );
+                                                              });
+                                                      }/*on FirebaseException*/ catch(e){
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (context) {
+                                                           //var m=e.message;
+                                                            return const AlertDialog(
+                                                              content:
+                                                              Text('Account could not be deleted, try again.' , style: TextStyle(color: Colors.red,)));
+                                                              //print(m);
+                                                              });
+                                                      }
+                                                    },//=> Navigator.pop(context, 'OK'),
+                                                    child: const Text('Delete'),
+                                                  ),
+                                                ],
+                                              );
+                                              }
+                                              );
+                                              
                                             },
 
 
 
-                                            child: Column(
-                                              children: <Widget>[
+                                            child: Row(
+                                              children: const <Widget>[
                                                 Icon(Icons.cancel_rounded, color: Colors.redAccent),
-                                                Padding(padding: const EdgeInsets.symmetric(vertical: 2.0),),
-                                                Text('Delete account'),
+                                                Padding(padding: EdgeInsets.symmetric(vertical: 2.0),),
+                                                Text(' Delete account'),
                                               ],
                                             ),
 

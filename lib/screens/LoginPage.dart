@@ -7,6 +7,7 @@ import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/welcome_admin.dart';
+import 'package:rafad1/admin/DeleteCampaign.dart';
 
 
 // void main() {
