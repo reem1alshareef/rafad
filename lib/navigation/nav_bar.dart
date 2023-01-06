@@ -88,7 +88,7 @@ class _nav_campaignState extends State<nav_campaign> {
   int _selectedIndex = 0;
   
   static const List<Widget> _widgetOptions = <Widget> [
-    Center(child: Text('requests', style: TextStyle(fontSize: 72),),),
+    Center(child: Text('requests', style: TextStyle(fontSize: 72),),),//request(),
     Center(child: Text('pilgrims', style: TextStyle(fontSize: 72),),),
     Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),
     AddDescription(),
@@ -166,10 +166,10 @@ int _selectedIndex = 0;
   
   static const List<Widget> _widgetOptions = <Widget> [
     Center(child: Text('bookings', style: TextStyle(fontSize: 72),),),
-    Center(child: Text('campaigns', style: TextStyle(fontSize: 72),),),
+    logOutPilgrim(),
     Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),
     Center(child: Text('emergency', style: TextStyle(fontSize: 72),),),
-    logOutPilgrim()
+    Center(child: Text('profile', style: TextStyle(fontSize: 72),),),
   ];
 
   void _onItemTapped(int index) {  
