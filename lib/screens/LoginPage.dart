@@ -2,6 +2,9 @@ import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:rafad1/screens/CampaignView.dart';
+import 'package:rafad1/navigation/nav_bar.dart';
+//import 'package:fluttertoast_example/toast_context.dart';
+//import 'test.dart';
 import 'package:rafad1/screens/forget_pw.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
@@ -83,6 +86,7 @@ class _LoginPageState extends State<LoginPage> {
                         const PageHeading(
                           title: 'log in page',
                         ),
+                        
                         CustomInputField(
                             labelText: 'Email',
                             hintText: 'Your email id',
@@ -242,7 +246,7 @@ class _LoginPageState extends State<LoginPage> {
           //Navigator.push(
           //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => View()));
+              context, MaterialPageRoute(builder: (context) => nav_admin()));
 
           ///home_screen_owner
         } else if (isCampaign) {
@@ -253,7 +257,7 @@ class _LoginPageState extends State<LoginPage> {
           emailAddress = '';
           userPassword = '';
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => CampaignView()));
+              MaterialPageRoute(builder: (context) => nav_campaign()));
         } else {
           //in case of pilgrim
           await _auth.signInWithEmailAndPassword(
@@ -261,7 +265,7 @@ class _LoginPageState extends State<LoginPage> {
           emailAddress = '';
           userPassword = '';
           Navigator.push(context,
-              MaterialPageRoute(builder: (context) => logOutPilgrim()));
+              MaterialPageRoute(builder: (context) => nav_pilgrim()));
         }
       } on FirebaseAuthException catch (e) {
         showDialog(

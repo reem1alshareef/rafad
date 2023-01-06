@@ -1,36 +1,17 @@
-//هذي اول بيج تطلع للحاج اذا سوا لوق ان
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
-
-import '../widgets/my_button.dart';
-
 //import 'package:rafad1/screens/LoginPage.dart';
-class logOutPilgrim extends StatefulWidget {
-static const String screenRoute = 'logOutPilgrim.dart';
-const logOutPilgrim({super.key});
-/*@override
-  State<logOutPilgrim> createState() => _logOutPilgrim();
-}
-
-class _logOutPilgrimState extends State<logOutPilgrim> {
-  final _firestore = FirebaseFirestore.instance;
-  String? rejectionReason;
-  bool isButtonActive = true;////// حق شرط البوتون انه مايسمح للحاج يضغط اكثر من مره
-  final _controller = TextEditingController();
-  
-  User? user;
-
-*/
+class View extends StatefulWidget {
+static const String screenRoute = 'DeleteCampaign';
 
   @override
-  _logOutPilgrimState createState() => _logOutPilgrimState();
+  _ViewState createState() => _ViewState();
 }
 
-class _logOutPilgrimState extends State<logOutPilgrim> {
+class _ViewState extends State<View> {
   final _firestore = FirebaseFirestore.instance;
   String? rejectionReason;
 
@@ -68,8 +49,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
 
   void DataStreams() async {
     await for (var snapshot
-        in _firestore.collection('AcceptedCampaigns')
-        .snapshots()) {
+        in _firestore.collection('Campaign-Account').snapshots()) {
       for (var campaign in snapshot.docs) {
         print(campaign.data());
       }
@@ -79,13 +59,12 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
-        FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
-        
-    return Scaffold(
+        FirebaseFirestore.instance.collection('Campaign-Account').snapshots();
 
+    return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text('pilgrim main home page'),
+          title: Text('Registration requests'),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
           actions: <Widget>[
@@ -95,43 +74,18 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                 color: Colors.white,
               ),
               onPressed: () {
-                FirebaseAuth.instance.signOut();
-                Navigator.pushNamed(context, WelcomeScreen.screenRoute);
+                Navigator.pushNamed(context, WelcomeScreen.screenRoute);/////عدلته اذا سوا لوق اوت يوديه للصفحه الاساسيه
               },
             )
           ],
         ),
         body: SingleChildScrollView(
             child: Column(children: [
-Padding(
-  padding: const EdgeInsets.only(top: 30),
-  child:   Container(
-  //margin: EdgeInsets.all(60), 
-    color: Color.fromARGB(255, 179, 181, 183),
-  
-    child:   Padding(
-      padding: const EdgeInsets.all(17),
-      child: Text('available campaign' , style: TextStyle(
-        fontSize: 50,
-        fontWeight: FontWeight.w900,
-        fontStyle: FontStyle.normal,
-        color: Color(0xFF455D83),
-      ),
-      ),
-    ),
-  ),
-),
-            Container(//كود الخلفيه 
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assests/images/background.png"),
-                  fit: BoxFit.cover),),),//كود الخلفيه لين هنا بس ما اشتغلت 
-
           Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
               child: StreamBuilder<QuerySnapshot>(
-                  stream: dataStream, 
+                  stream: dataStream,
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
                     if (snapshot.hasError) {
@@ -146,7 +100,7 @@ Padding(
                     snapshot.data!.docs.map((DocumentSnapshot document) {
                       Map a = document.data() as Map<String, dynamic>;
                       storedocs.add(a);
-                      a['UID'] = document.id;
+                      a['id'] = document.id;
                     }).toList();
                     return Column(
                         children: List.generate(
@@ -161,16 +115,11 @@ Padding(
                                     //key: cardA,
                                     leading: CircleAvatar(
                                       child: Image.asset(
-                                          "assests/images/campaignLogo.png"),
+                                          "assests/images/kaaba.png"),
                                       backgroundColor: Color(0xFF788AA4),
                                     ),
                                     title: Text(
-                                      storedocs[i]['name'],//storedocs[i]['UID']
-    //                                   _firestore.collection("acceptedCampaigns")
-    // .doc(storedocs[i]['UID'])
-    // .collection("pilgrimsRequest").add
-    //
-    // .doc(pilgrim ID);
+                                      storedocs[i]['nameCampaign'],
                                     ),
                                     subtitle: Text(
                                       "Click to view campaign's details",
@@ -207,7 +156,7 @@ Padding(
                                                                     .w500),
                                                       ),
                                                       Text(
-                                                        storedocs[i]['email'],
+                                                        storedocs[i]['emailC'],
                                                         style: TextStyle(
                                                             fontSize: 12),
                                                         textAlign:
@@ -251,7 +200,7 @@ Padding(
                                                     ),
                                                     Text(
                                                       storedocs[i]
-                                                          ['commercial_ID'],
+                                                          ['commercialID'],
                                                       style: TextStyle(
                                                           fontSize: 12),
                                                     ),
@@ -272,7 +221,7 @@ Padding(
                                                     ),
                                                     Text(
                                                       storedocs[i]
-                                                          ['phoneNumber'],
+                                                          ['phoneNumberC'],
                                                       style: TextStyle(
                                                           fontSize: 12),
                                                     ),
@@ -292,81 +241,156 @@ Padding(
                                                               FontWeight.w500),
                                                     ),
                                                     Text(
-                                                      storedocs[i]['seatingCapacity'],
+                                                      storedocs[i]['capacity'],
                                                       style: TextStyle(
                                                           fontSize: 12),
                                                     )
                                                   ]),
                                                 ),
-                                                //  Padding(
-                                                //   padding:
-                                                //       const EdgeInsets.only(
-                                                //           bottom: 10),
-                                                //   child: Column(children: [
-                                                //     Text(
-                                                //       'Campaign\'s description :  ',
-                                                //       style: TextStyle(
-                                                //           color:
-                                                //               Color(0xFF455D83),
-                                                //           fontWeight:
-                                                //               FontWeight.w500),
-                                                //     ),
-                                                //     Text(
-                                                //       storedocs[i]['description'],
-                                                //       style: TextStyle(
-                                                //           fontSize: 12),
-                                                //     )
-                                                //   ]),
-                                                // ),
                                               ]),
                                             ]),
                                           ),
                                         ),
                                       ),
-                                      /////////////////buton
-                                      
-                                      MyButton(
-                                        color: const Color(0xFF455D83),
-                                        title: 'book',
-                                        onPressed:  () async  {
-                                        _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").add({
-                                                'bookStatus': 'booked',
-                                                'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
-                                                //User user = FirebaseAuth.instance.currentUser;
-                                               // DocumentSnapshot snap = FirebaseFirestore.instance.collection('Pilgrims-Account').doc(user.uid).get();
-                                                // String 'pilgrinID' = snap['uid'];
-                                                // String 'name' = snap['name'];
-                                                // String 'number' = snap['number'];
-                                                // String 'hajId' = snap['hajId'];
-                                                // String 'pharma' = snap['pharma'];
-                                                // 'name':  storedocsP[i]['name'],
-                                                // 'number': storedocsP[i]['number'],//   في الكولكشن حقها باقي هنا اسوي ريتريف لبيانات الحاج من الكلوكشن حقه واحطها عند الحمله
-                                                // 'hajId': storedocsP[i]['hajId'],
-                                                // 'pharma': storedocsP[i]['pharma'],
-                                              },
-                                              );
-                                              int counter = int.parse(storedocs[i]['seatingCapacity'])-1;
-                                        FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': counter.toString(),});
-                                        _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").add({
-                                                'bookStatus': 'pending',
-                                                'campaignID': storedocs[i]['UID'],
-                                              },
-                                              );
-                                        },
-                                       ) ////////////////buton
-                                ],
-                                ),
-                                ),
-                                ),
-                                );
-                  },
-                  ),
-                  ),
-        ],
-        ),
-        ),
-      
+                                      ButtonBar(
+                                        alignment:
+                                            MainAxisAlignment.spaceAround,
+                                        buttonHeight: 52.0,
+                                        buttonMinWidth: 90.0,
+                                        children: <Widget>[
+                                          // TextButton(
+                                          //   style: TextButton.styleFrom(
+                                          //       shape:
+                                          //           const RoundedRectangleBorder(
+                                          //     borderRadius: BorderRadius.all(
+                                          //         Radius.circular(2.0)),
+                                          //   )),
+                                          //   onPressed: () {
+                                          //     _firestore
+                                          //         .collection(
+                                          //             'AcceptedCampaigns')
+                                          //         .add({
+                                          //       'status': 'accepted',
+                                          //       'name': storedocs[i]
+                                          //           ['nameCampaign'],
+                                          //       'email': storedocs[i]['emailC'],
+                                          //       'address': storedocs[i]
+                                          //           ['address'],
+                                          //       'commercial_ID': storedocs[i]
+                                          //           ['commercialID'],
+                                          //       'password': storedocs[i]
+                                          //           ['password'],
+                                          //       'phoneNumber': storedocs[i]
+                                          //           ['phoneNumberC'],
+                                          //       'seatingCapacity': storedocs[i]
+                                          //           ['capacity'],
+                                          //     });
+
+                                          //     showDialog(
+                                          //         context: context,
+                                          //         builder:
+                                          //             (BuildContext context) {
+                                          //           return AlertDialog(
+                                          //             title: const Text(
+                                          //                 "Accept Request"),
+                                          //             content: const Text(
+                                          //                 "Are you sure you want to accept?"),
+                                          //             actions: [
+                                          //               ElevatedButton(
+                                          //                   style: ElevatedButton.styleFrom(
+                                          //                       shape: RoundedRectangleBorder(
+                                          //                           borderRadius:
+                                          //                               BorderRadius.circular(
+                                          //                                   30.0)),
+                                          //                       backgroundColor:
+                                          //                           Color(
+                                          //                               0xFF455D83)),
+                                          //                   onPressed: () {
+                                          //                     Navigator.of(
+                                          //                             context)
+                                          //                         .pop();
+                                          //                   },
+                                          //                   child: const Text(
+                                          //                       "Cancel")),
+                                          //               ElevatedButton(
+                                          //                   style: ElevatedButton.styleFrom(
+                                          //                       shape: RoundedRectangleBorder(
+                                          //                           borderRadius:
+                                          //                               BorderRadius.circular(
+                                          //                                   30.0)),
+                                          //                       backgroundColor:
+                                          //                           Color(
+                                          //                               0xFF455D83)),
+                                          //                   onPressed: () {
+                                          //                     Navigator.of(
+                                          //                             context)
+                                          //                         .pop();
+                                          //                     setState(
+                                          //                         () async {
+                                          //                       await FirebaseFirestore
+                                          //                           .instance
+                                          //                           .collection(
+                                          //                               'Campaign-Account')
+                                          //                           .doc(storedocs[
+                                          //                                   i]
+                                          //                               ['UID'])
+                                          //                           .delete();
+                                          //                     });
+                                          //                   },
+                                          //                   child: const Text(
+                                          //                       "Yes")),
+                                          //             ],
+                                          //           );
+                                          //         });
+                                          //   },
+                                          //   child: Column(
+                                          //     children: <Widget>[
+                                          //       Icon(
+                                          //         Icons.check_circle,
+                                          //         color: Colors.green,
+                                          //       ),
+                                          //       Padding(
+                                          //         padding: const EdgeInsets
+                                          //             .symmetric(vertical: 2.0),
+                                          //       ),
+                                          //       Text('Accept'),
+                                          //     ],
+                                          //   ),
+                                          // ),
+
+
+
+                                          
+                                          TextButton(
+                                            style: TextButton.styleFrom(shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2.0)),)),
+                                            onPressed: () {
+
+
+                                              //delete action
+                                            },
+
+
+
+                                            child: Column(
+                                              children: <Widget>[
+                                                Icon(Icons.cancel_rounded, color: Colors.redAccent),
+                                                Padding(padding: const EdgeInsets.symmetric(vertical: 2.0),),
+                                                Text('Delete account'),
+                                              ],
+                                            ),
+
+
+
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )));
+                  }))
+        ]
+        )
+        )
         );
-        
   }
 }

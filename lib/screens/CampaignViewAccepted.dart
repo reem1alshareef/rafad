@@ -7,7 +7,7 @@ import 'package:rafad1/screens/logOutCampaign.dart';
 
 //import 'package:rafad1/screens/LoginPage.dart';
 class ViewAccepted extends StatefulWidget {
-  //static const String screenRoute = 'welcome_screen';
+static const String screenRoute = 'CampaignViewAccepted';
 
   @override
   _ViewAcceptedState createState() => _ViewAcceptedState();
