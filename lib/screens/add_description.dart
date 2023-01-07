@@ -28,47 +28,35 @@ class _AddDescriptionState extends State<AddDescription> {
   final TextEditingController _descController = TextEditingController();
   final _addDescKey = GlobalKey<FormState>();
   String? description;
-  final _firestore = FirebaseFirestore.instance;
+  //final _firestore = FirebaseFirestore.instance;
   final String uid= FirebaseAuth.instance.currentUser!.uid;
-  final CollectionReference collectionReference = FirebaseFirestore.instance.collection('AcceptedCampaigns');
+  
 
-  final docUser = FirebaseFirestore.instance.collection('AcceptedCampaigns').doc('uid');
+ 
 
-  @override
-  void dispose() {
-    _descController.dispose();
-    super.dispose();
-  }
+  final Stream<QuerySnapshot> dataStream =
+        FirebaseFirestore.instance
+        .collection('AcceptedCampaigns')
+        .where("UID", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .snapshots();
 
   Future addDescription() async{
-
-
+    
     if (_addDescKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
       content: Text('Submitting data..')),
     );
-    //DocumentReference doc_id = _firestore.collection("AcceptedCampaigns").document();
+    //DocumentReference doc = _firestore.collection("AcceptedCampaigns").doc(uid);
 
-
-        //docUser.update({'description': description, });
-
-      /*await FirebaseFirestore.instance
+      await FirebaseFirestore.instance
             .collection("AcceptedCampaigns")
-            .doc('uid')
+            .doc(FirebaseAuth.instance.currentUser!.uid)
             .update({
               'description': description,
-              
             })
-
-            ;*/
-
-            await FirebaseFirestore.instance
-                                  .collection("Campaign-Account")
-                                  .doc(FirebaseAuth.instance.currentUser!.uid)
-                                  .update({
-                                      'description': description,
-                                  });
+            //.whenComplete(() async {})
+            ;
 
             showDialog(
           context: context,
@@ -88,9 +76,6 @@ class _AddDescriptionState extends State<AddDescription> {
 
   @override
   Widget build(BuildContext context) {  
-     final Stream<QuerySnapshot> dataStream =
-        FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
-
         return Scaffold(
         appBar: AppBar(
           title: const Text("Add Description"),
@@ -100,7 +85,6 @@ class _AddDescriptionState extends State<AddDescription> {
             SizedBox(height: 30),
           ],
         ),
-        
         /*body: screens[index],
         bottomNavigationBar: 
         NavigationBar(
@@ -129,15 +113,16 @@ class _AddDescriptionState extends State<AddDescription> {
         ],),*/
        
           body: Container(
-            
           decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assests/images/background.png"),
                   fit: BoxFit.cover)),
+                  
           child: Form(
             key: _addDescKey,
               //mainAxisAlignment: MainAxisAlignment.center,
               //crossAxisAlignment: CrossAxisAlignment.stretch,
+              
               child: 
                 Column(
                   children: [ 
@@ -210,6 +195,9 @@ class _AddDescriptionState extends State<AddDescription> {
 
 class _ViewDescriptionState extends State<ViewDescription> {
 //final uid = FirebaseAuth.instance.currentUser!.uid;
+final _addDescKey = GlobalKey<FormState>();
+  String? description;
+
 
 
 
@@ -238,8 +226,7 @@ final Stream<QuerySnapshot> dataStream =
                   image: AssetImage("assests/images/background.png"),
                   fit: BoxFit.cover)),
           
-          
-          child: StreamBuilder<QuerySnapshot>(
+       child: StreamBuilder<QuerySnapshot>(
                   stream: dataStream,
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -251,29 +238,18 @@ final Stream<QuerySnapshot> dataStream =
                         child: CircularProgressIndicator(),
                       );
                     }
-                    if(dataStream == null){
-
-                      Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddDescription()));
-                    }
                     final List storedocs = [];
                     snapshot.data!.docs.map((DocumentSnapshot document) {
                       Map a = document.data() as Map<String, dynamic>;
                       storedocs.add(a);
-                      a['UID'] = document.id;
-                    }
-                    
-                    
-                    
-                    ).toList();
+                      a['id'] = document.id;
+                    }).toList();
                     return Column(
                         children: List.generate(
                             storedocs.length,
                             (i) => SingleChildScrollView(
-                                
-
-          child: ExpansionTileCard(
-                                    elevation: 2,
+                                  child: ExpansionTileCard(
+                                  elevation: 2,
                                     initialPadding:
                                         EdgeInsets.only(bottom: 7, top: 7),
                                     baseColor: Colors.blueGrey[50],
@@ -284,11 +260,13 @@ final Stream<QuerySnapshot> dataStream =
                                           "assests/images/kaaba.png"),
                                       backgroundColor: Color(0xFF788AA4),
                                     ),
+                                    title: Text(
+                                      storedocs[i]['nameCampaign'],
+                                    ),
                                     subtitle: Text(
                                       "Click to view campaign's description",
                                       style: TextStyle(fontSize: 11),
                                     ),
-                                    title: Text(""),
                                     children: [
                                       Divider(
                                         thickness: 1.7,
@@ -310,37 +288,78 @@ final Stream<QuerySnapshot> dataStream =
                                                           bottom: 10),
                                                   child: Column(
                                                     children: [
-                                                      Text(
-                                                        'Campaign\'s description:  ',
-                                                        style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .w500),
+                                                      Form(
+                                                        key: _addDescKey,
+                                                        child: Column(
+                      children: [
+                    TextFormField(
+                          //controller: _descController,
+                          maxLines: 3,
+                          maxLength: 100,
+                          
+                          inputFormatters: [
+                            FilteringTextInputFormatter.deny
+                            (RegExp(r"\s\s"),)
+                          ],
+                          cursorColor: Colors.white,
+                          style: TextStyle(color: Colors.grey[500],) ,
+                          textInputAction: TextInputAction.done,
+                          keyboardType: TextInputType.text,
+                          onChanged: (value) {
+                            setState(() {
+                              description = value;
+                            });
+                          },
+                          decoration: const InputDecoration(labelText: 'Description'),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (textValue) {
+                            
+                            if (textValue == null || textValue.isEmpty) {
+                              return 'Description is required!';
+                            }
+                            //return null;
+                            if(textValue.trim().isEmpty){
+                            return "Description cannot be empty.";
+                            }
+
+                            return null;
+
+                          }
+                          
+                           ),
+                    const SizedBox(
+                          height: 20,
+                        ),
+                    MyButton(
+                          color: const Color(0xFF455D83),
+                          title: 'Add Description',
+                          onPressed: (){
+                            FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'description':description,});
+
+                          },
+                        ),
+                                                          ],
                                                       ),
-                                                      Text(
-                                                        storedocs[i]['description'],
-                                                        style: TextStyle(
-                                                            fontSize: 12),
-                                                        textAlign:
-                                                            TextAlign.center,
-                                                      ),
-                                  
-                                                    ],
-                                                  ),
-                                                ),
-        ],),],),),),),
-          ],),
-          
-          ),
-        )
-        );
-  }
-  )
-  )
+                                                      )
   
-  );
+                                                    ])
+                                                  ),
+                                            ]),
+                                            ]))
+                            ) )
+                                    ]
+                                    )
+                                    )
+                                    
+                                  )
+                    );
+                      }
+                        )
+       )
+        );
+  
+  
+  
   }
   
   
