@@ -313,24 +313,33 @@ Padding(
                                       
                                       MyButton(
                                         color: const Color(0xFF455D83),
-                                        title: 'Book',
+                                        title: 'book',
                                         onPressed:  () async  {
                                         _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").add({
                                                 'bookStatus': 'pending',
                                                 'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
+                                                //User user = FirebaseAuth.instance.currentUser;
+                                               // DocumentSnapshot snap = FirebaseFirestore.instance.collection('Pilgrims-Account').doc(user.uid).get();
+                                                // String 'pilgrinID' = snap['uid'];
+                                                // String 'name' = snap['name'];
+                                                // String 'number' = snap['number'];
+                                                // String 'hajId' = snap['hajId'];
+                                                // String 'pharma' = snap['pharma'];
+                                                // 'name':  storedocsP[i]['name'],
+                                                // 'number': storedocsP[i]['number'],//   في الكولكشن حقها باقي هنا اسوي ريتريف لبيانات الحاج من الكلوكشن حقه واحطها عند الحمله
+                                                // 'hajId': storedocsP[i]['hajId'],
+                                                // 'pharma': storedocsP[i]['pharma'],
                                               },
                                               );
                                               int counter = int.parse(storedocs[i]['seatingCapacity'])-1;
-                                              
                                         FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': counter.toString(),});
                                         _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").add({
                                                 'bookStatus': 'pending',
                                                 'campaignID': storedocs[i]['UID'],
                                               },
                                               );
-                                              if (counter==0){}
                                         },
-                                       ) ////////////////buton
+                                      ),
                                 ],
                                 ),
                                 ),
