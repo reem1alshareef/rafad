@@ -49,6 +49,7 @@ class _LoginPageState extends State<LoginPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          title: Text('log in page'),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
         ),
@@ -83,9 +84,9 @@ class _LoginPageState extends State<LoginPage> {
                     key: _loginFormKey,
                     child: Column(
                       children: [
-                        const PageHeading(
-                          title: 'log in page',
-                        ),
+                        // const PageHeading(
+                        //   title: 'log in page',
+                        // ),
                         
                         CustomInputField(
                             labelText: 'Email',
