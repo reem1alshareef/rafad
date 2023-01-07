@@ -161,6 +161,10 @@ class _AddDescriptionState extends State<AddDescription> {
                             return "Description cannot be empty.";
                             }
 
+                            if (textValue.length < 20) {
+                              return "Description must be at least 20 characters in length";
+                            }
+
                             return null;
 
                           }
