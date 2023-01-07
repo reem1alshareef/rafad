@@ -134,7 +134,7 @@ class _AddDescriptionState extends State<AddDescription> {
                     TextFormField(
                           //controller: _descController,
                           maxLines: 3,
-                          maxLength: 100,
+                          maxLength: 200,
                           
                           inputFormatters: [
                             FilteringTextInputFormatter.deny
