@@ -31,6 +31,8 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
 }
 
 class _logOutPilgrimState extends State<logOutPilgrim> {
+
+
   final _firestore = FirebaseFirestore.instance;
   String? rejectionReason;
 
@@ -65,22 +67,26 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
     // return null if the text is valid
     return null;
   }
+/////////////////////
+  // void DataStreams() async {
+  //   await for (var snapshot in _firestore.collection("Pilgrim-Account").where('UID' == FirebaseAuth.instance.currentUser!.uid).snapshots()) {
+  //     for (var pilgrim in snapshot.docs) {
+  //       print(pilgrim.data());
+  //     }
+  //   }
+  // }
+  // void getData(){
 
-  void DataStreams() async {
-    await for (var snapshot
-        in _firestore.collection('AcceptedCampaigns')
-        .snapshots()) {
-      for (var campaign in snapshot.docs) {
-        print(campaign.data());
-      }
-    }
-  }
-
+  // }
+////////////////////
+String? name ;
+String? email;
   @override
   Widget build(BuildContext context) {
+
     final Stream<QuerySnapshot> dataStream =
         FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
-        
+
     return Scaffold(
 
         appBar: AppBar(
@@ -325,36 +331,50 @@ Padding(
                                       ),
                                       /////////////////buton
                                       
+                                      // void pilgrimData async{
+                                      //   final Stream<QuerySnapshot> dataStream2 = FirebaseFirestore.instance.collection('Pilgrim-Account').doc(FirebaseAuth.instance.currentUser!.uid).snapshots();
+                                      //     StreamBuilder<QuerySnapshot>( 
+                                      //       stream: dataStream2,builder: (BuildContext context,AsyncSnapshot<QuerySnapshot> snapshot)
+                                      //        {
+                                      //         final List storedocsP = [];
+                                      //         snapshot.data!.docs.map((DocumentSnapshot document) {
+                                      //           Map a = document.data() as Map<String, dynamic>;storedocsP.add(a);
+                                      //           a['pilgrimID'] = document.id;}).toList();
+                                      // }
+
                                       MyButton(
                                         color: const Color(0xFF455D83),
                                         title: 'book',
                                         onPressed:  () async  {
+                                          User? user = await FirebaseAuth.instance.currentUser;
+                                          var vari =FirebaseFirestore.instance.collection("Pilgrims-Account").doc(user!.uid).get();
+                                          Map<String,dynamic> userData = vari as Map<String,dynamic>;
+                                          name = userData['name']; //or name = userData['name']
+                                          email = userData['email'];
+                                          // await _firestore.collection("Pilgrims-Account").where("UID", isEqualTo: FirebaseAuth.instance.currentUser?.uid).get().then((QuerySnapshot snapshot){
+                                          //         snapshot.docs.forEach((DocumentSnapshot documentSnapshot){
+                                          //           print(documentSnapshot.data);
+                                          //           });
+                                          //           });
                                         _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").doc(FirebaseAuth.instance.currentUser?.uid).set({
                                                 'bookStatus': 'pending',
                                                 'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
-                                              
-                                                //User user = FirebaseAuth.instance.currentUser;
-                                               // DocumentSnapshot snap = FirebaseFirestore.instance.collection('Pilgrims-Account').doc(user.uid).get();
-                                                // String 'pilgrinID' = snap['uid'];
-                                                // String 'name' = snap['name'];
-                                                // String 'number' = snap['number'];
-                                                // String 'hajId' = snap['hajId'];
-                                                // String 'pharma' = snap['pharma'];
-                                                // 'name':  storedocsP[i]['name'],
-                                                // 'number': storedocsP[i]['number'],//   في الكولكشن حقها باقي هنا اسوي ريتريف لبيانات الحاج من الكلوكشن حقه واحطها عند الحمله
-                                                // 'hajId': storedocsP[i]['hajId'],
-                                                // 'pharma': storedocsP[i]['pharma'],
+                                                
+                                                'name': name,
+                                                'email': email,
                                               },
                                               );
                                               int counter = int.parse(storedocs[i]['seatingCapacity'])-1;
                                         FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': counter.toString(),});
-                                        _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").add({
+
+                                        _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").doc(storedocs[i]['UID']).set({
                                                 'bookStatus': 'pending',
                                                 'campaignID': storedocs[i]['UID'],
+                                                'name':  storedocs[i]['name'],
                                               },
                                               );
                                         },
-                                       ) ////////////////buton
+                                      ),
                                 ],
                                 ),
                                 ),
