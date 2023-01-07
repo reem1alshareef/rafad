@@ -325,7 +325,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                                 );
 
                                 Navigator.push(
-              context, MaterialPageRoute(builder: (context) => nav_campaign()));
+              context, MaterialPageRoute(builder: (context) => logOutCampaign()));
 
                               }).catchError((onError) {
                                 ScaffoldMessenger.of(context).showSnackBar(
