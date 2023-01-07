@@ -88,7 +88,7 @@ String? email;
 
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text('pilgrim main home page'),
+          title: Text('available campaign'),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
           actions: <Widget>[
