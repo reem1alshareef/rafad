@@ -320,20 +320,31 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                   'seatingCapacity': counter.toString(),
                                 });
 
-                                DocumentSnapshot variable =
-                                    await _firestore
-                                        .collection('Pilgrims-Account')
-                                        .doc(FirebaseAuth
-                                            .instance.currentUser?.uid)
-                                        .get();
+                                _firestore
+                                    .collection("Pilgrims-Account")
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .collection("pilgrimCampaigns")
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .set(
+                                  {
+                                    'bookStatus': 'pending',
+                                    'campaignID': storedocs[i]['UID'],
+                                    'name': storedocs[i]['name'],
+                                  },
+                                );
+
+                                DocumentSnapshot variable = await _firestore
+                                    .collection('Pilgrims-Account')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .get();
                                 String name = variable['name'];
                                 String email = variable['email'];
                                 String number = variable['number'];
-                                String diseaese = variable['diseaese'];
+                                String disease = variable['disease'];
                                 String hajId = variable['hajId'];
                                 String pharma = variable['pharma'];
-                                
-                              _firestore
+
+                                _firestore
                                     .collection("AcceptedCampaigns")
                                     .doc(storedocs[i]['UID'])
                                     .collection("pilgrimsRequest")
@@ -346,24 +357,9 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                     'name': name,
                                     'number': number,
                                     'email': email,
-                                    'diseaese': diseaese,
+                                    'disease': disease,
                                     'hajId': hajId,
                                     'pharma': pharma
-
-                                    
-                                  },
-                                );
-                               
-                                _firestore
-                                    .collection("Pilgrims-Account")
-                                    .doc(FirebaseAuth.instance.currentUser?.uid)
-                                    .collection("pilgrimCampaigns")
-                                    .doc(FirebaseAuth.instance.currentUser?.uid)
-                                    .set(
-                                  {
-                                    'bookStatus': 'pending',
-                                    'campaignID': storedocs[i]['UID'],
-                                    'name': storedocs[i]['name'],
                                   },
                                 );
                               },

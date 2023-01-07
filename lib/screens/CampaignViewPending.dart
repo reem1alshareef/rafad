@@ -282,49 +282,28 @@ class _ViewPendingState extends State<ViewPending> {
                                                               'name':
                                                                   storedocs[i]
                                                                       ['name'],
+                                                              'email':
+                                                                  storedocs[i]
+                                                                      ['email'],
+                                                              'disease':
+                                                                  storedocs[i][
+                                                                      'disease'],
+                                                              'number':
+                                                                  storedocs[i][
+                                                                      'number'],
                                                               'bookStatus':
-                                                                  'accepted',
-
-                                                              // 'name':
-                                                              //     storedocs[i]
-                                                              //         ['name'],
-                                                              // 'email':
-                                                              //     storedocs[
-                                                              //             i]
-                                                              //         [
-                                                              //         'emailP'],
-                                                              // 'address':
-                                                              //     storedocs[
-                                                              //             i]
-                                                              //         [
-                                                              //         'address'],
+                                                                  storedocs[i][
+                                                                      'bookStatus'],
+                                                              'hajId':
+                                                                  storedocs[i]
+                                                                      ['hajId'],
+                                                              'pharma':
+                                                                  storedocs[i][
+                                                                      'pharma'],
                                                               'pilgrimID':
                                                                   storedocs[i][
-                                                                      'pilgrimID'],
-                                                              // 'password':
-                                                              //     storedocs[
-                                                              //             i]
-                                                              //         [
-                                                              //         'password'],
-                                                              // 'phoneNumber':
-                                                              //     storedocs[
-                                                              //             i]
-                                                              //         [
-                                                              //         'phoneNumberP'],
-                                                              //  'seatingCapacity': storedocs[i]
-                                                              // ['capacity'],
+                                                                      'pilgrimID']
                                                             });
-
-// This will delete the pilgrim account from the collection with pilgrims pending bookings
-
-                                                            // await FirebaseFirestore
-                                                            //     .instance
-                                                            //     .collection(
-                                                            //         'pilgrimRequest')
-                                                            //     .doc(storedocs[
-                                                            //             i][
-                                                            //         'UID']) // مفروض حق الحاج نفس لما سجل
-                                                            //     .delete();
                                                           });
                                                         },
                                                         child:
@@ -452,11 +431,27 @@ class _ViewPendingState extends State<ViewPending> {
                                                               .set({
                                                             'name': storedocs[i]
                                                                 ['name'],
+                                                            'email':
+                                                                storedocs[i]
+                                                                    ['email'],
+                                                            'disease':
+                                                                storedocs[i]
+                                                                    ['disease'],
+                                                            'number':
+                                                                storedocs[i]
+                                                                    ['number'],
                                                             'bookStatus':
-                                                                'rejected',
+                                                                storedocs[i][
+                                                                    'bookStatus'],
+                                                            'hajId':
+                                                                storedocs[i]
+                                                                    ['hajId'],
+                                                            'pharma':
+                                                                storedocs[i]
+                                                                    ['pharma'],
                                                             'pilgrimID':
                                                                 storedocs[i][
-                                                                    'pilgrimID'],
+                                                                    'pilgrimID']
                                                           });
                                                         });
                                                       },
