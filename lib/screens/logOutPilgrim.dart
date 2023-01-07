@@ -8,9 +8,23 @@ import 'package:rafad1/screens/welcome_screen.dart';
 
 import '../widgets/my_button.dart';
 
+//import 'package:rafad1/screens/LoginPage.dart';
 class logOutPilgrim extends StatefulWidget {
 static const String screenRoute = 'logOutPilgrim.dart';
 const logOutPilgrim({super.key});
+/*@override
+  State<logOutPilgrim> createState() => _logOutPilgrim();
+}
+
+class _logOutPilgrimState extends State<logOutPilgrim> {
+  final _firestore = FirebaseFirestore.instance;
+  String? rejectionReason;
+  bool isButtonActive = true;////// حق شرط البوتون انه مايسمح للحاج يضغط اكثر من مره
+  final _controller = TextEditingController();
+  
+  User? user;
+
+*/
 
   @override
   _logOutPilgrimState createState() => _logOutPilgrimState();
@@ -19,7 +33,7 @@ const logOutPilgrim({super.key});
 class _logOutPilgrimState extends State<logOutPilgrim> {
   final _firestore = FirebaseFirestore.instance;
   String? rejectionReason;
-  bool isButtonActive = true;////// حق شرط البوتون انه مايسمح للحاج يضغط اكثر من مره
+
   final _controller = TextEditingController();
 
   @override
@@ -71,7 +85,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
 
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text('available campaign'),
+          title: Text('pilgrim main home page'),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
           actions: <Widget>[
@@ -95,16 +109,16 @@ Padding(
   //margin: EdgeInsets.all(60), 
     color: Color.fromARGB(255, 179, 181, 183),
   
-    // child:   Padding(
-    //   padding: const EdgeInsets.all(17),
-    //   child: Text('available campaign' , style: TextStyle(
-    //     fontSize: 50,
-    //     fontWeight: FontWeight.w900,
-    //     fontStyle: FontStyle.normal,
-    //     color: Color(0xFF455D83),
-    //   ),
-    //   ),
-    // ),
+    child:   Padding(
+      padding: const EdgeInsets.all(17),
+      child: Text('available campaign' , style: TextStyle(
+        fontSize: 50,
+        fontWeight: FontWeight.w900,
+        fontStyle: FontStyle.normal,
+        color: Color(0xFF455D83),
+      ),
+      ),
+    ),
   ),
 ),
             Container(//كود الخلفيه 
@@ -284,26 +298,26 @@ Padding(
                                                     )
                                                   ]),
                                                 ),
-                                                 Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 10),
-                                                  child: Column(children: [
-                                                    Text(
-                                                      'Campaign\'s description :  ',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xFF455D83),
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                    Text(
-                                                      storedocs[i]['description'],
-                                                      style: TextStyle(
-                                                          fontSize: 12),
-                                                    )
-                                                  ]),
-                                                ),
+                                                //  Padding(
+                                                //   padding:
+                                                //       const EdgeInsets.only(
+                                                //           bottom: 10),
+                                                //   child: Column(children: [
+                                                //     Text(
+                                                //       'Campaign\'s description :  ',
+                                                //       style: TextStyle(
+                                                //           color:
+                                                //               Color(0xFF455D83),
+                                                //           fontWeight:
+                                                //               FontWeight.w500),
+                                                //     ),
+                                                //     Text(
+                                                //       storedocs[i]['description'],
+                                                //       style: TextStyle(
+                                                //           fontSize: 12),
+                                                //     )
+                                                //   ]),
+                                                // ),
                                               ]),
                                             ]),
                                           ),
@@ -315,9 +329,10 @@ Padding(
                                         color: const Color(0xFF455D83),
                                         title: 'book',
                                         onPressed:  () async  {
-                                        _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").add({
+                                        _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").doc(FirebaseAuth.instance.currentUser?.uid).set({
                                                 'bookStatus': 'pending',
                                                 'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
+                                              
                                                 //User user = FirebaseAuth.instance.currentUser;
                                                // DocumentSnapshot snap = FirebaseFirestore.instance.collection('Pilgrims-Account').doc(user.uid).get();
                                                 // String 'pilgrinID' = snap['uid'];
@@ -339,7 +354,7 @@ Padding(
                                               },
                                               );
                                         },
-                                      ),
+                                       ) ////////////////buton
                                 ],
                                 ),
                                 ),
