@@ -32,8 +32,6 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
 }
 
 class _logOutPilgrimState extends State<logOutPilgrim> {
-
-
   final _firestore = FirebaseFirestore.instance;
   String? rejectionReason;
 
@@ -55,7 +53,10 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
   }
 
   String? get _errorText {
+    // at any time, we can get the text from _controller.value.text
     final text = _controller.value.text;
+    // Note: you can do your own custom validation here
+    // Move this logic this outside the widget for more testable code
     if (text.isEmpty) {
       return 'Can\'t be empty ';
     }
@@ -65,15 +66,6 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
     // return null if the text is valid
     return null;
   }
-/////////////////////
-  // void DataStreams() async {
-  //   await for (var snapshot in _firestore.collection("Pilgrim-Account").where('UID' == FirebaseAuth.instance.currentUser!.uid).snapshots()) {
-  //     for (var pilgrim in snapshot.docs) {
-  //       print(pilgrim.data());
-  //     }
-  //   }
-  // }
-  // void getData(){
 
   void DataStreams() async {
     await for (var snapshot
@@ -86,7 +78,6 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
 
   @override
   Widget build(BuildContext context) {
-
     final Stream<QuerySnapshot> dataStream =
         FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
 
@@ -117,16 +108,19 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
               child: Container(
                 //margin: EdgeInsets.all(60),
                 color: Color.fromARGB(255, 179, 181, 183),
-     appBar: AppBar(
-          automaticallyImplyLeading: false,
-          title: Text('available campaign'),
-          backgroundColor: const Color(0xFF455D83),
-          elevation: 0,
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.logout,
-                color: Colors.white,
+
+                child: Padding(
+                  padding: const EdgeInsets.all(17),
+                  child: Text(
+                    'available campaign',
+                    style: TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.w900,
+                      fontStyle: FontStyle.normal,
+                      color: Color(0xFF455D83),
+                    ),
+                  ),
+                ),
               ),
             ),
             Container(
@@ -284,26 +278,26 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                           )
                                         ]),
                                       ),
-                                    Padding(
-                                        padding:
-                                            const EdgeInsets.only(
-                                                bottom: 10),
-                                        child: Column(children: [
-                                          Text(
-                                            'Campaign\'s description :  ',
-                                            style: TextStyle(
-                                                color:
-                                                    Color(0xFF455D83),
-                                                fontWeight:
-                                                    FontWeight.w500),
-                                          ),
-                                          Text(
-                                            storedocs[i]['description'],
-                                            style: TextStyle(
-                                                fontSize: 12),
-                                          )
-                                        ]),
-                                      ),
+                                      //  Padding(
+                                      //   padding:
+                                      //       const EdgeInsets.only(
+                                      //           bottom: 10),
+                                      //   child: Column(children: [
+                                      //     Text(
+                                      //       'Campaign\'s description :  ',
+                                      //       style: TextStyle(
+                                      //           color:
+                                      //               Color(0xFF455D83),
+                                      //           fontWeight:
+                                      //               FontWeight.w500),
+                                      //     ),
+                                      //     Text(
+                                      //       storedocs[i]['description'],
+                                      //       style: TextStyle(
+                                      //           fontSize: 12),
+                                      //     )
+                                      //   ]),
+                                      // ),
                                     ]),
                                   ]),
                                 ),
