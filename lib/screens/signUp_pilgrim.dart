@@ -307,9 +307,10 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                                   ),
                                 );
                               });
+                              
                               await FirebaseFirestore.instance
-                                  .collection("Pilgrims-Account")
-                                  .add({
+                                  .collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser!.uid)
+                                  .set({
                                 'name': name,
                                 'UID': FirebaseAuth.instance.currentUser!.uid,////////هذا يا شادن ضبطناه
                                 'email': email,
