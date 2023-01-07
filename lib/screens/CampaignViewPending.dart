@@ -283,7 +283,21 @@ class _ViewPendingState extends State<ViewPending> {
                                                               .pop();
 
                                                           setState(() async {
-// This part will make a new collection for accepted pilgrims for this specific campaign who accepted the pilgrim?????
+                                                            await FirebaseFirestore
+                                                                .instance
+                                                                .collection(
+                                                                    'AcceptedCampaigns')
+                                                                .doc(FirebaseAuth
+                                                                    .instance
+                                                                    .currentUser!
+                                                                    .uid)
+                                                                .collection(
+                                                                    'pilgrimsRequest')
+                                                                .doc(storedocs[
+                                                                        i][
+                                                                    'pilgrimID'])
+                                                                .delete();
+
                                                             _firestore
                                                                 .collection(
                                                                     'AcceptedCampaigns')
@@ -302,6 +316,7 @@ class _ViewPendingState extends State<ViewPending> {
                                                                       ['name'],
                                                               'bookStatus':
                                                                   'accepted',
+
                                                               // 'name':
                                                               //     storedocs[i]
                                                               //         ['name'],
@@ -422,25 +437,38 @@ class _ViewPendingState extends State<ViewPending> {
                                                             Color(0xFF455D83),
                                                       ), // background
                                                       onPressed: () async {
-                                                        await NotificationAccept
-                                                            .showNotification(
-                                                                id: 0,
-                                                                title:
-                                                                    'campaign message',
-                                                                body:
-                                                                    'Sorry!, your requst is rejected in our campaign');
+                                                        await NotificationAccept.showNotification(
+                                                            id: 0,
+                                                            title:
+                                                                //   FirebaseFirestore
+                                                                // .instance
+                                                                // .collection(
+                                                                //     'AcceptedCampaigns')
+                                                                // .doc(FirebaseAuth
+                                                                //     .instance
+                                                                //     .currentUser!
+                                                                //     .uid).get().then((name) => null)
+                                                                'campaign message',
+                                                            body: 'Sorry!, your requst is rejected in our campaign');
 
                                                         //When campaign presses Reject , i think notification caller should be here
                                                         Navigator.of(context)
                                                             .pop();
                                                         setState(() async {
-                                                          //   await FirebaseFirestore
-                                                          //       .instance
-                                                          //       .collection(
-                                                          //           'BOOKING COLLECTION??????')
-                                                          //       .doc(storedocs[i]
-                                                          //           ['UID'])
-                                                          //       .delete();
+                                                          await FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  'AcceptedCampaigns')
+                                                              .doc(FirebaseAuth
+                                                                  .instance
+                                                                  .currentUser!
+                                                                  .uid)
+                                                              .collection(
+                                                                  'pilgrimsRequest')
+                                                              .doc(storedocs[i]
+                                                                  ['pilgrimID'])
+                                                              .delete();
+
                                                           _firestore
                                                               .collection(
                                                                   'AcceptedCampaigns')
