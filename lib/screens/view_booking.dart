@@ -192,10 +192,9 @@ print (element. data());l
                                                   child: Column(
                                                     children: const [
                                                       Text(
-                                                        'Request has been submitted  successfully',
+                                                        'your Request has been submitted  successfully !',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
+                                                            color: Color.fromARGB(255, 200, 20, 20),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
@@ -221,7 +220,9 @@ print (element. data());l
                                                     Text(
                                                       storedocs[i]['bookStatus'],
                                                       style: TextStyle(
-                                                          fontSize: 12),
+                                                      fontSize: 14,
+                                                      color:
+                                                            Color.fromARGB(255, 109, 94, 19),),
                                                     ),
                                                   ]),
                                                 ),
