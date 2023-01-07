@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:rafad1/firebase_options.dart';
+import 'package:rafad1/screens/CampaignView.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/notification_accept.dart';
 import 'package:rafad1/screens/signUP_pilgrim.dart';
@@ -9,7 +10,6 @@ import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/signUp_campaign.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:rafad1/screens/logOutAdmin.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/LoginPage.dart';
@@ -58,10 +58,10 @@ class MyApp extends StatelessWidget {
           WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
           SignUpPilgrim.screenRoute: (context) => const SignUpPilgrim(),
           SignUpCampaign.screenRoute: (context) => const SignUpCampaign(),
-          logOutAdmin.screenRoute: (context) => logOutAdmin(),
-          logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
-          logOutCampaign.screenRoute: (context) => logOutCampaign(),
-          LoginPage.screenRoute: (context) => LoginPage(),
+          //logOutAdmin.screenRoute: (context) => logOutAdmin(),
+          //logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
+          //logOutCampaign.screenRoute: (context) => logOutCampaign(),
+          LoginPage.screenRoute: (context) => const LoginPage(),
         });
   }
 }
