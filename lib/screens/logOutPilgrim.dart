@@ -351,9 +351,8 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                     // 'pharma': storedocsP[i]['pharma'],
                                   },
                                 );
-                                int counter =
-                                    int.parse(storedocs[i]['seatingCapacity']) -
-                                        1;
+                               int counter = int.parse(storedocs[i]['seatingCapacity'])-1;
+                                       
                                 FirebaseFirestore.instance
                                     .collection('AcceptedCampaigns')
                                     .doc(storedocs[i]['UID'])
