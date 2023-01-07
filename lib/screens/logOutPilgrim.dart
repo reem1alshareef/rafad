@@ -356,7 +356,6 @@ Padding(
                                         _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").doc(FirebaseAuth.instance.currentUser?.uid).set({
                                                 'bookStatus': 'pending',
                                                 'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
-                                                
                                                 'name': name,
                                                 'email': email,
                                               },
