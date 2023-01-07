@@ -309,6 +309,18 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                               color: const Color(0xFF455D83),
                               title: 'book',
                               onPressed: () async {
+
+    int counter = int.parse(storedocs[i]['seatingCapacity'])-1;
+                                       
+                                FirebaseFirestore.instance
+                                    .collection('AcceptedCampaigns')
+                                    .doc(storedocs[i]['UID'])
+                                    .update({
+                                  'seatingCapacity': counter.toString(),
+                                });
+
+
+
                                 DocumentSnapshot variable =
                                     await FirebaseFirestore.instance
                                         .collection('Pilgrims-Account')
@@ -351,14 +363,14 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                     // 'pharma': storedocsP[i]['pharma'],
                                   },
                                 );
-                               int counter = int.parse(storedocs[i]['seatingCapacity'])-1;
+                              //  int counter = int.parse(storedocs[i]['seatingCapacity'])-1;
                                        
-                                FirebaseFirestore.instance
-                                    .collection('AcceptedCampaigns')
-                                    .doc(storedocs[i]['UID'])
-                                    .update({
-                                  'seatingCapacity': counter.toString(),
-                                });
+                              //   FirebaseFirestore.instance
+                              //       .collection('AcceptedCampaigns')
+                              //       .doc(storedocs[i]['UID'])
+                              //       .update({
+                              //     'seatingCapacity': counter.toString(),
+                              //   });
                                 _firestore
                                     .collection("Pilgrims-Account")
                                     .doc(FirebaseAuth.instance.currentUser?.uid)
