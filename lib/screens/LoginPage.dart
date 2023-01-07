@@ -1,13 +1,13 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rafad1/screens/CampaignView.dart';
 import 'package:rafad1/screens/forget_pw.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/welcome_admin.dart';
-
 
 // void main() {
 //   runApp(const MyApp());
@@ -52,20 +52,21 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: const Color(0xffEEF1F3),
         body: Column(
           children: [
-            
             const PageHeader(),
-            Container(//من هنا يبدا كود الخلفيه
-                  padding: EdgeInsets.symmetric(horizontal: 50),
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-            image: AssetImage("assests/images/background.png"),
-            fit: BoxFit.cover),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
-                    ),
-                  ),),//نهايه كود الخلفيه
-                  
+            Container(
+              //من هنا يبدا كود الخلفيه
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assests/images/background.png"),
+                    fit: BoxFit.cover),
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+              ),
+            ), //نهايه كود الخلفيه
+
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
@@ -251,8 +252,8 @@ class _LoginPageState extends State<LoginPage> {
               email: emailAddress, password: userPassword);
           emailAddress = '';
           userPassword = '';
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => logOutCampaign()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => CampaignView()));
         } else {
           //in case of pilgrim
           await _auth.signInWithEmailAndPassword(
