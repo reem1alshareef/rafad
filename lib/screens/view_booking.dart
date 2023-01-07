@@ -192,7 +192,7 @@ print (element. data());l
                                                   child: Column(
                                                     children: const [
                                                       Text(
-                                                        'Request has been Submitted  successfully',
+                                                        'Request has been submitted  successfully',
                                                         style: TextStyle(
                                                             color: Color(
                                                                 0xFF455D83),
@@ -211,7 +211,7 @@ print (element. data());l
                                                           bottom: 10),
                                                   child: Column(children: [
                                                     Text(
-                                                      'Requet State: ',
+                                                      'Request Status: ',
                                                       style: TextStyle(
                                                           color:
                                                               Color(0xFF455D83),
@@ -255,9 +255,9 @@ print (element. data());l
                                                       (BuildContext context) {
                                                     return AlertDialog(
                                                       title: const Text(
-                                                          "Cansel Request"),
+                                                          "Cancel Request"),
                                                       content: const Text(
-                                                          "Are you sure you want to Cansel?"),
+                                                          "Are you sure you want to Cancel?"),
                                                       actions: [
                                                         ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
@@ -291,12 +291,13 @@ print (element. data());l
                                                               setState(
                                                                   () async {
                                                                     // حذف البيانات الخاصه باليوزر من الفايرستور
+                                                                    var cID = storedocs[i]['campaignID'] ;
                                                                 await FirebaseFirestore
                                                                     .instance
                                                                     .collection("Pilgrims-Account")
                                                                     .doc(FirebaseAuth.instance.currentUser?.uid)
                                                                     .collection("pilgrimCampaigns")
-                                                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                                                    .doc(cID)
                                                                     .delete();
                                                               });
                                                             },
@@ -314,7 +315,7 @@ print (element. data());l
                                                   padding: EdgeInsets
                                                       .symmetric(vertical: 2.0),
                                                 ),
-                                                Text('Cansel'),
+                                                Text('Cancel'),
                                               ],
                                             ),
                                           ),
