@@ -28,10 +28,12 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+
 dependencies:
+  
   flutter:
     sdk: flutter
-
+ 
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -46,7 +48,8 @@ dependencies:
   firebase_database: ^10.0.8
   toast: ^0.3.0
   expansion_tile_card: ^2.0.0
-
+  flutter_local_notifications: ^13.0.0
+  persistent_bottom_nav_bar: ^5.0.2
   #firebase:
   #cloud_firestore: ^3.1.5
   #firebase_auth: ^3.3.14

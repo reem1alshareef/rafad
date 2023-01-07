@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rafad1/widgets/my_button.dart';
@@ -101,28 +99,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                           title: 'Reset Password',
                           onPressed: passwordReset,
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Container(
-                          alignment: Alignment.center,
-                          child: GestureDetector(
-                            onTap: () => {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => const LoginPage()))
-                            },
-                            child: const Text(
-                              'Back to login',
-                              style: TextStyle(
-                                fontSize: 13,
-                                color: Color(0xff939393),
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
                       ],
                     ),
                   ),
@@ -145,7 +121,7 @@ class PageHeader extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.3,
-      child: Image.asset('assets/images/logo.png'),
+      child: Image.asset('assests/images/logo.png'),
     );
   }
 }

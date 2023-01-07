@@ -3,6 +3,7 @@ import 'package:email_validator/email_validator.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:rafad1/navigation/nav_bar.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -77,7 +78,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                               nameCampaign = value;
                             });
                           },
-                          validator: (textValue) {
+                          validator: (textValue) { 
                             if (textValue == null || textValue.isEmpty) {
                               return 'Name field is required!';
                             }
@@ -323,8 +324,9 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                                   ),
                                 );
 
-                                Navigator.pushNamed(
-                                    context, logOutCampaign.screenRoute);
+                                Navigator.push(
+              context, MaterialPageRoute(builder: (context) => nav_campaign()));
+
                               }).catchError((onError) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
