@@ -309,9 +309,10 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                               color: const Color(0xFF455D83),
                               title: 'book',
                               onPressed: () async {
+                                int counter =
+                                    int.parse(storedocs[i]['seatingCapacity']) -
+                                        1;
 
-    int counter = int.parse(storedocs[i]['seatingCapacity'])-1;
-                                       
                                 FirebaseFirestore.instance
                                     .collection('AcceptedCampaigns')
                                     .doc(storedocs[i]['UID'])
@@ -319,10 +320,8 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                   'seatingCapacity': counter.toString(),
                                 });
 
-
-
                                 DocumentSnapshot variable =
-                                    await FirebaseFirestore.instance
+                                    await _firestore
                                         .collection('Pilgrims-Account')
                                         .doc(FirebaseAuth
                                             .instance.currentUser?.uid)
@@ -333,7 +332,8 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                 String diseaese = variable['diseaese'];
                                 String hajId = variable['hajId'];
                                 String pharma = variable['pharma'];
-                                _firestore
+                                
+                              _firestore
                                     .collection("AcceptedCampaigns")
                                     .doc(storedocs[i]['UID'])
                                     .collection("pilgrimsRequest")
@@ -350,27 +350,10 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                     'hajId': hajId,
                                     'pharma': pharma
 
-                                    //User user = FirebaseAuth.instance.currentUser;
-                                    // DocumentSnapshot snap = FirebaseFirestore.instance.collection('Pilgrims-Account').doc(user.uid).get();
-                                    // String 'pilgrinID' = snap['uid'];
-                                    // String 'name' = snap['name'];
-                                    // String 'number' = snap['number'];
-                                    // String 'hajId' = snap['hajId'];
-                                    // String 'pharma' = snap['pharma'];
-                                    // 'name':  storedocsP[i]['name'],
-                                    // 'number': storedocsP[i]['number'],//   في الكولكشن حقها باقي هنا اسوي ريتريف لبيانات الحاج من الكلوكشن حقه واحطها عند الحمله
-                                    // 'hajId': storedocsP[i]['hajId'],
-                                    // 'pharma': storedocsP[i]['pharma'],
+                                    
                                   },
                                 );
-                              //  int counter = int.parse(storedocs[i]['seatingCapacity'])-1;
-                                       
-                              //   FirebaseFirestore.instance
-                              //       .collection('AcceptedCampaigns')
-                              //       .doc(storedocs[i]['UID'])
-                              //       .update({
-                              //     'seatingCapacity': counter.toString(),
-                              //   });
+                               
                                 _firestore
                                     .collection("Pilgrims-Account")
                                     .doc(FirebaseAuth.instance.currentUser?.uid)
@@ -380,6 +363,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                   {
                                     'bookStatus': 'pending',
                                     'campaignID': storedocs[i]['UID'],
+                                    'name': storedocs[i]['name'],
                                   },
                                 );
                               },
