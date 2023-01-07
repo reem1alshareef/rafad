@@ -280,21 +280,17 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                       ),
                                       Padding(
                                         padding:
-                                            const EdgeInsets.only(
-                                                bottom: 10),
+                                            const EdgeInsets.only(bottom: 10),
                                         child: Column(children: [
                                           Text(
                                             'Campaign\'s description :  ',
                                             style: TextStyle(
-                                                color:
-                                                    Color(0xFF455D83),
-                                                fontWeight:
-                                                    FontWeight.w500),
+                                                color: Color(0xFF455D83),
+                                                fontWeight: FontWeight.w500),
                                           ),
                                           Text(
                                             storedocs[i]['description'],
-                                            style: TextStyle(
-                                                fontSize: 12),
+                                            style: TextStyle(fontSize: 12),
                                           )
                                         ]),
                                       ),
