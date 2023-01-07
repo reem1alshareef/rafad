@@ -49,6 +49,9 @@ dependencies:
   toast: ^0.3.0
   expansion_tile_card: ^2.0.0
   flutter_local_notifications: ^13.0.0
+  firebase_messaging: ^14.2.1
+  http:
+
   persistent_bottom_nav_bar: ^5.0.2
   #firebase:
   #cloud_firestore: ^3.1.5

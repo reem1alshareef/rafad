@@ -12,7 +12,6 @@ import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/welcome_admin.dart';
 
-
 // void main() {
 //   runApp(const MyApp());
 // }
@@ -56,20 +55,21 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: const Color(0xffEEF1F3),
         body: Column(
           children: [
-            
             const PageHeader(),
-            Container(//من هنا يبدا كود الخلفيه
-                  padding: EdgeInsets.symmetric(horizontal: 50),
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-            image: AssetImage("assests/images/background.png"),
-            fit: BoxFit.cover),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
-                    ),
-                  ),),//نهايه كود الخلفيه
-                  
+            Container(
+              //من هنا يبدا كود الخلفيه
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assests/images/background.png"),
+                    fit: BoxFit.cover),
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+              ),
+            ), //نهايه كود الخلفيه
+
             Expanded(
               child: Container(
                 decoration: const BoxDecoration(
