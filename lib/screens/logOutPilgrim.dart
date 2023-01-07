@@ -54,10 +54,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
   }
 
   String? get _errorText {
-    // at any time, we can get the text from _controller.value.text
     final text = _controller.value.text;
-    // Note: you can do your own custom validation here
-    // Move this logic this outside the widget for more testable code
     if (text.isEmpty) {
       return 'Can\'t be empty ';
     }
@@ -304,26 +301,26 @@ Padding(
                                                     )
                                                   ]),
                                                 ),
-                                                //  Padding(
-                                                //   padding:
-                                                //       const EdgeInsets.only(
-                                                //           bottom: 10),
-                                                //   child: Column(children: [
-                                                //     Text(
-                                                //       'Campaign\'s description :  ',
-                                                //       style: TextStyle(
-                                                //           color:
-                                                //               Color(0xFF455D83),
-                                                //           fontWeight:
-                                                //               FontWeight.w500),
-                                                //     ),
-                                                //     Text(
-                                                //       storedocs[i]['description'],
-                                                //       style: TextStyle(
-                                                //           fontSize: 12),
-                                                //     )
-                                                //   ]),
-                                                // ),
+                                                 Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 10),
+                                                  child: Column(children: [
+                                                    Text(
+                                                      'Campaign\'s description :  ',
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xFF455D83),
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                    Text(
+                                                      storedocs[i]['description'],
+                                                      style: TextStyle(
+                                                          fontSize: 12),
+                                                    )
+                                                  ]),
+                                                ),
                                               ]),
                                             ]),
                                           ),
