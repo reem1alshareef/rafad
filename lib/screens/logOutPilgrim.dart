@@ -4,6 +4,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 
@@ -13,19 +14,6 @@ import '../widgets/my_button.dart';
 class logOutPilgrim extends StatefulWidget {
   static const String screenRoute = 'logOutPilgrim.dart';
   const logOutPilgrim({super.key});
-/*@override
-  State<logOutPilgrim> createState() => _logOutPilgrim();
-}
-
-class _logOutPilgrimState extends State<logOutPilgrim> {
-  final _firestore = FirebaseFirestore.instance;
-  String? rejectionReason;
-  bool isButtonActive = true;////// حق شرط البوتون انه مايسمح للحاج يضغط اكثر من مره
-  final _controller = TextEditingController();
-  
-  User? user;
-
-*/
 
   @override
   _logOutPilgrimState createState() => _logOutPilgrimState();
@@ -33,7 +21,9 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
 
 class _logOutPilgrimState extends State<logOutPilgrim> {
   final _firestore = FirebaseFirestore.instance;
+  bool isButtonClickable = true ;
   String? rejectionReason;
+  
 
   final _controller = TextEditingController();
 
@@ -84,7 +74,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('pilgrim main home page'),
+        title: Text('available campaign for booking'),
         backgroundColor: const Color(0xFF455D83),
         elevation: 0,
         actions: <Widget>[
@@ -109,18 +99,6 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                 //margin: EdgeInsets.all(60),
                 color: Color.fromARGB(255, 179, 181, 183),
 
-                child: Padding(
-                  padding: const EdgeInsets.all(17),
-                  child: Text(
-                    'available campaign',
-                    style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.w900,
-                      fontStyle: FontStyle.normal,
-                      color: Color(0xFF455D83),
-                    ),
-                  ),
-                ),
               ),
             ),
             Container(
@@ -299,9 +277,11 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                 ),
                               ),
                             ),
+                            
                             MyButton(
                               color: const Color(0xFF455D83),
                               title: 'book',
+                              
                               onPressed: () async {
                                 int counter =
                                     int.parse(storedocs[i]['seatingCapacity'])-1;
@@ -311,6 +291,10 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                     .update({
                                   'seatingCapacity': counter.toString(),
                                 });
+
+                                setState(() async {
+                                if(isButtonClickable && counter>0){
+                                isButtonClickable = false;
                                 _firestore
                                     .collection("Pilgrims-Account")
                                     .doc(FirebaseAuth.instance.currentUser?.uid)
@@ -353,8 +337,11 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                     'pharma': pharma
                                   },
                                 );
-                              },
-                            ) ////////////////buton
+                              }
+                                }
+                                );
+                              }
+                    ),//////////
                           ],
                         ),
                       ),
