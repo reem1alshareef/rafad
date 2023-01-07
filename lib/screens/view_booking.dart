@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
-import 'package:rafad1/screens/logOutAdmin.dart';
+import 'package:rafad1/screens/welcome_screen.dart';
 
 //import 'package:rafad1/screens/LoginPage.dart';
 class ViewBooking extends StatefulWidget {
@@ -115,7 +115,8 @@ print (element. data());l
                 color: Colors.white,
               ),
               onPressed: () {
-                Navigator.pushNamed(context, logOutAdmin.screenRoute);
+                FirebaseAuth.instance.signOut();
+                Navigator.pushNamed(context, WelcomeScreen.screenRoute);
               },
             )
           ],
