@@ -5,11 +5,7 @@ import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/widgets/my_button.dart';
 
 import 'add_description.dart';
-//import 'dart:js';
 
-// void main(){
-//   runApp(logOutAdmin());
-// }
 class logOutCampaign extends StatefulWidget {
 static const String screenRoute = 'logOutCampaign';
 const logOutCampaign({super.key});
@@ -19,16 +15,8 @@ const logOutCampaign({super.key});
 }
 
 class _logOutCampaign extends State<logOutCampaign> {
-
-
-
-  
   
   final user = FirebaseAuth.instance.currentUser!;
-  // void signUserOut() {
-  //FirebaseAuth.instance.signOut();
-  //Navigator.pushNamed(context, WelcomeScreen.screenRoute);
-  //}
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +31,7 @@ class _logOutCampaign extends State<logOutCampaign> {
                       }, icon: const Icon(Icons.logout),//hhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
                       ), 
                       ],
-          title: Text("campaign main home page"),
+          title: Text("campaign profile"),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
         ),
@@ -56,43 +44,8 @@ class _logOutCampaign extends State<logOutCampaign> {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Column(
-                  children: [                   
-                  MyButton(
-                      color: Color.fromARGB(255, 250, 73, 13),
-                      title: 'Sign Out',
-                      onPressed: () {
-                        FirebaseAuth.instance.signOut();
-                        Navigator.pushNamed(context, WelcomeScreen.screenRoute);
-                      },
-                    ),
- /*MyButton(
-                      color: Color.fromARGB(255, 250, 73, 13),
-                      title: 'add ',
-                      onPressed: () {
-                        Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddDescription()));
-                      },
-                    ),*/
-
-                    // const Text(
-                    //   "hello ! you have logged in successfully",
-                    //   style: TextStyle(
-                    //     fontSize: 20,
-                    //     fontWeight: FontWeight.w900,
-                    //     color: Color(0xFF788AA4),
-                    //   ),
-                    // ),
-                  ],
-                ),
-                // body: Center(
-                //     child: Text(
-                //   "hello ! you have logged in As admin" ,
-                //   //+ user.email!,
-                //   style: TextStyle(fontSize: 20),
-                // )),
-              ]),
+ 
+              ),
         ));
   }
 }

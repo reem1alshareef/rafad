@@ -1,6 +1,7 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rafad1/screens/CampaignView.dart';
 import 'package:rafad1/navigation/nav_bar.dart';
 //import 'package:fluttertoast_example/toast_context.dart';
 //import 'test.dart';
