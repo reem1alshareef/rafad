@@ -88,7 +88,7 @@ String? email;
 
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text('pilgrim main home page'),
+          title: Text('available campaign for booking '),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
           actions: <Widget>[
@@ -326,18 +326,6 @@ Padding(
                                           ),
                                         ),
                                       ),
-                                      /////////////////buton
-                                      
-                                      // void pilgrimData async{
-                                      //   final Stream<QuerySnapshot> dataStream2 = FirebaseFirestore.instance.collection('Pilgrim-Account').doc(FirebaseAuth.instance.currentUser!.uid).snapshots();
-                                      //     StreamBuilder<QuerySnapshot>( 
-                                      //       stream: dataStream2,builder: (BuildContext context,AsyncSnapshot<QuerySnapshot> snapshot)
-                                      //        {
-                                      //         final List storedocsP = [];
-                                      //         snapshot.data!.docs.map((DocumentSnapshot document) {
-                                      //           Map a = document.data() as Map<String, dynamic>;storedocsP.add(a);
-                                      //           a['pilgrimID'] = document.id;}).toList();
-                                      // }
 
                                       MyButton(
                                         color: const Color(0xFF455D83),
@@ -348,19 +336,8 @@ Padding(
                                           Map<String,dynamic> userData = vari as Map<String,dynamic>;
                                           name = userData['name']; //or name = userData['name']
                                           email = userData['email'];
-                                          // await _firestore.collection("Pilgrims-Account").where("UID", isEqualTo: FirebaseAuth.instance.currentUser?.uid).get().then((QuerySnapshot snapshot){
-                                          //         snapshot.docs.forEach((DocumentSnapshot documentSnapshot){
-                                          //           print(documentSnapshot.data);
-                                          //           });
-                                          //           });
-                                        _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").doc(FirebaseAuth.instance.currentUser?.uid).set({
-                                                'bookStatus': 'pending',
-                                                'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
-                                                'name': name,
-                                                'email': email,
-                                              },
-                                              );
-                                              int counter = int.parse(storedocs[i]['seatingCapacity'])-1;
+
+                                        int counter = int.parse(storedocs[i]['seatingCapacity'])-1;
                                         FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': counter.toString(),});
 
                                         _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").doc(storedocs[i]['UID']).set({
