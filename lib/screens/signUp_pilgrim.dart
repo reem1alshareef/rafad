@@ -60,9 +60,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        const PageHeading(
-                          title: 'Sign up as Pilgrim',
-                        ),
+                       
                         const SizedBox(
                           height: 16,
                         ),

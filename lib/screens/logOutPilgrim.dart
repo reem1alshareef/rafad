@@ -331,14 +331,12 @@ Padding(
                                         color: const Color(0xFF455D83),
                                         title: 'book',
                                         onPressed:  () async  {
-                                          User? user = await FirebaseAuth.instance.currentUser;
-                                          var vari =FirebaseFirestore.instance.collection("Pilgrims-Account").doc(user!.uid).get();
-                                          Map<String,dynamic> userData = vari as Map<String,dynamic>;
-                                          name = userData['name']; //or name = userData['name']
-                                          email = userData['email'];
+                                        
 
                                         int counter = int.parse(storedocs[i]['seatingCapacity'])-1;
                                         FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': counter.toString(),});
+
+
 
                                         _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").doc(storedocs[i]['UID']).set({
                                                 'bookStatus': 'pending',
