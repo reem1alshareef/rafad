@@ -42,7 +42,7 @@ class LocalNotificationService {
 
 
 
-/* كود لينا مضبوط في ارسال الاشعار بس يكون عند الحمل 
+/* كود  مضبوط في ارسال الاشعار بس يكون عند الحملة
 class NotificationAccept {
   static final _notifications = FlutterLocalNotificationsPlugin();
 
