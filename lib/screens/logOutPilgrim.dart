@@ -112,16 +112,16 @@ Padding(
   //margin: EdgeInsets.all(60), 
     color: Color.fromARGB(255, 179, 181, 183),
   
-    child:   Padding(
-      padding: const EdgeInsets.all(17),
-      child: Text('available campaign' , style: TextStyle(
-        fontSize: 50,
-        fontWeight: FontWeight.w900,
-        fontStyle: FontStyle.normal,
-        color: Color(0xFF455D83),
-      ),
-      ),
-    ),
+    // child:   Padding(
+    //   padding: const EdgeInsets.all(17),
+    //   child: Text('available campaign' , style: TextStyle(
+    //     fontSize: 50,
+    //     fontWeight: FontWeight.w900,
+    //     fontStyle: FontStyle.normal,
+    //     color: Color(0xFF455D83),
+    //   ),
+    //   ),
+    // ),
   ),
 ),
             Container(//كود الخلفيه 
