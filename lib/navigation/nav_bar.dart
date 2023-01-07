@@ -8,6 +8,7 @@ import '../screens/add_description.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 
+import '../screens/view_booking.dart';
 import '../screens/welcome_admin.dart';
 
 
@@ -165,7 +166,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
 int _selectedIndex = 0;
   
   static const List<Widget> _widgetOptions = <Widget> [
-    Center(child: Text('bookings', style: TextStyle(fontSize: 72),),),
+    ViewBooking(),
     logOutPilgrim(),
     Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),
     Center(child: Text('emergency', style: TextStyle(fontSize: 72),),),

@@ -31,6 +31,8 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
 }
 
 class _logOutPilgrimState extends State<logOutPilgrim> {
+
+
   final _firestore = FirebaseFirestore.instance;
   String? rejectionReason;
 
@@ -52,10 +54,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
   }
 
   String? get _errorText {
-    // at any time, we can get the text from _controller.value.text
     final text = _controller.value.text;
-    // Note: you can do your own custom validation here
-    // Move this logic this outside the widget for more testable code
     if (text.isEmpty) {
       return 'Can\'t be empty ';
     }
@@ -65,22 +64,26 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
     // return null if the text is valid
     return null;
   }
+/////////////////////
+  // void DataStreams() async {
+  //   await for (var snapshot in _firestore.collection("Pilgrim-Account").where('UID' == FirebaseAuth.instance.currentUser!.uid).snapshots()) {
+  //     for (var pilgrim in snapshot.docs) {
+  //       print(pilgrim.data());
+  //     }
+  //   }
+  // }
+  // void getData(){
 
-  void DataStreams() async {
-    await for (var snapshot
-        in _firestore.collection('AcceptedCampaigns')
-        .snapshots()) {
-      for (var campaign in snapshot.docs) {
-        print(campaign.data());
-      }
-    }
-  }
-
+  // }
+////////////////////
+String? name ;
+String? email;
   @override
   Widget build(BuildContext context) {
+
     final Stream<QuerySnapshot> dataStream =
         FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
-        
+
     return Scaffold(
 
         appBar: AppBar(
@@ -109,16 +112,16 @@ Padding(
   //margin: EdgeInsets.all(60), 
     color: Color.fromARGB(255, 179, 181, 183),
   
-    child:   Padding(
-      padding: const EdgeInsets.all(17),
-      child: Text('available campaign' , style: TextStyle(
-        fontSize: 50,
-        fontWeight: FontWeight.w900,
-        fontStyle: FontStyle.normal,
-        color: Color(0xFF455D83),
-      ),
-      ),
-    ),
+    // child:   Padding(
+    //   padding: const EdgeInsets.all(17),
+    //   child: Text('available campaign' , style: TextStyle(
+    //     fontSize: 50,
+    //     fontWeight: FontWeight.w900,
+    //     fontStyle: FontStyle.normal,
+    //     color: Color(0xFF455D83),
+    //   ),
+    //   ),
+    // ),
   ),
 ),
             Container(//كود الخلفيه 
@@ -298,26 +301,26 @@ Padding(
                                                     )
                                                   ]),
                                                 ),
-                                                //  Padding(
-                                                //   padding:
-                                                //       const EdgeInsets.only(
-                                                //           bottom: 10),
-                                                //   child: Column(children: [
-                                                //     Text(
-                                                //       'Campaign\'s description :  ',
-                                                //       style: TextStyle(
-                                                //           color:
-                                                //               Color(0xFF455D83),
-                                                //           fontWeight:
-                                                //               FontWeight.w500),
-                                                //     ),
-                                                //     Text(
-                                                //       storedocs[i]['description'],
-                                                //       style: TextStyle(
-                                                //           fontSize: 12),
-                                                //     )
-                                                //   ]),
-                                                // ),
+                                                 Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 10),
+                                                  child: Column(children: [
+                                                    Text(
+                                                      'Campaign\'s description :  ',
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xFF455D83),
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                    Text(
+                                                      storedocs[i]['description'],
+                                                      style: TextStyle(
+                                                          fontSize: 12),
+                                                    )
+                                                  ]),
+                                                ),
                                               ]),
                                             ]),
                                           ),
@@ -325,36 +328,49 @@ Padding(
                                       ),
                                       /////////////////buton
                                       
+                                      // void pilgrimData async{
+                                      //   final Stream<QuerySnapshot> dataStream2 = FirebaseFirestore.instance.collection('Pilgrim-Account').doc(FirebaseAuth.instance.currentUser!.uid).snapshots();
+                                      //     StreamBuilder<QuerySnapshot>( 
+                                      //       stream: dataStream2,builder: (BuildContext context,AsyncSnapshot<QuerySnapshot> snapshot)
+                                      //        {
+                                      //         final List storedocsP = [];
+                                      //         snapshot.data!.docs.map((DocumentSnapshot document) {
+                                      //           Map a = document.data() as Map<String, dynamic>;storedocsP.add(a);
+                                      //           a['pilgrimID'] = document.id;}).toList();
+                                      // }
+
                                       MyButton(
                                         color: const Color(0xFF455D83),
                                         title: 'book',
                                         onPressed:  () async  {
+                                          User? user = await FirebaseAuth.instance.currentUser;
+                                          var vari =FirebaseFirestore.instance.collection("Pilgrims-Account").doc(user!.uid).get();
+                                          Map<String,dynamic> userData = vari as Map<String,dynamic>;
+                                          name = userData['name']; //or name = userData['name']
+                                          email = userData['email'];
+                                          // await _firestore.collection("Pilgrims-Account").where("UID", isEqualTo: FirebaseAuth.instance.currentUser?.uid).get().then((QuerySnapshot snapshot){
+                                          //         snapshot.docs.forEach((DocumentSnapshot documentSnapshot){
+                                          //           print(documentSnapshot.data);
+                                          //           });
+                                          //           });
                                         _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").doc(FirebaseAuth.instance.currentUser?.uid).set({
                                                 'bookStatus': 'pending',
                                                 'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
-                                              
-                                                //User user = FirebaseAuth.instance.currentUser;
-                                               // DocumentSnapshot snap = FirebaseFirestore.instance.collection('Pilgrims-Account').doc(user.uid).get();
-                                                // String 'pilgrinID' = snap['uid'];
-                                                // String 'name' = snap['name'];
-                                                // String 'number' = snap['number'];
-                                                // String 'hajId' = snap['hajId'];
-                                                // String 'pharma' = snap['pharma'];
-                                                // 'name':  storedocsP[i]['name'],
-                                                // 'number': storedocsP[i]['number'],//   في الكولكشن حقها باقي هنا اسوي ريتريف لبيانات الحاج من الكلوكشن حقه واحطها عند الحمله
-                                                // 'hajId': storedocsP[i]['hajId'],
-                                                // 'pharma': storedocsP[i]['pharma'],
+                                                
+                                                'name': name,
+                                                'email': email,
                                               },
                                               );
                                               int counter = int.parse(storedocs[i]['seatingCapacity'])-1;
-                                           FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': counter.toString(),});
+                                              FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': counter.toString(),});
                                         _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").doc(FirebaseAuth.instance.currentUser?.uid).set({
                                                 'bookStatus': 'pending',
                                                 'campaignID': storedocs[i]['UID'],
+                                                'name':  storedocs[i]['name'],
                                               },
                                               );
                                         },
-                                       ) ////////////////buton
+                                      ),
                                 ],
                                 ),
                                 ),
