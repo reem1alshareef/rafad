@@ -117,8 +117,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
               child: Container(
                 //margin: EdgeInsets.all(60),
                 color: Color.fromARGB(255, 179, 181, 183),
-
-        appBar: AppBar(
+     appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('available campaign'),
           backgroundColor: const Color(0xFF455D83),
