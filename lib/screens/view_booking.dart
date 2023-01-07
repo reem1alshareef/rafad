@@ -65,7 +65,8 @@ class _ViewState extends State<ViewBooking> {
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
-        FirebaseFirestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns");
+        FirebaseFirestore.instance.collection("Pilgrims-Account").doc('UID').collection("pilgrimCampaigns").snapshots();
+
 /*
   void DataStreams() async {
     FirebaseFirestore.instance.collection ("AcceptedCampaigns").get().then((value) {
@@ -216,9 +217,8 @@ print (element. data());l
                                                           fontWeight:
                                                               FontWeight.w500),
                                                     ),
-                                                   
                                                     Text(
-                                                      storedocs[i]['address'],
+                                                      storedocs[i]['bookStatus'],
                                                       style: TextStyle(
                                                           fontSize: 12),
                                                     ),
