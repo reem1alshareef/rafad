@@ -37,19 +37,19 @@ class CampaignView extends StatelessWidget {
                 Tab(
                     text: 'Pending',
                     icon: Icon(
-                      Icons.access_time_rounded,
+                      Icons.assignment_outlined,
                       color: Colors.blueGrey,
                     )),
                 Tab(
                     text: 'Accepted',
                     icon: Icon(
-                      Icons.check_circle_outline,
+                      Icons.assignment_turned_in_outlined,
                       color: Colors.blueGrey,
                     )),
                 Tab(
                     text: 'Rejected',
                     icon: Icon(
-                      Icons.cancel_outlined,
+                      Icons.assignment_late_outlined,
                       color: Colors.blueGrey,
                     )),
               ]),

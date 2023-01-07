@@ -50,8 +50,8 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                   padding: EdgeInsets.symmetric(horizontal: 50),
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-            image: AssetImage("assests/images/background.png"),
-            fit: BoxFit.cover),
+                        image: AssetImage("assests/images/background.png"),
+                        fit: BoxFit.cover),
                     color: Colors.white,
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),
@@ -296,9 +296,10 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                                   ),
                                 );
 
-                               Navigator.push(
-              context, MaterialPageRoute(builder: (context) => nav_pilgrim()));
-
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => nav_pilgrim()));
                               }).catchError((onError) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -309,9 +310,11 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                               });
                               await FirebaseFirestore.instance
                                   .collection("Pilgrims-Account")
-                                  .add({
+                                  .doc(FirebaseAuth.instance.currentUser!.uid)
+                                  .set({
                                 'name': name,
-                                'UID': FirebaseAuth.instance.currentUser!.uid,////////هذا يا شادن ضبطناه
+                                'UID': FirebaseAuth.instance.currentUser!
+                                    .uid, ////////هذا يا شادن ضبطناه
                                 'email': email,
                                 'number': number,
                                 'hajId': hajId,

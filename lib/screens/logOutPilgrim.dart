@@ -329,9 +329,10 @@ Padding(
                                         color: const Color(0xFF455D83),
                                         title: 'book',
                                         onPressed:  () async  {
-                                        _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").add({
+                                        _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").doc(FirebaseAuth.instance.currentUser?.uid).set({
                                                 'bookStatus': 'pending',
                                                 'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
+                                              
                                                 //User user = FirebaseAuth.instance.currentUser;
                                                // DocumentSnapshot snap = FirebaseFirestore.instance.collection('Pilgrims-Account').doc(user.uid).get();
                                                 // String 'pilgrinID' = snap['uid'];

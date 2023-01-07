@@ -19,7 +19,7 @@ class _ViewRejectedState extends State<ViewRejected> {
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
-        FirebaseFirestore.instance.collection('Bookings').snapshots();
+        FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(FirebaseAuth.instance.currentUser!.uid).collection('RejectedPilgrims').snapshots();
 
     return Scaffold(
         body: SingleChildScrollView(
@@ -132,14 +132,14 @@ class _ViewRejectedState extends State<ViewRejected> {
                                                   bottom: 10),
                                               child: Column(children: [
                                                 Text(
-                                                  'Pilgrim\'s Hajj ID:  ',
+                                                  'Pilgrim\'s booking status:  ',
                                                   style: TextStyle(
                                                       color: Color(0xFF455D83),
                                                       fontWeight:
                                                           FontWeight.w500),
                                                 ),
                                                 Text(
-                                                  storedocs[i]['id'],
+                                                  storedocs[i]['bookStatus'],
                                                   style:
                                                       TextStyle(fontSize: 12),
                                                 ),
@@ -190,233 +190,6 @@ class _ViewRejectedState extends State<ViewRejected> {
                                         ]),
                                       ),
                                     ),
-                                  ),
-                                  ButtonBar(
-                                    alignment: MainAxisAlignment.spaceAround,
-                                    buttonHeight: 52.0,
-                                    buttonMinWidth: 90.0,
-                                    children: <Widget>[
-                                      TextButton(
-                                        style: TextButton.styleFrom(
-                                            shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(2.0)),
-                                        )),
-                                        onPressed: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: const Text(
-                                                      "Accept Request"),
-                                                  content: const Text(
-                                                      "Are you sure you want to accept pilgrim's request?"),
-                                                  actions: [
-                                                    ElevatedButton(
-                                                        style: ElevatedButton.styleFrom(
-                                                            shape: RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            30.0)),
-                                                            backgroundColor:
-                                                                Color(
-                                                                    0xFF455D83)),
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                        child: const Text(
-                                                            "Cancel")),
-                                                    ElevatedButton(
-                                                        style: ElevatedButton.styleFrom(
-                                                            shape: RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            30.0)),
-                                                            backgroundColor:
-                                                                Color(
-                                                                    0xFF455D83)),
-                                                        onPressed: () {
-                                                          // This whole code will be when campaign presses Accept
-                                                          // Albatouls Notification
-
-                                                          Navigator.of(context)
-                                                              .pop();
-
-                                                          setState(() async {
-// This part will make a new collection for accepted pilgrims for this specific campaign who accepted the pilgrim?????
-                                                            _firestore
-                                                                .collection(
-                                                                    'AcceptedBookings') // for this specific campaign
-                                                                .add({
-                                                              'status':
-                                                                  'accepted',
-                                                              'name':
-                                                                  storedocs[i]
-                                                                      ['name'],
-                                                              // 'email':
-                                                              //     storedocs[
-                                                              //             i]
-                                                              //         [
-                                                              //         'emailP'],
-                                                              // 'address':
-                                                              //     storedocs[
-                                                              //             i]
-                                                              //         [
-                                                              //         'address'],
-                                                              'HajjID':
-                                                                  storedocs[i]
-                                                                      ['id'],
-                                                              // 'password':
-                                                              //     storedocs[
-                                                              //             i]
-                                                              //         [
-                                                              //         'password'],
-                                                              // 'phoneNumber':
-                                                              //     storedocs[
-                                                              //             i]
-                                                              //         [
-                                                              //         'phoneNumberP'],
-                                                              //  'seatingCapacity': storedocs[i]
-                                                              // ['capacity'],
-                                                            });
-
-// This will delete the pilgrim account from the collection with pilgrims pending bookings
-
-                                                            await FirebaseFirestore
-                                                                .instance
-                                                                .collection(
-                                                                    'Bookings')
-                                                                .doc(storedocs[
-                                                                        i][
-                                                                    'UID']) // مفروض حق الحاج نفس لما سجل
-                                                                .delete();
-                                                          });
-                                                        },
-                                                        child:
-                                                            const Text("Yes")),
-                                                  ],
-                                                );
-                                              });
-                                        },
-                                        child: Column(
-                                          children: <Widget>[
-                                            Icon(
-                                              Icons.check_circle,
-                                              color: Colors.green,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 2.0),
-                                            ),
-                                            Text('Accept'),
-                                          ],
-                                        ),
-                                      ),
-                                      TextButton(
-                                        style: TextButton.styleFrom(
-                                            shape: const RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(2.0)),
-                                        )),
-                                        onPressed: () {
-                                          showDialog(
-                                              context: context,
-                                              builder: (BuildContext context) {
-                                                return AlertDialog(
-                                                  title: const Text(
-                                                      "Reject Pilgrim"),
-                                                  content: Text(
-                                                      'Are you sure you want to reject pilgrim\'s booking request?'),
-                                                  // content: TextField(
-                                                  //   controller: _controller,
-                                                  //   //  errorText: _errorText,
-                                                  //   maxLines: 7,
-                                                  //   onChanged: (value) {
-                                                  //     rejectionReason =
-                                                  //         value;
-                                                  //   },
-                                                  //   decoration:
-                                                  //       InputDecoration(
-                                                  //     hintText:
-                                                  //         "Enter reason of rejection",
-                                                  //   ),
-                                                  // ),
-                                                  actions: [
-                                                    ElevatedButton(
-                                                        style: ElevatedButton.styleFrom(
-                                                            shape: RoundedRectangleBorder(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            30.0)),
-                                                            backgroundColor:
-                                                                Color(
-                                                                    0xFF455D83)),
-                                                        onPressed: () {
-                                                          Navigator.of(context)
-                                                              .pop();
-                                                        },
-                                                        child: Text('Cancel')),
-                                                    ElevatedButton(
-                                                      style: ElevatedButton
-                                                          .styleFrom(
-                                                        shape: RoundedRectangleBorder(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        30.0)),
-                                                        backgroundColor:
-                                                            Color(0xFF455D83),
-                                                      ), // background
-                                                      onPressed: () {
-                                                        //When campaign presses Reject , i think notification caller should be here
-                                                        Navigator.of(context)
-                                                            .pop();
-                                                        setState(() async {
-                                                          await FirebaseFirestore
-                                                              .instance
-                                                              .collection(
-                                                                  'BOOKING COLLECTION??????')
-                                                              .doc(storedocs[i]
-                                                                  ['UID'])
-                                                              .delete();
-                                                          _firestore
-                                                              .collection(
-                                                                  'RejectedPilgrim') // Why should i delete it then add it to a rejected collection??
-                                                              // another campaign might accapt it......
-                                                              .add({
-                                                            'namePilgrim':
-                                                                storedocs[i][
-                                                                    'namePilgrim'],
-                                                            'status':
-                                                                'rejected',
-                                                          });
-                                                        });
-                                                      },
-                                                      child: const Text("Yes"),
-                                                    )
-                                                  ],
-                                                );
-                                              });
-                                        },
-                                        child: Column(
-                                          children: <Widget>[
-                                            Icon(Icons.cancel_rounded,
-                                                color: Colors.redAccent),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 2.0),
-                                            ),
-                                            Text('Reject'),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
                                   ),
                                 ],
                               ),
