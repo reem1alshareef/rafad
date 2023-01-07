@@ -7,7 +7,8 @@ import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'notification_accept.dart';
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 //import 'package:rafad1/screens/LoginPage.dart';
 class ViewPending extends StatefulWidget {
@@ -24,26 +25,28 @@ class _ViewPendingState extends State<ViewPending> {
   }
 
   final _firestore = FirebaseFirestore.instance;
-  String? rejectionReason;
-
-  final _controller = TextEditingController();
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  
-
 
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> dataStream =
-        FirebaseFirestore.instance.collection('Bookings').snapshots();
+// if (FirebaseFirestore.instance.collection('Pilgrims-Account').doc() ==
+//         FirebaseFirestore.instance
+//             .collection('AcceptedCampaigns')
+//             .doc(FirebaseAuth.instance.currentUser!.uid)
+//             .collection('pilgrimsRequest')
+//             .doc())
+//              FirebaseFirestore.instance.collection('pilgrimsRequest').doc();
+    // DocumentReference doc_ref = FirebaseFirestore.instance
+    //     .collection('AcceptedCampaigns')
+    //     .doc(FirebaseAuth.instance.currentUser!.uid)
+    //     .collection('pilgrimsRequest').
+
+    final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
+        .collection('AcceptedCampaigns')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('pilgrimsRequest')
+        .snapshots();
 
     return Scaffold(
-      
         body: SingleChildScrollView(
             child: Column(children: [
       Padding(
@@ -64,7 +67,7 @@ class _ViewPendingState extends State<ViewPending> {
                 snapshot.data!.docs.map((DocumentSnapshot document) {
                   Map a = document.data() as Map<String, dynamic>;
                   storedocs.add(a);
-                  a['id'] = document.id;
+                  a['pilgrimID'] = document.id;
                 }).toList();
                 return Column(
                     children: List.generate(
@@ -84,10 +87,14 @@ class _ViewPendingState extends State<ViewPending> {
                                 title: Text(
                                   storedocs[i]['name'],
                                 ),
+
                                 subtitle: Text(
                                   "Click to view pilgrim's details",
-                                  style: TextStyle(fontSize: 11),
+                                  style: TextStyle(
+                                    fontSize: 11,
+                                  ),
                                 ),
+
                                 children: [
                                   Divider(
                                     thickness: 1.7,
@@ -153,14 +160,14 @@ class _ViewPendingState extends State<ViewPending> {
                                                   bottom: 10),
                                               child: Column(children: [
                                                 Text(
-                                                  'Pilgrim\'s Hajj ID:  ',
+                                                  'Pilgrim\'s booking status:  ',
                                                   style: TextStyle(
                                                       color: Color(0xFF455D83),
                                                       fontWeight:
                                                           FontWeight.w500),
                                                 ),
                                                 Text(
-                                                  storedocs[i]['id'],
+                                                  storedocs[i]['bookStatus'],
                                                   style:
                                                       TextStyle(fontSize: 12),
                                                 ),
@@ -279,13 +286,25 @@ class _ViewPendingState extends State<ViewPending> {
 // This part will make a new collection for accepted pilgrims for this specific campaign who accepted the pilgrim?????
                                                             _firestore
                                                                 .collection(
-                                                                    'AcceptedBookings') // for this specific campaign
-                                                                .add({
-                                                              'status':
-                                                                  'accepted',
+                                                                    'AcceptedCampaigns')
+                                                                .doc(FirebaseAuth
+                                                                    .instance
+                                                                    .currentUser!
+                                                                    .uid)
+                                                                .collection(
+                                                                    'AcceptedPilgrims')
+                                                                .doc(storedocs[
+                                                                        i][
+                                                                    'pilgrimID']) // for this specific campaign
+                                                                .set({
                                                               'name':
                                                                   storedocs[i]
                                                                       ['name'],
+                                                              'bookStatus':
+                                                                  'accepted',
+                                                              // 'name':
+                                                              //     storedocs[i]
+                                                              //         ['name'],
                                                               // 'email':
                                                               //     storedocs[
                                                               //             i]
@@ -296,9 +315,9 @@ class _ViewPendingState extends State<ViewPending> {
                                                               //             i]
                                                               //         [
                                                               //         'address'],
-                                                              'HajjID':
-                                                                  storedocs[i]
-                                                                      ['id'],
+                                                              'pilgrimID':
+                                                                  storedocs[i][
+                                                                      'pilgrimID'],
                                                               // 'password':
                                                               //     storedocs[
                                                               //             i]
@@ -315,14 +334,14 @@ class _ViewPendingState extends State<ViewPending> {
 
 // This will delete the pilgrim account from the collection with pilgrims pending bookings
 
-                                                            await FirebaseFirestore
-                                                                .instance
-                                                                .collection(
-                                                                    'Bookings')
-                                                                .doc(storedocs[
-                                                                        i][
-                                                                    'UID']) // مفروض حق الحاج نفس لما سجل
-                                                                .delete();
+                                                            // await FirebaseFirestore
+                                                            //     .instance
+                                                            //     .collection(
+                                                            //         'pilgrimRequest')
+                                                            //     .doc(storedocs[
+                                                            //             i][
+                                                            //         'UID']) // مفروض حق الحاج نفس لما سجل
+                                                            //     .delete();
                                                           });
                                                         },
                                                         child:
@@ -415,23 +434,33 @@ class _ViewPendingState extends State<ViewPending> {
                                                         Navigator.of(context)
                                                             .pop();
                                                         setState(() async {
-                                                          await FirebaseFirestore
-                                                              .instance
-                                                              .collection(
-                                                                  'BOOKING COLLECTION??????')
-                                                              .doc(storedocs[i]
-                                                                  ['UID'])
-                                                              .delete();
+                                                          //   await FirebaseFirestore
+                                                          //       .instance
+                                                          //       .collection(
+                                                          //           'BOOKING COLLECTION??????')
+                                                          //       .doc(storedocs[i]
+                                                          //           ['UID'])
+                                                          //       .delete();
                                                           _firestore
                                                               .collection(
-                                                                  'RejectedPilgrim') // Why should i delete it then add it to a rejected collection??
-                                                              // another campaign might accapt it......
-                                                              .add({
-                                                            'namePilgrim':
-                                                                storedocs[i][
-                                                                    'namePilgrim'],
-                                                            'status':
+                                                                  'AcceptedCampaigns')
+                                                              .doc(FirebaseAuth
+                                                                  .instance
+                                                                  .currentUser!
+                                                                  .uid)
+                                                              .collection(
+                                                                  'RejectedPilgrims')
+                                                              .doc(storedocs[i][
+                                                                  'pilgrimID']) // Why should i delete it then add it to a rejected collection??
+                                                              //       // another campaign might accapt it......
+                                                              .set({
+                                                            'name': storedocs[i]
+                                                                ['name'],
+                                                            'bookStatus':
                                                                 'rejected',
+                                                            'pilgrimID':
+                                                                storedocs[i][
+                                                                    'pilgrimID'],
                                                           });
                                                         });
                                                       },
