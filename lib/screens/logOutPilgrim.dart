@@ -338,7 +338,7 @@ Padding(
 
 
 
-                                        _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").doc(storedocs[i]['UID']).set({
+                                        _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").doc(FirebaseAuth.instance.currentUser?.uid).set({
                                                 'bookStatus': 'pending',
                                                 'campaignID': storedocs[i]['UID'],
                                                 'name':  storedocs[i]['name'],
