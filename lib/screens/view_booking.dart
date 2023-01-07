@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -63,12 +64,8 @@ class _ViewState extends State<ViewBooking> {
 
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> dataStream =_firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").add({
-                                                'bookStatus': 'pending',
-                                                'campaignID': storedocs[i]['UID'],
-                                              },
-                                              );
-        FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
+    final Stream<QuerySnapshot> dataStream =
+        FirebaseFirestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns");
 /*
   void DataStreams() async {
     FirebaseFirestore.instance.collection ("AcceptedCampaigns").get().then((value) {
