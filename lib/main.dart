@@ -55,4 +55,3 @@ class MyApp extends StatelessWidget {
           LoginPage.screenRoute: (context) => const LoginPage(),
         });
   }
-}
