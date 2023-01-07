@@ -8,7 +8,7 @@ import 'package:rafad1/screens/welcome_screen.dart';
 //import 'package:rafad1/screens/LoginPage.dart';
 class ViewBooking extends StatefulWidget {
   //static const String screenRoute = 'welcome_screen';
-
+const ViewBooking({super.key});
   @override
   _ViewState createState() => _ViewState();
 }
