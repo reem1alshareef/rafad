@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'dart:math';
 
@@ -42,7 +42,7 @@ class LocalNotificationService {
 
 
 
-/* كود لينا مضبوط في ارسال الاشعار بس يكون عند الحمل 
+/* كود  مضبوط في ارسال الاشعار بس يكون عند الحملة
 class NotificationAccept {
   static final _notifications = FlutterLocalNotificationsPlugin();
 
