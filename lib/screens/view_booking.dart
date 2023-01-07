@@ -65,7 +65,7 @@ class _ViewState extends State<ViewBooking> {
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
-        FirebaseFirestore.instance.collection("Pilgrims-Account").doc('UID').collection("pilgrimCampaigns").snapshots();
+        FirebaseFirestore.instance.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").snapshots();
 
 /*
   void DataStreams() async {
@@ -293,11 +293,10 @@ print (element. data());l
                                                                     // حذف البيانات الخاصه باليوزر من الفايرستور
                                                                 await FirebaseFirestore
                                                                     .instance
-                                                                    .collection(
-                                                                        'Campaign-Account')
-                                                                    .doc(storedocs[
-                                                                            i]
-                                                                        ['UID'])
+                                                                    .collection("Pilgrims-Account")
+                                                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                                                    .collection("pilgrimCampaigns")
+                                                                    .doc(FirebaseAuth.instance.currentUser?.uid)
                                                                     .delete();
                                                               });
                                                             },
