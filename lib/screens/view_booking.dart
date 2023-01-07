@@ -63,7 +63,11 @@ class _ViewState extends State<ViewBooking> {
 
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> dataStream =
+    final Stream<QuerySnapshot> dataStream =_firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").add({
+                                                'bookStatus': 'pending',
+                                                'campaignID': storedocs[i]['UID'],
+                                              },
+                                              );
         FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
 /*
   void DataStreams() async {
