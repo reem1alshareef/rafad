@@ -315,7 +315,6 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                     .update({
                                   'seatingCapacity': counter.toString(),
                                 });
-
                                 _firestore
                                     .collection("Pilgrims-Account")
                                     .doc(FirebaseAuth.instance.currentUser?.uid)
