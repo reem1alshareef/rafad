@@ -206,7 +206,11 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             setState(() {
-                              disease = value;
+                              if (disease != null) {
+                                disease = value;
+                              } else {
+                                disease = 'no disease';
+                              }
                             });
                           },
                           decoration: InputDecoration(
@@ -227,7 +231,11 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             setState(() {
-                              pharma = value;
+                              if (value != null) {
+                                pharma = value;
+                              } else {
+                                pharma = 'no pharma';
+                              }
                             });
                           },
                           decoration: InputDecoration(

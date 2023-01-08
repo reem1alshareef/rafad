@@ -32,6 +32,7 @@ class _logOutCampaign extends State<logOutCampaign> {
                       ), 
                       ],
           title: Text("campaign profile"),
+          
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
         ),
