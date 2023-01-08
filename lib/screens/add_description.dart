@@ -128,9 +128,15 @@ class _AddDescriptionState extends State<AddDescription> {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Description is required!';
                             }
-                            else if(textValue.length<20){
+                            if(textValue.length<20){
                               return 'Describtion should be 20 characters at least';
                             }
+                            
+                            //return null;
+                            if(textValue.trim().isEmpty){
+                            return "Description cannot be empty.";
+                            }
+
                             return null;
                           }
                            ),
