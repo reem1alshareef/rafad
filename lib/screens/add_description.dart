@@ -107,9 +107,11 @@ class _AddDescriptionState extends State<AddDescription> {
                        Container(
                       
                    child: SingleChildScrollView(
-                    child: Column(
+                    child: Column (
                       children: [
+                        //SizedBox(height: 40,),
                     TextFormField(
+                          
                           //controller: _descController,
                           cursorColor: Colors.white,
                           style: TextStyle(color: Colors.grey[500],) ,
@@ -125,6 +127,9 @@ class _AddDescriptionState extends State<AddDescription> {
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Description is required!';
+                            }
+                            else if(textValue.length<20){
+                              return 'Describtion should be 20 characters at least';
                             }
                             return null;
                           }

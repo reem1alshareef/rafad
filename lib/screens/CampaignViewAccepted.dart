@@ -304,8 +304,7 @@ class _ViewAcceptedState extends State<ViewAccepted> {
                                                                   () async {
 // This part will make a new collection for accepted pilgrims for this specific campaign who accepted the pilgrim?????
                                                                 _firestore
-                                                                    .collection(
-                                                                        'AcceptedBookings') // for this specific campaign
+                                                                    .collection('AcceptedBookings') // for this specific campaign
                                                                     .add({
                                                                   'status':
                                                                       'accepted',
