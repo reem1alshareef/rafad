@@ -9,12 +9,12 @@ import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'notification_accept.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_auth/firebase_auth.dart'; //حقت البتول
-import 'package:http/http.dart' as http; //حقت البتول
+import 'package:firebase_auth/firebase_auth.dart'; //حقتي
+import 'package:http/http.dart' as http; //حقتي
 
 //اضفت كود  عند لاين 381
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin(); //حقت البتول
+/*final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin(); */
 
 //import 'package:rafad1/screens/LoginPage.dart';
 class ViewPending extends StatefulWidget {
@@ -25,9 +25,9 @@ class ViewPending extends StatefulWidget {
 }
 
 class _ViewPendingState extends State<ViewPending> {
-//  من لاين 26 - 89 حقت البتول
+//  من لاين 26 - 89 حقتي
 
-  bool isLoading = false;
+  /* bool isLoading = false;
   String? token;
   storeNotificationToken() async {
     token = await FirebaseMessaging.instance.getToken();
@@ -82,12 +82,12 @@ class _ViewPendingState extends State<ViewPending> {
         print("Error");
       }
     } catch (e) {}
-  }
-  /*void initState() {
-    //  طريقة لينا حقت البتول
+  }*/
+  void initState() {
+    //  طريقة لينا حقت
     super.initState();
     NotificationAccept.init();
-  }*/
+  }
 
   final _firestore = FirebaseFirestore.instance;
 
@@ -334,7 +334,7 @@ class _ViewPendingState extends State<ViewPending> {
                                                         onPressed: () async {
                                                           // This whole code will be when campaign presses Accept
                                                           // Albatouls Notification
-                                                          FirebaseFirestore
+                                                          /* مقطع الهنوف   FirebaseFirestore
                                                               .instance
                                                               .collection(
                                                                   'Pilgrims-Account')
@@ -346,17 +346,15 @@ class _ViewPendingState extends State<ViewPending> {
 
                                                           sendNotification(
                                                               'campaign response!',
-                                                              token!);
-                                                          /*    sendNotification(
-                                                              'campaign response!',
                                                               token!);*/
-                                                          /* await LocalNotificationService
+
+                                                          await NotificationAccept
                                                               .showNotification(
                                                                   id: 0,
                                                                   title:
                                                                       'campaign message',
                                                                   body:
-                                                                      'Congratulations!, you have been accepted into our campaign. We wish you a blessed Hajj');*/
+                                                                      'Congratulations!, you have been accepted into our campaign. We wish you a blessed Hajj');
 
                                                           Navigator.of(context)
                                                               .pop();
@@ -410,10 +408,11 @@ class _ViewPendingState extends State<ViewPending> {
                                                               //  'seatingCapacity': storedocs[i]
                                                               // ['capacity'],
                                                             });
-                                                            String? token =
+                                                            /* مقطع الهنوف مهم  String? token =
                                                                 await FirebaseMessaging
                                                                     .instance
-                                                                    .getToken();
+                                                                    .getToken();*/
+
 // This will delete the pilgrim account from the collection with pilgrims pending bookings
 
                                                             // await FirebaseFirestore
@@ -504,13 +503,13 @@ class _ViewPendingState extends State<ViewPending> {
                                                             Color(0xFF455D83),
                                                       ), // background
                                                       onPressed: () async {
-                                                        /*  await LocalNotificationService
+                                                        await NotificationAccept
                                                             .showNotification(
                                                                 id: 0,
                                                                 title:
                                                                     'campaign message',
                                                                 body:
-                                                                    'Sorry!, your requst is rejected in our campaign');*/
+                                                                    'Sorry!, your requst is rejected in our campaign');
 
                                                         //When campaign presses Reject , i think notification caller should be here
                                                         Navigator.of(context)

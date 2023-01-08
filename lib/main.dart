@@ -18,20 +18,20 @@ import '../firebase_options.dart';
 //import 'package:rafad1/screens/newAcc.dart';
 
 // ...
-//هذي حطيتها من المقطع الاول ممكن تكون حقت الاشعار اللي من الفايربيس
+/*هذي حطيتها من المقطع الاول ممكن تكون حقت الاشعار اللي من الفايربيس
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   /// On click listner
 }
-
+*/
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await Firebase.initializeApp(); // مكرر 3 مرات ليه ؟؟
-  //هذي حطيتها من المقطع الاول ممكن تكون حقت الاشعار اللي من الفايربيس
+  /*هذي حطيتها من المقطع الاول ممكن تكون حقت الاشعار اللي من الفايربيس
   LocalNotificationService.initialize(); //هذا حق الوكال
-  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);*/
   //await Firebase.initializeApp();
 
   await Firebase.initializeApp(
