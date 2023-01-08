@@ -265,7 +265,7 @@ class _ViewPendingState extends State<ViewPending> {
                                                                         i][
                                                                     'pilgrimID'])
                                                                 .delete();
-
+// delete from view_booking UI
                                                             await FirebaseFirestore
                                                                 .instance
                                                                 .collection(
