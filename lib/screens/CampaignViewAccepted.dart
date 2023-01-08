@@ -118,6 +118,7 @@ class _ViewAcceptedState extends State<ViewAccepted> {
                                       style: TextStyle(fontSize: 11),
                                     ),
                                     children: [
+                                    
                                       Divider(
                                         thickness: 1.7,
                                         height: 1.0,

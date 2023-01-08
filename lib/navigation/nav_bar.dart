@@ -2,6 +2,7 @@
 
 import "package:flutter/material.dart";
 import 'package:rafad1/admin/DeletePilgrim.dart';
+import 'package:rafad1/screens/CampaignView.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/forget_pw.dart';
@@ -80,12 +81,7 @@ class _nav_campaignState extends State<nav_campaign> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    Center(
-      child: Text(
-        'requests',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
+    CampaignView(),
     Center(
       child: Text(
         'pilgrims',
