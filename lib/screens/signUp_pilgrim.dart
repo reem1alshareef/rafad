@@ -206,12 +206,13 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             setState(() {
-                              if (disease != null) {
-                                disease = value;
-                              } else {
-                                disease = 'no disease';
-                              }
+                              disease = value;
                             });
+                          },
+                          validator: (textValue) {
+                            if (textValue == null || textValue.isEmpty) {
+                              return 'please enter none if there isn\'t any!';
+                            }
                           },
                           decoration: InputDecoration(
                             labelText: 'chronic disease',
@@ -231,12 +232,13 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             setState(() {
-                              if (value != null) {
-                                pharma = value;
-                              } else {
-                                pharma = 'no pharma';
-                              }
+                              pharma = value;
                             });
+                          },
+                          validator: (textValue) {
+                            if (textValue == null || textValue.isEmpty) {
+                              return 'please enter none if there isn\'t any!';
+                            }
                           },
                           decoration: InputDecoration(
                             labelText: 'pharmaceutical',
