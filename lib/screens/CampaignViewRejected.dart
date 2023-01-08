@@ -165,7 +165,7 @@ class _ViewRejectedState extends State<ViewRejected> {
                                 ],
                               ),
                             )));
-              }))
+              })) 
     ])));
   }
 }
