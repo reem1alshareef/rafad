@@ -281,8 +281,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                 title: 'book',
                                 onPressed: () async {
                                   int counter = int.parse(
-                                          storedocs[i]['seatingCapacity']) -
-                                      1;
+                                          storedocs[i]['seatingCapacity']) -1;
                                   FirebaseFirestore.instance
                                       .collection('AcceptedCampaigns')
                                       .doc(storedocs[i]['UID'])
@@ -295,7 +294,8 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                       .doc(FirebaseAuth
                                           .instance.currentUser?.uid)
                                       .collection("pilgrimCampaigns")
-                                      .doc(storedocs[i]['UID'])
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser?.uid)
                                       .set(
                                     {
                                       'bookStatus': 'pending',
