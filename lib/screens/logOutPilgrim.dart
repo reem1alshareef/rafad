@@ -1,9 +1,31 @@
+//هذي اول بيج تطلع للحاج اذا سوا لوق ان
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
+import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/src/widgets/editable_text.dart';
+import 'package:rafad1/screens/welcome_screen.dart';
+
 import '../widgets/my_button.dart';
 
 //import 'package:rafad1/screens/LoginPage.dart';
 class logOutPilgrim extends StatefulWidget {
   static const String screenRoute = 'logOutPilgrim.dart';
   const logOutPilgrim({super.key});
+/*@override
+  State<logOutPilgrim> createState() => _logOutPilgrim();
+}
+
+class _logOutPilgrimState extends State<logOutPilgrim> {
+  final _firestore = FirebaseFirestore.instance;
+  String? rejectionReason;
+  bool isButtonActive = true;////// حق شرط البوتون انه مايسمح للحاج يضغط اكثر من مره
+  final _controller = TextEditingController();
+  
+  User? user;
+
+*/
 
   @override
   _logOutPilgrimState createState() => _logOutPilgrimState();
@@ -11,7 +33,6 @@ class logOutPilgrim extends StatefulWidget {
 
 class _logOutPilgrimState extends State<logOutPilgrim> {
   final _firestore = FirebaseFirestore.instance;
-  bool isButtonClickable = true;
   String? rejectionReason;
 
   final _controller = TextEditingController();
@@ -63,7 +84,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('available campaign for booking'),
+        title: Text('pilgrim main home page'),
         backgroundColor: const Color(0xFF455D83),
         elevation: 0,
         actions: <Widget>[
@@ -87,6 +108,19 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
               child: Container(
                 //margin: EdgeInsets.all(60),
                 color: Color.fromARGB(255, 179, 181, 183),
+
+                child: Padding(
+                  padding: const EdgeInsets.all(17),
+                  child: Text(
+                    'available campaign',
+                    style: TextStyle(
+                      fontSize: 50,
+                      fontWeight: FontWeight.w900,
+                      fontStyle: FontStyle.normal,
+                      color: Color(0xFF455D83),
+                    ),
+                  ),
+                ),
               ),
             ),
             Container(
@@ -265,67 +299,67 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                 ),
                               ),
                             ),
+                            /////////////////buton
 
                             MyButton(
-                                color: const Color(0xFF455D83),
-                                title: 'book',
-                                onPressed: () async {
-                                  int counter = int.parse(
-                                          storedocs[i]['seatingCapacity']) -1;
-                                  FirebaseFirestore.instance
-                                      .collection('AcceptedCampaigns')
-                                      .doc(storedocs[i]['UID'])
-                                      .update({
-                                    'seatingCapacity': counter.toString(),
-                                  });
+                              color: const Color(0xFF455D83),
+                              title: 'book',
+                              onPressed: () async {
+                                int counter =
+                                    int.parse(storedocs[i]['seatingCapacity']) -
+                                        1;
 
-                                  _firestore
-                                      .collection("Pilgrims-Account")
-                                      .doc(FirebaseAuth
-                                          .instance.currentUser?.uid)
-                                      .collection("pilgrimCampaigns")
-                                      .doc(FirebaseAuth
-                                          .instance.currentUser?.uid)
-                                      .set(
-                                    {
-                                      'bookStatus': 'pending',
-                                      'campaignID': storedocs[i]['UID'],
-                                      'name': storedocs[i]['name'],
-                                    },
-                                  );
+                                FirebaseFirestore.instance
+                                    .collection('AcceptedCampaigns')
+                                    .doc(storedocs[i]['UID'])
+                                    .update({
+                                  'seatingCapacity': counter.toString(),
+                                });
 
-                                  DocumentSnapshot variable = await _firestore
-                                      .collection('Pilgrims-Account')
-                                      .doc(FirebaseAuth
-                                          .instance.currentUser?.uid)
-                                      .get();
-                                  String name = variable['name'];
-                                  String email = variable['email'];
-                                  String number = variable['number'];
-                                  String disease = variable['disease'];
-                                  String hajId = variable['hajId'];
-                                  String pharma = variable['pharma'];
+                                _firestore
+                                    .collection("Pilgrims-Account")
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .collection("pilgrimCampaigns")
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .set(
+                                  {
+                                    'bookStatus': 'pending',
+                                    'campaignID': storedocs[i]['UID'],
+                                    'name': storedocs[i]['name'],
+                                  },
+                                );
 
-                                  _firestore
-                                      .collection("AcceptedCampaigns")
-                                      .doc(storedocs[i]['UID'])
-                                      .collection("pilgrimsRequest")
-                                      .doc(FirebaseAuth
-                                          .instance.currentUser?.uid)
-                                      .set(
-                                    {
-                                      'bookStatus': 'pending',
-                                      'pilgrimID': FirebaseAuth
-                                          .instance.currentUser?.uid,
-                                      'name': name,
-                                      'number': number,
-                                      'email': email,
-                                      'disease': disease,
-                                      'hajId': hajId,
-                                      'pharma': pharma
-                                    },
-                                  );
-                                }), //////////
+                                DocumentSnapshot variable = await _firestore
+                                    .collection('Pilgrims-Account')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .get();
+                                String name = variable['name'];
+                                String email = variable['email'];
+                                String number = variable['number'];
+                                String disease = variable['disease'];
+                                String hajId = variable['hajId'];
+                                String pharma = variable['pharma'];
+
+                                _firestore
+                                    .collection("AcceptedCampaigns")
+                                    .doc(storedocs[i]['UID'])
+                                    .collection("pilgrimsRequest")
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .set(
+                                  {
+                                    'bookStatus': 'pending',
+                                    'pilgrimID':
+                                        FirebaseAuth.instance.currentUser?.uid,
+                                    'name': name,
+                                    'number': number,
+                                    'email': email,
+                                    'disease': disease,
+                                    'hajId': hajId,
+                                    'pharma': pharma
+                                  },
+                                );
+                              },
+                            ) ////////////////buton
                           ],
                         ),
                       ),
