@@ -422,19 +422,13 @@ class _ViewPendingState extends State<ViewPending> {
                                                         String name =
                                                             variable['name'];
 
-                                                        await NotificationAccept.showNotification(
-                                                            id: 0,
-                                                            title:
-                                                                //   FirebaseFirestore
-                                                                // .instance
-                                                                // .collection(
-                                                                //     'AcceptedCampaigns')
-                                                                // .doc(FirebaseAuth
-                                                                //     .instance
-                                                                //     .currentUser!
-                                                                //     .uid).get().then((name) => null)
-                                                                'campaign message',
-                                                            body: 'Sorry!, your requst is rejected in $name campaign');
+                                                        await NotificationAccept
+                                                            .showNotification(
+                                                                id: 0,
+                                                                title:
+                                                                    'campaign message',
+                                                                body:
+                                                                    'Sorry!, your requst is rejected in $name campaign');
 
                                                         //When campaign presses Reject , i think notification caller should be here
                                                         Navigator.of(context)
