@@ -1,19 +1,19 @@
 // ignore_for_file: camel_case_types
 
 import "package:flutter/material.dart";
+import 'package:rafad1/admin/DeletePilgrim.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/forget_pw.dart';
-import '../screens/CampaignView.dart';
 import '../screens/add_description.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
+import 'package:rafad1/admin/DeleteCampaign.dart';
 
-import '../screens/view_booking.dart';
 import '../screens/welcome_admin.dart';
 
 
 class nav_admin extends StatefulWidget {
-  const nav_admin({super.key});
+   nav_admin({super.key});
 
   @override
   State<nav_admin> createState() => _nav_adminState();
@@ -24,9 +24,9 @@ class _nav_adminState extends State<nav_admin> {
 
 int _selectedIndex = 0;
   
-  static const List<Widget> _widgetOptions = <Widget> [
-    Center(child: Text('pilgrims', style: TextStyle(fontSize: 72),),),//DeleteCampaign(),
-    Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),//DeletePilgrim(),
+  static final List<Widget> _widgetOptions = <Widget> [
+    const DeleteCampaign(),//DeleteCampaign(),
+    const DeletePilgrim(),//DeletePilgrim(),
     View()
       ];
 
@@ -45,10 +45,11 @@ int _selectedIndex = 0;
       ),
       bottomNavigationBar: BottomNavigationBar(  
         items: const <BottomNavigationBarItem>[  
-          BottomNavigationBarItem(  
-            icon: Icon(Icons.person_remove),  
+          BottomNavigationBarItem(   
+            icon: Icon(Icons.remove_moderator_outlined), 
             label: 'Campaigns',  
-            backgroundColor: Color(0xFF455D83)  
+            backgroundColor: Color(0xFF455D83),
+            
           ),  
           BottomNavigationBarItem(  
             icon: Icon(Icons.person_remove),  
@@ -56,7 +57,7 @@ int _selectedIndex = 0;
             backgroundColor: Color(0xFF455D83) 
           ),
           BottomNavigationBarItem(  
-            icon: Icon(Icons.request_page),  
+            icon: Icon(Icons.add_moderator_outlined),  
             label:'Requests',  
             backgroundColor: Color(0xFF455D83)  
           ),    
@@ -89,7 +90,7 @@ class _nav_campaignState extends State<nav_campaign> {
   int _selectedIndex = 0;
   
   static const List<Widget> _widgetOptions = <Widget> [
-    CampaignView(),//request(),
+    Center(child: Text('requests', style: TextStyle(fontSize: 72),),),
     Center(child: Text('pilgrims', style: TextStyle(fontSize: 72),),),
     Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),
     AddDescription(),
@@ -166,11 +167,11 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
 int _selectedIndex = 0;
   
   static const List<Widget> _widgetOptions = <Widget> [
-    ViewBooking(),
-    logOutPilgrim(),
+    Center(child: Text('bookings', style: TextStyle(fontSize: 72),),),
+    Center(child: Text('campaigns', style: TextStyle(fontSize: 72),),),
     Center(child: Text('announcement', style: TextStyle(fontSize: 72),),),
     Center(child: Text('emergency', style: TextStyle(fontSize: 72),),),
-    Center(child: Text('profile', style: TextStyle(fontSize: 72),),),
+   //logOutPilgrim()
   ];
 
   void _onItemTapped(int index) {  
