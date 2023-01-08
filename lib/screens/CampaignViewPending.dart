@@ -266,6 +266,20 @@ class _ViewPendingState extends State<ViewPending> {
                                                                     'pilgrimID'])
                                                                 .delete();
 
+                                                            await FirebaseFirestore
+                                                                .instance
+                                                                .collection(
+                                                                    "Pilgrims-Account")
+                                                                .doc(storedocs[
+                                                                        i][
+                                                                    'pilgrimID'])
+                                                                .collection(
+                                                                    "pilgrimCampaigns")
+                                                                .doc(storedocs[
+                                                                        i][
+                                                                    'pilgrimID'])
+                                                                .delete();
+
                                                             _firestore
                                                                 .collection(
                                                                     'AcceptedCampaigns')
