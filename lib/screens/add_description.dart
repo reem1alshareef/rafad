@@ -113,7 +113,7 @@ class _AddDescriptionState extends State<AddDescription> {
                         //SizedBox(height: 40,),
                     TextFormField(
                           maxLines: 3,
-                          maxLength: 100,
+                          maxLength: 200,
                           
                           inputFormatters: [
                             FilteringTextInputFormatter.deny
