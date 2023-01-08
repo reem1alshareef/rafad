@@ -119,7 +119,7 @@ class _ViewAcceptedState extends State<ViewAccepted> {
                                         child: Column(children: [
                                           Column(children: [
                                             
-                                             Padding(
+                                        Padding(
                                               padding: const EdgeInsets.only(
                                                   bottom: 10),
                                               child: Column(children: [
@@ -158,7 +158,7 @@ class _ViewAcceptedState extends State<ViewAccepted> {
                                                 ),
                                               ]),
                                             ),
-                                             Padding(
+                                          Padding(
                                                   padding:
                                                       const EdgeInsets.only(
                                                           bottom: 10),
