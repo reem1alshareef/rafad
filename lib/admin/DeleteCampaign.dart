@@ -3,17 +3,20 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
+import 'package:rafad1/navigation/nav_bar.dart';
 //import 'package:rafad1/screens/LoginPage.dart';
-class View extends StatefulWidget {
-static const String screenRoute = 'DeleteCampaign';
+class DeleteCampaign extends StatefulWidget {
+  const DeleteCampaign({super.key});
+
+//static const String screenRoute = 'DeleteCampaign';
 
   @override
-  _ViewState createState() => _ViewState();
+  deleteCampaign createState() => deleteCampaign();
 }
 
-class _ViewState extends State<View> {
+class deleteCampaign extends State<DeleteCampaign> {
   final _firestore = FirebaseFirestore.instance;
-  String? rejectionReason;
+  //String? rejectionReason;
 
   final _controller = TextEditingController();
 
@@ -49,7 +52,7 @@ class _ViewState extends State<View> {
 
   void DataStreams() async {
     await for (var snapshot
-        in _firestore.collection('Campaign-Account').snapshots()) {
+        in _firestore.collection('AcceptedCampaigns').snapshots()) {
       for (var campaign in snapshot.docs) {
         print(campaign.data());
       }
@@ -59,12 +62,13 @@ class _ViewState extends State<View> {
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
-        FirebaseFirestore.instance.collection('Campaign-Account').snapshots();
+        FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
 
     return Scaffold(
+     // bottomNavigationBar: nav_admin(),
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text('Registration requests'),
+          title: Text('Delete Campaign Account'),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
           actions: <Widget>[
@@ -74,7 +78,7 @@ class _ViewState extends State<View> {
                 color: Colors.white,
               ),
               onPressed: () {
-                Navigator.pushNamed(context, WelcomeScreen.screenRoute);/////عدلته اذا سوا لوق اوت يوديه للصفحه الاساسيه
+                Navigator.pushNamed(context, WelcomeScreen.screenRoute);
               },
             )
           ],
@@ -83,7 +87,7 @@ class _ViewState extends State<View> {
             child: Column(children: [
           Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
+                 EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
               child: StreamBuilder<QuerySnapshot>(
                   stream: dataStream,
                   builder: (BuildContext context,
@@ -92,7 +96,7 @@ class _ViewState extends State<View> {
                       // TODO : add snackbar
                     }
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(
+                      return Center(
                         child: CircularProgressIndicator(),
                       );
                     }
@@ -119,7 +123,7 @@ class _ViewState extends State<View> {
                                       backgroundColor: Color(0xFF788AA4),
                                     ),
                                     title: Text(
-                                      storedocs[i]['nameCampaign'],
+                                      storedocs[i]['name'],
                                     ),
                                     subtitle: Text(
                                       "Click to view campaign's details",
@@ -133,7 +137,7 @@ class _ViewState extends State<View> {
                                       Align(
                                         alignment: Alignment.centerLeft,
                                         child: Padding(
-                                          padding: const EdgeInsets.symmetric(
+                                          padding: EdgeInsets.symmetric(
                                             horizontal: 16.0,
                                             vertical: 10.0,
                                           ),
@@ -142,7 +146,7 @@ class _ViewState extends State<View> {
                                               Column(children: [
                                                 Padding(
                                                   padding:
-                                                      const EdgeInsets.only(
+                                                     EdgeInsets.only(
                                                           bottom: 10),
                                                   child: Column(
                                                     children: [
@@ -156,7 +160,7 @@ class _ViewState extends State<View> {
                                                                     .w500),
                                                       ),
                                                       Text(
-                                                        storedocs[i]['emailC'],
+                                                        storedocs[i]['email'],
                                                         style: TextStyle(
                                                             fontSize: 12),
                                                         textAlign:
@@ -187,7 +191,7 @@ class _ViewState extends State<View> {
                                                 ),
                                                 Padding(
                                                   padding:
-                                                      const EdgeInsets.only(
+                                                       EdgeInsets.only(
                                                           bottom: 10),
                                                   child: Column(children: [
                                                     Text(
@@ -200,7 +204,7 @@ class _ViewState extends State<View> {
                                                     ),
                                                     Text(
                                                       storedocs[i]
-                                                          ['commercialID'],
+                                                          ['commercial_ID'],
                                                       style: TextStyle(
                                                           fontSize: 12),
                                                     ),
@@ -212,7 +216,7 @@ class _ViewState extends State<View> {
                                                           bottom: 10),
                                                   child: Column(children: [
                                                     Text(
-                                                      'Campaign\s Phone Number:  ',
+                                                      'Campaign\'s Phone Number:  ',
                                                       style: TextStyle(
                                                           color:
                                                               Color(0xFF455D83),
@@ -221,7 +225,7 @@ class _ViewState extends State<View> {
                                                     ),
                                                     Text(
                                                       storedocs[i]
-                                                          ['phoneNumberC'],
+                                                          ['phoneNumber'],
                                                       style: TextStyle(
                                                           fontSize: 12),
                                                     ),
@@ -229,7 +233,7 @@ class _ViewState extends State<View> {
                                                 ),
                                                 Padding(
                                                   padding:
-                                                      const EdgeInsets.only(
+                                                       EdgeInsets.only(
                                                           bottom: 10),
                                                   child: Column(children: [
                                                     Text(
@@ -241,7 +245,7 @@ class _ViewState extends State<View> {
                                                               FontWeight.w500),
                                                     ),
                                                     Text(
-                                                      storedocs[i]['capacity'],
+                                                      storedocs[i]['seatingCapacity'],
                                                       style: TextStyle(
                                                           fontSize: 12),
                                                     )
@@ -258,124 +262,148 @@ class _ViewState extends State<View> {
                                         buttonHeight: 52.0,
                                         buttonMinWidth: 90.0,
                                         children: <Widget>[
-                                          // TextButton(
-                                          //   style: TextButton.styleFrom(
-                                          //       shape:
-                                          //           const RoundedRectangleBorder(
-                                          //     borderRadius: BorderRadius.all(
-                                          //         Radius.circular(2.0)),
-                                          //   )),
-                                          //   onPressed: () {
-                                          //     _firestore
-                                          //         .collection(
-                                          //             'AcceptedCampaigns')
-                                          //         .add({
-                                          //       'status': 'accepted',
-                                          //       'name': storedocs[i]
-                                          //           ['nameCampaign'],
-                                          //       'email': storedocs[i]['emailC'],
-                                          //       'address': storedocs[i]
-                                          //           ['address'],
-                                          //       'commercial_ID': storedocs[i]
-                                          //           ['commercialID'],
-                                          //       'password': storedocs[i]
-                                          //           ['password'],
-                                          //       'phoneNumber': storedocs[i]
-                                          //           ['phoneNumberC'],
-                                          //       'seatingCapacity': storedocs[i]
-                                          //           ['capacity'],
-                                          //     });
-
-                                          //     showDialog(
-                                          //         context: context,
-                                          //         builder:
-                                          //             (BuildContext context) {
-                                          //           return AlertDialog(
-                                          //             title: const Text(
-                                          //                 "Accept Request"),
-                                          //             content: const Text(
-                                          //                 "Are you sure you want to accept?"),
-                                          //             actions: [
-                                          //               ElevatedButton(
-                                          //                   style: ElevatedButton.styleFrom(
-                                          //                       shape: RoundedRectangleBorder(
-                                          //                           borderRadius:
-                                          //                               BorderRadius.circular(
-                                          //                                   30.0)),
-                                          //                       backgroundColor:
-                                          //                           Color(
-                                          //                               0xFF455D83)),
-                                          //                   onPressed: () {
-                                          //                     Navigator.of(
-                                          //                             context)
-                                          //                         .pop();
-                                          //                   },
-                                          //                   child: const Text(
-                                          //                       "Cancel")),
-                                          //               ElevatedButton(
-                                          //                   style: ElevatedButton.styleFrom(
-                                          //                       shape: RoundedRectangleBorder(
-                                          //                           borderRadius:
-                                          //                               BorderRadius.circular(
-                                          //                                   30.0)),
-                                          //                       backgroundColor:
-                                          //                           Color(
-                                          //                               0xFF455D83)),
-                                          //                   onPressed: () {
-                                          //                     Navigator.of(
-                                          //                             context)
-                                          //                         .pop();
-                                          //                     setState(
-                                          //                         () async {
-                                          //                       await FirebaseFirestore
-                                          //                           .instance
-                                          //                           .collection(
-                                          //                               'Campaign-Account')
-                                          //                           .doc(storedocs[
-                                          //                                   i]
-                                          //                               ['UID'])
-                                          //                           .delete();
-                                          //                     });
-                                          //                   },
-                                          //                   child: const Text(
-                                          //                       "Yes")),
-                                          //             ],
-                                          //           );
-                                          //         });
-                                          //   },
-                                          //   child: Column(
-                                          //     children: <Widget>[
-                                          //       Icon(
-                                          //         Icons.check_circle,
-                                          //         color: Colors.green,
-                                          //       ),
-                                          //       Padding(
-                                          //         padding: const EdgeInsets
-                                          //             .symmetric(vertical: 2.0),
-                                          //       ),
-                                          //       Text('Accept'),
-                                          //     ],
-                                          //   ),
-                                          // ),
-
-
-
-                                          
                                           TextButton(
                                             style: TextButton.styleFrom(shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2.0)),)),
                                             onPressed: () {
+                                              showDialog(
+                                                   context: context,
+                                                  builder:
+                                                      (BuildContext context) {
+                                                    return AlertDialog(
+                                                title: Row(
+                                                  children:  [
+                                                    Text('Delete '),
+                                                    Text(storedocs[i]['name'], style: TextStyle(fontWeight: FontWeight.bold),),
+                                                    Text(' account'),
+                                                  ],
+                                                ),
+                                                content: Row(
+                                                  children:  [
+                                                    Text('Deleting this account '),
+                                                    Text('cannot ', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),),
+                                                    Text('be undone, Are you sure you want to delete the account?')
+                                                  ],
+                                                ),
+                                                actions: <Widget>[
+                                                  TextButton(
+                                                    onPressed: () => Navigator.pop(context, 'Cancel'),
+                                                    child:  Text('Cancel'),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () async {
+                                                      
+                                                      //firebase
+                                                      try{
+                                                        //await FirebaseFirestore.instance
+                                                        //.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).delete();
+                                                        //.then((doc) => print("Document deleted"));
+                                                        setState(
+                                                                  () async {
+                                                                await FirebaseFirestore
+                                                                    .instance
+                                                                    .collection(
+                                                                        'AcceptedCampaigns')
+                                                                    .doc(storedocs[i]['UID'])
+                                                                    .delete();
+                                                                    
 
 
-                                              //delete action
+
+
+
+
+                                                                    //start of deleting pilgrims
+                                                                    // await for (var snapshot in _firestore.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).collection('pilgrimsRequest').snapshots()); 
+                                                                    // final Stream<QuerySnapshot> dataStream =FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).collection('pilgrimsRequest').snapshots();
+                                                                    // final List storedocss = [];
+                                                                    // snapshot.data!.docs.map((DocumentSnapshot document) {
+                                                                    //   Map a = document.data() as Map<String, dynamic>;
+                                                                    //   storedocss.add(a);
+                                                                    //   a['id'] = document.id;
+                                                                    //   }).toList();
+                                                                      
+                                                                    //   var l;
+                                                                    //   List.generate(
+                                                                    //     storedocss.length,
+                                                                    //     (l) async {
+                                                                    //       await FirebaseFirestore.instance
+                                                                    // .collection('AcceptedCampaigns')
+                                                                    // .doc(storedocs[i]['UID'])
+                                                                    // .collection('pilgrimsRequest')
+                                                                    // .doc(storedocss[l]['UID'])
+                                                                    // .delete();
+                                                                    //     }
+                                                                    //     );
+                                                                    //end of deleting pilgrims
+
+
+
+
+
+
+
+
+
+                                                                    // await FirebaseFirestore
+                                                                    // .instance
+                                                                    // .collection(
+                                                                    //     'AcceptedCampaigns')
+                                                                    // .doc(storedocs[i]['UID'])
+                                                                    // .collection('pilgrimsRequest')
+                                                                    // .batch.delete();
+                                                              });
+                                                        Navigator.pop(context, 'Delete');
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return const AlertDialog(
+                                                              content: 
+                                                              Text('Account been deleted succesfully', style: TextStyle(color: Colors.green),),
+                                                              );
+                                                              });
+                                                        
+                                                      } catch(e){
+                                                        //e.hashCode;
+                                                        //print(e.runtimeType);
+                                                        
+                                                        Navigator.pop(context, 'Delete');
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return const AlertDialog(
+                                                              content: 
+                                                              Text('Account been deleted succesfully', style: TextStyle(color: Colors.green),),
+                                                              );
+                                                              });
+
+                                                        
+                                                        // showDialog(
+                                                        //   context: context,
+                                                        //   builder: (context) {
+                                                        //    //var m=e.message;
+                                                        //     return const AlertDialog(
+                                                        //       content:
+                                                        //       Text('Account could not be deleted, try again.' , style: TextStyle(color: Colors.red,)));
+                                                        //       //print(m);
+                                                        //       });
+                                                      }
+                                                    },//=> Navigator.pop(context, 'OK'),
+                                                    child: Text('Delete'),
+                                                  ),
+                                                ],
+                                              );
+                                              }
+                                              );
+                                              
                                             },
 
 
 
-                                            child: Column(
+                                            child: Row(
                                               children: <Widget>[
                                                 Icon(Icons.cancel_rounded, color: Colors.redAccent),
-                                                Padding(padding: const EdgeInsets.symmetric(vertical: 2.0),),
-                                                Text('Delete account'),
+                                                Padding(padding: EdgeInsets.symmetric(vertical: 2.0),),
+                                                Text(' Delete account'),
                                               ],
                                             ),
 
