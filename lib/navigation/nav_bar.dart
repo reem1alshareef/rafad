@@ -171,6 +171,12 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
         style: TextStyle(fontSize: 72),
       ),
     ),
+    Center(
+      child: Text(
+        'profile',
+        style: TextStyle(fontSize: 72),
+      ),
+    ),
     //logOutPilgrim()
   ];
 
