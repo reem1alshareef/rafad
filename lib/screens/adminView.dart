@@ -295,6 +295,7 @@ class _ViewState extends State<View> {
                                                   .set({ 
                                                     'UID': storedocs[i]['UID'],// To add it to the accepted collection
                                                 'status': 'accepted',
+                                                'description': 'none',
                                                 'name': storedocs[i]
                                                     ['nameCampaign'],
                                                 'email': storedocs[i]['emailC'],
