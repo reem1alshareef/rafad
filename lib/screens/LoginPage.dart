@@ -31,7 +31,7 @@ class loginPageState extends State<LoginPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("sign up as pilgrim"),
+          title: Text("sign in"),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
         ), //عشان سهم رجوع
@@ -58,9 +58,9 @@ class loginPageState extends State<LoginPage> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        const PageHeading(
-                          title: 'Sign in',
-                        ),
+                        // const PageHeading(
+                        //   title: 'Sign in',
+                        // ),
 
 
                         // const SizedBox(
