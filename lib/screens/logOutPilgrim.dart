@@ -320,7 +320,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                     .collection("Pilgrims-Account")
                                     .doc(FirebaseAuth.instance.currentUser?.uid)
                                     .collection("pilgrimCampaigns")
-                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .doc(storedocs[i]['UID'])
                                     .set(
                                   {
                                     'bookStatus': 'pending',
