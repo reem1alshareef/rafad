@@ -399,19 +399,13 @@ class _ViewPendingState extends State<ViewPending> {
                                                             Color(0xFF455D83),
                                                       ), // background
                                                       onPressed: () async {
-                                                        await NotificationAccept.showNotification(
-                                                            id: 0,
-                                                            title:
-                                                                //   FirebaseFirestore
-                                                                // .instance
-                                                                // .collection(
-                                                                //     'AcceptedCampaigns')
-                                                                // .doc(FirebaseAuth
-                                                                //     .instance
-                                                                //     .currentUser!
-                                                                //     .uid).get().then((name) => null)
-                                                                'campaign message',
-                                                            body: 'Sorry!, your requst is rejected in our campaign');
+                                                        await NotificationAccept
+                                                            .showNotification(
+                                                                id: 0,
+                                                                title:
+                                                                    'campaign message',
+                                                                body:
+                                                                    'Sorry!, your requst is rejected in our campaign');
 
                                                         //When campaign presses Reject , i think notification caller should be here
                                                         Navigator.of(context)
@@ -453,9 +447,8 @@ class _ViewPendingState extends State<ViewPending> {
                                                                   .uid)
                                                               .collection(
                                                                   'RejectedPilgrims')
-                                                              .doc(storedocs[i][
-                                                                  'pilgrimID']) // Why should i delete it then add it to a rejected collection??
-                                                              //       // another campaign might accapt it......
+                                                              .doc(storedocs[i]
+                                                                  ['pilgrimID'])
                                                               .set({
                                                             'name': storedocs[i]
                                                                 ['name'],
@@ -469,8 +462,7 @@ class _ViewPendingState extends State<ViewPending> {
                                                                 storedocs[i]
                                                                     ['number'],
                                                             'bookStatus':
-                                                                storedocs[i][
-                                                                    'bookStatus'],
+                                                                'Rejected',
                                                             'hajId':
                                                                 storedocs[i]
                                                                     ['hajId'],
