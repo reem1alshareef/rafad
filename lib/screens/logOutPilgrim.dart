@@ -347,7 +347,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                     .doc(FirebaseAuth.instance.currentUser?.uid)
                                     .set(
                                   {
-                                    'bookStatus': 'pending',
+                                    'bookStatus': 'Pending',
                                     'pilgrimID':
                                         FirebaseAuth.instance.currentUser?.uid,
                                     'name': name,
