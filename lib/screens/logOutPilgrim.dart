@@ -323,7 +323,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                     .doc(storedocs[i]['UID'])
                                     .set(
                                   {
-                                    'bookStatus': 'pending',
+                                    'bookStatus': 'Pending',
                                     'campaignID': storedocs[i]['UID'],
                                     'name': storedocs[i]['name'],
                                   },

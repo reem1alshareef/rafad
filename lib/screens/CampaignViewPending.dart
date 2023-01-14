@@ -287,10 +287,14 @@ class _ViewPendingState extends State<ViewPending> {
                                                                     'pilgrimID'])
                                                                 .collection(
                                                                     "pilgrimCampaigns")
-                                                                .doc(storedocs[
-                                                                        i][
-                                                                    'pilgrimID'])
-                                                                .delete();
+                                                                .doc(FirebaseAuth
+                                                                    .instance
+                                                                    .currentUser!
+                                                                    .uid)
+                                                                .update({
+                                                              'bookStatus':
+                                                                  'Accepted'
+                                                            });
 
                                                             _firestore
                                                                 .collection(
@@ -482,7 +486,7 @@ class _ViewPendingState extends State<ViewPending> {
                                                       },
                                                       child: const Text("Yes"),
                                                     )
-                                                  ], 
+                                                  ],
                                                 );
                                               });
                                         },
