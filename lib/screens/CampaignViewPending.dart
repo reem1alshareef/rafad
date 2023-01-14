@@ -322,8 +322,7 @@ class _ViewPendingState extends State<ViewPending> {
                                                                   storedocs[i][
                                                                       'number'],
                                                               'bookStatus':
-                                                                  storedocs[i][
-                                                                      'bookStatus'],
+                                                                  'Accepted',
                                                               'hajId':
                                                                   storedocs[i]
                                                                       ['hajId'],
