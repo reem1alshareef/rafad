@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
@@ -8,13 +6,9 @@ import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'notification_accept.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_auth/firebase_auth.dart'; //حقت البتول
-import 'package:http/http.dart' as http; //حقت البتول
 
-//اضفت كود  عند لاين 381
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin(); //حقت البتول
+    FlutterLocalNotificationsPlugin();
 
 //import 'package:rafad1/screens/LoginPage.dart';
 class ViewPending extends StatefulWidget {
@@ -25,69 +19,10 @@ class ViewPending extends StatefulWidget {
 }
 
 class _ViewPendingState extends State<ViewPending> {
-//  من لاين 26 - 89 حقت البتول
-
-  bool isLoading = false;
-  String? token;
-  storeNotificationToken() async {
-    token = await FirebaseMessaging.instance.getToken();
-    FirebaseFirestore.instance
-        .collection('Pilgrims-Account') //اعتقد هنا يكون الحاج نفس الداتابيس ***
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .set({'token': token}, SetOptions(merge: true));
-  }
-
-  @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
-    FirebaseMessaging.instance.getInitialMessage();
-    FirebaseMessaging.onMessage.listen((event) {
-      LocalNotificationService.display(event);
-      //هنا عشان يسمع الرسائل اللي جايه من الفايربيس
-    });
-    storeNotificationToken();
-
-    FirebaseMessaging.instance.subscribeToTopic('subscription');
-  }
-
-  sendNotification(String title, String token) async {
-    final data = {
-      'click_action': 'FLUTTER_NOTIFICATION_CLICK',
-      'id': '1',
-      'status': 'done',
-      'message': title,
-    };
-
-    try {
-      http.Response response =
-          await http.post(Uri.parse('https://fcm.googleapis.com/fcm/send'),
-              headers: <String, String>{
-                'Content-Type': 'application/json',
-                'Authorization':
-                    'key=AAAAWFk75Xw:APA91bF_mR6VkjSLNMmSPCbxzG1ncSRvn6LoesiZ68COdk8BW5GWoFs7JADB3plpNOI1GGfpeZ3xnKgTSlJT6LGHrrVh0vK64Zz4o-K7vVWuZMrDtXWwoD4PkL5L98c5fH4KyPyOnUP-'
-              },
-              body: jsonEncode(<String, dynamic>{
-                'notification': <String, dynamic>{
-                  'title': title,
-                  'body': 'You are followed by someone'
-                },
-                'priority': 'high',
-                'data': data,
-                'to': '$token'
-              }));
-      if (response.statusCode == 200) {
-        print("your notificatin is sent");
-      } else {
-        print("Error");
-      }
-    } catch (e) {}
-  }
-  /*void initState() {
-    //  طريقة لينا حقت البتول
     super.initState();
     NotificationAccept.init();
-  }*/
+  }
 
   final _firestore = FirebaseFirestore.instance;
 
@@ -302,15 +237,6 @@ class _ViewPendingState extends State<ViewPending> {
                                                         onPressed: () async {
                                                           // This whole code will be when campaign presses Accept
                                                           // Albatouls Notification
-                                                          FirebaseFirestore
-                                                              .instance
-                                                              .collection(
-                                                                  'Pilgrims-Account')
-                                                              .doc(FirebaseAuth
-                                                                  .instance
-                                                                  .currentUser!
-                                                                  .uid)
-                                                              .set;
 
                                                           DocumentSnapshot
                                                               variable =
@@ -473,13 +399,13 @@ class _ViewPendingState extends State<ViewPending> {
                                                             Color(0xFF455D83),
                                                       ), // background
                                                       onPressed: () async {
-                                                        /*  await LocalNotificationService
+                                                        await NotificationAccept
                                                             .showNotification(
                                                                 id: 0,
                                                                 title:
                                                                     'campaign message',
                                                                 body:
-                                                                    'Sorry!, your requst is rejected in our campaign');*/
+                                                                    'Sorry!, your requst is rejected in our campaign');
 
                                                         //When campaign presses Reject , i think notification caller should be here
                                                         Navigator.of(context)
@@ -577,3 +503,4 @@ class _ViewPendingState extends State<ViewPending> {
     ])));
   }
 }
+
