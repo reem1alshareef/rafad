@@ -5,16 +5,16 @@ import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/navigation/nav_bar.dart';
 //import 'package:rafad1/screens/LoginPage.dart';
-class DeleteCampaign extends StatefulWidget {
-  const DeleteCampaign({super.key});
+class DeletePilgrim extends StatefulWidget {
+  const DeletePilgrim({super.key});
 
 //static const String screenRoute = 'DeleteCampaign';
 
   @override
-  deleteCampaign createState() => deleteCampaign();
+  deletePilgrim createState() => deletePilgrim();
 }
 
-class deleteCampaign extends State<DeleteCampaign> {
+class deletePilgrim extends State<DeletePilgrim> {
   final _firestore = FirebaseFirestore.instance;
   //String? rejectionReason;
 
@@ -52,9 +52,9 @@ class deleteCampaign extends State<DeleteCampaign> {
 
   void DataStreams() async {
     await for (var snapshot
-        in _firestore.collection('AcceptedCampaigns').snapshots()) {
-      for (var campaign in snapshot.docs) {
-        print(campaign.data());
+        in _firestore.collection('Pilgrims-Account').snapshots()) {
+      for (var pilgrim in snapshot.docs) {
+        print(pilgrim.data());
       }
     }
   }
@@ -62,13 +62,13 @@ class deleteCampaign extends State<DeleteCampaign> {
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
-        FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
+        FirebaseFirestore.instance.collection('Pilgrims-Account').snapshots();
 
     return Scaffold(
      // bottomNavigationBar: nav_admin(),
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text('Delete Campaign Account'),
+          title: Text('Delete Pilgrim Account'),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
           actions: <Widget>[
@@ -119,14 +119,14 @@ class deleteCampaign extends State<DeleteCampaign> {
                                     //key: cardA,
                                     leading: CircleAvatar(
                                       child: Image.asset(
-                                          "assests/images/kaaba.png"),
+                                          "assests/images/hajj.png"),
                                       backgroundColor: Color(0xFF788AA4),
                                     ),
                                     title: Text(
                                       storedocs[i]['name'],
                                     ),
                                     subtitle: Text(
-                                      "Click to view campaign's details",
+                                      "Click to view pilgrim's details",
                                       style: TextStyle(fontSize: 11),
                                     ),
                                     children: [
@@ -151,7 +151,7 @@ class deleteCampaign extends State<DeleteCampaign> {
                                                   child: Column(
                                                     children: [
                                                       Text(
-                                                        'Campaign\'s email:  ',
+                                                        'Pilgrim\'s email:  ',
                                                         style: TextStyle(
                                                             color: Color(
                                                                 0xFF455D83),
@@ -175,7 +175,7 @@ class deleteCampaign extends State<DeleteCampaign> {
                                                           bottom: 10),
                                                   child: Column(children: [
                                                     Text(
-                                                      'Campaign\'s address: ',
+                                                      'pilrim\'s Haj ID: ',
                                                       style: TextStyle(
                                                           color:
                                                               Color(0xFF455D83),
@@ -183,7 +183,7 @@ class deleteCampaign extends State<DeleteCampaign> {
                                                               FontWeight.w500),
                                                     ),
                                                     Text(
-                                                      storedocs[i]['address'],
+                                                      storedocs[i]['hajId'],
                                                       style: TextStyle(
                                                           fontSize: 12),
                                                     ),
@@ -195,7 +195,7 @@ class deleteCampaign extends State<DeleteCampaign> {
                                                           bottom: 10),
                                                   child: Column(children: [
                                                     Text(
-                                                      'Campaign\'s commercial ID:  ',
+                                                      'Pilgrim\'s Phome Number:  ',
                                                       style: TextStyle(
                                                           color:
                                                               Color(0xFF455D83),
@@ -204,53 +204,62 @@ class deleteCampaign extends State<DeleteCampaign> {
                                                     ),
                                                     Text(
                                                       storedocs[i]
-                                                          ['commercial_ID'],
+                                                          ['number'],
                                                       style: TextStyle(
                                                           fontSize: 12),
                                                     ),
                                                   ]),
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 10),
-                                                  child: Column(children: [
-                                                    Text(
-                                                      'Campaign\'s Phone Number:  ',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xFF455D83),
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                    Text(
-                                                      storedocs[i]
-                                                          ['phoneNumber'],
-                                                      style: TextStyle(
-                                                          fontSize: 12),
-                                                    ),
-                                                  ]),
-                                                ),
-                                                Padding(
-                                                  padding:
-                                                       EdgeInsets.only(
-                                                          bottom: 10),
-                                                  child: Column(children: [
-                                                    Text(
-                                                      'Campaign\'s Seating Capacity:  ',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xFF455D83),
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                    Text(
-                                                      storedocs[i]['seatingCapacity'],
-                                                      style: TextStyle(
-                                                          fontSize: 12),
-                                                    )
-                                                  ]),
-                                                ),
+
+
+
+
+
+                                                // Padding(
+                                                //   padding:
+                                                //       const EdgeInsets.only(
+                                                //           bottom: 10),
+                                                //   child: Column(children: [
+                                                //     Text(
+                                                //       'Campaign\'s Phone Number:  ',
+                                                //       style: TextStyle(
+                                                //           color:
+                                                //               Color(0xFF455D83),
+                                                //           fontWeight:
+                                                //               FontWeight.w500),
+                                                //     ),
+                                                //     Text(
+                                                //       storedocs[i]
+                                                //           ['phoneNumber'],
+                                                //       style: TextStyle(
+                                                //           fontSize: 12),
+                                                //     ),
+                                                //   ]),
+                                                // ),
+                                                // Padding(
+                                                //   padding:
+                                                //        EdgeInsets.only(
+                                                //           bottom: 10),
+                                                //   child: Column(children: [
+                                                //     Text(
+                                                //       'Campaign\'s Seating Capacity:  ',
+                                                //       style: TextStyle(
+                                                //           color:
+                                                //               Color(0xFF455D83),
+                                                //           fontWeight:
+                                                //               FontWeight.w500),
+                                                //     ),
+                                                //     Text(
+                                                //       storedocs[i]['seatingCapacity'],
+                                                //       style: TextStyle(
+                                                //           fontSize: 12),
+                                                //     )
+                                                //   ]),
+                                                // ),
+
+
+
+
                                               ]),
                                             ]),
                                           ),
@@ -302,7 +311,7 @@ class deleteCampaign extends State<DeleteCampaign> {
                                                                 await FirebaseFirestore
                                                                     .instance
                                                                     .collection(
-                                                                        'AcceptedCampaigns')
+                                                                        'Pilgrims-Account')
                                                                     .doc(storedocs[i]['UID'])
                                                                     .delete();
                                                                     
@@ -365,8 +374,22 @@ class deleteCampaign extends State<DeleteCampaign> {
                                                       } catch(e){
                                                         //e.hashCode;
                                                         //print(e.runtimeType);
-                                                        
+
+
+
+
+
+
+
                                                         Navigator.pop(context, 'Delete');
+                                                        // showDialog(
+                                                        //   context: context,
+                                                        //   builder: (context) {
+                                                        //    //var m=e.message;
+                                                        //     return const AlertDialog(
+                                                        //       content:
+                                                        //       Text('Account could not be deleted, try again.' , style: TextStyle(color: Colors.red,)));
+                                                        //       });
                                                         showDialog(
                                                           context: context,
                                                           builder: (context) {
@@ -375,17 +398,6 @@ class deleteCampaign extends State<DeleteCampaign> {
                                                               Text('Account been deleted succesfully', style: TextStyle(color: Colors.green),),
                                                               );
                                                               });
-
-                                                        
-                                                        // showDialog(
-                                                        //   context: context,
-                                                        //   builder: (context) {
-                                                        //    //var m=e.message;
-                                                        //     return const AlertDialog(
-                                                        //       content:
-                                                        //       Text('Account could not be deleted, try again.' , style: TextStyle(color: Colors.red,)));
-                                                        //       //print(m);
-                                                        //       });
                                                       }
                                                     },//=> Navigator.pop(context, 'OK'),
                                                     child: Text('Delete'),
@@ -419,6 +431,6 @@ class deleteCampaign extends State<DeleteCampaign> {
         ]
         )
         )
-);
-}
+        );
+  }
 }

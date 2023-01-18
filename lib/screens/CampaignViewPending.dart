@@ -175,110 +175,78 @@ class _ViewPendingState extends State<ViewPending> {
                                       child: Center(
                                         child: Column(children: [
                                           Column(children: [
-                                            // Padding(
-                                            //   padding:
-                                            //       const EdgeInsets.only(
-                                            //           bottom: 10),
-                                            //   child: Column(
-                                            //     children: [
-                                            //       Text(
-                                            //         'Campaign\'s email:  ',
-                                            //         style: TextStyle(
-                                            //             color: Color(
-                                            //                 0xFF455D83),
-                                            //             fontWeight:
-                                            //                 FontWeight
-                                            //                     .w500),
-                                            //       ),
-                                            //       Text(
-                                            //         storedocs[i]['emailP'],
-                                            //         style: TextStyle(
-                                            //             fontSize: 12),
-                                            //         textAlign:
-                                            //             TextAlign.center,
-                                            //       ),
-                                            //     ],
-                                            //   ),
-                                            // ),
-                                            // Padding(
-                                            //   padding:
-                                            //       const EdgeInsets.only(
-                                            //           bottom: 10),
-                                            //   child: Column(children: [
-                                            //     Text(
-                                            //       'Campaign\'s address: ',
-                                            //       style: TextStyle(
-                                            //           color:
-                                            //               Color(0xFF455D83),
-                                            //           fontWeight:
-                                            //               FontWeight.w500),
-                                            //     ),
-                                            //     Text(
-                                            //       storedocs[i]['address'],
-                                            //       style: TextStyle(
-                                            //           fontSize: 12),
-                                            //     ),
-                                            //   ]),
-                                            // ),
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   bottom: 10),
                                               child: Column(children: [
                                                 Text(
-                                                  'Pilgrim\'s booking status:  ',
+                                                  'Pilgrim\'s email:  ',
                                                   style: TextStyle(
                                                       color: Color(0xFF455D83),
                                                       fontWeight:
                                                           FontWeight.w500),
                                                 ),
                                                 Text(
-                                                  storedocs[i]['bookStatus'],
+                                                  storedocs[i]['email'],
                                                   style:
                                                       TextStyle(fontSize: 12),
                                                 ),
                                               ]),
                                             ),
-                                            // Padding(
-                                            //   padding:
-                                            //       const EdgeInsets.only(
-                                            //           bottom: 10),
-                                            //   child: Column(children: [
-                                            //     Text(
-                                            //       'Campaign\s Phone Number:  ',
-                                            //       style: TextStyle(
-                                            //           color:
-                                            //               Color(0xFF455D83),
-                                            //           fontWeight:
-                                            //               FontWeight.w500),
-                                            //     ),
-                                            //     Text(
-                                            //       storedocs[i]
-                                            //           ['phoneNumberP'],
-                                            //       style: TextStyle(
-                                            //           fontSize: 12),
-                                            //     ),
-                                            //   ]),
-                                            // ),
-                                            /* Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 10),
-                                                  child: Column(children: [
-                                                    Text(
-                                                      'Campaign\'s Seating Capacity:  ',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xFF455D83),
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                    Text(
-                                                      storedocs[i]['capacity'],
-                                                      style: TextStyle(
-                                                          fontSize: 12),
-                                                    )
-                                                  ]),
-                                                ),*/
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10),
+                                              child: Column(children: [
+                                                Text(
+                                                  'Pilgrim\'s Phone Number:  ',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF455D83),
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Text(
+                                                  storedocs[i]['number'],
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ]),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10),
+                                              child: Column(children: [
+                                                Text(
+                                                  'Pilgrim\'s ID:  ',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF455D83),
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Text(
+                                                  storedocs[i]['hajId'],
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                )
+                                              ]),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10),
+                                              child: Column(children: [
+                                                Text(
+                                                  'Pilgrim\'s Diseases:  ',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF455D83),
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Text(
+                                                  storedocs[i]['disease'],
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                )
+                                              ]),
+                                            ),
                                           ]),
                                         ]),
                                       ),
@@ -344,25 +312,64 @@ class _ViewPendingState extends State<ViewPending> {
                                                                   .uid)
                                                               .set;
 
-                                                          sendNotification(
-                                                              'campaign response!',
-                                                              token!);
-                                                          /*    sendNotification(
-                                                              'campaign response!',
-                                                              token!);*/
-                                                          /* await LocalNotificationService
+                                                          DocumentSnapshot
+                                                              variable =
+                                                              await _firestore
+                                                                  .collection(
+                                                                      'AcceptedCampaigns')
+                                                                  .doc(FirebaseAuth
+                                                                      .instance
+                                                                      .currentUser
+                                                                      ?.uid)
+                                                                  .get();
+                                                          String name =
+                                                              variable['name'];
+
+                                                          await NotificationAccept
                                                               .showNotification(
                                                                   id: 0,
                                                                   title:
-                                                                      'campaign message',
+                                                                      '$name Campaign Message',
                                                                   body:
-                                                                      'Congratulations!, you have been accepted into our campaign. We wish you a blessed Hajj');*/
+                                                                      'Congratulations!, you have been accepted into $name campaign. We wish you a blessed Hajj');
 
                                                           Navigator.of(context)
                                                               .pop();
 
                                                           setState(() async {
-// This part will make a new collection for accepted pilgrims for this specific campaign who accepted the pilgrim?????
+                                                            await FirebaseFirestore
+                                                                .instance
+                                                                .collection(
+                                                                    'AcceptedCampaigns')
+                                                                .doc(FirebaseAuth
+                                                                    .instance
+                                                                    .currentUser!
+                                                                    .uid)
+                                                                .collection(
+                                                                    'pilgrimsRequest')
+                                                                .doc(storedocs[
+                                                                        i][
+                                                                    'pilgrimID'])
+                                                                .delete();
+// delete from view_booking UI
+                                                            await FirebaseFirestore
+                                                                .instance
+                                                                .collection(
+                                                                    "Pilgrims-Account")
+                                                                .doc(storedocs[
+                                                                        i][
+                                                                    'pilgrimID'])
+                                                                .collection(
+                                                                    "pilgrimCampaigns")
+                                                                .doc(FirebaseAuth
+                                                                    .instance
+                                                                    .currentUser!
+                                                                    .uid)
+                                                                .update({
+                                                              'bookStatus':
+                                                                  'Accepted'
+                                                            });
+
                                                             _firestore
                                                                 .collection(
                                                                     'AcceptedCampaigns')
@@ -379,51 +386,27 @@ class _ViewPendingState extends State<ViewPending> {
                                                               'name':
                                                                   storedocs[i]
                                                                       ['name'],
+                                                              'email':
+                                                                  storedocs[i]
+                                                                      ['email'],
+                                                              'disease':
+                                                                  storedocs[i][
+                                                                      'disease'],
+                                                              'number':
+                                                                  storedocs[i][
+                                                                      'number'],
                                                               'bookStatus':
-                                                                  'accepted',
-                                                              // 'name':
-                                                              //     storedocs[i]
-                                                              //         ['name'],
-                                                              // 'email':
-                                                              //     storedocs[
-                                                              //             i]
-                                                              //         [
-                                                              //         'emailP'],
-                                                              // 'address':
-                                                              //     storedocs[
-                                                              //             i]
-                                                              //         [
-                                                              //         'address'],
+                                                                  'Accepted',
+                                                              'hajId':
+                                                                  storedocs[i]
+                                                                      ['hajId'],
+                                                              'pharma':
+                                                                  storedocs[i][
+                                                                      'pharma'],
                                                               'pilgrimID':
                                                                   storedocs[i][
-                                                                      'pilgrimID'],
-                                                              // 'password':
-                                                              //     storedocs[
-                                                              //             i]
-                                                              //         [
-                                                              //         'password'],
-                                                              // 'phoneNumber':
-                                                              //     storedocs[
-                                                              //             i]
-                                                              //         [
-                                                              //         'phoneNumberP'],
-                                                              //  'seatingCapacity': storedocs[i]
-                                                              // ['capacity'],
+                                                                      'pilgrimID']
                                                             });
-                                                            String? token =
-                                                                await FirebaseMessaging
-                                                                    .instance
-                                                                    .getToken();
-// This will delete the pilgrim account from the collection with pilgrims pending bookings
-
-                                                            // await FirebaseFirestore
-                                                            //     .instance
-                                                            //     .collection(
-                                                            //         'pilgrimRequest')
-                                                            //     .doc(storedocs[
-                                                            //             i][
-                                                            //         'UID']) // مفروض حق الحاج نفس لما سجل
-                                                            //     .delete();
                                                           });
                                                         },
                                                         child:
@@ -462,20 +445,6 @@ class _ViewPendingState extends State<ViewPending> {
                                                       "Reject Request"),
                                                   content: Text(
                                                       'Are you sure you want to reject pilgrim\'s booking request?'),
-                                                  // content: TextField(
-                                                  //   controller: _controller,
-                                                  //   //  errorText: _errorText,
-                                                  //   maxLines: 7,
-                                                  //   onChanged: (value) {
-                                                  //     rejectionReason =
-                                                  //         value;
-                                                  //   },
-                                                  //   decoration:
-                                                  //       InputDecoration(
-                                                  //     hintText:
-                                                  //         "Enter reason of rejection",
-                                                  //   ),
-                                                  // ),
                                                   actions: [
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
@@ -516,13 +485,33 @@ class _ViewPendingState extends State<ViewPending> {
                                                         Navigator.of(context)
                                                             .pop();
                                                         setState(() async {
-                                                          //   await FirebaseFirestore
-                                                          //       .instance
-                                                          //       .collection(
-                                                          //           'BOOKING COLLECTION??????')
-                                                          //       .doc(storedocs[i]
-                                                          //           ['UID'])
-                                                          //       .delete();
+                                                          await FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  'AcceptedCampaigns')
+                                                              .doc(FirebaseAuth
+                                                                  .instance
+                                                                  .currentUser!
+                                                                  .uid)
+                                                              .collection(
+                                                                  'pilgrimsRequest')
+                                                              .doc(storedocs[i]
+                                                                  ['pilgrimID'])
+                                                              .delete();
+
+                                                          // delete from view_booking UI
+                                                          await FirebaseFirestore
+                                                              .instance
+                                                              .collection(
+                                                                  "Pilgrims-Account")
+                                                              .doc(storedocs[i]
+                                                                  ['pilgrimID'])
+                                                              .collection(
+                                                                  "pilgrimCampaigns")
+                                                              .doc(storedocs[i]
+                                                                  ['pilgrimID'])
+                                                              .delete();
+
                                                           _firestore
                                                               .collection(
                                                                   'AcceptedCampaigns')
@@ -532,17 +521,31 @@ class _ViewPendingState extends State<ViewPending> {
                                                                   .uid)
                                                               .collection(
                                                                   'RejectedPilgrims')
-                                                              .doc(storedocs[i][
-                                                                  'pilgrimID']) // Why should i delete it then add it to a rejected collection??
-                                                              //       // another campaign might accapt it......
+                                                              .doc(storedocs[i]
+                                                                  ['pilgrimID'])
                                                               .set({
                                                             'name': storedocs[i]
                                                                 ['name'],
+                                                            'email':
+                                                                storedocs[i]
+                                                                    ['email'],
+                                                            'disease':
+                                                                storedocs[i]
+                                                                    ['disease'],
+                                                            'number':
+                                                                storedocs[i]
+                                                                    ['number'],
                                                             'bookStatus':
-                                                                'rejected',
+                                                                'Rejected',
+                                                            'hajId':
+                                                                storedocs[i]
+                                                                    ['hajId'],
+                                                            'pharma':
+                                                                storedocs[i]
+                                                                    ['pharma'],
                                                             'pilgrimID':
                                                                 storedocs[i][
-                                                                    'pilgrimID'],
+                                                                    'pilgrimID']
                                                           });
                                                         });
                                                       },

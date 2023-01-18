@@ -209,6 +209,11 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                               disease = value;
                             });
                           },
+                          validator: (textValue) {
+                            if (textValue == null || textValue.isEmpty) {
+                              return 'please enter none if there isn\'t any!';
+                            }
+                          },
                           decoration: InputDecoration(
                             labelText: 'chronic disease',
                             hintText: 'if you suffer from any chronic disease',
@@ -229,6 +234,11 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                             setState(() {
                               pharma = value;
                             });
+                          },
+                          validator: (textValue) {
+                            if (textValue == null || textValue.isEmpty) {
+                              return 'please enter none if there isn\'t any!';
+                            }
                           },
                           decoration: InputDecoration(
                             labelText: 'pharmaceutical',
