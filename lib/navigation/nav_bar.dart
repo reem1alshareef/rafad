@@ -7,6 +7,8 @@ import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/forget_pw.dart';
 import 'package:rafad1/screens/view_booking.dart';
+import 'package:rafad1/search/search_campaign.dart';
+import 'package:rafad1/search/search_pilgrim.dart';
 import '../screens/add_description.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
@@ -83,12 +85,7 @@ class _nav_campaignState extends State<nav_campaign> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     CampaignView(),
-    Center(
-      child: Text(
-        'pilgrims',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
+    SearchPilgrim(),
     Center(
       child: Text(
         'announcement',
@@ -158,7 +155,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     ViewBooking(),
-    logOutPilgrim(),
+    SearchCampaign(),//logOutPilgrim(),
     Center(
       child: Text(
         'announcement',
