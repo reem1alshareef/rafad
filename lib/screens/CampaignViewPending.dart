@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
@@ -8,13 +6,9 @@ import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'notification_accept.dart';
-//import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:firebase_auth/firebase_auth.dart'; //حقتي
-import 'package:http/http.dart' as http; //حقتي
 
-//اضفت كود  عند لاين 381
-/*final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-    FlutterLocalNotificationsPlugin(); */
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+    FlutterLocalNotificationsPlugin();
 
 //import 'package:rafad1/screens/LoginPage.dart';
 class ViewPending extends StatefulWidget {
@@ -25,66 +19,7 @@ class ViewPending extends StatefulWidget {
 }
 
 class _ViewPendingState extends State<ViewPending> {
-//  من لاين 26 - 89 حقتي
-
-  /* bool isLoading = false;
-  String? token;
-  storeNotificationToken() async {
-    token = await FirebaseMessaging.instance.getToken();
-    FirebaseFirestore.instance
-        .collection('Pilgrims-Account') //اعتقد هنا يكون الحاج نفس الداتابيس ***
-        .doc(FirebaseAuth.instance.currentUser!.uid)
-        .set({'token': token}, SetOptions(merge: true));
-  }
-
-  @override
   void initState() {
-    // TODO: implement initState
-    super.initState();
-    FirebaseMessaging.instance.getInitialMessage();
-    FirebaseMessaging.onMessage.listen((event) {
-      LocalNotificationService.display(event);
-      //هنا عشان يسمع الرسائل اللي جايه من الفايربيس
-    });
-    storeNotificationToken();
-
-    FirebaseMessaging.instance.subscribeToTopic('subscription');
-  }
-
-  sendNotification(String title, String token) async {
-    final data = {
-      'click_action': 'FLUTTER_NOTIFICATION_CLICK',
-      'id': '1',
-      'status': 'done',
-      'message': title,
-    };
-
-    try {
-      http.Response response =
-          await http.post(Uri.parse('https://fcm.googleapis.com/fcm/send'),
-              headers: <String, String>{
-                'Content-Type': 'application/json',
-                'Authorization':
-                    'key=AAAAWFk75Xw:APA91bF_mR6VkjSLNMmSPCbxzG1ncSRvn6LoesiZ68COdk8BW5GWoFs7JADB3plpNOI1GGfpeZ3xnKgTSlJT6LGHrrVh0vK64Zz4o-K7vVWuZMrDtXWwoD4PkL5L98c5fH4KyPyOnUP-'
-              },
-              body: jsonEncode(<String, dynamic>{
-                'notification': <String, dynamic>{
-                  'title': title,
-                  'body': 'You are followed by someone'
-                },
-                'priority': 'high',
-                'data': data,
-                'to': '$token'
-              }));
-      if (response.statusCode == 200) {
-        print("your notificatin is sent");
-      } else {
-        print("Error");
-      }
-    } catch (e) {}
-  }*/
-  void initState() {
-    //  طريقة لينا حقت
     super.initState();
     NotificationAccept.init();
   }
@@ -302,6 +237,7 @@ class _ViewPendingState extends State<ViewPending> {
                                                         onPressed: () async {
                                                           // This whole code will be when campaign presses Accept
                                                           // Albatouls Notification
+
                                                           DocumentSnapshot
                                                               variable =
                                                               await _firestore
@@ -319,10 +255,9 @@ class _ViewPendingState extends State<ViewPending> {
                                                               .showNotification(
                                                                   id: 0,
                                                                   title:
-                                                                      'campaign message',
+                                                                      '$name Campaign Message',
                                                                   body:
                                                                       'Congratulations!, you have been accepted into $name campaign. We wish you a blessed Hajj');
-                                                                      'Congratulations!, you have been accepted into our campaign. We wish you a blessed Hajj');
 
                                                           Navigator.of(context)
                                                               .pop();
@@ -352,10 +287,14 @@ class _ViewPendingState extends State<ViewPending> {
                                                                     'pilgrimID'])
                                                                 .collection(
                                                                     "pilgrimCampaigns")
-                                                                .doc(storedocs[
-                                                                        i][
-                                                                    'pilgrimID'])
-                                                                .delete();
+                                                                .doc(FirebaseAuth
+                                                                    .instance
+                                                                    .currentUser!
+                                                                    .uid)
+                                                                .update({
+                                                              'bookStatus':
+                                                                  'Accepted'
+                                                            });
 
                                                             _firestore
                                                                 .collection(
@@ -383,8 +322,7 @@ class _ViewPendingState extends State<ViewPending> {
                                                                   storedocs[i][
                                                                       'number'],
                                                               'bookStatus':
-                                                                  storedocs[i][
-                                                                      'bookStatus'],
+                                                                  'Accepted',
                                                               'hajId':
                                                                   storedocs[i]
                                                                       ['hajId'],
@@ -395,21 +333,6 @@ class _ViewPendingState extends State<ViewPending> {
                                                                   storedocs[i][
                                                                       'pilgrimID']
                                                             });
-                                                            /* مقطع الهنوف مهم  String? token =
-                                                                await FirebaseMessaging
-                                                                    .instance
-                                                                    .getToken();*/
-
-// This will delete the pilgrim account from the collection with pilgrims pending bookings
-
-                                                            // await FirebaseFirestore
-                                                            //     .instance
-                                                            //     .collection(
-                                                            //         'pilgrimRequest')
-                                                            //     .doc(storedocs[
-                                                            //             i][
-                                                            //         'UID']) // مفروض حق الحاج نفس لما سجل
-                                                            //     .delete();
                                                           });
                                                         },
                                                         child:
@@ -448,20 +371,6 @@ class _ViewPendingState extends State<ViewPending> {
                                                       "Reject Request"),
                                                   content: Text(
                                                       'Are you sure you want to reject pilgrim\'s booking request?'),
-                                                  // content: TextField(
-                                                  //   controller: _controller,
-                                                  //   //  errorText: _errorText,
-                                                  //   maxLines: 7,
-                                                  //   onChanged: (value) {
-                                                  //     rejectionReason =
-                                                  //         value;
-                                                  //   },
-                                                  //   decoration:
-                                                  //       InputDecoration(
-                                                  //     hintText:
-                                                  //         "Enter reason of rejection",
-                                                  //   ),
-                                                  // ),
                                                   actions: [
                                                     ElevatedButton(
                                                         style: ElevatedButton.styleFrom(
@@ -490,40 +399,13 @@ class _ViewPendingState extends State<ViewPending> {
                                                             Color(0xFF455D83),
                                                       ), // background
                                                       onPressed: () async {
-                                                        DocumentSnapshot
-                                                            variable =
-                                                            await _firestore
-                                                                .collection(
-                                                                    'AcceptedCampaigns')
-                                                                .doc(FirebaseAuth
-                                                                    .instance
-                                                                    .currentUser
-                                                                    ?.uid)
-                                                                .get();
-                                                        String name =
-                                                            variable['name'];
-
-                                                        DocumentSnapshot
-                                                            variable =
-                                                            await _firestore
-                                                                .collection(
-                                                                    'AcceptedCampaigns')
-                                                                .doc(FirebaseAuth
-                                                                    .instance
-                                                                    .currentUser
-                                                                    ?.uid)
-                                                                .get();
-                                                        String name =
-                                                            variable['name'];
-
                                                         await NotificationAccept
                                                             .showNotification(
                                                                 id: 0,
                                                                 title:
                                                                     'campaign message',
                                                                 body:
-                                                                    'Sorry!, your requst is rejected in $name campaign');
-                                                                    'Sorry!, your requst is rejected in our $name campaign');
+                                                                    'Sorry!, your requst is rejected in our campaign');
 
                                                         //When campaign presses Reject , i think notification caller should be here
                                                         Navigator.of(context)
@@ -565,9 +447,8 @@ class _ViewPendingState extends State<ViewPending> {
                                                                   .uid)
                                                               .collection(
                                                                   'RejectedPilgrims')
-                                                              .doc(storedocs[i][
-                                                                  'pilgrimID']) // Why should i delete it then add it to a rejected collection??
-                                                              //       // another campaign might accapt it......
+                                                              .doc(storedocs[i]
+                                                                  ['pilgrimID'])
                                                               .set({
                                                             'name': storedocs[i]
                                                                 ['name'],
@@ -581,8 +462,7 @@ class _ViewPendingState extends State<ViewPending> {
                                                                 storedocs[i]
                                                                     ['number'],
                                                             'bookStatus':
-                                                                storedocs[i][
-                                                                    'bookStatus'],
+                                                                'Rejected',
                                                             'hajId':
                                                                 storedocs[i]
                                                                     ['hajId'],
