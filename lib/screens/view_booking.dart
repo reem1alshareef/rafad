@@ -297,7 +297,7 @@ print (element. data());l
                                                                     .collection("Pilgrims-Account")
                                                                     .doc(FirebaseAuth.instance.currentUser?.uid)
                                                                     .collection("pilgrimCampaigns")
-                                                                    .doc(cID)
+                                                                    .doc(FirebaseAuth.instance.currentUser?.uid)
                                                                     .delete();
                                                               });
                                                             },
