@@ -155,7 +155,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     ViewBooking(),
-    SearchCampaign(),//logOutPilgrim(),
+    SearchCampaign(), //logOutPilgrim(),
     Center(
       child: Text(
         'announcement',
@@ -168,7 +168,12 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
         style: TextStyle(fontSize: 72),
       ),
     ),
-    //logOutPilgrim()
+    Center(
+      child: Text(
+        'profile',
+        style: TextStyle(fontSize: 72),
+      ),
+    ), //logOutPilgrim()
   ];
 
   void _onItemTapped(int index) {
