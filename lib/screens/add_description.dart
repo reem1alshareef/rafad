@@ -44,7 +44,7 @@ class _AddDescriptionState extends State<AddDescription> {
       await FirebaseFirestore.instance
             .collection("AcceptedCampaigns")
             .doc(FirebaseAuth.instance.currentUser!.uid)
-            .set({
+            .update({
               'description': description,
 
             });
@@ -59,7 +59,7 @@ class _AddDescriptionState extends State<AddDescription> {
   Widget build(BuildContext context) {  
         return Scaffold(
         appBar: AppBar(
-          title: const Text("Add Description"),
+          title: const Text("Profile"),
           automaticallyImplyLeading: false,
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,

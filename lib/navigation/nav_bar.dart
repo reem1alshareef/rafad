@@ -92,8 +92,9 @@ class _nav_campaignState extends State<nav_campaign> {
         style: TextStyle(fontSize: 72),
       ),
     ),
+    //MapTracking(), 
     AddDescription(),
-    ProfileCampaign()
+    
   ];
 
   void _onItemTapped(int index) {
@@ -123,8 +124,8 @@ class _nav_campaignState extends State<nav_campaign> {
                 label: 'Announcement',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.description),
-                label: 'Description',
+                icon: Icon(Icons.location_city),
+                label: 'Location',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
@@ -168,7 +169,12 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
         style: TextStyle(fontSize: 72),
       ),
     ),
-    //logOutPilgrim()
+    Center(
+      child: Text(
+        'profile',
+        style: TextStyle(fontSize: 72),
+      ),
+    ),//logOutPilgrim()
   ];
 
   void _onItemTapped(int index) {
