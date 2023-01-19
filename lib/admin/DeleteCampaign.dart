@@ -419,6 +419,6 @@ class deleteCampaign extends State<DeleteCampaign> {
         ]
         )
         )
-);
-}
+        );
+  }
 }

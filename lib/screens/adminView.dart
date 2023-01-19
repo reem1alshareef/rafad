@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
+//import 'package:rafad1/screens/logOutAdmin.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 
+
 class View extends StatefulWidget {
-  const View({super.key});
+
 
   @override
   _ViewState createState() => _ViewState();
@@ -15,6 +17,8 @@ class View extends StatefulWidget {
 class _ViewState extends State<View> {
   final _firestore = FirebaseFirestore.instance;
   String? rejectionReason;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -227,6 +231,8 @@ class _ViewState extends State<View> {
                                                   Radius.circular(2.0)),
                                             )),
                                             onPressed: () {
+                                              
+
                                               showDialog(
                                                   context: context,
                                                   builder:
@@ -263,6 +269,12 @@ class _ViewState extends State<View> {
                                                                     Color(
                                                                         0xFF455D83)),
                                                             onPressed: () {
+
+
+
+
+
+                                                              
                                                               Navigator.of(
                                                                       context)
                                                                   .pop();
@@ -276,52 +288,26 @@ class _ViewState extends State<View> {
                                                                             i]
                                                                         ['UID'])
                                                                     .delete(); // to remove it from UI
-                                                                _firestore
-                                                                    .collection(
-                                                                        'AcceptedCampaigns')
-                                                                    .doc(storedocs[
-                                                                            i]
-                                                                        ['UID'])
-                                                                    .set({
-                                                                  // To add it to the accepted collection
-                                                                  'UID':
-                                                                      storedocs[
-                                                                              i]
-                                                                          [
-                                                                          'UID'],
-                                                                  'description':
-                                                                      'no description',
-                                                                  'status':
-                                                                      'accepted',
-                                                                  'name': storedocs[
-                                                                          i][
-                                                                      'nameCampaign'],
-                                                                  'email':
-                                                                      storedocs[
-                                                                              i]
-                                                                          [
-                                                                          'emailC'],
-                                                                  'address':
-                                                                      storedocs[
-                                                                              i]
-                                                                          [
-                                                                          'address'],
-                                                                  'commercial_ID':
-                                                                      storedocs[
-                                                                              i]
-                                                                          [
-                                                                          'commercialID'],
-                                                                  'phoneNumber':
-                                                                      storedocs[
-                                                                              i]
-                                                                          [
-                                                                          'phoneNumberC'],
-                                                                  'seatingCapacity':
-                                                                      storedocs[
-                                                                              i]
-                                                                          [
-                                                                          'capacity'],
-                                                                });
+                                                                    _firestore
+                                                  .collection(
+                                                      'AcceptedCampaigns')
+                                                  .doc(storedocs[i]['UID'])
+                                                  .set({ 
+                                                    'UID': storedocs[i]['UID'],// To add it to the accepted collection
+                                                'status': 'accepted',
+                                                'description': 'none',
+                                                'name': storedocs[i]
+                                                    ['nameCampaign'],
+                                                'email': storedocs[i]['emailC'],
+                                                'address': storedocs[i]
+                                                    ['address'],
+                                                'commercial_ID': storedocs[i]
+                                                    ['commercialID'],
+                                                'phoneNumber': storedocs[i]
+                                                    ['phoneNumberC'],
+                                                'seatingCapacity': storedocs[i]
+                                                    ['capacity'],
+                                              });
                                                               });
                                                             },
                                                             child: const Text(
@@ -360,6 +346,7 @@ class _ViewState extends State<View> {
                                                       title: const Text(
                                                           "Reject Request"),
                                                       content: TextField(
+                                                      
                                                         maxLines: 7,
                                                         onChanged: (value) {
                                                           rejectionReason =
@@ -417,13 +404,8 @@ class _ViewState extends State<View> {
                                                                       'RejectedCampaigns')
                                                                   .doc(storedocs[
                                                                       i]['UID'])
-                                                                  .set({
-                                                                // to add it to rejected collection
-                                                                'UID':
-                                                                    storedocs[i]
-                                                                        ['UID'],
-                                                                'description':
-                                                                    '',
+                                                                  .set({ 
+                                                                     'UID': storedocs[i]['UID'],// to add it to rejected collection
                                                                 'name': storedocs[
                                                                         i][
                                                                     'nameCampaign'],
@@ -477,7 +459,9 @@ class _ViewState extends State<View> {
                                       ),
                                     ],
                                   ),
-                                )));
+                                )
+                              )
+                            );
                   }))
         ])));
   }

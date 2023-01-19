@@ -477,7 +477,7 @@ class _ViewPendingState extends State<ViewPending> {
                                                       },
                                                       child: const Text("Yes"),
                                                     )
-                                                  ],
+                                                  ], 
                                                 );
                                               });
                                         },
