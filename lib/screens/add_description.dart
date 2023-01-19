@@ -134,7 +134,7 @@ class _AddDescriptionState extends State<AddDescription> {
                     TextFormField(
                           //controller: _descController,
                           maxLines: 3,
-                          maxLength: 100,
+                          maxLength: 200,
                           
                           inputFormatters: [
                             FilteringTextInputFormatter.deny
@@ -159,6 +159,10 @@ class _AddDescriptionState extends State<AddDescription> {
                             //return null;
                             if(textValue.trim().isEmpty){
                             return "Description cannot be empty.";
+                            }
+
+                            if (textValue.length < 20) {
+                              return "Description must be at least 20 characters in length";
                             }
 
                             return null;

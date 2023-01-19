@@ -18,8 +18,11 @@ class _ViewRejectedState extends State<ViewRejected> {
 
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> dataStream =
-        FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(FirebaseAuth.instance.currentUser!.uid).collection('RejectedPilgrims').snapshots();
+    final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
+        .collection('AcceptedCampaigns')
+        .doc(FirebaseAuth.instance.currentUser!.uid)
+        .collection('RejectedPilgrims')
+        .snapshots();
 
     return Scaffold(
         body: SingleChildScrollView(
@@ -82,110 +85,78 @@ class _ViewRejectedState extends State<ViewRejected> {
                                       child: Center(
                                         child: Column(children: [
                                           Column(children: [
-                                            // Padding(
-                                            //   padding:
-                                            //       const EdgeInsets.only(
-                                            //           bottom: 10),
-                                            //   child: Column(
-                                            //     children: [
-                                            //       Text(
-                                            //         'Campaign\'s email:  ',
-                                            //         style: TextStyle(
-                                            //             color: Color(
-                                            //                 0xFF455D83),
-                                            //             fontWeight:
-                                            //                 FontWeight
-                                            //                     .w500),
-                                            //       ),
-                                            //       Text(
-                                            //         storedocs[i]['emailP'],
-                                            //         style: TextStyle(
-                                            //             fontSize: 12),
-                                            //         textAlign:
-                                            //             TextAlign.center,
-                                            //       ),
-                                            //     ],
-                                            //   ),
-                                            // ),
-                                            // Padding(
-                                            //   padding:
-                                            //       const EdgeInsets.only(
-                                            //           bottom: 10),
-                                            //   child: Column(children: [
-                                            //     Text(
-                                            //       'Campaign\'s address: ',
-                                            //       style: TextStyle(
-                                            //           color:
-                                            //               Color(0xFF455D83),
-                                            //           fontWeight:
-                                            //               FontWeight.w500),
-                                            //     ),
-                                            //     Text(
-                                            //       storedocs[i]['address'],
-                                            //       style: TextStyle(
-                                            //           fontSize: 12),
-                                            //     ),
-                                            //   ]),
-                                            // ),
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   bottom: 10),
                                               child: Column(children: [
                                                 Text(
-                                                  'Pilgrim\'s booking status:  ',
+                                                  'Pilgrim\'s email:  ',
                                                   style: TextStyle(
                                                       color: Color(0xFF455D83),
                                                       fontWeight:
                                                           FontWeight.w500),
                                                 ),
                                                 Text(
-                                                  storedocs[i]['bookStatus'],
+                                                  storedocs[i]['email'],
                                                   style:
                                                       TextStyle(fontSize: 12),
                                                 ),
                                               ]),
                                             ),
-                                            // Padding(
-                                            //   padding:
-                                            //       const EdgeInsets.only(
-                                            //           bottom: 10),
-                                            //   child: Column(children: [
-                                            //     Text(
-                                            //       'Campaign\s Phone Number:  ',
-                                            //       style: TextStyle(
-                                            //           color:
-                                            //               Color(0xFF455D83),
-                                            //           fontWeight:
-                                            //               FontWeight.w500),
-                                            //     ),
-                                            //     Text(
-                                            //       storedocs[i]
-                                            //           ['phoneNumberP'],
-                                            //       style: TextStyle(
-                                            //           fontSize: 12),
-                                            //     ),
-                                            //   ]),
-                                            // ),
-                                            /* Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 10),
-                                                  child: Column(children: [
-                                                    Text(
-                                                      'Campaign\'s Seating Capacity:  ',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xFF455D83),
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                    Text(
-                                                      storedocs[i]['capacity'],
-                                                      style: TextStyle(
-                                                          fontSize: 12),
-                                                    )
-                                                  ]),
-                                                ),*/
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10),
+                                              child: Column(children: [
+                                                Text(
+                                                  'Pilgrim\'s Phone Number:  ',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF455D83),
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Text(
+                                                  storedocs[i]['number'],
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                ),
+                                              ]),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10),
+                                              child: Column(children: [
+                                                Text(
+                                                  'Pilgrim\'s ID:  ',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF455D83),
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Text(
+                                                  storedocs[i]['hajId'],
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                )
+                                              ]),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10),
+                                              child: Column(children: [
+                                                Text(
+                                                  'Pilgrim\'s Diseases:  ',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF455D83),
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Text(
+                                                  storedocs[i]['disease'],
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                )
+                                              ]),
+                                            ),
                                           ]),
                                         ]),
                                       ),
