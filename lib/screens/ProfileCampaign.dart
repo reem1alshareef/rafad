@@ -6,15 +6,15 @@ import 'package:rafad1/widgets/my_button.dart';
 
 import 'add_description.dart';
 
-class logOutCampaign extends StatefulWidget {
+class ProfileCampaign extends StatefulWidget {
   static const String screenRoute = 'logOutCampaign';
-  const logOutCampaign({super.key});
+  const ProfileCampaign({super.key});
 
   @override
-  State<logOutCampaign> createState() => _logOutCampaign();
+  State<ProfileCampaign> createState() => _logOutCampaign();
 }
 
-class _logOutCampaign extends State<logOutCampaign> {
+class _logOutCampaign extends State<ProfileCampaign> {
   final user = FirebaseAuth.instance.currentUser!;
 
   @override
@@ -45,7 +45,7 @@ class _logOutCampaign extends State<logOutCampaign> {
           //DeleteCampaign(),
 
           child: Text(
-            'Your request has been sent to admin, please wait for the response',
+            '',
             style: TextStyle(fontSize: 20),
           ),
         ), //DeleteCampaign(),

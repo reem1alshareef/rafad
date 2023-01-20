@@ -46,6 +46,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
   bool card = false;
   bool isVisible = true;
   bool _submitted = false;
+  //var bookList=new List();
 
   void _submit() {
     setState(() => _submitted = true);
@@ -84,7 +85,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text('pilgrim main home page'),
+        title: Text('available campaign for booking'),
         backgroundColor: const Color(0xFF455D83),
         elevation: 0,
         actions: <Widget>[
@@ -109,18 +110,18 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                 //margin: EdgeInsets.all(60),
                 color: Color.fromARGB(255, 179, 181, 183),
 
-                child: Padding(
-                  padding: const EdgeInsets.all(17),
-                  child: Text(
-                    'available campaign',
-                    style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.w900,
-                      fontStyle: FontStyle.normal,
-                      color: Color(0xFF455D83),
-                    ),
-                  ),
-                ),
+                // child: Padding(
+                //   padding: const EdgeInsets.all(17),
+                //   // child: Text(
+                //   //   'available campaign',
+                //   //   style: TextStyle(
+                //   //     fontSize: 50,
+                //   //     fontWeight: FontWeight.w900,
+                //   //     fontStyle: FontStyle.normal,
+                //   //     color: Color(0xFF455D83),
+                //   //   ),
+                //   // ),
+                // ),
               ),
             ),
             Container(
@@ -315,15 +316,14 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                     .update({
                                   'seatingCapacity': counter.toString(),
                                 });
-
                                 _firestore
                                     .collection("Pilgrims-Account")
                                     .doc(FirebaseAuth.instance.currentUser?.uid)
                                     .collection("pilgrimCampaigns")
-                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .doc(storedocs[i]['UID'])
                                     .set(
                                   {
-                                    'bookStatus': 'pending',
+                                    'bookStatus': 'Pending',
                                     'campaignID': storedocs[i]['UID'],
                                     'name': storedocs[i]['name'],
                                   },
@@ -347,7 +347,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                     .doc(FirebaseAuth.instance.currentUser?.uid)
                                     .set(
                                   {
-                                    'bookStatus': 'pending',
+                                    'bookStatus': 'Pending',
                                     'pilgrimID':
                                         FirebaseAuth.instance.currentUser?.uid,
                                     'name': name,

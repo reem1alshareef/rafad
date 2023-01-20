@@ -118,8 +118,7 @@ class _ViewAcceptedState extends State<ViewAccepted> {
                                       child: Center(
                                         child: Column(children: [
                                           Column(children: [
-                                            
-                                             Padding(
+                                            Padding(
                                               padding: const EdgeInsets.only(
                                                   bottom: 10),
                                               child: Column(children: [
@@ -138,66 +137,59 @@ class _ViewAcceptedState extends State<ViewAccepted> {
                                               ]),
                                             ),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(
-                                                      bottom: 10),
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10),
                                               child: Column(children: [
                                                 Text(
                                                   'Pilgrim\'s Phone Number:  ',
                                                   style: TextStyle(
-                                                      color:
-                                                          Color(0xFF455D83),
+                                                      color: Color(0xFF455D83),
                                                       fontWeight:
                                                           FontWeight.w500),
                                                 ),
                                                 Text(
-                                                  storedocs[i]
-                                                      ['number'],
-                                                  style: TextStyle(
-                                                      fontSize: 12),
+                                                  storedocs[i]['number'],
+                                                  style:
+                                                      TextStyle(fontSize: 12),
                                                 ),
                                               ]),
                                             ),
-                                             Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 10),
-                                                  child: Column(children: [
-                                                    Text(
-                                                      'Pilgrim\'s ID:  ',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xFF455D83),
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                    Text(
-                                                      storedocs[i]['hajId'],
-                                                      style: TextStyle(
-                                                          fontSize: 12),
-                                                    )
-                                                  ]),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10),
+                                              child: Column(children: [
+                                                Text(
+                                                  'Pilgrim\'s ID:  ',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF455D83),
+                                                      fontWeight:
+                                                          FontWeight.w500),
                                                 ),
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 10),
-                                                  child: Column(children: [
-                                                    Text(
-                                                      'Pilgrim\'s Diseases:  ',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xFF455D83),
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                    Text(
-                                                      storedocs[i]['disease'],
-                                                      style: TextStyle(
-                                                          fontSize: 12),
-                                                    )
-                                                  ]),
+                                                Text(
+                                                  storedocs[i]['hajId'],
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                )
+                                              ]),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10),
+                                              child: Column(children: [
+                                                Text(
+                                                  'Pilgrim\'s Diseases:  ',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF455D83),
+                                                      fontWeight:
+                                                          FontWeight.w500),
                                                 ),
+                                                Text(
+                                                  storedocs[i]['disease'],
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                )
+                                              ]),
+                                            ),
                                           ]),
                                         ]),
                                       ),

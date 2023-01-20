@@ -8,7 +8,7 @@ import 'package:rafad1/screens/welcome_screen.dart';
 //import 'package:rafad1/screens/LoginPage.dart';
 class ViewBooking extends StatefulWidget {
   //static const String screenRoute = 'welcome_screen';
-const ViewBooking({super.key});
+  const ViewBooking({super.key});
   @override
   _ViewState createState() => _ViewState();
 }
@@ -51,11 +51,9 @@ class _ViewState extends State<ViewBooking> {
 
   //data streeeeeeeeeeeeeemmmms
 
-
   void DataStreams() async {
     await for (var snapshot
-        in _firestore.collection('AcceptedCampaigns')
-        .snapshots()) {
+        in _firestore.collection('AcceptedCampaigns').snapshots()) {
       for (var campaign in snapshot.docs) {
         print(campaign.data());
       }
@@ -64,8 +62,11 @@ class _ViewState extends State<ViewBooking> {
 
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> dataStream =
-        FirebaseFirestore.instance.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").snapshots();
+    final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
+        .collection("Pilgrims-Account")
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .collection("pilgrimCampaigns")
+        .snapshots();
 
 /*
   void DataStreams() async {
@@ -101,7 +102,7 @@ FirebaseFirestore.instance.collection ("users")
 subcol.docs .forEach ((element) {
 print (element. data());l
 });
-]);*/ 
+]);*/
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -143,14 +144,11 @@ print (element. data());l
                       Map a = document.data() as Map<String, dynamic>;
                       storedocs.add(a);
                       a['UID'] = document.id;
-
-
                     }).toList();
                     return Column(
                         children: List.generate(
                             storedocs.length,
                             (i) => SingleChildScrollView(
-                              
                                   child: ExpansionTileCard(
                                     elevation: 2,
                                     initialPadding:
@@ -192,26 +190,28 @@ print (element. data());l
                                                   child: Column(
                                                     children: const [
                                                       Text(
-                                                        'Request has been submitted  successfully',
+                                                        '',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
+                                                            color:
+                                                                Color.fromARGB(
+                                                                    255,
+                                                                    200,
+                                                                    20,
+                                                                    20),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
                                                       ),
-                                                      
                                                     ],
                                                   ),
                                                 ),
-                                                
                                                 Padding(
                                                   padding:
                                                       const EdgeInsets.only(
                                                           bottom: 10),
                                                   child: Column(children: [
                                                     Text(
-                                                      'Request Status: ',
+                                                      'Campaign\'s Booking Request Status: ',
                                                       style: TextStyle(
                                                           color:
                                                               Color(0xFF455D83),
@@ -219,15 +219,16 @@ print (element. data());l
                                                               FontWeight.w500),
                                                     ),
                                                     Text(
-                                                      storedocs[i]['bookStatus'],
+                                                      storedocs[i]
+                                                          ['bookStatus'],
                                                       style: TextStyle(
-                                                          fontSize: 12),
+                                                        fontSize: 14,
+                                                        color: Color.fromARGB(
+                                                            255, 109, 94, 19),
+                                                      ),
                                                     ),
                                                   ]),
                                                 ),
-                                                
-                                                
-                                                
                                               ]),
                                             ]),
                                           ),
@@ -247,8 +248,6 @@ print (element. data());l
                                                   Radius.circular(2.0)),
                                             )),
                                             onPressed: () {
-                                              
-
                                               showDialog(
                                                   context: context,
                                                   builder:
@@ -256,8 +255,8 @@ print (element. data());l
                                                     return AlertDialog(
                                                       title: const Text(
                                                           "Cancel Request"),
-                                                      content: const Text(
-                                                          "Are you sure you want to Cancel?"),
+                                                      content: Text(
+                                                          "Are you sure you want to Cancel This Campaign's Booking?"),
                                                       actions: [
                                                         ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
@@ -290,14 +289,21 @@ print (element. data());l
                                                                   .pop();
                                                               setState(
                                                                   () async {
-                                                                    // حذف البيانات الخاصه باليوزر من الفايرستور
-                                                                    var cID = storedocs[i]['campaignID'] ;
+                                                                //removes from UI when pressed Yes for cancellation
+
                                                                 await FirebaseFirestore
                                                                     .instance
-                                                                    .collection("Pilgrims-Account")
-                                                                    .doc(FirebaseAuth.instance.currentUser?.uid)
-                                                                    .collection("pilgrimCampaigns")
-                                                                    .doc(cID)
+                                                                    .collection(
+                                                                        "Pilgrims-Account")
+                                                                    .doc(FirebaseAuth
+                                                                        .instance
+                                                                        .currentUser
+                                                                        ?.uid)
+                                                                    .collection(
+                                                                        "pilgrimCampaigns")
+                                                                    .doc(storedocs[
+                                                                            i][
+                                                                        'campaignID'])
                                                                     .delete();
                                                               });
                                                             },
@@ -312,14 +318,13 @@ print (element. data());l
                                                 Icon(Icons.cancel_rounded,
                                                     color: Colors.redAccent),
                                                 Padding(
-                                                  padding: EdgeInsets
-                                                      .symmetric(vertical: 2.0),
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 2.0),
                                                 ),
                                                 Text('Cancel'),
                                               ],
                                             ),
                                           ),
-                                          
                                         ],
                                       ),
                                     ],
@@ -329,5 +334,3 @@ print (element. data());l
         ])));
   }
 }
-
-
