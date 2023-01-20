@@ -2,6 +2,7 @@
 
 import "package:flutter/material.dart";
 import 'package:rafad1/admin/DeletePilgrim.dart';
+import 'package:rafad1/screens/CampaignPlan.dart';
 import 'package:rafad1/screens/CampaignView.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
@@ -89,12 +90,7 @@ class _nav_campaignState extends State<nav_campaign> {
         style: TextStyle(fontSize: 72),
       ),
     ),
-    Center(
-      child: Text(
-        'announcement',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
+    CampaignPlan(),
     AddDescription(),
     ProfileCampaign()
   ];
