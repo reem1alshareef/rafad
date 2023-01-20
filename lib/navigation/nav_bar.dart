@@ -92,6 +92,12 @@ class _nav_campaignState extends State<nav_campaign> {
         style: TextStyle(fontSize: 72),
       ),
     ),
+    Center(
+      child: Text(
+        'emergency',
+        style: TextStyle(fontSize: 72),
+      ),
+    ),
     //MapTracking(), 
     AddDescription(),
     
@@ -124,8 +130,8 @@ class _nav_campaignState extends State<nav_campaign> {
                 label: 'Announcement',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.location_city),
-                label: 'Location',
+                icon: Icon(Icons.emergency),
+                label: 'Emergency',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
