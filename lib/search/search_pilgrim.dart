@@ -30,7 +30,7 @@ initSearchingPilgrim(String textEntered){
     postDocumentsList = FirebaseFirestore.instance
         .collection('AcceptedCampaigns')
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('pilgrimsRequest')
+        .collection('AcceptedPilgrims')
         .where('name', isGreaterThanOrEqualTo: textEntered)
         .get();
 
