@@ -6,6 +6,7 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
+import 'package:rafad1/widgets/emButton.dart';
 
 import '../widgets/my_button.dart';
 
@@ -132,7 +133,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                     fit: BoxFit.cover),
               ),
             ), //كود الخلفيه لين هنا بس ما اشتغلت
-
+            
             Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
@@ -355,11 +356,14 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
                                     'email': email,
                                     'disease': disease,
                                     'hajId': hajId,
-                                    'pharma': pharma
+                                    'pharma': pharma,
+                                    'campaignID' :storedocs[i]['UID'],
                                   },
                                 );
                               },
-                            ) ////////////////buton
+                            ),
+
+                            
                           ],
                         ),
                       ),

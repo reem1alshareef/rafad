@@ -21,7 +21,7 @@ class ViewPending extends StatefulWidget {
 class _ViewPendingState extends State<ViewPending> {
   void initState() {
     super.initState();
-    NotificationAccept.init();
+    //NotificationAccept.init();
   }
 
   final _firestore = FirebaseFirestore.instance;
@@ -251,13 +251,13 @@ class _ViewPendingState extends State<ViewPending> {
                                                           String name =
                                                               variable['name'];
 
-                                                          await NotificationAccept
-                                                              .showNotification(
-                                                                  id: 0,
-                                                                  title:
-                                                                      '$name Campaign Message',
-                                                                  body:
-                                                                      'Congratulations!, you have been accepted into $name campaign. We wish you a blessed Hajj');
+                                                          // await NotificationAccept
+                                                          //     .showNotification(
+                                                          //         id: 0,
+                                                          //         title:
+                                                          //             '$name Campaign Message',
+                                                          //         body:
+                                                          //             'Congratulations!, you have been accepted into $name campaign. We wish you a blessed Hajj');
 
                                                           Navigator.of(context)
                                                               .pop();
@@ -295,7 +295,32 @@ class _ViewPendingState extends State<ViewPending> {
                                                               'bookStatus':
                                                                   'Accepted'
                                                             });
-
+                                                            ///////////////////////////////كود يحفظ اي دي الحمله باكاونت الحاج عشان نعلاف الحاج الحين يمشي مع اي حمله
+                                                            await FirebaseFirestore
+                                                                .instance
+                                                                .collection(
+                                                                    "Pilgrims-Account")
+                                                                .doc(storedocs[
+                                                                        i][
+                                                                    'pilgrimID']).update({
+                                                                      'campaignID' :FirebaseAuth.instance.currentUser?.uid,
+                                                                    },
+                                                                    );
+                                                              ////////////////////
+                                                              ///عشان اجيب اي دي الحجاج المقبولين مع الحمله
+                                                              // await FirebaseFirestore
+                                                              //   .instance
+                                                              //   .collection(
+                                                              //       "AcceptedCampaigns")
+                                                              //   .doc(storedocs[
+                                                              //           i][
+                                                              //       'pilgrimID']).update({
+                                                              //         'pilgrimID' :storedocs[
+                                                              //           i][
+                                                              //       'pilgrimID'],
+                                                              //       },
+                                                              //       );
+                                                              ///
                                                             _firestore
                                                                 .collection(
                                                                     'AcceptedCampaigns')
@@ -399,13 +424,13 @@ class _ViewPendingState extends State<ViewPending> {
                                                             Color(0xFF455D83),
                                                       ), // background
                                                       onPressed: () async {
-                                                        await NotificationAccept
-                                                            .showNotification(
-                                                                id: 0,
-                                                                title:
-                                                                    'campaign message',
-                                                                body:
-                                                                    'Sorry!, your requst is rejected in our campaign');
+                                                        // await NotificationAccept
+                                                        //     .showNotification(
+                                                        //         id: 0,
+                                                        //         title:
+                                                        //             'campaign message',
+                                                        //         body:
+                                                        //             'Sorry!, your requst is rejected in our campaign');
 
                                                         //When campaign presses Reject , i think notification caller should be here
                                                         Navigator.of(context)

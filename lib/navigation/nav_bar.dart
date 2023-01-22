@@ -11,7 +11,9 @@ import '../screens/add_description.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/admin/DeleteCampaign.dart';
+import 'package:rafad1/screens/emergency.dart';
 
+import '../screens/emergencyList.dart';
 import '../screens/welcome_admin.dart';
 
 class nav_admin extends StatefulWidget {
@@ -96,7 +98,8 @@ class _nav_campaignState extends State<nav_campaign> {
       ),
     ),
     AddDescription(),
-    ProfileCampaign()
+    ProfileCampaign(),
+    emergencyList(),
   ];
 
   void _onItemTapped(int index) {
@@ -133,6 +136,10 @@ class _nav_campaignState extends State<nav_campaign> {
                 icon: Icon(Icons.person),
                 label: 'Profile',
                 backgroundColor: Color(0xFF455D83)),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.emergency_share),
+                label: 'emergencyList',
+                backgroundColor: Color.fromARGB(255, 184, 20, 20)),
           ],
           type: BottomNavigationBarType.shifting,
           currentIndex: _selectedIndex,
@@ -165,12 +172,13 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
         style: TextStyle(fontSize: 72),
       ),
     ),
-    Center(
-      child: Text(
-        'emergency',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
+    // Center(
+    //   child: Text(
+    //     'emergency',
+    //     style: TextStyle(fontSize: 72),
+    //   ),
+    // ),
+    emergency(),
     Center(
       child: Text(
         'profile',
@@ -206,10 +214,11 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
                 icon: Icon(Icons.announcement),
                 label: 'Announcement',
                 backgroundColor: Color(0xFF455D83)),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.emergency),
-                label: 'Emergency',
-                backgroundColor: Color(0xFF455D83)),
+            // BottomNavigationBarItem(
+            //     icon: Icon(Icons.emergency_share_sharp),
+            //     label: 'Emergency',
+            //     backgroundColor: Color.fromARGB(255, 184, 20, 20)),
+                
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',
