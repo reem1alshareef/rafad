@@ -117,7 +117,7 @@ class _nav_campaignState extends State<nav_campaign> {
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.announcement),
-                label: 'Announcement',
+                label: 'Plan',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.emergency),
