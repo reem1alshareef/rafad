@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../widgets/my_button.dart';
@@ -43,7 +44,7 @@ class _AddDescriptionState extends State<AddDescription> {
       await FirebaseFirestore.instance
             .collection("AcceptedCampaigns")
             .doc(FirebaseAuth.instance.currentUser!.uid)
-            .set({
+            .update({
               'description': description,
 
             });
@@ -107,9 +108,18 @@ class _AddDescriptionState extends State<AddDescription> {
                        Container(
                       
                    child: SingleChildScrollView(
-                    child: Column(
+                    child: Column (
                       children: [
+                        //SizedBox(height: 40,),
                     TextFormField(
+                          maxLines: 3,
+                          maxLength: 200,
+                          
+                          inputFormatters: [
+                            FilteringTextInputFormatter.deny
+                            (RegExp(r"\s\s"),)
+                          ],
+                          
                           //controller: _descController,
                           cursorColor: Colors.white,
                           style: TextStyle(color: Colors.grey[500],) ,
@@ -126,6 +136,15 @@ class _AddDescriptionState extends State<AddDescription> {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Description is required!';
                             }
+                            if(textValue.length<20){
+                              return 'Describtion should be 20 characters at least';
+                            }
+                            
+                            //return null;
+                            if(textValue.trim().isEmpty){
+                            return "Description cannot be empty.";
+                            }
+
                             return null;
                           }
                            ),

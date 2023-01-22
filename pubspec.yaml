@@ -28,7 +28,9 @@ environment:
 # dependencies can be manually updated by changing the version numbers below to
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
+
 dependencies:
+  
   flutter:
     sdk: flutter
 
@@ -47,7 +49,15 @@ dependencies:
   toast: ^0.3.0
   expansion_tile_card: ^2.0.0
   flutter_local_notifications: ^13.0.0
+  firebase_messaging: ^14.2.1
+  http: ^0.13.5
+  dio: ^4.0.6
+  flutter_polyline_points: ^1.0.0
+  google_maps_flutter: ^2.2.3
+  location: ^4.4.0
+  flutter_svg: ^1.1.6
   persistent_bottom_nav_bar: ^5.0.2
+  url_launcher: ^6.1.8
   #firebase:
   #cloud_firestore: ^3.1.5
   #firebase_auth: ^3.3.14

@@ -78,7 +78,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                               nameCampaign = value;
                             });
                           },
-                          validator: (textValue) { 
+                          validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Name field is required!';
                             }
@@ -310,6 +310,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                                 const SnackBar(
                                     content: Text('Submitting data..')),
                               );
+                              //  Firebase method creating user account
                               await FirebaseAuth.instance
                                   .createUserWithEmailAndPassword(
                                       email: emailC.toString(),
@@ -324,8 +325,10 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                                 );
 
                                 Navigator.push(
-              context, MaterialPageRoute(builder: (context) => nav_campaign()));
-
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            logOutCampaign()));
                               }).catchError((onError) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
@@ -333,8 +336,8 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                                     backgroundColor: Colors.red,
                                   ),
                                 );
-                              });
-
+                              });// 
+                              // Firestore method -- assign a sub dir from Campaign-Account doc for the current user
                               await FirebaseFirestore.instance
                                   .collection("Campaign-Account")
                                   .doc(FirebaseAuth.instance.currentUser!.uid)

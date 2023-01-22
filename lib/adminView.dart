@@ -270,9 +270,12 @@ class _ViewState extends State<View> {
                                               _firestore
                                                   .collection(
                                                       'AcceptedCampaigns')
-                                                  .add({
-                                                'UID': FirebaseAuth
-                                                    .instance.currentUser!.uid,
+                                                  .doc(storedocs[i]['UID'])
+                                                  .set({
+                                                 //FirebaseAuth
+                                                    //.instance.currentUser!.uid,
+                                                'UID': storedocs[i]['UID'],
+                                                'description':'none',
                                                 'status': 'accepted',
                                                 'name': storedocs[i]
                                                     ['nameCampaign'],
@@ -280,6 +283,11 @@ class _ViewState extends State<View> {
                                                     ['emailC'],
                                                 'address': storedocs[i]
                                                     ['address'],
+                                                'UID': FirebaseFirestore.instance
+                                                .collection('userNames')
+                                                .where('emailC', isEqualTo: storedocs[i]
+                                                    ['emailC'])
+                                                .get(),
                                                 'commercial_ID': storedocs[i]
                                                     ['commercialID'],
                                                 'password': storedocs[i]
