@@ -14,6 +14,7 @@ import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:rafad1/widgets/map_tracking.dart';
 import '../firebase_options.dart';
 //import 'package:rafad1/screens/newAcc.dart';
 
@@ -53,7 +54,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        initialRoute: WelcomeScreen.screenRoute,
+        home: const MapTracking(),
+        // initialRoute: WelcomeScreen.screenRoute,
         routes: {
           WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
           SignUpPilgrim.screenRoute: (context) => const SignUpPilgrim(),
@@ -65,4 +67,3 @@ class MyApp extends StatelessWidget {
         });
   }
 }
-

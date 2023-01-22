@@ -173,7 +173,8 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
         'profile',
         style: TextStyle(fontSize: 72),
       ),
-    ), //logOutPilgrim()
+    ),
+    //logOutPilgrim()
   ];
 
   void _onItemTapped(int index) {
