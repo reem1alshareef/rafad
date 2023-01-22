@@ -87,11 +87,20 @@ class _RateReviewState extends State<RateReview> {
                                                   margin:
                                                       const EdgeInsets.only(
                                                           bottom: 10),
-                                                  child: Column(children: [
+                                                  child: Column(children: <Widget>[
+                                                    Text(
+                                                      'Campaign Name:' 
+                                                        ),
+                                                        Text(
+                                                      storedocs[i]['name'] 
+                                                        ),
+                                                        SizedBox(height: 10,),
                                                     Text(
                                                       'Rating: $rating'
 
                                                         ),
+                                                    SizedBox(height: 10,),
+                                                    
                                                     RatingBar.builder(
                                                       minRating: 1,
                                                       itemSize: 20,
@@ -327,5 +336,6 @@ class _RateReviewState extends State<RateReview> {
                         )
         
         ])));
+        
   }
 }
