@@ -50,6 +50,7 @@ class LocationService {
     );
   }
 
+  
   goToMaps(double latitude, double longitude) async {
     String mapLocationUrl =
         "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude";

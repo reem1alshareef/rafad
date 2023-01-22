@@ -17,9 +17,6 @@ import 'package:rafad1/screens/LocationService.dart';
 import '../widgets/my_button.dart';
 
 
-
-
-
 class emergency extends StatefulWidget {
   static const String screenRoute = 'emergency.dart';
   const emergency({super.key});
@@ -36,6 +33,7 @@ class _emergencyState extends State<emergency> {
   
   double _latitude = 0;
   double _longitude = 0;
+
   @override
 
 
