@@ -23,6 +23,8 @@ class _emergencyListState extends State<emergencyList> {
   final _controller = TextEditingController();
   late double _latitude;
   late double  _longitude;
+
+
   //  DocumentSnapshot variable = await _firestore
   //  .collection('Pilgrims-Account')
   //   .doc(storedocs[i]['UID']).get(
@@ -201,6 +203,22 @@ void DataStreams() async {
   //       _longitude = variable['longitude'];
   //   },
   //   );
+  //   getActivityProfile() async{
+  // await _firestore
+  // .collection('Pilgrims-Account')
+  // .doc(storedocs[i]['UID']).get().then(
+  //   (doc)=>{
+  //     setState((){
+  //       if (doc.data() != null){
+  //         _latitude = doc.data()!['latitude']??=0;
+  //         _longitude = doc.data()!['longitude']??=0;
+  //       }
+  //     },
+      
+  //     ),
+  //   },
+  //     );
+  //     };
                                                     _locationService.goToMaps(
                                                       _latitude, _longitude);
     //////////////////////////////////////////////////
