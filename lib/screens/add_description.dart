@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:rafad1/screens/welcome_screen.dart';
 import '../widgets/my_button.dart';
 
 
@@ -48,6 +49,15 @@ class _AddDescriptionState extends State<AddDescription> {
               'description': description,
 
             });
+
+            showDialog(
+          context: context,
+          builder: (context) {
+            return const AlertDialog(
+              content: Text(
+                  'Submitted successfully!'),
+            );
+          });
             /*Navigator.push(
               context, MaterialPageRoute(builder: (context) => ViewDescription()));*/
   }
@@ -63,8 +73,17 @@ class _AddDescriptionState extends State<AddDescription> {
           automaticallyImplyLeading: false,
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
-          actions: const [
-            SizedBox(height: 30),
+           actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushNamed(context, WelcomeScreen.screenRoute);
+              },
+            )
           ],
         ),
         /*body: screens[index],

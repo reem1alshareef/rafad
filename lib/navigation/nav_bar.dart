@@ -9,6 +9,7 @@ import 'package:rafad1/screens/forget_pw.dart';
 import 'package:rafad1/screens/view_booking.dart';
 import 'package:rafad1/search/search_campaign.dart';
 import 'package:rafad1/search/search_pilgrim.dart';
+import '../pilgrim_view_booking/pilgrimViewBooking.dart';
 import '../screens/add_description.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
@@ -86,21 +87,9 @@ class _nav_campaignState extends State<nav_campaign> {
   static const List<Widget> _widgetOptions = <Widget>[
     CampaignView(),
     SearchPilgrim(),
-    Center(
-      child: Text(
-        'announcement',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    Center(
-      child: Text(
-        'emergency',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    //MapTracking(), 
+    Center(child: Text('announcement',style: TextStyle(fontSize: 72),),),
+    Center(child: Text('emergency',style: TextStyle(fontSize: 72),),), 
     AddDescription(),
-    
   ];
 
   void _onItemTapped(int index) {
@@ -161,26 +150,11 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    ViewBooking(),
+    PilgrimView(),
     SearchCampaign(),//logOutPilgrim(),
-    Center(
-      child: Text(
-        'announcement',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    Center(
-      child: Text(
-        'emergency',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    Center(
-      child: Text(
-        'profile',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),//logOutPilgrim()
+    Center(child: Text('announcement',style: TextStyle(fontSize: 72),),),
+    Center(child: Text('emergency',style: TextStyle(fontSize: 72),),),
+    Center(child: Text('profile',style: TextStyle(fontSize: 72),),),//logOutPilgrim()
   ];
 
   void _onItemTapped(int index) {
