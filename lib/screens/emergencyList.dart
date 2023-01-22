@@ -23,9 +23,9 @@ class _emergencyListState extends State<emergencyList> {
   final _controller = TextEditingController();
   
 
-  get latitude => 0;
+  get latitude => 24.7227033;
   
-  get longitude => 0;
+  get longitude => 46.6369882;
   LocationService _locationService = LocationService();
   
   @override
