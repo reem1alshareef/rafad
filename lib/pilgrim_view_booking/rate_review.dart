@@ -83,10 +83,10 @@ class _RateReviewState extends State<RateReview> {
                         children: List.generate(
                             storedocs.length,
                             (i) => SingleChildScrollView(
-                              child: Card(
+                              /*child: Card(
                                                   margin:
                                                       const EdgeInsets.only(
-                                                          bottom: 10),
+                                                          bottom: 10),*/
                                                   child: Column(children: <Widget>[
                                                     Text(
                                                       'Campaign Name:' 
@@ -121,7 +121,7 @@ class _RateReviewState extends State<RateReview> {
                           ],
                           
                           //controller: _descController,
-                          cursorColor: Colors.black,
+                          cursorColor: Colors.blue,
                           style: TextStyle(color: Colors.black,) ,
                           textInputAction: TextInputAction.done,
                           keyboardType: TextInputType.text,
@@ -332,7 +332,11 @@ class _RateReviewState extends State<RateReview> {
         
         )
         
-                        )));})
+                        )
+                        )
+                        ;
+                        }
+                        )
                         )
         
         ])));
