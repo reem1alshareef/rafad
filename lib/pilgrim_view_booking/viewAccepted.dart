@@ -99,7 +99,7 @@ class _viewAcceptedState extends State<viewAccepted> {
                                       storedocs[i]['name'],
                                     ),
                                     subtitle: Text(
-                                      "Click to rate and review the campaign",
+                                      "Click to view requests's details ",
                                       style: TextStyle(fontSize: 11),
                                     ),
                                     children: [

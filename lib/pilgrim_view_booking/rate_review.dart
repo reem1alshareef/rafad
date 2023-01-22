@@ -56,10 +56,6 @@ class _RateReviewState extends State<RateReview> {
         .snapshots();
 
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: const Color(0xFF455D83),
-          elevation: 0,
-        ),
         body: SingleChildScrollView(
             child: Column(children: [
           Padding(
@@ -87,6 +83,93 @@ class _RateReviewState extends State<RateReview> {
                         children: List.generate(
                             storedocs.length,
                             (i) => SingleChildScrollView(
+                              child: Card(
+                                                  margin:
+                                                      const EdgeInsets.only(
+                                                          bottom: 10),
+                                                  child: Column(children: [
+                                                    Text(
+                                                      'Rating: $rating'
+
+                                                        ),
+                                                    RatingBar.builder(
+                                                      minRating: 1,
+                                                      itemSize: 20,
+                                                      itemPadding: EdgeInsets.symmetric(horizontal: 4),
+                                                      itemBuilder: (context, _) => Icon(Icons.star, color: Colors.amber,),
+                                                      updateOnDrag: true,
+                                                      onRatingUpdate: (rating) => setState(() {
+                                                      this.rating = rating;
+                                                 }),
+                                                    ),
+                                                      TextFormField(
+                          maxLines: 3,
+                          maxLength: 100,
+                          
+                          inputFormatters: [
+                            FilteringTextInputFormatter.deny
+                            (RegExp(r"\s\s"),)
+                          ],
+                          
+                          //controller: _descController,
+                          cursorColor: Colors.black,
+                          style: TextStyle(color: Colors.black,) ,
+                          textInputAction: TextInputAction.done,
+                          keyboardType: TextInputType.text,
+                          onChanged: (value) {
+                            setState(() {
+                              review = value;
+                            });
+                          },
+                          decoration: const InputDecoration(labelText: 'Please write your review here'),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (textValue) {
+                            if (textValue == null || textValue.isEmpty) {
+                              return 'Review is required!';
+                            }
+                            if(textValue.length<20){
+                              return 'Review should be 10 characters at least';
+                            }
+                            
+                            //return null;
+                            if(textValue.trim().isEmpty){
+                            return "Review cannot be empty.";
+                            }
+
+                            return null;
+                          }
+                           ),
+                            MyButton(
+                          color: const Color(0xFF455D83),
+                          title: 'Submit',
+                          onPressed: () async {
+                            await FirebaseFirestore.instance
+                            .collection("Rate")
+                            //.doc(FirebaseAuth.instance.currentUser!.uid)
+                            .add({
+                           'rating': rating,
+                           'review': review,
+                           'campaignID': storedocs[i]['campaignID'],
+                           'UID': FirebaseAuth.instance.currentUser!.uid,
+                                });
+
+                             showDialog(
+                                context: context,
+                                builder: (context) {
+                                return const AlertDialog(
+                                content: Text('Submitted successfully!'),
+                                              );
+                          },
+                        );}),
+                                                  ]
+
+                              ),
+
+
+
+
+
+                              /*
                                   child: ExpansionTileCard(
                                     elevation: 2,
                                     initialPadding:
@@ -174,8 +257,8 @@ class _RateReviewState extends State<RateReview> {
                           ],
                           
                           //controller: _descController,
-                          cursorColor: Colors.white,
-                          style: TextStyle(color: Colors.grey[500],) ,
+                          cursorColor: Colors.black,
+                          style: TextStyle(color: Colors.black,) ,
                           textInputAction: TextInputAction.done,
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
@@ -235,11 +318,14 @@ class _RateReviewState extends State<RateReview> {
                                   ),
                                 )));
                   }))
-        ]))
+        ])*/
         
         
+        )
         
+                        )));})
+                        )
         
-        );
+        ])));
   }
 }
