@@ -109,8 +109,8 @@ Container(
     (doc)=>{
       setState((){
         if (doc.data() != null){
-          _latitude = doc.data()!['latitude'];
-          _longitude = doc.data()!['longitude'];
+          _latitude = doc.data()!['latitude']??=0;
+          _longitude = doc.data()!['longitude']??=0;
         }
       },
       
