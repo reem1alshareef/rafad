@@ -8,6 +8,9 @@ import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/forget_pw.dart';
 import 'package:rafad1/screens/view_booking.dart';
+import 'package:rafad1/search/search_campaign.dart';
+import 'package:rafad1/search/search_pilgrim.dart';
+import '../pilgrim_view_booking/pilgrimViewBooking.dart';
 import '../screens/add_description.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
@@ -84,15 +87,10 @@ class _nav_campaignState extends State<nav_campaign> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     CampaignView(),
-    Center(
-      child: Text(
-        'pilgrims',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    CampaignPlan(),
+    SearchPilgrim(),
+    Center(child: Text('announcement',style: TextStyle(fontSize: 72),),),
+    Center(child: Text('emergency',style: TextStyle(fontSize: 72),),), 
     AddDescription(),
-    ProfileCampaign()
   ];
 
   void _onItemTapped(int index) {
@@ -122,8 +120,8 @@ class _nav_campaignState extends State<nav_campaign> {
                 label: 'Announcement',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.description),
-                label: 'Description',
+                icon: Icon(Icons.emergency),
+                label: 'Emergency',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
@@ -153,27 +151,11 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    ViewBooking(),
-    logOutPilgrim(),
-    Center(
-      child: Text(
-        'announcement',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    Center(
-      child: Text(
-        'emergency',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    Center(
-      child: Text(
-        'profile',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    //logOutPilgrim()
+    PilgrimView(),
+    SearchCampaign(),//logOutPilgrim(),
+     CampaignPlan(),
+    Center(child: Text('emergency',style: TextStyle(fontSize: 72),),),
+    Center(child: Text('profile',style: TextStyle(fontSize: 72),),),//logOutPilgrim()
   ];
 
   void _onItemTapped(int index) {
@@ -200,7 +182,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.announcement),
-                label: 'Announcement',
+                label: 'Plan',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.emergency),
