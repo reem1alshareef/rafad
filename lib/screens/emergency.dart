@@ -16,6 +16,7 @@ import 'package:rafad1/widgets/emButton.dart';
 import 'package:rafad1/screens/LocationService.dart';
 import '../widgets/my_button.dart';
 
+import 'package:rafad1/screens/emergencyList.dart';
 
 class emergency extends StatefulWidget {
   static const String screenRoute = 'emergency.dart';
@@ -33,10 +34,15 @@ class _emergencyState extends State<emergency> {
   
   double _latitude = 0;
   double _longitude = 0;
+  
+  @override 
+  void initState(){
+    _emergencyState();
+    print(FirebaseAuth.instance.currentUser?.uid);
+    super.initState();
+  }
 
   @override
-
-
   Widget build(BuildContext context) {
 
     return Scaffold(
@@ -77,6 +83,7 @@ Container(
               title: 'click here if you want to send emerency request !!',
                 onPressed: () async{
 //////////////////////////الكود اللي بيرسل اللوكيشن الحالي لليوزر
+
                   LocationService _locationService = LocationService();
                   _locationService.sendLocationToDataBase(context);
                   _locationService.goToMaps(
@@ -92,6 +99,25 @@ Container(
                                 String pharma = variable['pharma'];
                                 String campaignID = variable['campaignID'];
                                 String number = variable['number'];
+                                // double _latitude1 = variable['latitude'];
+                                // double _longitude1 = variable['longitude'];
+
+  getActivityProfile() async{
+  await _firestore
+  .collection('Pilgrims-Account')
+  .doc(FirebaseAuth.instance.currentUser?.uid).get().then(
+    (doc)=>{
+      setState((){
+        if (doc.data() != null){
+          _latitude = doc.data()!['latitude'];
+          _longitude = doc.data()!['longitude'];
+        }
+      },
+      
+      ),
+    },
+      );
+      };
                   _firestore
                   .collection("AcceptedCampaigns")
                   .doc(campaignID)

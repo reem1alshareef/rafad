@@ -7,6 +7,7 @@ import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/widgets/emButton.dart';
 import 'package:rafad1/screens/LocationService.dart';
 import 'package:rafad1/screens/emergency.dart';
+import 'package:rafad1/screens/LocationService.dart';
 
 
 class emergencyList extends StatefulWidget {
@@ -16,17 +17,23 @@ class emergencyList extends StatefulWidget {
   @override
   _emergencyListState createState() => _emergencyListState();
 }
-
 class _emergencyListState extends State<emergencyList> {
   final _firestore = FirebaseFirestore.instance;
 
   final _controller = TextEditingController();
+  late double _latitude;
+  late double  _longitude;
+  //  DocumentSnapshot variable = await _firestore
+  //  .collection('Pilgrims-Account')
+  //   .doc(storedocs[i]['UID']).get(
+  //    {
+  //   double latitude = variable['latitude'];
+  //   double  longitude = variable['longitude'];
+  //   },
+  //   );
+  LocationService _locationService = LocationService();
   
 
-  get latitude => 24.7227033;
-  
-  get longitude => 46.6369882;
-  LocationService _locationService = LocationService();
   
   @override
 void DataStreams() async {
@@ -185,9 +192,17 @@ void DataStreams() async {
                                                     (Icons.location_history_sharp),
                                                     color: Color.fromARGB(255, 160, 10, 10),
                                                     ),
-                                                    onPressed: () {
+                                                    onPressed: () async {
+  //  DocumentSnapshot variable = await _firestore
+  //  .collection('Pilgrims-Account')
+  //   .doc(storedocs[i]['UID']).get(
+  //    {
+  //       _latitude = variable['latitude'];
+  //       _longitude = variable['longitude'];
+  //   },
+  //   );
                                                     _locationService.goToMaps(
-                                                      latitude, longitude);
+                                                      _latitude, _longitude);
     //////////////////////////////////////////////////
                                                     },
                                                     )
