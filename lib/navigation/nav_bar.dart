@@ -2,7 +2,7 @@
 
 import "package:flutter/material.dart";
 import 'package:rafad1/admin/DeletePilgrim.dart';
-import 'package:rafad1/screens/CampaignPlan.dart';
+import 'package:rafad1/screens/ViewCampaignPlan.dart';
 import 'package:rafad1/screens/CampaignView.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
@@ -153,7 +153,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
   static const List<Widget> _widgetOptions = <Widget>[
     PilgrimView(),
     SearchCampaign(),//logOutPilgrim(),
-     CampaignPlan(),
+    ViewCampaignPlan(),
     Center(child: Text('emergency',style: TextStyle(fontSize: 72),),),
     Center(child: Text('profile',style: TextStyle(fontSize: 72),),),//logOutPilgrim()
   ];

@@ -93,7 +93,7 @@ class _viewAcceptedState extends State<viewAccepted> {
                                   storedocs[i]['name'],
                                 ),
                                 subtitle: Text(
-                                  "Click to rate and review the campaign",
+                                  "Click to confirm your booking for this campaign",
                                   style: TextStyle(fontSize: 11),
                                 ),
                                 children: [
@@ -116,14 +116,14 @@ class _viewAcceptedState extends State<viewAccepted> {
                                                   bottom: 10),
                                               child: Column(children: [
                                                 const Text(
-                                                  'Campaign\'s Name: ',
+                                                  'This Campaign has accepted your booking request',
                                                   style: TextStyle(
                                                       color: Color(0xFF455D83),
                                                       fontWeight:
                                                           FontWeight.w500),
                                                 ),
                                                 Text(
-                                                  storedocs[i]['name'],
+                                                  'Click confirm if you want to join this campaign',
                                                   style: const TextStyle(
                                                     fontSize: 14,
                                                     color: Color.fromARGB(
@@ -151,6 +151,9 @@ class _viewAcceptedState extends State<viewAccepted> {
                                                               ?.uid)
                                                           .set(
                                                               {
+                                                            'ChosenCampaignName':
+                                                                storedocs[i]
+                                                                    ['name'],
                                                             'ChosenCampaignID':
                                                                 storedocs[i][
                                                                     'campaignID']
