@@ -70,7 +70,7 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
 //////////////////////////الكود اللي بيرسل اللوكيشن الحالي لليوزر
 
                   mapService _mapService = mapService();
-                  _mapService.sendLocationToDataBase(context);
+                  _mapService.CsendLocationToDataBase(context);
                   
 ///////////////////////////////
                  

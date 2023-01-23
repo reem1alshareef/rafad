@@ -9,13 +9,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:rafad1/screens/emergency.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'dart:developer';
 
-class mapService {
+class LocationService {
+
   final _firestore = FirebaseFirestore.instance;
 
-  CsendLocationToDataBase(context) async {
+  PsendLocationToDataBase(context) async {
     Location location = new Location();
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
@@ -37,10 +39,9 @@ class mapService {
     }
     _locationData = await location.getLocation();
 
-    _firestore
-        .collection('AcceptedCampaigns')
-        .doc(FirebaseAuth.instance.currentUser?.uid)
-        .update(
+      _firestore
+        .collection('Pilgrims-Account')
+        .doc(FirebaseAuth.instance.currentUser?.uid).update(
       {
         'latitude': _locationData.latitude,
         'longitude': _locationData.longitude,
@@ -48,7 +49,8 @@ class mapService {
     );
   }
 
-  CgoToMaps(double latitude, double longitude) async {
+  
+  PgoToMaps(double latitude, double longitude) async {
     String mapLocationUrl =
         "https://www.google.com/maps/search/?api=1&query=$latitude,$longitude";
     final String encodedURl = Uri.encodeFull(mapLocationUrl);
