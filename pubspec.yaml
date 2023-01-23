@@ -56,6 +56,8 @@ dependencies:
   location: ^4.4.0
   flutter_svg: ^1.1.6
   persistent_bottom_nav_bar: ^5.0.2
+  dio: ^4.0.6
+  geolocator: ^9.0.2
   #firebase:
   #cloud_firestore: ^3.1.5
   #firebase_auth: ^3.3.14
