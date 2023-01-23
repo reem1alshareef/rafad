@@ -60,9 +60,9 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        const PageHeading(
-                          title: 'Sign up as Pilgrim',
-                        ),
+                        // const PageHeading(
+                        //   title: 'Sign up as Pilgrim',
+                        // ),
                         const SizedBox(
                           height: 16,
                         ),
@@ -209,6 +209,11 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                               disease = value;
                             });
                           },
+                          validator: (textValue) {
+                            if (textValue == null || textValue.isEmpty) {
+                              return 'please enter none if there isn\'t any!';
+                            }
+                          },
                           decoration: InputDecoration(
                             labelText: 'chronic disease',
                             hintText: 'if you suffer from any chronic disease',
@@ -229,6 +234,11 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                             setState(() {
                               pharma = value;
                             });
+                          },
+                          validator: (textValue) {
+                            if (textValue == null || textValue.isEmpty) {
+                              return 'please enter none if there isn\'t any!';
+                            }
                           },
                           decoration: InputDecoration(
                             labelText: 'pharmaceutical',

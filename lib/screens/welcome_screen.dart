@@ -4,12 +4,7 @@ import 'package:rafad1/screens/signUp_campaign.dart';
 import 'package:rafad1/widgets/my_button.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:screens/screens.dart';
-//import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-//import 'notification_accept.dart';
-//final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin= FlutterLocalNotificationsPlugin();
-//1- بصفحة سديم سوي زي كذا لازم امبورت لفايل الرفض والقبول واربطهم بالزر
 
-//3- كيف الاشعار يروح للحاج ؟؟؟
 class WelcomeScreen extends StatefulWidget {
   static const String screenRoute = 'welcome_screen';
   const WelcomeScreen({super.key});

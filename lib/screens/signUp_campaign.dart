@@ -78,7 +78,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                               nameCampaign = value;
                             });
                           },
-                          validator: (textValue) { 
+                          validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Name field is required!';
                             }
@@ -325,8 +325,10 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                                 );
 
                                 Navigator.push(
-              context, MaterialPageRoute(builder: (context) => logOutCampaign()));
-
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            logOutCampaign()));
                               }).catchError((onError) {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
