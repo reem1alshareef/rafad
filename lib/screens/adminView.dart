@@ -114,8 +114,7 @@ class _ViewState extends State<View> {
                                                       Text(
                                                         'Campaign\'s email:  ',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
+                                                            color: Color.fromARGB(255, 69, 93, 131),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),

@@ -41,7 +41,7 @@ class LocationService {
     _locationData = await location.getLocation();
 
       _firestore
-        .collection('Pilgrims-Account')
+        .collection('AcceptedCampaigns')
         .doc(FirebaseAuth.instance.currentUser?.uid).update(
       {
         'latitude': _locationData.latitude,
