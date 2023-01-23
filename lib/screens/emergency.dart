@@ -33,8 +33,8 @@ class _emergencyState extends State<emergency> {
 
   final _controller = TextEditingController();
   
-  double _latitude = 0;
-  double _longitude = 0;
+  late GeoPoint _latitude ;
+  late GeoPoint _longitude ;
 
   @override 
   void initState(){
