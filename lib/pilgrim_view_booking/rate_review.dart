@@ -111,43 +111,7 @@ class _RateReviewState extends State<RateReview> {
                                                       this.rating = rating;
                                                  }),
                                                     ),
-                                                      TextFormField(
-                          maxLines: 3,
-                          maxLength: 100,
-                          
-                          inputFormatters: [
-                            FilteringTextInputFormatter.deny
-                            (RegExp(r"\s\s"),)
-                          ],
-                          
-                          //controller: _descController,
-                          cursorColor: Colors.blue,
-                          style: TextStyle(color: Colors.black,) ,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {
-                            setState(() {
-                              review = value;
-                            });
-                          },
-                          decoration: const InputDecoration(labelText: 'Please write your review here'),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (textValue) {
-                            if (textValue == null || textValue.isEmpty) {
-                              return 'Review is required!';
-                            }
-                            if(textValue.length<20){
-                              return 'Review should be 10 characters at least';
-                            }
-                            
-                            //return null;
-                            if(textValue.trim().isEmpty){
-                            return "Review cannot be empty.";
-                            }
-
-                            return null;
-                          }
-                           ),
+                                                      
                             MyButton(
                           color: const Color(0xFF455D83),
                           title: 'Submit',
@@ -170,15 +134,100 @@ class _RateReviewState extends State<RateReview> {
                                               );
                           },
                         );}),
-                                                  ]
+                        MyButton(
+                  color: const Color(0xFF455D83),
+                  title: 'Review',
+                  onPressed: () async {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Form(
+              key: _review,
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      icon: Icon(Icons.ac_unit),
+                    ),
+                    maxLength: 30,
+                    maxLines: 2,
+                    textAlign: TextAlign.center,
+                    onSaved: (val) {
+                      review = val;
+                      setState(() {});
+                    },
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (textValue) {
+                            if (textValue == null || textValue.isEmpty) {
+                              return 'Review is required!';
+                            }
+                            if(textValue.length<10){
+                              return 'Review should be 10 characters at least';
+                            }
+                            
+                            //return null;
+                            if(textValue.trim().isEmpty){
+                            return "Review cannot be empty.";
+                            }
 
+                            return null;
+                          }
+                  )
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              MyButton(
+                color:  Colors.green,
+                title: 'Save',
+                onPressed: () async {
+                  await FirebaseFirestore.instance
+                            .collection("Rate")
+                            //.doc(FirebaseAuth.instance.currentUser!.uid)
+                            .add({
+                           'rating': rating,
+                           'review': review,
+                           'campaignID': storedocs[i]['campaignID'],
+                           'UID': FirebaseAuth.instance.currentUser!.uid,});
+                  //if (_review.currentState!.validate()) {
+                    //_review.currentState!.save();
+
+                    Navigator.pop(context);
+                  }),
+              MyButton(
+                color: Colors.red,
+                title: 'Cancel',
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+              ),
+            ],
+          );
+        });
+  },)
+                                                  ]
                               ),
 
+        
+        )
+        
+                        )
+                        )
+                        ;
+                        }
+                        )
+                        )
+        
+        ])));
+        
+  }
+  
+}
 
 
 
-
-                              /*
+/*
                                   child: ExpansionTileCard(
                                     elevation: 2,
                                     initialPadding:
@@ -328,18 +377,3 @@ class _RateReviewState extends State<RateReview> {
                                 )));
                   }))
         ])*/
-        
-        
-        )
-        
-                        )
-                        )
-                        ;
-                        }
-                        )
-                        )
-        
-        ])));
-        
-  }
-}
