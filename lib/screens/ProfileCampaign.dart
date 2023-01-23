@@ -69,24 +69,24 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
                 onPressed: () async{
 //////////////////////////الكود اللي بيرسل اللوكيشن الحالي لليوزر
 
-                  mapService _mapService = mapService();
-                  _mapService.CsendLocationToDataBase(context);
+                  LocationService _LocationService = LocationService();
+                  _LocationService.CampsendLocationToDataBase(context);
                   
 ///////////////////////////////
-                 
+
                 },
             ),
-                       MyButton(
+              MyButton(
               color: Color.fromARGB(55, 4, 66, 55),
               title: 'click here to udpate your Location',
                 onPressed: () async{
 //////////////////////////هذا اللي يعرض الماب الحين يابتول حطيته عشان تجربين الخريطة تطلع ولا لا 
 
-                 LocationService _locationService = LocationService();
-  _locationService.PgoToMaps(24.7231819,46.6367413);
+LocationService _locationService = LocationService();
+  _locationService.goToMaps(24.7231819,46.6367413);
                   
 ///////////////////////////////
-                 
+
                 },
             ),
             

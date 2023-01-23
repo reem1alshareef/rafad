@@ -87,7 +87,7 @@ Container(
 //////////////////////////الكود اللي بيرسل اللوكيشن الحالي لليوزر
 
                   LocationService locationService = LocationService();
-                  locationService.PsendLocationToDataBase(context);
+                  locationService.PilgsendLocationToDataBase(context);
                   // _locationService.goToMaps(
                   // _latitude, _longitude);
 ///////////////////////////////

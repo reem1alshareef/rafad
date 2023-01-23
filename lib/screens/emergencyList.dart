@@ -230,7 +230,7 @@ void DataStreams() async {
   //   },
   //     );
   LocationService _locationService = LocationService();
-  _locationService.PgoToMaps(_latitude, _longitude);
+  _locationService.goToMaps(_latitude, _longitude);
     //////////////////////////////////////////////////
                                                     },
                                                     )
