@@ -76,8 +76,20 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
                  
                 },
             ),
-            
+                       MyButton(
+              color: Color.fromARGB(55, 4, 66, 55),
+              title: 'click here to udpate your Location',
+                onPressed: () async{
+//////////////////////////هذا اللي يعرض الماب الحين يابتول حطيته عشان تجربين الخريطة تطلع ولا لا 
 
+                 LocationService _locationService = LocationService();
+  _locationService.PgoToMaps(24.7231819,46.6367413);
+                  
+///////////////////////////////
+                 
+                },
+            ),
+            
 
       ],
             ),
