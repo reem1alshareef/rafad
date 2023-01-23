@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: ProfileCampaign(),
+        home: const MapTracking(),
         // initialRoute: WelcomeScreen.screenRoute,
         routes: {
           WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
