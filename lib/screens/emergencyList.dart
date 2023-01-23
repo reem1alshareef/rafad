@@ -21,8 +21,8 @@ class _emergencyListState extends State<emergencyList> {
   final _firestore = FirebaseFirestore.instance;
 
   final _controller = TextEditingController();
-  late double _latitude;
-  late double  _longitude;
+  late final  double _latitude;
+  late final double  _longitude;
 
 
   //  DocumentSnapshot variable = await _firestore
@@ -33,7 +33,6 @@ class _emergencyListState extends State<emergencyList> {
   //   double  longitude = variable['longitude'];
   //   },
   //   );
-  LocationService _locationService = LocationService();
   
 
   
@@ -195,16 +194,28 @@ void DataStreams() async {
                                                     color: Color.fromARGB(255, 160, 10, 10),
                                                     ),
                                                     onPressed: () async {
-  //  DocumentSnapshot variable = await _firestore
-  //  .collection('Pilgrims-Account')
-  //   .doc(storedocs[i]['UID']).get(
-  //    {
-  //       _latitude = variable['latitude'];
-  //       _longitude = variable['longitude'];
-  //   },
-  //   );
-  //   getActivityProfile() async{
-  // await _firestore
+
+        //_latitude = storedocs[i]['latitude'];
+        //_longitude = storedocs[i]['longitude'];
+
+    getActivityProfile() async{
+  await _firestore
+  .collection('Pilgrims-Account')
+  .doc(storedocs[i]['UID']).get().then(
+    (doc)=>{
+      setState((){
+        if (doc.data() != null){
+          _latitude = doc.data()!['latitude']??=0;
+          _longitude = doc.data()!['longitude']??=0;
+        }
+      },
+      
+      ),
+    },
+      );
+      };
+    
+  // _firestore
   // .collection('Pilgrims-Account')
   // .doc(storedocs[i]['UID']).get().then(
   //   (doc)=>{
@@ -218,9 +229,8 @@ void DataStreams() async {
   //     ),
   //   },
   //     );
-  //     };
-                                                    _locationService.goToMaps(
-                                                      _latitude, _longitude);
+  LocationService _locationService = LocationService();
+  _locationService.goToMaps(_latitude, _longitude);
     //////////////////////////////////////////////////
                                                     },
                                                     )

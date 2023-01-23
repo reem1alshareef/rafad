@@ -24,6 +24,7 @@ class emergency extends StatefulWidget {
 
   @override
   _emergencyState createState() => _emergencyState();
+  
 }
 
 class _emergencyState extends State<emergency> {
@@ -34,7 +35,7 @@ class _emergencyState extends State<emergency> {
   
   double _latitude = 0;
   double _longitude = 0;
-  
+
   @override 
   void initState(){
     _emergencyState();
@@ -74,6 +75,7 @@ Container(
 
         ],
       ),
+      
       body:Center(
       child: Column(
           children: [
@@ -84,10 +86,10 @@ Container(
                 onPressed: () async{
 //////////////////////////الكود اللي بيرسل اللوكيشن الحالي لليوزر
 
-                  LocationService _locationService = LocationService();
-                  _locationService.sendLocationToDataBase(context);
-                  _locationService.goToMaps(
-                  _latitude, _longitude);
+                  LocationService locationService = LocationService();
+                  locationService.sendLocationToDataBase(context);
+                  // _locationService.goToMaps(
+                  // _latitude, _longitude);
 ///////////////////////////////
                   DocumentSnapshot variable = await _firestore
                                     .collection('Pilgrims-Account')
@@ -102,22 +104,24 @@ Container(
                                 // double _latitude1 = variable['latitude'];
                                 // double _longitude1 = variable['longitude'];
 
-  getActivityProfile() async{
-  await _firestore
-  .collection('Pilgrims-Account')
-  .doc(FirebaseAuth.instance.currentUser?.uid).get().then(
-    (doc)=>{
-      setState((){
-        if (doc.data() != null){
-          _latitude = doc.data()!['latitude']??=0;
-          _longitude = doc.data()!['longitude']??=0;
-        }
-      },
+  // getActivityProfile() async{
+  // await _firestore
+  // .collection('Pilgrims-Account')
+  // .doc(FirebaseAuth.instance.currentUser?.uid).get().then(
+  //   (doc)=>{
+  //     setState((){
+  //       if (doc.data() != null){
+  //         _latitude = doc.data()!['latitude']??=0;
+  //         _longitude = doc.data()!['longitude']??=0;
+  //       }
+  //     },
       
-      ),
-    },
-      );
-      };
+  //     ),
+  //   },
+  //     );
+  //     };
+
+      //_locationService.goToMaps(_latitude, _longitude);
                   _firestore
                   .collection("AcceptedCampaigns")
                   .doc(campaignID)
@@ -134,9 +138,6 @@ Container(
             );
                 },
             ),
-            
-
-
       ],
             ),
 

@@ -214,11 +214,10 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
                 icon: Icon(Icons.announcement),
                 label: 'Announcement',
                 backgroundColor: Color(0xFF455D83)),
-            // BottomNavigationBarItem(
-            //     icon: Icon(Icons.emergency_share_sharp),
-            //     label: 'Emergency',
-            //     backgroundColor: Color.fromARGB(255, 184, 20, 20)),
-                
+            BottomNavigationBarItem(
+                icon: Icon(Icons.emergency_share_sharp),
+                label: 'Emergency',
+                backgroundColor: Color.fromARGB(255, 184, 20, 20)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',
