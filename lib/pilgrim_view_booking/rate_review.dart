@@ -57,7 +57,9 @@ class _RateReviewState extends State<RateReview> {
 
     return Scaffold(
         body: SingleChildScrollView(
-            child: Column(children: [
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
           Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
@@ -83,11 +85,8 @@ class _RateReviewState extends State<RateReview> {
                         children: List.generate(
                             storedocs.length,
                             (i) => SingleChildScrollView(
-                              /*child: Card(
-                                                  margin:
-                                                      const EdgeInsets.only(
-                                                          bottom: 10),*/
-                                                  child: Column(children: <Widget>[
+                                                  child: Column(
+                                                    children: <Widget>[
                                                     Text(
                                                       'Campaign Name:' 
                                                         ),
@@ -95,45 +94,58 @@ class _RateReviewState extends State<RateReview> {
                                                       storedocs[i]['name'] 
                                                         ),
                                                         SizedBox(height: 10,),
-                                                    Text(
-                                                      'Rating: $rating'
-
-                                                        ),
-                                                    SizedBox(height: 10,),
                                                     
-                                                    RatingBar.builder(
-                                                      minRating: 1,
-                                                      itemSize: 20,
-                                                      itemPadding: EdgeInsets.symmetric(horizontal: 4),
-                                                      itemBuilder: (context, _) => Icon(Icons.star, color: Colors.amber,),
-                                                      updateOnDrag: true,
-                                                      onRatingUpdate: (rating) => setState(() {
-                                                      this.rating = rating;
-                                                 }),
-                                                    ),
-                                                      
-                            MyButton(
-                          color: const Color(0xFF455D83),
-                          title: 'Submit',
-                          onPressed: () async {
-                            await FirebaseFirestore.instance
-                            .collection("Rate")
-                            //.doc(FirebaseAuth.instance.currentUser!.uid)
-                            .add({
-                           'rating': rating,
-                           'review': review,
-                           'campaignID': storedocs[i]['campaignID'],
-                           'UID': FirebaseAuth.instance.currentUser!.uid,
-                                });
+                                      MyButton(
+                                      color: const Color(0xFF455D83),
+                                       title: 'Rate',
+                                       onPressed: () async {
+                                        return showDialog(
+                                         context: context,
+                                         builder: (context) => AlertDialog(
+                                            //title: Text('Rate this campaign'),
+                                            content: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              children:  [
+                                                const Text(
+                                                'Please leave a star rating.',
+                                                style: TextStyle(fontSize: 20)),
 
-                             showDialog(
-                                context: context,
-                                builder: (context) {
-                                return const AlertDialog(
-                                content: Text('Submitted successfully!'),
-                                              );
-                          },
-                        );}),
+                                                const SizedBox(height: 32,),
+
+                                                buildRating(),
+                                              ],
+                                            ),
+                                            actions: <Widget>[
+              TextButton(
+                style: TextButton.styleFrom(
+                    backgroundColor: Colors.green,),
+                onPressed: () async {
+                  await FirebaseFirestore.instance
+                            .collection("Rate")
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .set({
+                           'rating': rating,
+                           //'review': review,
+                           'campaignID': storedocs[i]['campaignID'],
+                           'UID': FirebaseAuth.instance.currentUser!.uid,}, SetOptions(merge: true));
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Save', style: TextStyle(color: Colors.white , fontSize: 20),),
+                  ),
+              TextButton(
+                //color: Colors.red,
+                //title: 'Cancel',
+                style: TextButton.styleFrom(
+                    backgroundColor: Colors.red,),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Cancel', style: TextStyle(color: Colors.white , fontSize: 20),),
+              ),
+            ],
+                                         ),);
+                                       },
+                                      ),
                         MyButton(
                   color: const Color(0xFF455D83),
                   title: 'Review',
@@ -146,17 +158,19 @@ class _RateReviewState extends State<RateReview> {
               key: _review,
               child: Column(
                 children: <Widget>[
+                  const Text(
+                   'Please leave a review.',
+                   style: TextStyle(fontSize: 20)),
                   TextFormField(
-                    decoration: const InputDecoration(
-                      icon: Icon(Icons.ac_unit),
-                    ),
                     maxLength: 30,
                     maxLines: 2,
-                    textAlign: TextAlign.center,
-                    onSaved: (val) {
-                      review = val;
-                      setState(() {});
-                    },
+                     textInputAction: TextInputAction.done,
+                          keyboardType: TextInputType.text,
+                          onChanged: (value) {
+                            setState(() {
+                              review = value;
+                            });
+                          },
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
@@ -178,202 +192,58 @@ class _RateReviewState extends State<RateReview> {
               ),
             ),
             actions: <Widget>[
-              MyButton(
-                color:  Colors.green,
-                title: 'Save',
+              TextButton(
+                //color:  Colors.green,
+                //title: 'Save',
+                style: TextButton.styleFrom(
+                    backgroundColor: Colors.green,),
                 onPressed: () async {
                   await FirebaseFirestore.instance
                             .collection("Rate")
-                            //.doc(FirebaseAuth.instance.currentUser!.uid)
-                            .add({
-                           'rating': rating,
+                            .doc(FirebaseAuth.instance.currentUser!.uid)
+                            .set({
+                           //'rating': rating,
                            'review': review,
                            'campaignID': storedocs[i]['campaignID'],
-                           'UID': FirebaseAuth.instance.currentUser!.uid,});
-                  //if (_review.currentState!.validate()) {
-                    //_review.currentState!.save();
-
+                           'UID': FirebaseAuth.instance.currentUser!.uid,}, SetOptions(merge: true));
                     Navigator.pop(context);
-                  }),
-              MyButton(
-                color: Colors.red,
-                title: 'Cancel',
+                  },
+                  child: const Text('Save', style: TextStyle(color: Colors.white , fontSize: 20),),
+                  ),
+              TextButton(
+                //color: Colors.red,
+                //title: 'Cancel',
+                style: TextButton.styleFrom(
+                    backgroundColor: Colors.red,),
                   onPressed: () {
                     Navigator.pop(context);
                   },
+                  child: const Text('Cancel', style: TextStyle(color: Colors.white , fontSize: 20),),
               ),
             ],
           );
         });
   },)
-                                                  ]
-                              ),
-
-        
-        )
-        
-                        )
-                        )
+ ]
+ ),
+ )
+)
+  )
                         ;
-                        }
-                        )
-                        )
-        
-        ])));
-        
-  }
-  
 }
-
-
-
-/*
-                                  child: ExpansionTileCard(
-                                    elevation: 2,
-                                    initialPadding:
-                                        EdgeInsets.only(bottom: 7, top: 7),
-                                    baseColor: Colors.blueGrey[50],
-                                    expandedColor: Colors.blueGrey[50],
-                                    //key: cardA,
-                                    leading: CircleAvatar(
-                                      child: Image.asset(
-                                          "assests/images/kaaba.png"),
-                                      backgroundColor: Color(0xFF788AA4),
-                                    ),
-                                    title: Text(
-                                      storedocs[i]['name'],
-                                    ),
-                                    subtitle: Text(
-                                      "Click to rate and review the campaign",
-                                      style: TextStyle(fontSize: 11),
-                                    ),
-                                    children: [
-                                      Divider(
-                                        thickness: 1.7,
-                                        height: 1.0,
-                                      ),
-                                      Align(
-                                        alignment: Alignment.centerLeft,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                            horizontal: 16.0,
-                                            vertical: 10.0,
-                                          ),
-                                          child: Center(
-                                            child: Column(children: [
-                                              Column(children: [
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 10),
-                                                  child: Column(children: [
-                                                    const Text(
-                                                      'Campaign\'s Name: ',
-                                                      style: TextStyle(
-                                                          color:
-                                                              Color(0xFF455D83),
-                                                          fontWeight:
-                                                              FontWeight.w500),
-                                                    ),
-                                                    Text(
-                                                      storedocs[i]
-                                                          ['name'],
-                                                      style: const TextStyle(
-                                                        fontSize: 14,
-                                                        color: Color.fromARGB(
-                                                            255, 109, 94, 19),
-                                                      ),
-                                                    ),
-                                                  ]),
-                                                ),
-                                              Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 10),
-                                                  child: Column(children: [
-                                                    Text(
-                                                      'Rating: $rating'
-
-                                                        ),
-                                                    RatingBar.builder(
+ )
+)
+]))
+); 
+  }
+  Widget buildRating() => RatingBar.builder(
                                                       minRating: 1,
-                                                      itemSize: 20,
+                                                      itemSize: 30,
                                                       itemPadding: EdgeInsets.symmetric(horizontal: 4),
                                                       itemBuilder: (context, _) => Icon(Icons.star, color: Colors.amber,),
                                                       updateOnDrag: true,
                                                       onRatingUpdate: (rating) => setState(() {
                                                       this.rating = rating;
                                                  }),
-                                                          ),
-                                                          TextFormField(
-                          maxLines: 3,
-                          maxLength: 100,
-                          
-                          inputFormatters: [
-                            FilteringTextInputFormatter.deny
-                            (RegExp(r"\s\s"),)
-                          ],
-                          
-                          //controller: _descController,
-                          cursorColor: Colors.black,
-                          style: TextStyle(color: Colors.black,) ,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {
-                            setState(() {
-                              review = value;
-                            });
-                          },
-                          decoration: const InputDecoration(labelText: 'Please write your review here'),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (textValue) {
-                            if (textValue == null || textValue.isEmpty) {
-                              return 'Review is required!';
-                            }
-                            if(textValue.length<20){
-                              return 'Review should be 10 characters at least';
-                            }
-                            
-                            //return null;
-                            if(textValue.trim().isEmpty){
-                            return "Review cannot be empty.";
-                            }
-
-                            return null;
-                          }
-                           ),
-                            MyButton(
-                          color: const Color(0xFF455D83),
-                          title: 'Submit',
-                          onPressed: () async {
-                            await FirebaseFirestore.instance
-                            .collection("Rate")
-                            //.doc(FirebaseAuth.instance.currentUser!.uid)
-                            .add({
-                           'rating': rating,
-                           'review': review,
-                           'campaignID': storedocs[i]['campaignID'],
-                           'UID': FirebaseAuth.instance.currentUser!.uid,
-                                });
-
-                             showDialog(
-                                context: context,
-                                builder: (context) {
-                                return const AlertDialog(
-                                content: Text('Submitted successfully!'),
-                                              );
-                          },
-                        );}),
-                                                  ]),
-                                                ),
-                                              ]),
-                                            ]),
-                                          ),
-                                        ),
-                                      ),
-                                      
-                                    ],
-                                  ),
-                                )));
-                  }))
-        ])*/
+                                                    );
+}
