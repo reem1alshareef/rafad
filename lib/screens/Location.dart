@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
       home: getLocation(),
     );
   }
+  wej
+  
 }
 
 class getLocation extends StatefulWidget {
