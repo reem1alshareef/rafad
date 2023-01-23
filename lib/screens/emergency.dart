@@ -103,7 +103,21 @@ Container(
                                 String number = variable['number'];
                                 // double _latitude1 = variable['latitude'];
                                 // double _longitude1 = variable['longitude'];
-
+    LocationService _locationService = LocationService();
+  _firestore
+  .collection('Pilgrims-Account')
+  .doc(FirebaseAuth.instance.currentUser?.uid).get().then(
+    (doc)=>{
+      setState((){
+        if (doc.data() != null){
+          _locationService.goToMaps(doc.data()!['latitude'], doc.data()!['longitude']);
+          // _latitude = doc.data()!['latitude']??=0;
+          // _longitude = doc.data()!['longitude']??=0;
+        }
+      },
+      ),
+    },
+      );
   // getActivityProfile() async{
   // await _firestore
   // .collection('Pilgrims-Account')
@@ -120,8 +134,8 @@ Container(
   //   },
   //     );
   //     };
-
-      //_locationService.goToMaps(_latitude, _longitude);
+  // LocationService _locationService = LocationService();
+  //     _locationService.goToMaps(_latitude1, _longitude1);
                   _firestore
                   .collection("AcceptedCampaigns")
                   .doc(campaignID)
@@ -133,7 +147,6 @@ Container(
                   'disease': disease,
                   'pharma': pharma,
                   'number' : number,
-                  //'hajId': hajId,
                   },
             );
                 },

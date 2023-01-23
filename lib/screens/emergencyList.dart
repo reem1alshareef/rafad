@@ -21,8 +21,6 @@ class _emergencyListState extends State<emergencyList> {
   final _firestore = FirebaseFirestore.instance;
 
   final _controller = TextEditingController();
-  late final  double _latitude;
-  late final double  _longitude;
 
 
   //  DocumentSnapshot variable = await _firestore
@@ -198,24 +196,8 @@ void DataStreams() async {
         //_latitude = storedocs[i]['latitude'];
         //_longitude = storedocs[i]['longitude'];
 
-    getActivityProfile() async{
-  await _firestore
-  .collection('Pilgrims-Account')
-  .doc(storedocs[i]['UID']).get().then(
-    (doc)=>{
-      setState((){
-        if (doc.data() != null){
-          _latitude = doc.data()!['latitude']??=0;
-          _longitude = doc.data()!['longitude']??=0;
-        }
-      },
-      
-      ),
-    },
-      );
-      };
-    
-  // _firestore
+  //   getActivityProfile() async{
+  // await _firestore
   // .collection('Pilgrims-Account')
   // .doc(storedocs[i]['UID']).get().then(
   //   (doc)=>{
@@ -229,8 +211,25 @@ void DataStreams() async {
   //     ),
   //   },
   //     );
-  LocationService _locationService = LocationService();
-  _locationService.goToMaps(_latitude, _longitude);
+  //     };
+
+  //   LocationService _locationService = LocationService();
+  // _firestore
+  // .collection('Pilgrims-Account')
+  // .doc(storedocs[i]['UID']).get().then(
+  //   (doc)=>{
+  //     setState((){
+  //       if (doc.data() != null){
+  //         _locationService.goToMaps(doc.data()!['latitude']??=0, doc.data()!['longitude']??=0);
+  //         // _latitude = doc.data()!['latitude']??=0;
+  //         // _longitude = doc.data()!['longitude']??=0;
+  //       }
+  //     },
+  //     ),
+  //   },
+  //     );
+  
+  //_locationService.goToMaps(_latitude, _longitude);
     //////////////////////////////////////////////////
                                                     },
                                                     )
