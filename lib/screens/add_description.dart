@@ -114,10 +114,10 @@ class _AddDescriptionState extends State<AddDescription> {
         ],),*/
        
           body: Container(
-          decoration: const BoxDecoration(
+         /* decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assests/images/background.png"),
-                  fit: BoxFit.cover)),
+                  fit: BoxFit.cover)),*/
           child: Form(
             key: _addDescKey,
               //mainAxisAlignment: MainAxisAlignment.center,
