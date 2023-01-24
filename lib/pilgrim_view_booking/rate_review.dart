@@ -26,21 +26,6 @@ class _RateReviewState extends State<RateReview> {
       const SnackBar(
       content: Text('Submitting data..')),
     );
-     
-    
-      await FirebaseFirestore.instance
-            .collection("Rate")
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .set({
-              'rating': rating,
-              'review': review,
-              'campaignId': 'k',
-              'UID': FirebaseAuth.instance.currentUser!.uid,
-            });
-            
-            /*Navigator.push(
-              context, MaterialPageRoute(builder: (context) => ViewDescription()));*/
-  
   }
 
   
@@ -50,9 +35,7 @@ class _RateReviewState extends State<RateReview> {
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
         .collection("Pilgrims-Account")
-        .doc(FirebaseAuth.instance.currentUser?.uid)
-        .collection("pilgrimCampaigns")
-        .where('bookStatus', isEqualTo: 'Accepted')
+        .where('UID', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
         .snapshots();
 
     return Scaffold(
@@ -91,7 +74,7 @@ class _RateReviewState extends State<RateReview> {
                                                       'Campaign Name:' 
                                                         ),
                                                         Text(
-                                                      storedocs[i]['name'] 
+                                                      storedocs[i]['ChosenCampaignName'] 
                                                         ),
                                                         SizedBox(height: 10,),
                                                     
@@ -126,7 +109,7 @@ class _RateReviewState extends State<RateReview> {
                             .set({
                            'rating': rating,
                            //'review': review,
-                           'campaignID': storedocs[i]['campaignID'],
+                           'campaignID': storedocs[i]['ChosenCampaignID'],
                            'UID': FirebaseAuth.instance.currentUser!.uid,}, SetOptions(merge: true));
                     Navigator.pop(context);
                   },
@@ -204,7 +187,7 @@ class _RateReviewState extends State<RateReview> {
                             .set({
                            //'rating': rating,
                            'review': review,
-                           'campaignID': storedocs[i]['campaignID'],
+                           'campaignID': storedocs[i]['ChosenCampaignID'],
                            'UID': FirebaseAuth.instance.currentUser!.uid,}, SetOptions(merge: true));
                     Navigator.pop(context);
                   },

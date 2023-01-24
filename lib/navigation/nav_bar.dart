@@ -28,8 +28,8 @@ class _nav_adminState extends State<nav_admin> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    const DeleteCampaign(), //DeleteCampaign(),
-    const DeletePilgrim(), //DeletePilgrim(),
+    const DeleteCampaign(), 
+    const DeletePilgrim(), 
     View()
   ];
 
@@ -87,8 +87,9 @@ class _nav_campaignState extends State<nav_campaign> {
   static const List<Widget> _widgetOptions = <Widget>[
     CampaignView(),
     SearchPilgrim(),
-    Center(child: Text('announcement',style: TextStyle(fontSize: 72),),),
+    Center(child: Text('plan',style: TextStyle(fontSize: 72),),),
     Center(child: Text('emergency',style: TextStyle(fontSize: 72),),), 
+    Center(child: Text('location',style: TextStyle(fontSize: 72),),),
     AddDescription(),
   ];
 
@@ -116,11 +117,15 @@ class _nav_campaignState extends State<nav_campaign> {
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.announcement),
-                label: 'Announcement',
+                label: 'Plan',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.emergency),
-                label: 'Emergency',
+                label: 'Emergencies',
+                backgroundColor: Color(0xFF455D83)),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.location_city),
+                label: 'Location',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
@@ -151,10 +156,11 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     PilgrimView(),
-    SearchCampaign(),//logOutPilgrim(),
-    Center(child: Text('announcement',style: TextStyle(fontSize: 72),),),
+    SearchCampaign(),
+    Center(child: Text('plan',style: TextStyle(fontSize: 72),),),
     Center(child: Text('emergency',style: TextStyle(fontSize: 72),),),
-    Center(child: Text('profile',style: TextStyle(fontSize: 72),),),//logOutPilgrim()
+    Center(child: Text('location',style: TextStyle(fontSize: 72),),),
+    Center(child: Text('profile',style: TextStyle(fontSize: 72),),),
   ];
 
   void _onItemTapped(int index) {
@@ -181,11 +187,15 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.announcement),
-                label: 'Announcement',
+                label: 'Plan',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.emergency),
                 label: 'Emergency',
+                backgroundColor: Color(0xFF455D83)),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.location_city),
+                label: 'Location',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
