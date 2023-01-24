@@ -121,8 +121,11 @@ Container(
      body:Center(
       child: Column(
           children: [
-
-            emButton(
+          
+         Align(
+                alignment: Alignment.bottomCenter,
+                child:
+            MyButton(
               color: Color.fromARGB(55, 4, 66, 55),
               title: 'click here to udpate your Location',
                 onPressed: () async{
@@ -134,7 +137,7 @@ Container(
 ///////////////////////////////
                  
                 },
-            ),
+            ),)
             
 
 
