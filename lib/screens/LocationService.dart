@@ -61,4 +61,5 @@ class LocationService {
       throw 'Could not launch $encodedURl';
     }
   }
+  
 }

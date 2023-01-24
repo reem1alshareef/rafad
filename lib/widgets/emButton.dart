@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class emButton extends StatelessWidget {
-  const emButton(
+  const emButton(Type locationService, param1, 
       {super.key,
       required this.color,
       required this.title,

@@ -1,4 +1,3 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
@@ -87,7 +86,7 @@ Container(
 //////////////////////////الكود اللي بيرسل اللوكيشن الحالي لليوزر
 
                   LocationService locationService = LocationService();
-                  locationService.sendLocationToDataBase(context);
+                  locationService.PilgsendLocationToDataBase(context);
                   // _locationService.goToMaps(
                   // _latitude, _longitude);
 ///////////////////////////////
@@ -103,21 +102,7 @@ Container(
                                 String number = variable['number'];
                                 // double _latitude1 = variable['latitude'];
                                 // double _longitude1 = variable['longitude'];
-    LocationService _locationService = LocationService();
-  _firestore
-  .collection('Pilgrims-Account')
-  .doc(FirebaseAuth.instance.currentUser?.uid).get().then(
-    (doc)=>{
-      setState((){
-        if (doc.data() != null){
-          _locationService.goToMaps(doc.data()!['latitude'], doc.data()!['longitude']);
-          // _latitude = doc.data()!['latitude']??=0;
-          // _longitude = doc.data()!['longitude']??=0;
-        }
-      },
-      ),
-    },
-      );
+
   // getActivityProfile() async{
   // await _firestore
   // .collection('Pilgrims-Account')
@@ -134,8 +119,8 @@ Container(
   //   },
   //     );
   //     };
-  // LocationService _locationService = LocationService();
-  //     _locationService.goToMaps(_latitude1, _longitude1);
+
+      //_locationService.goToMaps(_latitude, _longitude);
                   _firestore
                   .collection("AcceptedCampaigns")
                   .doc(campaignID)
@@ -147,6 +132,7 @@ Container(
                   'disease': disease,
                   'pharma': pharma,
                   'number' : number,
+                  //'hajId': hajId,
                   },
             );
                 },
@@ -158,4 +144,3 @@ Container(
     );
     }//throw UnimplementedError();
 }
-
