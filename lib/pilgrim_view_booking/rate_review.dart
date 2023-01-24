@@ -58,7 +58,9 @@ class _RateReviewState extends State<RateReview> {
                         child: CircularProgressIndicator(),
                       );
                     }
+                    //if(snapshot.data!.docs[Index].data()['ChosenCampaignName'] != null){
                     final List storedocs = [];
+                    
                     snapshot.data!.docs.map((DocumentSnapshot document) {
                       Map a = document.data() as Map<String, dynamic>;
                       storedocs.add(a);
@@ -67,7 +69,9 @@ class _RateReviewState extends State<RateReview> {
                     return Column(
                         children: List.generate(
                             storedocs.length,
-                            (i) => SingleChildScrollView(
+                            (i) => 
+                            SingleChildScrollView( 
+                              
                                                   child: Column(
                                                     children: <Widget>[
                                                     Text(
@@ -159,8 +163,8 @@ class _RateReviewState extends State<RateReview> {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Review is required!';
                             }
-                            if(textValue.length<10){
-                              return 'Review should be 10 characters at least';
+                            if(textValue.length<5){
+                              return 'Review should be 5 characters at least';
                             }
                             
                             //return null;
