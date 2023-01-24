@@ -89,7 +89,7 @@ class _nav_campaignState extends State<nav_campaign> {
     SearchPilgrim(),
     Center(child: Text('plan',style: TextStyle(fontSize: 72),),),
     Center(child: Text('emergency',style: TextStyle(fontSize: 72),),), 
-    Center(child: Text('location',style: TextStyle(fontSize: 72),),),
+    //Center(child: Text('location',style: TextStyle(fontSize: 72),),),
     AddDescription(),
   ];
 
@@ -116,17 +116,17 @@ class _nav_campaignState extends State<nav_campaign> {
                 label: 'Search',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.announcement),
-                label: 'Plan',
+                icon: Icon(Icons.add_alert),
+                label: 'Plans',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.emergency),
                 label: 'Emergencies',
                 backgroundColor: Color(0xFF455D83)),
-            BottomNavigationBarItem(
+            /*BottomNavigationBarItem(
                 icon: Icon(Icons.location_city),
                 label: 'Location',
-                backgroundColor: Color(0xFF455D83)),
+                backgroundColor: Color(0xFF455D83)),*/
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',
@@ -159,7 +159,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
     SearchCampaign(),
     Center(child: Text('plan',style: TextStyle(fontSize: 72),),),
     Center(child: Text('emergency',style: TextStyle(fontSize: 72),),),
-    Center(child: Text('location',style: TextStyle(fontSize: 72),),),
+    //Center(child: Text('location',style: TextStyle(fontSize: 72),),),
     Center(child: Text('profile',style: TextStyle(fontSize: 72),),),
   ];
 
@@ -186,17 +186,17 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
                 label: 'Search',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.announcement),
-                label: 'Plan',
+                icon: Icon(Icons.add_alert),
+                label: 'Plans',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.emergency),
                 label: 'Emergency',
                 backgroundColor: Color(0xFF455D83)),
-            BottomNavigationBarItem(
+            /*BottomNavigationBarItem(
                 icon: Icon(Icons.location_city),
                 label: 'Location',
-                backgroundColor: Color(0xFF455D83)),
+                backgroundColor: Color(0xFF455D83)),*/
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',

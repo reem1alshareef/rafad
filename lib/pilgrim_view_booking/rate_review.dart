@@ -39,7 +39,7 @@ class _RateReviewState extends State<RateReview> {
         .snapshots();
 
     return Scaffold(
-        body: SingleChildScrollView(
+        body: Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
