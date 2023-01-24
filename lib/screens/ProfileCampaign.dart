@@ -7,14 +7,14 @@ import 'package:rafad1/widgets/my_button.dart';
 import 'add_description.dart';
 
 class ProfileCampaign extends StatefulWidget {
-  static const String screenRoute = 'logOutCampaign';
+  static const String screenRoute = 'ProfileCampaign';
   const ProfileCampaign({super.key});
 
   @override
-  State<ProfileCampaign> createState() => _logOutCampaign();
+  State<ProfileCampaign> createState() => _ProfileCampaignState();
 }
 
-class _logOutCampaign extends State<ProfileCampaign> {
+class _ProfileCampaignState extends State<ProfileCampaign> {
   final user = FirebaseAuth.instance.currentUser!;
 
   @override
