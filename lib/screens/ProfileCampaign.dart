@@ -24,7 +24,6 @@ import '../widgets/my_button.dart';
 
 import 'package:rafad1/screens/emergencyList.dart';
 
-import 'mapService.dart';
 
 
 class ProfileCampaign extends StatefulWidget {

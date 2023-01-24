@@ -52,7 +52,10 @@ class _MyApp2State extends State<MyApp2> {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => NavigationScreen(
                           double.parse(latController.text),
-                          double.parse(lngController.text))));
+                          double.parse(lngController.text),
+                          ),
+                          ),
+                          );
                 },
                 child: Text('Get Directions')),
           ),
