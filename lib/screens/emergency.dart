@@ -80,15 +80,20 @@ Container(
       body:Center(
       child: Column(
           children: [
-           
+
+ElevatedButton(onPressed: (){
+              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                return const CurrentLocationScreen();
+              }));
+            }, child: const Text("current Map")),
 
             emButton(
               color: const Color.fromARGB(255, 184, 20, 20),
               title: 'click here to send emerency request !!',
                 onPressed: () async{
-Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
-                return const CurrentLocationScreen();
-              }));
+// Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+//                 return const CurrentLocationScreen();
+//               }));
 //////////////////////////الكود اللي بيرسل اللوكيشن الحالي لليوزر
                   // LocationService locationService = LocationService();
                   // locationService.PilgsendLocationToDataBase(context);
