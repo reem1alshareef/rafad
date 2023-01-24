@@ -9,6 +9,25 @@ import 'package:rafad1/screens/forget_pw.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
+import 'package:rafad1/screens/adminView.dart';
+import 'package:rafad1/screens/welcome_admin.dart';
+
+// void main() {
+//   runApp(const MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key}) : super(key: key);
+
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: LoginPage(),
+//     );
+//   }
+// }
 
 class LoginPage extends StatefulWidget {
   static const String screenRoute = 'LoginPage';
@@ -30,28 +49,33 @@ class _LoginPageState extends State<LoginPage> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("sign in"),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
         ),
         backgroundColor: const Color(0xffEEF1F3),
-        body: SingleChildScrollView(
-          //للسكرولنق ممتاز
-          child: Form(
-            key: _signupFormKey,
-            child: Column(
-              children: [
-                const PageHeader(),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 50),
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-            image: AssetImage("assests/images/background.png"),
-            fit: BoxFit.cover),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
-                    ),
+        body: Column(
+          children: [
+            const PageHeader(),
+            Container(
+              //من هنا يبدا كود الخلفيه
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assests/images/background.png"),
+                    fit: BoxFit.cover),
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+              ),
+            ), //نهايه كود الخلفيه
+
+            Expanded(
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(20),
                   ),
                 ),
                 child: SingleChildScrollView(

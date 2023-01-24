@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rafad1/firebase_options.dart';
 import 'package:rafad1/screens/CampaignView.dart';
 import 'package:rafad1/screens/DriverHomePage.dart'; //احذفيها بعدين مهم
-import 'package:rafad1/screens/MapTry.dart';
+import 'package:rafad1/screens/CurrentLocationScreen.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
 
@@ -59,8 +59,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors
               .white, // change it from swatch to colort and from wight to blue , for map
         ),
-        home: MyApp2(),
-        // initialRoute: WelcomeScreen.screenRoute,
+        initialRoute: WelcomeScreen.screenRoute,
         routes: {
           WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
           SignUpPilgrim.screenRoute: (context) => const SignUpPilgrim(),

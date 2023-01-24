@@ -17,7 +17,7 @@ class LocationService {
 
   final _firestore = FirebaseFirestore.instance;
 
-  sendLocationToDataBase(context) async {
+  PilgsendLocationToDataBase(context) async {
     Location location = new Location();
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
