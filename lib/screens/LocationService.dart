@@ -17,12 +17,43 @@ class LocationService {
 
   final _firestore = FirebaseFirestore.instance;
 
-  sendLocationToDataBase(context) async {
+  PilgsendLocationToDataBase(context) async {
     Location location = new Location();
     bool _serviceEnabled;
     PermissionStatus _permissionGranted;
     LocationData _locationData;
+    _serviceEnabled = await location.serviceEnabled();
+    if (!_serviceEnabled) {
+      _serviceEnabled = await location.requestService();
+      if (!_serviceEnabled) {
+        return;
+      }
+    }
 
+    _permissionGranted = await location.hasPermission();
+    if (_permissionGranted == PermissionStatus.denied) {
+      _permissionGranted = await location.requestPermission();
+      if (_permissionGranted != PermissionStatus.granted) {
+        return;
+      }
+    }
+    _locationData = await location.getLocation();
+
+      _firestore
+        .collection('Pilgrims-Account')
+        .doc(FirebaseAuth.instance.currentUser?.uid).update(
+      {
+        'latitude': _locationData.latitude,
+        'longitude': _locationData.longitude,
+      },
+    );
+  }
+
+    CampsendLocationToDataBase(context) async {
+    Location location = new Location();
+    bool _serviceEnabled;
+    PermissionStatus _permissionGranted;
+    LocationData _locationData;
     _serviceEnabled = await location.serviceEnabled();
     if (!_serviceEnabled) {
       _serviceEnabled = await location.requestService();
@@ -49,6 +80,7 @@ class LocationService {
       },
     );
   }
+
 
   
   goToMaps(double latitude, double longitude) async {

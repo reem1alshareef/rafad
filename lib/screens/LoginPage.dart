@@ -1,365 +1,186 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_validator/email_validator.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:rafad1/navigation/nav_bar.dart';
-import 'package:rafad1/screens/LoginPage.dart';
-import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:toast/toast.dart';
+import 'package:rafad1/screens/CampaignView.dart';
+import 'package:rafad1/navigation/nav_bar.dart';
+//import 'package:fluttertoast_example/toast_context.dart';
+//import 'test.dart';
+import 'package:rafad1/screens/forget_pw.dart';
+import 'package:rafad1/screens/logOutCampaign.dart';
+import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
+import 'package:rafad1/screens/adminView.dart';
+import 'package:rafad1/screens/welcome_admin.dart';
+
+// void main() {
+//   runApp(const MyApp());
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({Key? key}) : super(key: key);
+
+//   // This widget is the root of your application.
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: LoginPage(),
+//     );
+//   }
+// }
 
 class LoginPage extends StatefulWidget {
   static const String screenRoute = 'LoginPage';
   const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<LoginPage> createState() => loginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class loginPageState extends State<LoginPage> {
-  String? email;
-  String? password;
-  bool? isAdmin=false;
-  bool? isCampaign=false;
-  final _signupFormKey = GlobalKey<FormState>();
+class _LoginPageState extends State<LoginPage> {
+  String emailAddress = "", userPassword = "";
+  bool isAdmin = false, isCampaign = false;
+  //
+  final _loginFormKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("sign in"),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
-        ), //عشان سهم رجوع
-
+        ),
         backgroundColor: const Color(0xffEEF1F3),
-        body: SingleChildScrollView(
-          //للسكرولنق ممتاز
-          child: Form(
-            key: _signupFormKey,
-            child: Column(
-              children: [
-                const PageHeader(),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 50),
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-            image: AssetImage("assests/images/background.png"),
-            fit: BoxFit.cover),
-                    color: Colors.white,
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(20),
-                    ),
+        body: Column(
+          children: [
+            const PageHeader(),
+            Container(
+              //من هنا يبدا كود الخلفيه
+              padding: EdgeInsets.symmetric(horizontal: 50),
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assests/images/background.png"),
+                    fit: BoxFit.cover),
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
+              ),
+            ), //نهايه كود الخلفيه
+
+            Expanded(
+              child: Container(
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(20),
                   ),
-                  child: SingleChildScrollView(
+                ),
+                child: SingleChildScrollView(
+                  child: Form(
+                    key: _loginFormKey,
                     child: Column(
                       children: [
-                        // const PageHeading(
-                        //   title: 'Sign in',
-                        // ),
-
-
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-
-                        // TextFormField(
-                        //   inputFormatters: [
-                        //     FilteringTextInputFormatter.allow(
-                        //         RegExp("[a-zA-Z- -]"))
-                        //   ],
-                        //   keyboardType: TextInputType.text,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       name = value;
-                        //     });
-                        //   },
-                        //   validator: (value) {
-                        //     if (value == null || value.isEmpty) {
-                        //       return 'Name field is required!';
-                        //     } else if (value.length < 8) {
-                        //       return 'Please enter valid name';
-                        //     }
-
-                        //     String patttern =
-                        //         (r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$");
-                        //     RegExp regExp = RegExp(patttern);
-                        //     if (!regExp.hasMatch(value)) {
-                        //       return 'Please enter valid name';
-                        //     }
-                        //     return null;
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'Pilgrim Name *',
-                        //     hintText: 'Your full name',
-                        //     isDense: true,
-                        //   ),
-                        // ),
-
-
-                        const SizedBox(
-                          height: 16,
+                        const PageHeading(
+                          title: 'log in page',
                         ),
-                        TextFormField(
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {
-                            setState(() {
-                              email = value;
-                              if(email=='adminofrafadapp@admin.rafad'){
-                                isAdmin=true;
-                                //print('object');
+                        
+                        CustomInputField(
+                            labelText: 'Email',
+                            hintText: 'Your email id',
+                            validator: (textValue) {
+                              if (textValue == null || textValue.isEmpty) {
+                                return 'Email is required!';
+                              } else {
+                                emailAddress = textValue;
                               }
-                            });
-                          },
-                          validator: (textValue) {
-                            if (textValue == null || textValue.isEmpty) {
-                              return 'Email is required!';
-                            }
-                            if (!EmailValidator.validate(textValue)) {
-                              return 'Please enter a valid email';
-                            }
-                            if (textValue == "adminofrafadapp@admin.rafad") {
-                                //print('reached bool');
+                              if (textValue == "adminofrafadapp@admin.rafad") {
+                                print('reached bool');
                                 //print('reached bool');
                                 isAdmin = true;
                               }
-                            
-                            return null;
-                          },
-                          decoration: InputDecoration(
-                            labelText: 'Email *',
-                            hintText: 'Your email id',
-                            isDense: true,
-                          ),
-                        ),
-
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-
-                        // TextFormField(
-                        //   maxLength: 10,
-                        //   inputFormatters: <TextInputFormatter>[
-                        //     FilteringTextInputFormatter.digitsOnly
-                        //   ],
-                        //   keyboardType: TextInputType.text,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       number = value;
-                        //     });
-                        //   },
-                        //   validator: (value) {
-                        //     if (value == null || value.isEmpty) {
-                        //       return 'Phone number is required!';
-                        //     }
-                        //     String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-                        //     RegExp regExp = new RegExp(patttern);
-                        //     if (!regExp.hasMatch(value)) {
-                        //       return 'Please enter valid Phone number';
-                        //     }
-                        //     if (value.length != 10) {
-                        //       return 'Phone Number must be of 10 digit';
-                        //     }
-
-                        //     return null;
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'Phone number *',
-                        //     hintText: 'Your phone number',
-                        //     isDense: true,
-                        //   ),
-                        // ),
-                        
-                        
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-
-                        // TextFormField(
-                        //   maxLength: 10,
-                        //   inputFormatters: [
-                        //     FilteringTextInputFormatter.allow(RegExp("[0-9]"))
-                        //   ],
-                        //   keyboardType: TextInputType.text,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       hajId = value;
-                        //     });
-                        //   },
-                        //   validator: (textValue) {
-                        //     if (textValue == null || textValue.isEmpty) {
-                        //       return 'ID is required!';
-                        //     }
-                        //     if (!textValue.contains(RegExp(r'[0-9]'))) {
-                        //       return 'Please enter valid ID';
-                        //     }
-                        //     if (textValue.length != 10) {
-                        //       return 'ID must be of 10 digit';
-                        //     }
-                        //     return null;
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'haj permission ID*',
-                        //     hintText: 'your haj permission ID',
-                        //     isDense: true,
-                        //   ),
-                        // ),
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-
-                        // TextFormField(
-                        //   inputFormatters: [
-                        //     FilteringTextInputFormatter.allow(
-                        //         RegExp("[a-zA-Z- -]"))
-                        //   ],
-                        //   keyboardType: TextInputType.text,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       disease = value;
-                        //     });
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'chronic disease',
-                        //     hintText: 'if you suffer from any chronic disease',
-                        //     isDense: true,
-                        //   ),
-                        //),
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-
-                        // TextFormField(
-                        //   inputFormatters: [
-                        //     FilteringTextInputFormatter.allow(
-                        //         RegExp("[a-zA-Z- -]"))
-                        //   ],
-                        //   keyboardType: TextInputType.text,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       pharma = value;
-                        //     });
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'pharmaceutical',
-                        //     hintText: 'if you are taking any pharmaceutical',
-                        //     isDense: true,
-                        //   ),
-                        // ),
+                              if (!EmailValidator.validate(textValue)) {
+                                return 'Please enter a valid email';
+                              }
+                              return null;
+                            }),
                         const SizedBox(
                           height: 16,
                         ),
-
-                        TextFormField(
-                          onChanged: (value) {
-                            setState(() {
-                              password = value;
-                            });
-                          },
+                        CustomInputField(
+                          labelText: 'Password',
+                          hintText: 'Your password',
                           obscureText: true,
+                          suffixIcon: true,
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Password is required!';
+                            } else {
+                              userPassword = textValue;
                             }
-                            
-
                             return null;
                           },
-                          decoration: InputDecoration(
-                            labelText: 'Password *',
-                            hintText: 'Your password',
-                            isDense: true,
-                          ),
                         ),
                         const SizedBox(
                           height: 16,
                         ),
-                        //-------------------------------------------------------------------------------
+                        Container(
+                          width: size.width * 0.80,
+                          alignment: Alignment.centerRight,
+                          child: GestureDetector(
+                            onTap: () => {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ForgotPasswordPage()))
+                            },
+                            child: const Text(
+                              'Forget password?',
+                              style: TextStyle(
+                                color: Color(0xff939393),
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline,
+                              ),
+                            ),
+                          ),
+                        ),
+                        Container(
+                          width: size.width * 0.80,
+                          alignment: Alignment.centerLeft,
+                          child: GestureDetector(
+                              child: CheckboxListTile(
+                            value: isCampaign,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                if (value != null) {
+                                  isCampaign = value;
+                                }
+                              });
+                            },
+                            title: Text('Are you a campaign?'),
+                          )),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         CustomFormButton(
-                          innerText: 'Sign in',
-                          onPressed: () async {
-                            final FirebaseAuth _auth = FirebaseAuth.instance;
-      //print('reached create user');
-      try {
-        if (isAdmin==true) {
-          //in case of an admin
-          isAdmin = false;
-          await _auth.signInWithEmailAndPassword(
-              email: email.toString(), password: password.toString());
-          email = '';
-          password = '';
-          //Navigator.push(
-          //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => nav_admin()));
-
-          ///home_screen_owner
-        } else{
-          await _auth.signInWithEmailAndPassword(
-              email: email.toString(), password: password.toString());
-
-
-
-
-          await FirebaseFirestore.instance
-    .collection('AcceptedCampaigns')
-    .doc(FirebaseAuth.instance.currentUser?.uid)
-    .get()
-    .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        isCampaign=true;
-        print('reached campaign');
-        print(isCampaign);
-      }
-    });//check if the user has account on AcceptedCampaign collection
-          //on case of campaign
-          //isCampaign = false;
-          print('object');
-          if(isCampaign!=false){
-            print('i hate uni');
-          }
-          if(isCampaign!){
-            print('reached capaign222222222');
-          email = '';
-          password = '';
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => nav_campaign()));
-
-          isCampaign = false;
-          }
-          else{
-          email = '';
-          password = '';
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => nav_pilgrim()));}
-        
-      }} on FirebaseAuthException catch (e) {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return const AlertDialog(
-                content:
-                    Text('Email or Password is not correct, try again please.'),
-              );
-            });
-      }
-
-                          },
+                          innerText: 'Login',
+                          onPressed: _handleLoginUser,
                         ),
                         const SizedBox(
                           height: 18,
                         ),
                         SizedBox(
+                          width: size.width * 0.8,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               const Text(
-                                'New user ? ',
+                                'Don\'t have an account ? ',
                                 style: TextStyle(
                                     fontSize: 13,
                                     color: Color(0xff939393),
@@ -386,22 +207,80 @@ class loginPageState extends State<LoginPage> {
                           ),
                         ),
                         const SizedBox(
-                          height: 30,
+                          height: 20,
                         ),
                       ],
                     ),
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
   }
+
+  Future<void> _handleLoginUser() async {
+    // login user
+    if (_loginFormKey.currentState!.validate()) {
+      //print('reached first if');
+      //print('reached first if');
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Submitting data..')),
+      );
+    }
+    if (_loginFormKey.currentState!.validate()) {
+      //print('reached second if');
+      //print(isAdmin);
+      final FirebaseAuth _auth = FirebaseAuth.instance;
+      //print('reached create user');
+      try {
+        if (isAdmin) {
+          //in case of an admin
+          isAdmin = false;
+          await _auth.signInWithEmailAndPassword(
+              email: emailAddress, password: userPassword);
+          emailAddress = '';
+          userPassword = '';
+          //Navigator.push(
+          //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => nav_admin()));
+
+          ///home_screen_owner
+        } else if (isCampaign) {
+          //on case of campaign
+          isCampaign = false;
+          await _auth.signInWithEmailAndPassword(
+              email: emailAddress, password: userPassword);
+          emailAddress = '';
+          userPassword = '';
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => nav_campaign()));
+        } else {
+          //in case of pilgrim
+          await _auth.signInWithEmailAndPassword(
+              email: emailAddress, password: userPassword);
+          emailAddress = '';
+          userPassword = '';
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => nav_pilgrim()));
+        }
+      } on FirebaseAuthException catch (e) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const AlertDialog(
+                content:
+                    Text('Email or Password is not correct, try again please.'),
+              );
+            });
+      }
+    }
+  }
 }
-
-
+//}
 
 class CustomFormButton extends StatelessWidget {
   final String innerText;
@@ -430,6 +309,20 @@ class CustomFormButton extends StatelessWidget {
   }
 }
 
+class PageHeader extends StatelessWidget {
+  const PageHeader({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    return SizedBox(
+      width: double.infinity,
+      height: size.height * 0.5,
+      child: Image.asset('assests/images/logo.png'),
+    );
+  }
+}
+
 class CustomInputField extends StatefulWidget {
   final String labelText;
   final String hintText;
@@ -438,15 +331,15 @@ class CustomInputField extends StatefulWidget {
   final bool? isDense;
   final bool obscureText;
 
-  const CustomInputField({
-    Key? key,
-    required this.labelText,
-    required this.hintText,
-    required this.validator,
-    this.suffixIcon = false,
-    this.isDense,
-    this.obscureText = false,
-  }) : super(key: key);
+  const CustomInputField(
+      {Key? key,
+      required this.labelText,
+      required this.hintText,
+      required this.validator,
+      this.suffixIcon = false,
+      this.isDense,
+      this.obscureText = false})
+      : super(key: key);
 
   @override
   State<CustomInputField> createState() => _CustomInputFieldState();
@@ -480,9 +373,9 @@ class _CustomInputFieldState extends State<CustomInputField> {
                   ? IconButton(
                       icon: Icon(
                         _obscureText
-                            ? Icons.remove_red_eye
-                            : Icons.visibility_off_outlined,
-                        color: const Color(0xFF7D8DBA),
+                            ? Icons.visibility_off_outlined
+                            : Icons.remove_red_eye,
+                        color: Colors.black54,
                       ),
                       onPressed: () {
                         setState(() {
@@ -504,20 +397,6 @@ class _CustomInputFieldState extends State<CustomInputField> {
   }
 }
 
-class PageHeader extends StatelessWidget {
-  const PageHeader({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
-    return SizedBox(
-      width: double.infinity,
-      height: size.height * 0.3,
-      child: Image.asset('assests/images/logo.png'),
-    );
-  }
-}
-
 class PageHeading extends StatelessWidget {
   final String title;
   const PageHeading({Key? key, required this.title}) : super(key: key);
@@ -531,7 +410,7 @@ class PageHeading extends StatelessWidget {
         title,
         style: const TextStyle(
             fontSize: 30, fontWeight: FontWeight.bold, fontFamily: 'NotoSerif'),
-),
-);
-}
+      ),
+    );
+  }
 }
