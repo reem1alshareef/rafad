@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rafad1/firebase_options.dart';
 import 'package:rafad1/screens/CampaignView.dart';
 import 'package:rafad1/screens/DriverHomePage.dart'; //احذفيها بعدين مهم
+import 'package:rafad1/screens/MapTry.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
 
@@ -55,9 +56,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         //home: logOutAdmin(),
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primaryColor: Colors
+              .white, // change it from swatch to colort and from wight to blue , for map
         ),
-        home: const MapTracking(),
+        home: MyApp2(),
         // initialRoute: WelcomeScreen.screenRoute,
         routes: {
           WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
