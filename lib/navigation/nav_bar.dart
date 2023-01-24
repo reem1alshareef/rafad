@@ -14,6 +14,7 @@ import '../screens/add_description.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/admin/DeleteCampaign.dart';
+import 'package:rafad1/screens/CampaignPlan.dart';
 
 import '../screens/welcome_admin.dart';
 
@@ -87,7 +88,7 @@ class _nav_campaignState extends State<nav_campaign> {
   static const List<Widget> _widgetOptions = <Widget>[
     CampaignView(),
     SearchPilgrim(),
-    Center(child: Text('plan',style: TextStyle(fontSize: 72),),),
+    CampaignPlan(),
     Center(child: Text('emergency',style: TextStyle(fontSize: 72),),), 
     //Center(child: Text('location',style: TextStyle(fontSize: 72),),),
     AddDescription(),
