@@ -38,11 +38,11 @@ class _emergencyState extends State<emergency> {
   
 
   @override 
-  void initState(){
-    _emergencyState();
-    print(FirebaseAuth.instance.currentUser?.uid);
-    super.initState();
-  }
+  // void initState(){
+    
+  //   print(FirebaseAuth.instance.currentUser?.uid);
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
