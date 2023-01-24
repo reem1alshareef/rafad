@@ -51,7 +51,7 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
         label: const Text("Current Location"),
         icon: const Icon(Icons.location_history),
       ),
-    );
+  );
   }
 
   Future<Position> _determinePosition() async {

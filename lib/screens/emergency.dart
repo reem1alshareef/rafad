@@ -80,7 +80,9 @@ Container(
       body:Center(
       child: Column(
           children: [
-
+SizedBox(
+      height: 50, 
+    ),
 ElevatedButton(onPressed: (){
               Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
                 return const CurrentLocationScreen();
