@@ -61,6 +61,7 @@ dependencies:
   permission_handler: ^10.2.0
   geolocator: ^9.0.2
   google_maps_flutter_web: ^0.4.0+5
+  sentry: ^6.18.3
   
   #firebase:
   #cloud_firestore: ^3.1.5

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+
 class CurrentLocationScreen extends StatefulWidget {
   static const String screenRoute = 'CurrentLocationScreen.dart';
   const CurrentLocationScreen({Key? key}) : super(key: key);
@@ -52,7 +53,8 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
         icon: const Icon(Icons.location_history),
       ),
   );
-  }
+    }
+
 
   Future<Position> _determinePosition() async {
     bool serviceEnabled;
