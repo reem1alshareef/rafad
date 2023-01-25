@@ -3,6 +3,7 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rafad1/screens/PolylineScreen.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/widgets/emButton.dart';
 import 'package:rafad1/screens/LocationService.dart';
@@ -192,7 +193,10 @@ void DataStreams() async {
                                                     color: Color.fromARGB(255, 160, 10, 10),
                                                     ),
                                                     onPressed: () async {
-
+                                                      ///////////توديه للماب 
+Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                return const PolylineScreen();
+              }));
         //_latitude = storedocs[i]['latitude'];
         //_longitude = storedocs[i]['longitude'];
 
