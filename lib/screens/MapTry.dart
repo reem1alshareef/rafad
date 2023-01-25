@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rafad1/screens/navigation_screen.dart';
+//هنا بجرب احط احدثيات اللي مخزنه في الفايربيس يصير كذا وصلنا للحملة
 
 class MyApp2 extends StatefulWidget {
   @override
@@ -7,8 +8,10 @@ class MyApp2 extends StatefulWidget {
 }
 
 class _MyApp2State extends State<MyApp2> {
-  TextEditingController latController = TextEditingController();
-  TextEditingController lngController = TextEditingController();
+  double latController = (21.3878387);
+  double lngController = (39.9144660);
+  //TextEditingController latController = TextEditingController();
+  //TextEditingController lngController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,15 +48,14 @@ class _MyApp2State extends State<MyApp2> {
           SizedBox(
             height: 20,
           ),*/
-
           Container(
             width: double.infinity,
             child: ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => NavigationScreen(
-                          double.parse(latController.text),
-                          double.parse(lngController.text))));
+                          latController, //double.parse(latController.text),
+                          lngController))); //double.parse(lngController.text))));
                 },
                 child: Text('Get Directions')),
           ),
