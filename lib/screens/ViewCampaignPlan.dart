@@ -9,36 +9,33 @@ class ViewCampaignPlan extends StatefulWidget {
   const ViewCampaignPlan({super.key});
   @override
   _ViewState createState() => _ViewState();
-  String ID;
+}
 
-  Future<void> start() async {
-    DocumentSnapshot variable = await FirebaseFirestore.instance
+class _ViewState extends State<ViewCampaignPlan> {
+  @override
+
+  Future<String> callAsyncFetch() => Future.delayed(Duration(seconds: 2), () => "hi");
+
+  Widget build(BuildContext context) {
+
+
+    
+    String ID = 'blah';
+
+    
+
+    //Future<String>() async {
+    void getID() async {
+      DocumentSnapshot variable = await FirebaseFirestore.instance
           .collection('Pilgrims-Account')
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .get();
       ID = variable["ChosenCampaignID"];
       print(ID);
-   // }
+    }
 
-   //getID();
+    getID();
     //}
-
-    print(ID);
-    Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
-        .collection("AcceptedCampaigns")
-        .doc(ID)
-        .collection("Activities")
-        .snapshots();
-    print(ID);
-  }
-}
-
-class _ViewState extends State<ViewCampaignPlan> {
-  @override
-  Future<Widget> build(BuildContext context) async {
-    String ID = 'blah';
-
-    
 
     print(ID);
     Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
@@ -49,12 +46,6 @@ class _ViewState extends State<ViewCampaignPlan> {
     print(ID);
 
     return Scaffold(
-      DocumentSnapshot variable = await FirebaseFirestore.instance
-          .collection('Pilgrims-Account')
-          .doc(FirebaseAuth.instance.currentUser?.uid)
-          .get();
-      ID = variable["ChosenCampaignID"];
-      print(ID);
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Today\'s Campaign plan'),
