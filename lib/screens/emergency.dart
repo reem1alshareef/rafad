@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/widgets/emButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,6 +16,7 @@ import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/widgets/emButton.dart';
 import 'package:rafad1/screens/LocationService.dart';
 import '../widgets/my_button.dart';
+import 'package:rafad1/screens/CurrentLocationScreen.dart';
 
 
 import 'package:rafad1/screens/emergencyList.dart';
@@ -85,16 +87,19 @@ SizedBox(///////////////بس عشان يحط مسافه
       height: 50, 
     ),
 
-ElevatedButton(onPressed: (){
-              Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
-                return const CurrentLocationScreen();
-              }));
-            }, child: const Text("current Map")),
+// ElevatedButton(onPressed: (){
+//               Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+//                 return const CurrentLocationScreen();
+//               }));
+//             }, child: const Text("current Map")),
 
             emButton(
               color: const Color.fromARGB(255, 184, 20, 20),
               title: 'click here to send emerency request !!',
                 onPressed: () async{
+                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                return const CurrentLocationScreen();
+              }));
 // Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
 //                 return const CurrentLocationScreen();
 //               }));
@@ -135,6 +140,16 @@ ElevatedButton(onPressed: (){
   //     };
 
       //_locationService.goToMaps(_latitude, _longitude);
+
+      // _firestore
+      //             .collection("Pilgrims-Account")
+      //             .doc(FirebaseAuth.instance.currentUser?.uid)
+                  
+      //             .update( 
+      //             {
+      //             'GeoPoint': GeoPoint(position.latitude, position.latitude),
+      //             },);
+Position position = await Geolocator.getCurrentPosition();
                   _firestore
                   .collection("AcceptedCampaigns")
                   .doc(ChosenCampaignID)
@@ -142,6 +157,7 @@ ElevatedButton(onPressed: (){
                   .doc(FirebaseAuth.instance.currentUser?.uid)
                   .set( 
                   {
+                  'GeoPoint': GeoPoint(position.latitude, position.latitude),
                   'name': name,
                   'disease': disease,
                   'pharma': pharma,

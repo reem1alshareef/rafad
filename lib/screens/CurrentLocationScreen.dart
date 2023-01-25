@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -13,7 +15,7 @@ class CurrentLocationScreen extends StatefulWidget {
 
 class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
   late GoogleMapController googleMapController;
-
+  final _firestore = FirebaseFirestore.instance;
   static const CameraPosition initialCameraPosition = CameraPosition(target: LatLng(37.42796133580664, -122.085749655962), zoom: 14);
 
   Set<Marker> markers = {};
@@ -21,10 +23,10 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("pilgrim current location"),
-        centerTitle: true,
-      ),
+      // appBar: AppBar(
+      //   title: const Text("select current location"),
+      //   centerTitle: true,
+      // ),
       body: GoogleMap(
         initialCameraPosition: initialCameraPosition,
         markers: markers,
@@ -35,6 +37,7 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton.extended(
+        
         onPressed: () async {
           Position position = await _determinePosition();
 
@@ -49,8 +52,9 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
           setState(() {});
 
         },
-        label: const Text("Current Location"),
+        label: const Text("send my Location"),
         icon: const Icon(Icons.location_history),
+        backgroundColor:  Color.fromARGB(255, 184, 20, 20),
       ),
   );
     }
@@ -81,6 +85,14 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
     }
 
     Position position = await Geolocator.getCurrentPosition();
+    _firestore
+                  .collection("Pilgrims-Account")
+                  .doc(FirebaseAuth.instance.currentUser?.uid)
+                  
+                  .update( 
+                  {
+                  'GeoPoint': GeoPoint(position.latitude, position.latitude),
+                  },);
 
     return position;
   }
