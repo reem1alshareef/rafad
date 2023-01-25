@@ -35,7 +35,9 @@ class _RateReviewState extends State<RateReview> {
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
         .collection("Pilgrims-Account")
-        .where('UID', isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .collection("pilgrimCampaigns")
+        .where('bookStatus', isEqualTo: 'Confirmed')
         .snapshots();
 
     return Scaffold(
@@ -78,7 +80,7 @@ class _RateReviewState extends State<RateReview> {
                                                       'Campaign Name:' 
                                                         ),
                                                         Text(
-                                                      storedocs[i]['ChosenCampaignName'] 
+                                                      storedocs[i]['name'] 
                                                         ),
                                                         SizedBox(height: 10,),
                                                     
@@ -113,7 +115,7 @@ class _RateReviewState extends State<RateReview> {
                             .set({
                            'rating': rating,
                            //'review': review,
-                           'campaignID': storedocs[i]['ChosenCampaignID'],
+                           'campaignID': storedocs[i]['campaignID'],
                            'UID': FirebaseAuth.instance.currentUser!.uid,}, SetOptions(merge: true));
                     Navigator.pop(context);
                   },
@@ -191,7 +193,7 @@ class _RateReviewState extends State<RateReview> {
                             .set({
                            //'rating': rating,
                            'review': review,
-                           'campaignID': storedocs[i]['ChosenCampaignID'],
+                           'campaignID': storedocs[i]['campaignID'],
                            'UID': FirebaseAuth.instance.currentUser!.uid,}, SetOptions(merge: true));
                     Navigator.pop(context);
                   },
