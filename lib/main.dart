@@ -57,8 +57,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: ProfileCampaign(),
-        // initialRoute: WelcomeScreen.screenRoute,
+       // home: ProfileCampaign(),
+         initialRoute: WelcomeScreen.screenRoute,
         routes: {
           WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
           SignUpPilgrim.screenRoute: (context) => const SignUpPilgrim(),
