@@ -19,7 +19,7 @@ import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/LocationService.dart';
 import '../widgets/my_button.dart';
 import 'package:rafad1/screens/emergencyList.dart';
-import 'mapService.dart';
+//import 'mapService.dart';
 
 class ProfileCampaign extends StatefulWidget {
   static const String screenRoute = 'ProfileCampaign.dart';
