@@ -8,11 +8,12 @@ import 'package:flutter/services.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../widgets/my_button.dart';
-//import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-//import 'package:rafad1/screens/datePicker.dart';
-
+import 'package:rafad1/services/localNotifications.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:rafad1/screens/notification_accept.dart';
 class CampaignPlan extends StatefulWidget {
+  
   const CampaignPlan({super.key});
 
   @override
@@ -20,6 +21,7 @@ class CampaignPlan extends StatefulWidget {
 }
 
 class _CampaignPlan extends State<CampaignPlan> {
+  
   final Stream<QuerySnapshot> dataStream =
         FirebaseFirestore.instance.collection('AcceptedCampaigns')
         .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -95,8 +97,16 @@ Row(children: [
                   tooltip: 'Show Snackbar',
                   color:const Color.fromARGB(255, 255, 255, 255),
                   onPressed: () {
+
+                    //LocalNotifications().showNotification(title: 'hello from the other side', body: 'hi');
+                    NotificationService().showNotification(
+                      1, 'Notification_title.text,' ,'Notification_descrp.text');
+
+
+
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(content: Text('This button is for future improvment')));
+                      
                   },
                 ),
             ),
@@ -320,7 +330,10 @@ SizedBox(height: 10,),
                                   SizedBox(height: 10,),
                                   
 
-                                  Row(children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                    
                                     SizedBox(width: 15,),
                                     Center(
                                     child:Text(storedocs[i]['title']),
