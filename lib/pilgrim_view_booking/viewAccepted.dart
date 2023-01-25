@@ -186,52 +186,88 @@ class _viewAcceptedState extends State<viewAccepted> {
                                                                           .pop();
                                                                     },
                                                                     child: const Text(
-                                                                        "Yes")),
+                                                                        "Cancel")),
                                                                 ElevatedButton(
-                                                                    style: ElevatedButton.styleFrom(
-                                                                        shape: RoundedRectangleBorder(
-                                                                            borderRadius: BorderRadius.circular(
-                                                                                30.0)),
-                                                                        backgroundColor:
-                                                                            Color(
-                                                                                0xFF455D83)),
-                                                                    onPressed:
-                                                                        () async{
-                                                                          DocumentSnapshot variable = await FirebaseFirestore.instance
-                                    .collection('Pilgrims-Account')
-                                    .doc(FirebaseAuth.instance.currentUser?.uid)
-                                    .get();
-                                String name = variable['ChosenCampaignName'];
-                                                                      AlertDialog(
-                                                                        title:
-                                                                            Text(
-                                                                          'Success',
-                                                                        ),
-                                                                        content:
-                                                                            Text('You have confirmed your booking with $name Campaign'),
-                                                                      );
-                                                                      Navigator.of(
-                                                                              context)
-                                                                          .pop();
-                                                                      setState(
-                                                                          () async {
-                                                                       
- DocumentSnapshot variable = await FirebaseFirestore.instance
-                                    .collection('Pilgrims-Account')
-                                    .doc(FirebaseAuth.instance.currentUser?.uid)
-                                    .get();
-                                String ID = variable['ChosenCampaignID'];
-                                                                        await FirebaseFirestore
+                                                                  style: ElevatedButton.styleFrom(
+                                                                      shape: RoundedRectangleBorder(
+                                                                          borderRadius: BorderRadius.circular(
+                                                                              30.0)),
+                                                                      backgroundColor:
+                                                                          Color(
+                                                                              0xFF455D83)),
+                                                                  onPressed:
+                                                                      () async {
+                                                                          
+                                                                    DocumentSnapshot variable = await FirebaseFirestore
+                                                                        .instance
+                                                                        .collection(
+                                                                            'Pilgrims-Account')
+                                                                        .doc(FirebaseAuth
                                                                             .instance
-                                                                            .collection("Pilgrims-Account")
-                                                                            .doc(FirebaseAuth.instance.currentUser?.uid)
-                                                                            .collection("pilgrimCampaigns")
-                                                                           .doc(ID).update({'bookStatus' : 'Confirmed'});
-                                                                        
-                                                                      });
-                                                                    }, child: null,
+                                                                            .currentUser
+                                                                            ?.uid)
+                                                                        .get();
+                                                                    String
+                                                                        name =
+                                                                        variable[
+                                                                            'ChosenCampaignName'];
+                                                                     Navigator.of(
+                                                                            context)
+                                                                        .pop();
+                                                                      showDialog(
+                                                                          context:
+                                                                              context,
+                                                                          builder:
+                                                                              (BuildContext context) {
+                                                                            return AlertDialog(
+                                                                              title: Text(
+                                                                                'Success',
+                                                                              ),
+                                                                              content:Text('You have confirmed your booking with $name Campaign'),
+                                                              );
+                                                                          });
                                                                    
-                                                             ) ],
+                                                                  
+                                                                    setState(
+                                                                        () async {
+                                                                         
+                                                                      DocumentSnapshot variable = await FirebaseFirestore
+                                                                          .instance
+                                                                          .collection(
+                                                                              'Pilgrims-Account')
+                                                                          .doc(FirebaseAuth
+                                                                              .instance
+                                                                              .currentUser
+                                                                              ?.uid)
+                                                                          .get();
+                                                                      String
+                                                                          ID =
+                                                                          variable[
+                                                                              'ChosenCampaignID'];
+                                                                      await FirebaseFirestore
+                                                                          .instance
+                                                                          .collection(
+                                                                              "Pilgrims-Account")
+                                                                          .doc(FirebaseAuth
+                                                                              .instance
+                                                                              .currentUser
+                                                                              ?.uid)
+                                                                          .collection(
+                                                                              "pilgrimCampaigns")
+                                                                          .doc(
+                                                                              ID)
+                                                                          .update({
+                                                                        'bookStatus':
+                                                                            'Confirmed'
+                                                                      });
+
+                                                                      
+                                                                    });
+                                                                  },
+                                                                  child: Text(
+                                                                      'Confrim'),
+                                                                )
+                                                              ],
                                                             );
                                                           });
                                                     })
