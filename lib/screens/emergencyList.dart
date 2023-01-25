@@ -9,6 +9,7 @@ import 'package:rafad1/widgets/emButton.dart';
 import 'package:rafad1/screens/LocationService.dart';
 import 'package:rafad1/screens/emergency.dart';
 import 'package:rafad1/screens/LocationService.dart';
+import 'package:rafad1/screens/pilgLocation.dart';
 
 
 class emergencyList extends StatefulWidget {
@@ -195,7 +196,7 @@ void DataStreams() async {
                                                     onPressed: () async {
                                                       ///////////توديه للماب 
 Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
-                return const PolylineScreen();
+                return const pilgLocation();
               }));
         //_latitude = storedocs[i]['latitude'];
         //_longitude = storedocs[i]['longitude'];

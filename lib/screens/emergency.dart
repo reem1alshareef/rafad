@@ -38,7 +38,8 @@ class _emergencyState extends State<emergency> {
 
   final _controller = TextEditingController();
   
-
+late double _latitude;
+late double _longitude ;
   @override 
   // void initState(){
     
@@ -104,8 +105,8 @@ SizedBox(///////////////بس عشان يحط مسافه
 //                 return const CurrentLocationScreen();
 //               }));
 //////////////////////////الكود اللي بيرسل اللوكيشن الحالي لليوزر
-                  // LocationService locationService = LocationService();
-                  // locationService.PilgsendLocationToDataBase(context);
+                  LocationService locationService = LocationService();
+                  locationService.PilgsendLocationToDataBase(context);
                   // _locationService.goToMaps(
                   // _latitude, _longitude);
 ///////////////////////////////
@@ -119,24 +120,24 @@ SizedBox(///////////////بس عشان يحط مسافه
                                 String pharma = variable['pharma'];
                                 String ChosenCampaignID = variable['ChosenCampaignID'];
                                 String number = variable['number'];
-                                // double _latitude1 = variable['latitude'];
-                                // double _longitude1 = variable['longitude'];
+                                double _latitude1 = variable['latitude'];
+                                double _longitude1 = variable['longitude'];
 
   // getActivityProfile() async{
-  // await _firestore
-  // .collection('Pilgrims-Account')
-  // .doc(FirebaseAuth.instance.currentUser?.uid).get().then(
-  //   (doc)=>{
-  //     setState((){
-  //       if (doc.data() != null){
-  //         _latitude = doc.data()!['latitude']??=0;
-  //         _longitude = doc.data()!['longitude']??=0;
-  //       }
-  //     },
+//   await _firestore
+//   .collection('Pilgrims-Account')
+//   .doc(FirebaseAuth.instance.currentUser?.uid).get().then(
+//     (doc)=>{
+//       setState((){
+//         if (doc.data() != null){
+//           _latitude = doc.data()!['latitude']??=0;
+//           _longitude = doc.data()!['longitude']??=0;
+//         }
+//       },
       
-  //     ),
-  //   },
-  //     );
+//       ),
+// },
+//     );
   //     };
 
       //_locationService.goToMaps(_latitude, _longitude);
@@ -149,7 +150,7 @@ SizedBox(///////////////بس عشان يحط مسافه
       //             {
       //             'GeoPoint': GeoPoint(position.latitude, position.latitude),
       //             },);
-Position position = await Geolocator.getCurrentPosition();
+//Position position = await Geolocator.getCurrentPosition();
                   _firestore
                   .collection("AcceptedCampaigns")
                   .doc(ChosenCampaignID)
@@ -157,7 +158,9 @@ Position position = await Geolocator.getCurrentPosition();
                   .doc(FirebaseAuth.instance.currentUser?.uid)
                   .set( 
                   {
-                  'GeoPoint': GeoPoint(position.latitude, position.latitude),
+                  //'GeoPoint': GeoPoint(position.latitude, position.latitude),
+                  '_latitude': _latitude1,
+                  '_longitude':_longitude1,
                   'name': name,
                   'disease': disease,
                   'pharma': pharma,
