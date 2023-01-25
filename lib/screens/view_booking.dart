@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -190,7 +191,7 @@ print (element. data());l
                                                   child: Column(
                                                     children: const [
                                                       Text(
-                                                        'your Request has been submitted  successfully !',
+                                                        '',
                                                         style: TextStyle(
                                                             color:
                                                                 Color.fromARGB(
@@ -211,7 +212,7 @@ print (element. data());l
                                                           bottom: 10),
                                                   child: Column(children: [
                                                     Text(
-                                                      'Request Status: ',
+                                                      'Campaign\'s Booking Request Status: ',
                                                       style: TextStyle(
                                                           color:
                                                               Color(0xFF455D83),
@@ -240,6 +241,7 @@ print (element. data());l
                                         buttonHeight: 52.0,
                                         buttonMinWidth: 90.0,
                                         children: <Widget>[
+                                        
                                           TextButton(
                                             style: TextButton.styleFrom(
                                                 shape:
@@ -255,8 +257,8 @@ print (element. data());l
                                                     return AlertDialog(
                                                       title: const Text(
                                                           "Cancel Request"),
-                                                      content: const Text(
-                                                          "Are you sure you want to Cancel?"),
+                                                      content: Text(
+                                                          "Are you sure you want to Cancel This Campaign's Booking?"),
                                                       actions: [
                                                         ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
@@ -289,11 +291,8 @@ print (element. data());l
                                                                   .pop();
                                                               setState(
                                                                   () async {
-                                                                // حذف البيانات الخاصه باليوزر من الفايرستور
-                                                                var cID =
-                                                                    storedocs[i]
-                                                                        [
-                                                                        'campaignID'];
+                                                                //removes from UI when pressed Yes for cancellation
+
                                                                 await FirebaseFirestore
                                                                     .instance
                                                                     .collection(
@@ -304,10 +303,9 @@ print (element. data());l
                                                                         ?.uid)
                                                                     .collection(
                                                                         "pilgrimCampaigns")
-                                                                    .doc(FirebaseAuth
-                                                                        .instance
-                                                                        .currentUser
-                                                                        ?.uid)
+                                                                    .doc(storedocs[
+                                                                            i][
+                                                                        'campaignID'])
                                                                     .delete();
                                                               });
                                                             },
@@ -317,7 +315,9 @@ print (element. data());l
                                                     );
                                                   });
                                             },
+                                            
                                             child: Column(
+                                              
                                               children: const <Widget>[
                                                 Icon(Icons.cancel_rounded,
                                                     color: Colors.redAccent),
@@ -326,6 +326,7 @@ print (element. data());l
                                                       vertical: 2.0),
                                                 ),
                                                 Text('Cancel'),
+                                                
                                               ],
                                             ),
                                           ),
