@@ -23,10 +23,11 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("select current location"),
-      //   centerTitle: true,
-      // ),
+      appBar: AppBar(
+        title: const Text("select current location"),
+        centerTitle: true,
+        backgroundColor:  Color.fromARGB(255, 184, 20, 20),
+      ),
       body: GoogleMap(
         initialCameraPosition: initialCameraPosition,
         markers: markers,
@@ -45,11 +46,11 @@ class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
               .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(position.latitude, position.longitude), zoom: 14)));
 
 
-          markers.clear();
+          // markers.clear();
 
           markers.add(Marker(markerId: const MarkerId('currentLocation'),position: LatLng(position.latitude, position.longitude)));
 
-          setState(() {});
+          //setState(() {});
 
         },
         label: const Text("send my Location"),

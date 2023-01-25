@@ -199,48 +199,8 @@ void DataStreams() async {
 Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
                 return const pilgLocation();
               }));
+//////////////////
 
-
-
-
-        //_latitude = storedocs[i]['latitude'];
-        //_longitude = storedocs[i]['longitude'];
-
-  //   getActivityProfile() async{
-  // await _firestore
-  // .collection('Pilgrims-Account')
-  // .doc(storedocs[i]['UID']).get().then(
-  //   (doc)=>{
-  //     setState((){
-  //       if (doc.data() != null){
-  //         _latitude = doc.data()!['latitude']??=0;
-  //         _longitude = doc.data()!['longitude']??=0;
-  //       }
-  //     },
-      
-  //     ),
-  //   },
-  //     );
-  //     };
-
-  //   LocationService _locationService = LocationService();
-  // _firestore
-  // .collection('Pilgrims-Account')
-  // .doc(storedocs[i]['UID']).get().then(
-  //   (doc)=>{
-  //     setState((){
-  //       if (doc.data() != null){
-  //         _locationService.goToMaps(doc.data()!['latitude']??=0, doc.data()!['longitude']??=0);
-  //         // _latitude = doc.data()!['latitude']??=0;
-  //         // _longitude = doc.data()!['longitude']??=0;
-  //       }
-  //     },
-  //     ),
-  //   },
-  //     );
-  
-  //_locationService.goToMaps(_latitude, _longitude);
-    //////////////////////////////////////////////////
                                                     },
                                                     )
                                               ]),

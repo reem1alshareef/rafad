@@ -38,14 +38,9 @@ class _emergencyState extends State<emergency> {
 
   final _controller = TextEditingController();
   
-late double _latitude;
-late double _longitude ;
+
   @override 
-  // void initState(){
-    
-  //   print(FirebaseAuth.instance.currentUser?.uid);
-  //   super.initState();
-  // }
+
 
   @override
   Widget build(BuildContext context) {
@@ -88,11 +83,7 @@ SizedBox(///////////////بس عشان يحط مسافه
       height: 50, 
     ),
 
-// ElevatedButton(onPressed: (){
-//               Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
-//                 return const CurrentLocationScreen();
-//               }));
-//             }, child: const Text("current Map")),
+
 
             emButton(
               color: const Color.fromARGB(255, 184, 20, 20),
@@ -101,14 +92,12 @@ SizedBox(///////////////بس عشان يحط مسافه
                   Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
                 return const CurrentLocationScreen();
               }));
-// Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
-//                 return const CurrentLocationScreen();
-//               }));
+
 //////////////////////////الكود اللي بيرسل اللوكيشن الحالي لليوزر
+
                   LocationService locationService = LocationService();
                   locationService.PilgsendLocationToDataBase(context);
-                  // _locationService.goToMaps(
-                  // _latitude, _longitude);
+
 ///////////////////////////////
                   DocumentSnapshot variable = await _firestore
                                     .collection('Pilgrims-Account')
@@ -122,7 +111,15 @@ SizedBox(///////////////بس عشان يحط مسافه
                                 String number = variable['number'];
                                 double _latitude1 = variable['latitude'];
                                 double _longitude1 = variable['longitude'];
-
+_firestore
+                  .collection("AcceptedCampaigns")
+                  .doc(ChosenCampaignID)
+                  .update( 
+                  {
+                  //'GeoPoint': GeoPoint(position.latitude, position.latitude),
+                  'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
+                  //'hajId': hajId,
+                  },);
   // getActivityProfile() async{
 //   await _firestore
 //   .collection('Pilgrims-Account')
