@@ -6,6 +6,7 @@ import 'package:rafad1/screens/DriverHomePage.dart'; //احذفيها بعدين
 import 'package:rafad1/screens/MapTry.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
+import 'package:rafad1/screens/mymap.dart';
 import 'package:rafad1/screens/notification_accept.dart';
 import 'package:rafad1/screens/signUP_pilgrim.dart';
 import 'package:rafad1/screens/welcome_admin.dart';
@@ -58,7 +59,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors
               .white, // change it from swatch to colort and from wight to blue , for map
         ),
-        home: MyApp2(),
+        home: MyMap(),
         // initialRoute: WelcomeScreen.screenRoute,
         routes: {
           WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
