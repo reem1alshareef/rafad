@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rafad1/screens/navigation_screen.dart';
-//هنا بجرب احط احدثيات اللي مخزنه في الفايربيس يصير كذا وصلنا للحملة
 
+//هنا بجرب احط احدثيات اللي مخزنه في الفايربيس يصير كذا وصلنا للحملة
+//المرتبط معه نفقيشين سكرين الباقي احذفه
 class MyApp2 extends StatefulWidget {
   @override
   State<MyApp2> createState() => _MyApp2State();
@@ -21,6 +22,13 @@ class _MyApp2State extends State<MyApp2> {
       body: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          // ممتاز هنا بجرب احضر اللوكيشن من الفايربيس وبيضبط ان شاء الله
+          TextButton(
+              onPressed: () {
+                _getLocation();
+              },
+              child: Text('add my location')),
+
           /* Text(
             'Enter your location',
             style: TextStyle(fontSize: 40),
