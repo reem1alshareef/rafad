@@ -195,9 +195,14 @@ void DataStreams() async {
                                                     ),
                                                     onPressed: () async {
                                                       ///////////توديه للماب 
+                                                      
 Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
                 return const pilgLocation();
               }));
+
+
+
+
         //_latitude = storedocs[i]['latitude'];
         //_longitude = storedocs[i]['longitude'];
 

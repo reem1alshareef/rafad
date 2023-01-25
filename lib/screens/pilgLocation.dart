@@ -1,43 +1,47 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:firebase_auth/firebase_auth.dart';
-// import 'package:flutter/material.dart';
-// import 'package:geolocator/geolocator.dart';
-// import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import 'dart:async';
 
-// class pilgLocation extends StatefulWidget {
-//   static const String screenRoute = 'pilgLocation.dart';
-//   const pilgLocation({Key? key}) : super(key: key);
-// //const CurrentLocationScreen({super.key});
-//   @override
-//   _pilgLocationState createState() => _pilgLocationState();
-// }
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-// class _pilgLocationState extends State<pilgLocation> {
-//   late GoogleMapController googleMapController;
-//   final _firestore = FirebaseFirestore.instance;
-//   static const CameraPosition initialCameraPosition = CameraPosition(target: LatLng(37.42796133580664, -122.085749655962), zoom: 14);
+class pilgLocation extends StatefulWidget {
+  static const String screenRoute = 'pilgLocation.dart';
+  const pilgLocation({super.key});
+  @override
+  _pilgLocationState createState() => _pilgLocationState();
+}
 
-//   Set<Marker> markers = {};
+class _pilgLocationState extends State<pilgLocation> {
+  final Completer<GoogleMapController> _controller = Completer();
+final _firestore = FirebaseFirestore.instance;
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       // appBar: AppBar(
-//       //   title: const Text("select current location"),
-//       //   centerTitle: true,
-//       // ),
-//       body: GoogleMap(
-//         initialCameraPosition: initialCameraPosition,
-//         markers: markers,
-//         zoomControlsEnabled: false,
-//         mapType: MapType.normal,
-//         onMapCreated: (GoogleMapController controller) async {
-//               DocumentSnapshot variable = await _firestore
+  static const CameraPosition initialPosition = CameraPosition(target: LatLng(37.42796133580664, -122.085749655962), zoom: 14.0);
+
+  // static  CameraPosition targetPosition = CameraPosition(target: LatLng(latitude, longitude), zoom: 14.0, bearing: 192.0, tilt: 60);
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Simple Google Map"),
+        centerTitle: true,
+      ),
+      body: GoogleMap(
+        initialCameraPosition: initialPosition,
+        mapType: MapType.normal,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+// DocumentSnapshot variable = await _firestore
 //                                     .collection('AcceptedCampaigns')
 //                                     .doc(FirebaseAuth.instance.currentUser?.uid)
 //                                     .get();
-//                                 String pilgrimID = variable['pilgrimID'];
+//                               String pilgrimID = variable['pilgrimID'];
 
 
 // DocumentSnapshot variable2 = await _firestore
@@ -46,194 +50,52 @@
 //                                     .collection('pilgrimEmrgency')
 //                                     .doc(pilgrimID)
 //                                     .get();
-//                                 var latitude = variable['latitude'];
-//                                 var longitude = variable['longitude'];
-
-//             controller.animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(latitude, longitude), zoom: 14)));
-// ;
-//         markers.add(Marker(markerId: const MarkerId('currentLocation'),position: LatLng(latitude, longitude)));
-// setState(() {});
-//         },
-//       ),
-//       floatingActionButton: FloatingActionButton.extended(
-        
-//         onPressed: () async {
-// //           DocumentSnapshot variable = await _firestore
-// //                                     .collection('AcceptedCampaigns')
-// //                                     .doc(FirebaseAuth.instance.currentUser?.uid)
-// //                                     .get();
-// //                                 String pilgrimID = variable['pilgrimID'];
-
-
-// // DocumentSnapshot variable2 = await _firestore
-// //                                     .collection('AcceptedCampaigns')
-// //                                     .doc(FirebaseAuth.instance.currentUser?.uid)
-// //                                     .collection('pilgrimEmrgency')
-// //                                     .doc(pilgrimID)
-// //                                     .get();
-// //                                 var latitude = variable['latitude'];
-// //                                 var longitude = variable['longitude'];
-                                
-//           _determinePosition();
-
-//           // googleMapController
-//           //     .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(latitude, longitude), zoom: 14)));
-
-
-//           // //markers.clear();
-
-//           // markers.add(Marker(markerId: const MarkerId('currentLocation'),position: LatLng(latitude, longitude)));
-
-//           // setState(() {});
-
-//         },
-//         label: const Text("view pilgrim Location"),
-//         icon: const Icon(Icons.location_history),
-//         backgroundColor:  Color.fromARGB(255, 184, 20, 20),
-//       ),
-//   );
-//     }
-
-
-//   Future<void> _determinePosition() async {
-//     bool serviceEnabled;
-//     LocationPermission permission;
-
-//     serviceEnabled = await Geolocator.isLocationServiceEnabled();
-
-//     if (!serviceEnabled) {
-//       return Future.error('Location services are disabled');
-//     }
-
-//     permission = await Geolocator.checkPermission();
-
-//     if (permission == LocationPermission.denied) {
-//       permission = await Geolocator.requestPermission();
-
-//       if (permission == LocationPermission.denied) {
-//         return Future.error("Location permission denied");
-//       }
-//     }
-
-//     if (permission == LocationPermission.deniedForever) {
-//       return Future.error('Location permissions are permanently denied');
-//     }
-// //     DocumentSnapshot variable = await _firestore
-// //                                     .collection('AcceptedCampaigns')
-// //                                     .doc(FirebaseAuth.instance.currentUser?.uid)
-// //                                     .get();
-// //                                 String pilgrimID = variable['pilgrimID'];
-
-
-// // DocumentSnapshot variable2 = await _firestore
-// //                                     .collection('AcceptedCampaigns')
-// //                                     .doc(FirebaseAuth.instance.currentUser?.uid)
-// //                                     .collection('pilgrimEmrgency')
-// //                                     .doc(pilgrimID)
-// //                                     .get();
-// //                                 var latitude = variable['latitude'];
-// //                                 var longitude = variable['longitude'];
-                                
-//     // googleMapController
-//     //           .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(latitude, longitude), zoom: 14)));
-
-
-//           //markers.clear();
-
-//           // markers.add(Marker(markerId: const MarkerId('currentLocation'),position: LatLng(latitude, longitude)));
-
-//               // setState(() {});
-//   }
-// }
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-
-
-class CurrentLocationScreen extends StatefulWidget {
-  static const String screenRoute = 'CurrentLocationScreen.dart';
-  const CurrentLocationScreen({Key? key}) : super(key: key);
-//const CurrentLocationScreen({super.key});
-  @override
-  _CurrentLocationScreenState createState() => _CurrentLocationScreenState();
-}
-
-class _CurrentLocationScreenState extends State<CurrentLocationScreen> {
-  late GoogleMapController googleMapController;
-  final _firestore = FirebaseFirestore.instance;
-  static const CameraPosition initialCameraPosition = CameraPosition(target: LatLng(37.42796133580664, -122.085749655962), zoom: 14);
-
-  Set<Marker> markers = {};
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("select current location"),
-      //   centerTitle: true,
-      // ),
-      body: GoogleMap(
-        initialCameraPosition: initialCameraPosition,
-        markers: markers,
-        zoomControlsEnabled: false,
-        mapType: MapType.normal,
-        onMapCreated: (GoogleMapController controller) {
-          googleMapController = controller;
+//                                 double latitude = variable2['_latitude'];
+//                                 double longitude = variable2['_longitude'];
+          goToLake();
         },
+        label: const Text("go to the pilgrim"),
+        icon: const Icon(Icons.directions_boat),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        
-        onPressed: () async {
-          Position position = await _determinePosition();
+    );
+  }
 
-          googleMapController
-              .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(position.latitude, position.longitude), zoom: 14)));
-
-
-          markers.clear();
-
-          markers.add(Marker(markerId: const MarkerId('currentLocation'),position: LatLng(position.latitude, position.longitude)));
-
-          setState(() {});
-
-        },
-        label: const Text("send my Location"),
-        icon: const Icon(Icons.location_history),
-        backgroundColor:  Color.fromARGB(255, 184, 20, 20),
-      ),
-  );
-    }
+  Future<void> goToLake() async {
+    final GoogleMapController controller = await _controller.future;
+    DocumentSnapshot variable = await _firestore
+                                    .collection('AcceptedCampaigns')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .get();
+                              String pilgrimID = variable['pilgrimID'];
 
 
-  Future<Position> _determinePosition() async {
-    bool serviceEnabled;
-    LocationPermission permission;
+DocumentSnapshot variable2 = await _firestore
+                                    .collection('AcceptedCampaigns')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .collection('pilgrimEmrgency')
+                                    .doc(pilgrimID)
+                                    .get();
+                                double latitude = variable2['_latitude'];
+                                double longitude = variable2['_longitude'];
 
-    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    CameraPosition targetPosition = CameraPosition(target: LatLng(latitude, longitude), zoom: 14.0, bearing: 192.0, tilt: 60);
 
-    if (!serviceEnabled) {
-      return Future.error('Location services are disabled');
-    }
-
-    permission = await Geolocator.checkPermission();
-
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-
-      if (permission == LocationPermission.denied) {
-        return Future.error("Location permission denied");
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      return Future.error('Location permissions are permanently denied');
-    }
-
-    Position position = await Geolocator.getCurrentPosition();
-    
-
-    return position;
+    controller.animateCamera(CameraUpdate.newCameraPosition(targetPosition));
   }
 }
+
+// DocumentSnapshot variable = await _firestore
+//                                     .collection('AcceptedCampaigns')
+//                                     .doc(FirebaseAuth.instance.currentUser?.uid)
+//                                     .get();
+//                               String pilgrimID = variable['pilgrimID'];
+
+
+// DocumentSnapshot variable2 = await _firestore
+//                                     .collection('AcceptedCampaigns')
+//                                     .doc(FirebaseAuth.instance.currentUser?.uid)
+//                                     .collection('pilgrimEmrgency')
+//                                     .doc(pilgrimID)
+//                                     .get();
+//                                 double latitude = variable2['_latitude'].latitude;
+//                                 double longitude = variable2['_longitude'].longitude;
