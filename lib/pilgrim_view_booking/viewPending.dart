@@ -6,14 +6,14 @@ import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 
 //import 'package:rafad1/screens/LoginPage.dart';
-class ViewBooking extends StatefulWidget {
+class viewPending extends StatefulWidget {
   //static const String screenRoute = 'welcome_screen';
-  const ViewBooking({super.key});
+  const viewPending({super.key});
   @override
   _ViewState createState() => _ViewState();
 }
 
-class _ViewState extends State<ViewBooking> {
+class _ViewState extends State<viewPending> {
   final _firestore = FirebaseFirestore.instance;
   String? rejectionReason;
 
@@ -66,6 +66,7 @@ class _ViewState extends State<ViewBooking> {
         .collection("Pilgrims-Account")
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .collection("pilgrimCampaigns")
+        .where('bookStatus', isEqualTo: 'pending')
         .snapshots();
 
 /*
@@ -104,7 +105,7 @@ print (element. data());l
 });
 ]);*/
     return Scaffold(
-        appBar: AppBar(
+        /*appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Booking Requests'),
           backgroundColor: const Color(0xFF455D83),
@@ -121,7 +122,7 @@ print (element. data());l
               },
             )
           ],
-        ),
+        ),*/
         body: SingleChildScrollView(
             child: Column(children: [
           Padding(
@@ -190,7 +191,7 @@ print (element. data());l
                                                   child: Column(
                                                     children: const [
                                                       Text(
-                                                        '',
+                                                        'your Request has been submitted  successfully !',
                                                         style: TextStyle(
                                                             color:
                                                                 Color.fromARGB(
@@ -211,7 +212,7 @@ print (element. data());l
                                                           bottom: 10),
                                                   child: Column(children: [
                                                     Text(
-                                                      'Campaign\'s Booking Request Status: ',
+                                                      'Request Status: ',
                                                       style: TextStyle(
                                                           color:
                                                               Color(0xFF455D83),
@@ -255,8 +256,8 @@ print (element. data());l
                                                     return AlertDialog(
                                                       title: const Text(
                                                           "Cancel Request"),
-                                                      content: Text(
-                                                          "Are you sure you want to Cancel This Campaign's Booking?"),
+                                                      content: const Text(
+                                                          "Are you sure you want to Cancel?"),
                                                       actions: [
                                                         ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
@@ -289,8 +290,11 @@ print (element. data());l
                                                                   .pop();
                                                               setState(
                                                                   () async {
-                                                                //removes from UI when pressed Yes for cancellation
-
+                                                                // حذف البيانات الخاصه باليوزر من الفايرستور
+                                                                var cID =
+                                                                    storedocs[i]
+                                                                        [
+                                                                        'campaignID'];
                                                                 await FirebaseFirestore
                                                                     .instance
                                                                     .collection(
@@ -301,9 +305,10 @@ print (element. data());l
                                                                         ?.uid)
                                                                     .collection(
                                                                         "pilgrimCampaigns")
-                                                                    .doc(storedocs[
-                                                                            i][
-                                                                        'campaignID'])
+                                                                    .doc(FirebaseAuth
+                                                                        .instance
+                                                                        .currentUser
+                                                                        ?.uid)
                                                                     .delete();
                                                               });
                                                             },
