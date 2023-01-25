@@ -3,11 +3,11 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:rafad1/screens/mymap.dart';
+import 'package:rafad1/screens/MyMap.dart';
 import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
 
-import 'mymap.dart';
+import 'MyMap.dart';
 
 
 class CampaignLocation extends StatefulWidget {
@@ -53,7 +53,7 @@ class _CampaignLocationState extends State<CampaignLocation> {
           Expanded(
               child: StreamBuilder(
             stream:
-                FirebaseFirestore.instance.collection('location').snapshots(),
+                FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots(),
             builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) {
                 return Center(child: CircularProgressIndicator());
@@ -62,8 +62,8 @@ class _CampaignLocationState extends State<CampaignLocation> {
                   itemCount: snapshot.data?.docs.length,
                   itemBuilder: (context, index) {
                     return ListTile(
-                      title:
-                          Text(snapshot.data!.docs[index]['name'].toString()),
+                      
+                        
                       subtitle: Row(
                         children: [
                           Text(snapshot.data!.docs[index]['latitude']
@@ -95,10 +95,10 @@ class _CampaignLocationState extends State<CampaignLocation> {
   _getLocation() async {
     try {
       final loc.LocationData _locationResult = await location.getLocation();
-      await FirebaseFirestore.instance.collection('location').doc('user1').set({
+      await FirebaseFirestore.instance.collection('AcceptedCampaigns').doc().set({
         'latitude': _locationResult.latitude,
         'longitude': _locationResult.longitude,
-        'name': 'john'
+       
       }, SetOptions(merge: true));
     } catch (e) {
       print(e);
@@ -113,10 +113,10 @@ class _CampaignLocationState extends State<CampaignLocation> {
         _locationSubscription = null;
       });
     }).listen((loc.LocationData currentlocation) async {
-      await FirebaseFirestore.instance.collection('location').doc('user1').set({
+      await FirebaseFirestore.instance.collection('AcceptedCampaigns').doc('').set({
         'latitude': currentlocation.latitude,
         'longitude': currentlocation.longitude,
-        'name': 'john'
+        
       }, SetOptions(merge: true));
     });
   }

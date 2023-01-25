@@ -6,7 +6,7 @@ import 'package:rafad1/screens/DriverHomePage.dart'; //احذفيها بعدين
 import 'package:rafad1/screens/MapTry.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
-import 'package:rafad1/screens/mymap.dart';
+import 'package:rafad1/screens/MyMap.dart';
 import 'package:rafad1/screens/notification_accept.dart';
 import 'package:rafad1/screens/signUP_pilgrim.dart';
 import 'package:rafad1/screens/welcome_admin.dart';

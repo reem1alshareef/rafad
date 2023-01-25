@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:rafad1/main.dart';
 import 'package:location/location.dart' as loc;
 
 class MyMap extends StatefulWidget {
@@ -18,7 +19,7 @@ class _MyMapState extends State<MyMap> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: StreamBuilder(
-      stream: FirebaseFirestore.instance.collection('location').snapshots(),
+      stream: FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots(),
       builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
         if (_added) {
           mymap(snapshot);
