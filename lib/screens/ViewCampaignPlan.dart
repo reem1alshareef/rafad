@@ -5,56 +5,33 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 
 class ViewCampaignPlan extends StatefulWidget {
-  //static const String screenRoute = 'welcome_screen';
-  const ViewCampaignPlan({super.key});
+  
+    ViewCampaignPlan({super.key});
   @override
   _ViewState createState() => _ViewState();
-  String ID;
-
-  Future<void> start() async {
-    DocumentSnapshot variable = await FirebaseFirestore.instance
-          .collection('Pilgrims-Account')
-          .doc(FirebaseAuth.instance.currentUser?.uid)
-          .get();
-      ID = variable["ChosenCampaignID"];
-      print(ID);
-   // }
-
-   //getID();
-    //}
-
-    print(ID);
-    Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
-        .collection("AcceptedCampaigns")
-        .doc(ID)
-        .collection("Activities")
-        .snapshots();
-    print(ID);
-  }
 }
 
 class _ViewState extends State<ViewCampaignPlan> {
   @override
-  Future<Widget> build(BuildContext context) async {
-    String ID = 'blah';
-
-    
-
-    print(ID);
-    Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
-        .collection("AcceptedCampaigns")
-        .doc(ID)
-        .collection("Activities")
-        .snapshots();
-    print(ID);
-
-    return Scaffold(
+  Widget build(BuildContext context) {
+    String ID = '';
+    void get() async {
       DocumentSnapshot variable = await FirebaseFirestore.instance
           .collection('Pilgrims-Account')
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .get();
       ID = variable["ChosenCampaignID"];
-      print(ID);
+    }
+
+    print(ID);
+
+    Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
+        .collection("AcceptedCampaigns")
+        .doc(ID)
+        .collection("Activities")
+        .snapshots();
+
+    return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Today\'s Campaign plan'),

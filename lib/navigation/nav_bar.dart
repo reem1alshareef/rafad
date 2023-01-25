@@ -30,8 +30,8 @@ class _nav_adminState extends State<nav_admin> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    const DeleteCampaign(), 
-    const DeletePilgrim(), 
+    const DeleteCampaign(),
+    const DeletePilgrim(),
     View()
   ];
 
@@ -90,7 +90,12 @@ class _nav_campaignState extends State<nav_campaign> {
     CampaignView(),
     SearchPilgrim(),
     CampaignPlan(),
-    Center(child: Text('emergency',style: TextStyle(fontSize: 72),),), 
+    Center(
+      child: Text(
+        'emergency',
+        style: TextStyle(fontSize: 72),
+      ),
+    ),
     //Center(child: Text('location',style: TextStyle(fontSize: 72),),),
     AddDescription(),
   ];
@@ -117,7 +122,7 @@ class _nav_campaignState extends State<nav_campaign> {
                 icon: Icon(Icons.search),
                 label: 'Search',
                 backgroundColor: Color(0xFF455D83)),
-             BottomNavigationBarItem(
+            BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_today_rounded),
                 label: 'Plan',
                 backgroundColor: Color(0xFF455D83)),
@@ -159,10 +164,26 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
   static const List<Widget> _widgetOptions = <Widget>[
     PilgrimView(),
     SearchCampaign(),
-    ViewCampaignPlan(),
-    Center(child: Text('emergency',style: TextStyle(fontSize: 72),),),
+    //ViewCampaignPlan(),
+    Center(
+      child: Text(
+        'plan',
+        style: TextStyle(fontSize: 72),
+      ),
+    ),
+    Center(
+      child: Text(
+        'emergency',
+        style: TextStyle(fontSize: 72),
+      ),
+    ),
     //Center(child: Text('location',style: TextStyle(fontSize: 72),),),
-    Center(child: Text('profile',style: TextStyle(fontSize: 72),),),
+    Center(
+      child: Text(
+        'profile',
+        style: TextStyle(fontSize: 72),
+      ),
+    ),
   ];
 
   void _onItemTapped(int index) {
@@ -187,7 +208,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
                 icon: Icon(Icons.search),
                 label: 'Search',
                 backgroundColor: Color(0xFF455D83)),
-             BottomNavigationBarItem(
+            BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_today_rounded),
                 label: 'Plan',
                 backgroundColor: Color(0xFF455D83)),
