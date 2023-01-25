@@ -18,7 +18,7 @@ class _MyApp2State extends State<MyApp2> {
       body: Padding(
         padding: const EdgeInsets.all(18.0),
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Text(
+          /* Text(
             'Enter your location',
             style: TextStyle(fontSize: 40),
           ),
@@ -44,7 +44,8 @@ class _MyApp2State extends State<MyApp2> {
           ),
           SizedBox(
             height: 20,
-          ),
+          ),*/
+
           Container(
             width: double.infinity,
             child: ElevatedButton(
