@@ -1,10 +1,9 @@
+import 'dart:html';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-
-//import 'package:rafad1/screens/LoginPage.dart';
 class ViewCampaignPlan extends StatefulWidget {
   //static const String screenRoute = 'welcome_screen';
   const ViewCampaignPlan({super.key});
@@ -15,10 +14,18 @@ class ViewCampaignPlan extends StatefulWidget {
 class _ViewState extends State<ViewCampaignPlan> {
   @override
   Widget build(BuildContext context) {
-    final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
-        .collection("Pilgrims-Account")
-        .doc(FirebaseAuth.instance.currentUser?.uid)
-        .collection("pilgrimCampaigns")
+
+Future<DocumentSnapshot<Object?>> variable =  FirebaseFirestore.instance
+                                    .collection('Pilgrims-Account')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .get();
+                               
+
+
+    Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
+        .collection("AcceptedCampaigns")
+        .doc('4a8v9veM6igptqvtBdq8cZvuczp2')
+        .collection("Activities")
         .snapshots();
 
     return Scaffold(
@@ -44,25 +51,44 @@ class _ViewState extends State<ViewCampaignPlan> {
                       child: CircularProgressIndicator(),
                     );
                   }
+
                   final List storedocs = [];
                   snapshot.data!.docs.map((DocumentSnapshot document) {
                     Map a = document.data() as Map<String, dynamic>;
                     storedocs.add(a);
-                    a['UID'] = document.id;
+                    a['id'] = document.id;
                   }).toList();
                   return Column(
                     children: List.generate(
                       storedocs.length,
                       (i) => SingleChildScrollView(
-                        child: ListTile(
-                          title: Text("Activity"),
-                         
-                          trailing: Text(
-                            "time",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 10),
+                        child: Container(
+                          margin: EdgeInsets.only(bottom: 17),
+                          child: ListTile(
+                            
+                            title: Text(
+                              storedocs[i]['title'],
+                              style: TextStyle(color: Color(0xFF455D83), fontSize: 20),
+                            ),
+                            trailing: Row( mainAxisSize: MainAxisSize.min, children:[ 
+                            Text(
+                              ' Starts at  '
+                              ' ${storedocs[i]['time'].toDate().hour} : ${storedocs[i]['time'].toDate().minute} ',
+                              style: TextStyle(
+                                  color: Color(0xFF455D83),
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 17),
+                            ),
+                            
+                             Icon(Icons.access_time_rounded)
+                            
+                            ] ),
+                            tileColor: Color.fromARGB(255, 228, 232, 235),
+                            contentPadding: EdgeInsets.all(17),
+                            
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                          
+             
                           ),
                         ),
                       ),

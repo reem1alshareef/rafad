@@ -181,7 +181,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
                 label: 'Search',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.announcement),
+                icon: Icon(Icons.calendar_today_rounded),
                 label: 'Plan',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(

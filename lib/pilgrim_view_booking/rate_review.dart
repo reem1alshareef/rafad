@@ -52,7 +52,7 @@ class _RateReviewState extends State<RateReview> {
         .collection("Pilgrims-Account")
         .doc(FirebaseAuth.instance.currentUser?.uid)
         .collection("pilgrimCampaigns")
-        .where('bookStatus', isEqualTo: 'Accepted')
+        .where('bookStatus', isEqualTo: 'Confirmed')
         .snapshots();
 
     return Scaffold(

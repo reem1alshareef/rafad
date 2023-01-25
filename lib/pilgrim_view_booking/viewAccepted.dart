@@ -160,6 +160,80 @@ class _viewAcceptedState extends State<viewAccepted> {
                                                           },
                                                               SetOptions(
                                                                   merge: true));
+
+                                                      showDialog(
+                                                          context: context,
+                                                          builder: (BuildContext
+                                                              context) {
+                                                            return AlertDialog(
+                                                              title: const Text(
+                                                                  "Confirm Booking"),
+                                                              content: Text(
+                                                                  "Are you sure you want to confirm This Campaign's Booking?"),
+                                                              actions: [
+                                                                ElevatedButton(
+                                                                    style: ElevatedButton.styleFrom(
+                                                                        shape: RoundedRectangleBorder(
+                                                                            borderRadius: BorderRadius.circular(
+                                                                                30.0)),
+                                                                        backgroundColor:
+                                                                            Color(
+                                                                                0xFF455D83)),
+                                                                    onPressed:
+                                                                        () {
+                                                                      Navigator.of(
+                                                                              context)
+                                                                          .pop();
+                                                                    },
+                                                                    child: const Text(
+                                                                        "Yes")),
+                                                                ElevatedButton(
+                                                                    style: ElevatedButton.styleFrom(
+                                                                        shape: RoundedRectangleBorder(
+                                                                            borderRadius: BorderRadius.circular(
+                                                                                30.0)),
+                                                                        backgroundColor:
+                                                                            Color(
+                                                                                0xFF455D83)),
+                                                                    onPressed:
+                                                                        () async{
+                                                                          DocumentSnapshot variable = await FirebaseFirestore.instance
+                                    .collection('Pilgrims-Account')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .get();
+                                String name = variable['ChosenCampaignName'];
+                                                                      AlertDialog(
+                                                                        title:
+                                                                            Text(
+                                                                          'Success',
+                                                                        ),
+                                                                        content:
+                                                                            Text('You have confirmed your booking with $name Campaign'),
+                                                                      );
+                                                                      Navigator.of(
+                                                                              context)
+                                                                          .pop();
+                                                                      setState(
+                                                                          () async {
+                                                                       
+ DocumentSnapshot variable = await FirebaseFirestore.instance
+                                    .collection('Pilgrims-Account')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .get();
+                                String ID = variable['ChosenCampaignID'];
+                                                                        await FirebaseFirestore
+                                                                            .instance
+                                                                            .collection("Pilgrims-Account")
+                                                                            .doc(FirebaseAuth.instance.currentUser?.uid)
+                                                                            .collection("pilgrimCampaigns")
+                                                                           .doc(ID).update({'bookStatus' : 'Confirmed'});
+                                                                        
+                                                                      });
+                                                                    }, child: null,
+                                                                   
+                                                             ) ],
+                                                            );
+                                                          });
                                                     })
                                               ]),
                                             ),
