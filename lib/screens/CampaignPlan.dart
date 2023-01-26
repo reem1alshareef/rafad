@@ -211,7 +211,7 @@ const SizedBox(width: 10),
               TextFormField(
                 //key: _addTitleKey,
                 maxLines: 1,
-                          maxLength: 20,
+                          maxLength: 15,
                           
                           inputFormatters: [
                             FilteringTextInputFormatter.deny
@@ -338,11 +338,11 @@ SizedBox(height: 10,),
                                     Center(
                                     child:Text(storedocs[i]['title']),
                                     ),
-                                    SizedBox(width: 40,),
+                                    //SizedBox(width: 40,),
 
                                    const Icon(Icons.calendar_today),
                                    Text(
-                                      ' ${storedocs[i]['time'].toDate().day} / ${storedocs[i]['time'].toDate().month} / ${storedocs[i]['time'].toDate().year} '),
+                                      ' ${storedocs[i]['time'].toDate().day}/${storedocs[i]['time'].toDate().month}/${storedocs[i]['time'].toDate().year} '),
 
                                    const Icon(Icons.timer),
                                    Text(
