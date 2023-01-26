@@ -92,16 +92,13 @@ class _nav_campaignState extends State<nav_campaign> {
     CampaignView(),
     SearchPilgrim(),
     CampaignPlan(),
-    Center(
-      child: Text(
-        'emergency',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
+    emergencyList(),
+   
     //Center(child: Text('location',style: TextStyle(fontSize: 72),),),
     AddDescription(),
     ProfileCampaign(),
     emergencyList(),
+     
   ];
 
   void _onItemTapped(int index) {
@@ -131,9 +128,9 @@ class _nav_campaignState extends State<nav_campaign> {
                 label: 'Plan',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.emergency),
+                icon: Icon(Icons.emergency_share_sharp),
                 label: 'Emergencies',
-                backgroundColor: Color(0xFF455D83)),
+                backgroundColor: Color.fromARGB(255, 184, 20, 20)),
             /*BottomNavigationBarItem(
                 icon: Icon(Icons.location_city),
                 label: 'Location',
@@ -142,10 +139,7 @@ class _nav_campaignState extends State<nav_campaign> {
                 icon: Icon(Icons.person),
                 label: 'Profile',
                 backgroundColor: Color(0xFF455D83)),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.emergency_share),
-                label: 'emergencyList',
-                backgroundColor: Color.fromARGB(255, 184, 20, 20)),
+            
           ],
           type: BottomNavigationBarType.shifting,
           currentIndex: _selectedIndex,
