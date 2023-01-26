@@ -167,12 +167,6 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
     ViewCampaignPlan(),
     Center(
       child: Text(
-        'plan',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    Center(
-      child: Text(
         'emergency',
         style: TextStyle(fontSize: 72),
       ),
