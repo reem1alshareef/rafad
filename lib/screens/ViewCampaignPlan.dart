@@ -1,33 +1,36 @@
-import 'dart:html';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
 
 class ViewCampaignPlan extends StatefulWidget {
-  //static const String screenRoute = 'welcome_screen';
   const ViewCampaignPlan({super.key});
   @override
   _ViewState createState() => _ViewState();
 }
 
+
+
 class _ViewState extends State<ViewCampaignPlan> {
   @override
   Widget build(BuildContext context) {
+    String ID = '';
+    <Future>() async {
+      DocumentSnapshot variable =  await FirebaseFirestore.instance
+          .collection('Pilgrims-Account')
+          .doc(FirebaseAuth.instance.currentUser?.uid)
+          .get();
+       ID = variable['ChosenCampaignID'];
+    
+    };
 
-Future<DocumentSnapshot<Object?>> variable =  FirebaseFirestore.instance
-                                    .collection('Pilgrims-Account')
-                                    .doc(FirebaseAuth.instance.currentUser?.uid)
-                                    .get();
-                               
-
-
-    Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
-        .collection("AcceptedCampaigns")
-        .doc('4a8v9veM6igptqvtBdq8cZvuczp2')
-        .collection("Activities")
-        .snapshots();
-
+    print(ID);
+  Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
+          .collection("AcceptedCampaigns")
+          .doc()
+          .collection("Activities")
+          .snapshots();
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -65,30 +68,27 @@ Future<DocumentSnapshot<Object?>> variable =  FirebaseFirestore.instance
                         child: Container(
                           margin: EdgeInsets.only(bottom: 17),
                           child: ListTile(
-                            
                             title: Text(
                               storedocs[i]['title'],
-                              style: TextStyle(color: Color(0xFF455D83), fontSize: 20),
-                            ),
-                            trailing: Row( mainAxisSize: MainAxisSize.min, children:[ 
-                            Text(
-                              ' Starts at  '
-                              ' ${storedocs[i]['time'].toDate().hour} : ${storedocs[i]['time'].toDate().minute} ',
                               style: TextStyle(
-                                  color: Color(0xFF455D83),
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 17),
+                                  color: Color(0xFF455D83), fontSize: 20),
                             ),
-                            
-                             Icon(Icons.access_time_rounded)
-                            
-                            ] ),
+                            trailing:
+                                Row(mainAxisSize: MainAxisSize.min, children: [
+                              Text(
+                                ' Starts at  '
+                                ' ${storedocs[i]['time'].toDate().hour} : ${storedocs[i]['time'].toDate().minute} ',
+                                style: TextStyle(
+                                    color: Color(0xFF455D83),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17),
+                              ),
+                              Icon(Icons.access_time_rounded)
+                            ]),
                             tileColor: Color.fromARGB(255, 228, 232, 235),
                             contentPadding: EdgeInsets.all(17),
-                            
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                          
-             
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20)),
                           ),
                         ),
                       ),

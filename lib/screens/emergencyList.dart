@@ -1,66 +1,73 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/src/widgets/editable_text.dart';
-import 'package:rafad1/screens/logOutCampaign.dart';
+import 'package:expansion_tile_card/expansion_tile_card.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:rafad1/screens/PolylineScreen.dart';
+import 'package:rafad1/screens/welcome_screen.dart';
+import 'package:rafad1/widgets/emButton.dart';
+import 'package:rafad1/screens/LocationService.dart';
+import 'package:rafad1/screens/emergency.dart';
+import 'package:rafad1/screens/LocationService.dart';
+import 'package:rafad1/screens/pilgLocation.dart';
 
-//import 'package:rafad1/screens/LoginPage.dart';
-class ViewAccepted extends StatefulWidget {
-  static const String screenRoute = 'CampaignViewAccepted';
+
+class emergencyList extends StatefulWidget {
+  static const String screenRoute = 'emergencyList.dart';
+  const emergencyList({super.key});
 
   @override
-  _ViewAcceptedState createState() => _ViewAcceptedState();
+  _emergencyListState createState() => _emergencyListState();
 }
-
-class _ViewAcceptedState extends State<ViewAccepted> {
+class _emergencyListState extends State<emergencyList> {
   final _firestore = FirebaseFirestore.instance;
-  String? rejectionReason;
 
   final _controller = TextEditingController();
 
+
+  //  DocumentSnapshot variable = await _firestore
+  //  .collection('Pilgrims-Account')
+  //   .doc(storedocs[i]['UID']).get(
+  //    {
+  //   double latitude = variable['latitude'];
+  //   double  longitude = variable['longitude'];
+  //   },
+  //   );
+  
+
+  
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
+void DataStreams() async {
+  DocumentSnapshot variable = await _firestore
+                                    .collection('AcceptedCampaigns')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .get();
+                                String pilgrimID = variable['pilgrimID'];
+    await for (var snapshot
+        in _firestore.collection('pilgrimEmrgency').snapshots()) {
+      
+      for (var pilgrim in snapshot.docs) {
+        print(pilgrim.data());
+      }
+    }
   }
 
-  String? get _errorText {
-    // at any time, we can get the text from _controller.value.text
-    final text = _controller.value.text;
-    // Note: you can do your own custom validation here
-    // Move this logic this outside the widget for more testable code
-    if (text.isEmpty) {
-      return 'Can\'t be empty ';
-    }
-    if (text.length < 4) {
-      return 'Too short';
-    }
-    // return null if the text is valid
-    return null;
-  }
-
-  // void DataStreams() async {
-  //   await for (var snapshot
-  //       in _firestore.collection('Bookings').snapshots()) {
-  //     for (var campaign in snapshot.docs) {
-  //       print(campaign.data());
-  //     }
-  //   }
-  // }
-
-  @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
         .collection('AcceptedCampaigns')
         .doc(FirebaseAuth.instance.currentUser!.uid)
-        .collection('AcceptedPilgrims')
+        .collection('pilgrimEmrgency')
         .snapshots();
 
     return Scaffold(
-
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        title: Text('list of requesting pilgrims emergency'),
+        backgroundColor:  Color.fromARGB(255, 184, 20, 20),
+        elevation: 0,
+      ),
       
-        body: SingleChildScrollView(
+            body: SingleChildScrollView(
             child: Column(children: [
               
       Padding(
@@ -95,16 +102,16 @@ class _ViewAcceptedState extends State<ViewAccepted> {
                                 expandedColor: Colors.blueGrey[50],
                                 //key: cardA,
                                 leading: CircleAvatar(
-                                  child: Image.asset("assests/images/hajj.png"),
+                                  child: Image.asset("assests/images/emergrncyIcon.png"),
                                   backgroundColor: Color(0xFF788AA4),
                                 ),
                                 title: Text(
                                   storedocs[i]['name'],
                                 ),
                                 subtitle: Text(
-                                  "Accepted Pilgrim",
+                                  "information of Pilgrim who need emergency",
                                   style: TextStyle(
-                                      fontSize: 11, color: Colors.lightGreen),
+                                      fontSize: 11, color: Color.fromARGB(255, 184, 20, 20)),
                                 ),
                                 children: [
                                   Divider(
@@ -121,24 +128,7 @@ class _ViewAcceptedState extends State<ViewAccepted> {
                                       child: Center(
                                         child: Column(children: [
                                           Column(children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 10),
-                                              child: Column(children: [
-                                                Text(
-                                                  'Pilgrim\'s email:  ',
-                                                  style: TextStyle(
-                                                      color: Color(0xFF455D83),
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                                Text(
-                                                  storedocs[i]['email'],
-                                                  style:
-                                                      TextStyle(fontSize: 12),
-                                                ),
-                                              ]),
-                                            ),
+                                            
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   bottom: 10),
@@ -162,24 +152,6 @@ class _ViewAcceptedState extends State<ViewAccepted> {
                                                   bottom: 10),
                                               child: Column(children: [
                                                 Text(
-                                                  'Pilgrim\'s ID:  ',
-                                                  style: TextStyle(
-                                                      color: Color(0xFF455D83),
-                                                      fontWeight:
-                                                          FontWeight.w500),
-                                                ),
-                                                Text(
-                                                  storedocs[i]['hajId'],
-                                                  style:
-                                                      TextStyle(fontSize: 12),
-                                                )
-                                              ]),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  bottom: 10),
-                                              child: Column(children: [
-                                                Text(
                                                   'Pilgrim\'s Diseases:  ',
                                                   style: TextStyle(
                                                       color: Color(0xFF455D83),
@@ -193,6 +165,47 @@ class _ViewAcceptedState extends State<ViewAccepted> {
                                                 )
                                               ]),
                                             ),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10),
+                                              child: Column(children: [
+                                                Text(
+                                                  'Pilgrim\'s pharma:  ',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF455D83),
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
+                                                Text(
+                                                  storedocs[i]['pharma'],
+                                                  style:
+                                                      TextStyle(fontSize: 12),
+                                                )
+                                              ]),
+                                            ),
+                                            /////////////////////حق ريتريف الكرنت لوكيشن حق الحاج
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10),
+                                              child: Column(children: [
+                                                IconButton(
+                                                  icon: Icon(
+                                                    (Icons.location_history_sharp),
+                                                    color: Color.fromARGB(255, 160, 10, 10),
+                                                    ),
+                                                    onPressed: () async {
+                                                      ///////////توديه للماب 
+                                                      
+Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                return const pilgLocation();
+              }));
+//////////////////
+
+                                                    },
+                                                    )
+                                              ]),
+                                            ),
+                                            //////////////////////////////// هنا نهايته
                                           ]),
                                         ]),
                                       ),
@@ -208,6 +221,7 @@ class _ViewAcceptedState extends State<ViewAccepted> {
     ],
     )
     )
+
     );
-  }
+    } //throw UnimplementedError();
 }
