@@ -16,7 +16,9 @@ import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/admin/DeleteCampaign.dart';
 import 'package:rafad1/screens/CampaignPlan.dart';
+import 'package:rafad1/screens/emergency.dart';
 
+import '../screens/emergencyList.dart';
 import '../screens/welcome_admin.dart';
 
 class nav_admin extends StatefulWidget {
@@ -90,14 +92,9 @@ class _nav_campaignState extends State<nav_campaign> {
     CampaignView(),
     SearchPilgrim(),
     CampaignPlan(),
-    Center(
-      child: Text(
-        'emergency',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    //Center(child: Text('location',style: TextStyle(fontSize: 72),),),
-    AddDescription(),
+    emergencyList(),
+                          //AddDescription(),
+    ProfileCampaign(),     
   ];
 
   void _onItemTapped(int index) {
@@ -127,17 +124,14 @@ class _nav_campaignState extends State<nav_campaign> {
                 label: 'Plan',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.emergency),
+                icon: Icon(Icons.emergency_share_sharp),
                 label: 'Emergencies',
-                backgroundColor: Color(0xFF455D83)),
-            /*BottomNavigationBarItem(
-                icon: Icon(Icons.location_city),
-                label: 'Location',
-                backgroundColor: Color(0xFF455D83)),*/
+                backgroundColor: Color.fromARGB(255, 184, 20, 20)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',
                 backgroundColor: Color(0xFF455D83)),
+            
           ],
           type: BottomNavigationBarType.shifting,
           currentIndex: _selectedIndex,
@@ -165,13 +159,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
     PilgrimView(),
     SearchCampaign(),
     ViewCampaignPlan(),
-    Center(
-      child: Text(
-        'emergency',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    //Center(child: Text('location',style: TextStyle(fontSize: 72),),),
+    emergency(),
     Center(
       child: Text(
         'profile',
@@ -207,13 +195,9 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
                 label: 'Plan',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.emergency),
+                icon: Icon(Icons.emergency_share_sharp),
                 label: 'Emergency',
-                backgroundColor: Color(0xFF455D83)),
-            /*BottomNavigationBarItem(
-                icon: Icon(Icons.location_city),
-                label: 'Location',
-                backgroundColor: Color(0xFF455D83)),*/
+                backgroundColor: Color.fromARGB(255, 184, 20, 20)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',
