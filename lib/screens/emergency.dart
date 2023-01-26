@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
+//import 'package:rafad1/services/firebase_helper.dart';
 import 'package:rafad1/widgets/emButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -52,12 +53,16 @@ class _emergencyState extends State<emergency> {
         backgroundColor: Color.fromARGB(255, 184, 20, 20),
         elevation: 0,
         actions: <Widget>[
+          
+          
           IconButton(
             icon: Icon(
               Icons.logout,
               color: Colors.white,
             ),
-            onPressed: () {
+            
+            onPressed: (){
+
               FirebaseAuth.instance.signOut();
               Navigator.pushNamed(context, WelcomeScreen.screenRoute);
             },
