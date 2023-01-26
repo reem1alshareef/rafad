@@ -26,10 +26,10 @@ class PiligrimProfile extends StatefulWidget {
   @override
   _PiligrimProfileState createState() => _PiligrimProfileState();
 }
-
+//(21.3878387)(39.9144660)
 class _PiligrimProfileState extends State<PiligrimProfile> {
-  double latController = (21.3878387); //ضبطت هذي الحركة
-  double lngController = (39.9144660); //ضبطت هذي الحركة
+  double latController = (24.7232056); //ضبطت هذي الحركة
+  double lngController = (46.636731); //ضبطت هذي الحركة
   @override
   Widget build(BuildContext context) {
     return Scaffold(
