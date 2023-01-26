@@ -51,6 +51,8 @@ dependencies:
   flutter_local_notifications: ^13.0.0
   persistent_bottom_nav_bar: ^5.0.2
   flutter_rating_bar: ^4.0.1
+  firebase_messaging: ^14.2.1
+  cloud_functions: ^4.0.7
   #firebase:
   #cloud_firestore: ^3.1.5
   #firebase_auth: ^3.3.14
