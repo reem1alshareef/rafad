@@ -164,7 +164,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
   static const List<Widget> _widgetOptions = <Widget>[
     PilgrimView(),
     SearchCampaign(),
-    //ViewCampaignPlan(),
+    ViewCampaignPlan(),
     Center(
       child: Text(
         'plan',
