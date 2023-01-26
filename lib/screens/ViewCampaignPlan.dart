@@ -10,27 +10,24 @@ class ViewCampaignPlan extends StatefulWidget {
   _ViewState createState() => _ViewState();
 }
 
-
-
 class _ViewState extends State<ViewCampaignPlan> {
   @override
   Widget build(BuildContext context) {
     String ID = '';
     <Future>() async {
-      DocumentSnapshot variable =  await FirebaseFirestore.instance
+      DocumentSnapshot variable = await FirebaseFirestore.instance
           .collection('Pilgrims-Account')
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .get();
-       ID = variable['ChosenCampaignID'];
-    
+      ID = variable['ChosenCampaignID'];
     };
 
     print(ID);
-  Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
-          .collection("AcceptedCampaigns")
-          .doc()
-          .collection("Activities")
-          .snapshots();
+    Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
+        .collection("AcceptedCampaigns")
+        .doc('4a8v9veM6igptqvtBdq8cZvuczp2')
+        .collection("Activities")
+        .snapshots();
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
