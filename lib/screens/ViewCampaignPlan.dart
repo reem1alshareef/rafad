@@ -5,32 +5,32 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 
 class ViewCampaignPlan extends StatefulWidget {
-  
-    ViewCampaignPlan({super.key});
+  const ViewCampaignPlan({super.key});
   @override
   _ViewState createState() => _ViewState();
 }
+
+
 
 class _ViewState extends State<ViewCampaignPlan> {
   @override
   Widget build(BuildContext context) {
     String ID = '';
-    void get() async {
-      DocumentSnapshot variable = await FirebaseFirestore.instance
+    <Future>() async {
+      DocumentSnapshot variable =  await FirebaseFirestore.instance
           .collection('Pilgrims-Account')
           .doc(FirebaseAuth.instance.currentUser?.uid)
           .get();
-      ID = variable["ChosenCampaignID"];
-    }
+       ID = variable['ChosenCampaignID'];
+    
+    };
 
     print(ID);
-
-    Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
-        .collection("AcceptedCampaigns")
-        .doc(ID)
-        .collection("Activities")
-        .snapshots();
-
+  Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
+          .collection("AcceptedCampaigns")
+          .doc()
+          .collection("Activities")
+          .snapshots();
     return Scaffold(
         appBar: AppBar(
           automaticallyImplyLeading: false,
