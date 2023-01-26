@@ -93,12 +93,8 @@ class _nav_campaignState extends State<nav_campaign> {
     SearchPilgrim(),
     CampaignPlan(),
     emergencyList(),
-   
-    //Center(child: Text('location',style: TextStyle(fontSize: 72),),),
-    AddDescription(),
-    ProfileCampaign(),
-    emergencyList(),
-     
+                          //AddDescription(),
+    ProfileCampaign(),     
   ];
 
   void _onItemTapped(int index) {
@@ -131,10 +127,6 @@ class _nav_campaignState extends State<nav_campaign> {
                 icon: Icon(Icons.emergency_share_sharp),
                 label: 'Emergencies',
                 backgroundColor: Color.fromARGB(255, 184, 20, 20)),
-            /*BottomNavigationBarItem(
-                icon: Icon(Icons.location_city),
-                label: 'Location',
-                backgroundColor: Color(0xFF455D83)),*/
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',
@@ -167,29 +159,6 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
     PilgrimView(),
     SearchCampaign(),
     ViewCampaignPlan(),
-    Center(
-      child: Text(
-        'emergency',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    //Center(child: Text('location',style: TextStyle(fontSize: 72),),),
-    ViewBooking(),
-    logOutPilgrim(),
-    //emergency(),
-    
-    Center(
-      child: Text(
-        'announcement',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    // Center(
-    //   child: Text(
-    //     'emergency',
-    //     style: TextStyle(fontSize: 72),
-    //   ),
-    // ),
     emergency(),
     Center(
       child: Text(
