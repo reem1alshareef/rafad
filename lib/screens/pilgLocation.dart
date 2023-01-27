@@ -26,7 +26,7 @@ List<Marker> _marker= [];
 final List<Marker> _list = const[
   Marker(
     markerId:MarkerId('1'),
-position: LatLng(37.42796133580664, -122.085749655962 )/////////////////
+position: LatLng(24.7232056, 46.636731 )/////////////////
     )
 ];
 @override

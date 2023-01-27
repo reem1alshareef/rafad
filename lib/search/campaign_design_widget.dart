@@ -41,7 +41,7 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                       widget.model!.name!,
                                     ),
                                     subtitle: const Text(
-                                      "Click to view pilgrim's details",
+                                      "Click to view campaign's details",
                                       style: TextStyle(fontSize: 11),
                                     ),
                                     children: [

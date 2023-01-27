@@ -3,14 +3,20 @@
 import "package:flutter/material.dart";
 import 'package:rafad1/admin/DeletePilgrim.dart';
 import 'package:rafad1/screens/CampaignView.dart';
+import 'package:rafad1/screens/PiligrimProfile.dart';
+import 'package:rafad1/screens/ViewCampaignPlan.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/forget_pw.dart';
 import 'package:rafad1/screens/view_booking.dart';
+import 'package:rafad1/search/search_campaign.dart';
+import 'package:rafad1/search/search_pilgrim.dart';
+import '../pilgrim_view_booking/pilgrimViewBooking.dart';
 import '../screens/add_description.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:rafad1/admin/DeleteCampaign.dart';
+import 'package:rafad1/screens/CampaignPlan.dart';
 import 'package:rafad1/screens/emergency.dart';
 
 import '../screens/emergencyList.dart';
@@ -27,8 +33,8 @@ class _nav_adminState extends State<nav_admin> {
   int _selectedIndex = 0;
 
   static final List<Widget> _widgetOptions = <Widget>[
-    const DeleteCampaign(), //DeleteCampaign(),
-    const DeletePilgrim(), //DeletePilgrim(),
+    const DeleteCampaign(),
+    const DeletePilgrim(),
     View()
   ];
 
@@ -85,21 +91,11 @@ class _nav_campaignState extends State<nav_campaign> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     CampaignView(),
-    Center(
-      child: Text(
-        'pilgrims',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    Center(
-      child: Text(
-        'announcement',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    AddDescription(),
-    ProfileCampaign(),
+    SearchPilgrim(),
+    CampaignPlan(),
     emergencyList(),
+                          //AddDescription(),
+    ProfileCampaign(),     
   ];
 
   void _onItemTapped(int index) {
@@ -125,21 +121,18 @@ class _nav_campaignState extends State<nav_campaign> {
                 label: 'Search',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.announcement),
-                label: 'Announcement',
+                icon: Icon(Icons.calendar_today_rounded),
+                label: 'Plan',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.description),
-                label: 'Description',
-                backgroundColor: Color(0xFF455D83)),
+                icon: Icon(Icons.emergency_share_sharp),
+                label: 'Emergencies',
+                backgroundColor: Color.fromARGB(255, 184, 20, 20)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',
                 backgroundColor: Color(0xFF455D83)),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.emergency_share),
-                label: 'emergencyList',
-                backgroundColor: Color.fromARGB(255, 184, 20, 20)),
+            
           ],
           type: BottomNavigationBarType.shifting,
           currentIndex: _selectedIndex,
@@ -164,30 +157,11 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    ViewBooking(),
-    logOutPilgrim(),
-    //emergency(),
-    
-    Center(
-      child: Text(
-        'announcement',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    // Center(
-    //   child: Text(
-    //     'emergency',
-    //     style: TextStyle(fontSize: 72),
-    //   ),
-    // ),
+    PilgrimView(),
+    SearchCampaign(),
+    ViewCampaignPlan(),
     emergency(),
-    Center(
-      child: Text(
-        'profile',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
-    //logOutPilgrim()
+    PiligrimProfile()
   ];
 
   void _onItemTapped(int index) {
@@ -213,8 +187,8 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
                 label: 'Search',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.announcement),
-                label: 'Announcement',
+                icon: Icon(Icons.calendar_today_rounded),
+                label: 'Plan',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.emergency_share_sharp),
