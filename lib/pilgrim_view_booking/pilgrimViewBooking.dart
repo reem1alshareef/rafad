@@ -51,7 +51,7 @@ class PilgrimView extends StatelessWidget {
                       color: Colors.blueGrey,
                     )),
                 Tab(
-                    text: 'Rate and Review',
+                    text: 'Confirmed',
                     icon: Icon(
                       Icons.assignment_late_outlined,
                       color: Colors.blueGrey,
