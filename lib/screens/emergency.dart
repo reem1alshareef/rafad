@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/widgets/emButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -15,8 +16,12 @@ import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/widgets/emButton.dart';
 import 'package:rafad1/screens/LocationService.dart';
 import '../widgets/my_button.dart';
+import 'package:rafad1/screens/CurrentLocationScreen.dart';
+
 
 import 'package:rafad1/screens/emergencyList.dart';
+
+import 'CurrentLocationScreen.dart';
 
 class emergency extends StatefulWidget {
   static const String screenRoute = 'emergency.dart';
@@ -33,15 +38,9 @@ class _emergencyState extends State<emergency> {
 
   final _controller = TextEditingController();
   
-  late GeoPoint _latitude ;
-  late GeoPoint _longitude ;
 
   @override 
-  void initState(){
-    _emergencyState();
-    print(FirebaseAuth.instance.currentUser?.uid);
-    super.initState();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -79,17 +78,26 @@ Container(
       body:Center(
       child: Column(
           children: [
+            
+SizedBox(///////////////بس عشان يحط مسافه
+      height: 200, 
+    ),
+
+
 
             emButton(
-              color: Color.fromARGB(255, 184, 20, 20),
-              title: 'click here if you want to send emerency request !!',
+              color: const Color.fromARGB(255, 184, 20, 20),
+              title: 'click here to send emerency request !!',
                 onPressed: () async{
+                  Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                return const CurrentLocationScreen();
+              }));
+
 //////////////////////////الكود اللي بيرسل اللوكيشن الحالي لليوزر
 
                   LocationService locationService = LocationService();
                   locationService.PilgsendLocationToDataBase(context);
-                  // _locationService.goToMaps(
-                  // _latitude, _longitude);
+
 ///////////////////////////////
                   DocumentSnapshot variable = await _firestore
                                     .collection('Pilgrims-Account')
@@ -99,36 +107,57 @@ Container(
                                 String disease = variable['disease'];
                                 //String hajId = variable['hajId'];
                                 String pharma = variable['pharma'];
-                                String campaignID = variable['campaignID'];
+                                String ChosenCampaignID = variable['ChosenCampaignID'];
                                 String number = variable['number'];
-                                // double _latitude1 = variable['latitude'];
-                                // double _longitude1 = variable['longitude'];
-
+                                double _latitude1 = variable['latitude'];
+                                double _longitude1 = variable['longitude'];
+_firestore
+                  .collection("AcceptedCampaigns")
+                  .doc(ChosenCampaignID)
+                  .update( 
+                  {
+                  //'GeoPoint': GeoPoint(position.latitude, position.latitude),
+                  'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
+                  //'hajId': hajId,
+                  },);
   // getActivityProfile() async{
-  // await _firestore
-  // .collection('Pilgrims-Account')
-  // .doc(FirebaseAuth.instance.currentUser?.uid).get().then(
-  //   (doc)=>{
-  //     setState((){
-  //       if (doc.data() != null){
-  //         _latitude = doc.data()!['latitude']??=0;
-  //         _longitude = doc.data()!['longitude']??=0;
-  //       }
-  //     },
+//   await _firestore
+//   .collection('Pilgrims-Account')
+//   .doc(FirebaseAuth.instance.currentUser?.uid).get().then(
+//     (doc)=>{
+//       setState((){
+//         if (doc.data() != null){
+//           _latitude = doc.data()!['latitude']??=0;
+//           _longitude = doc.data()!['longitude']??=0;
+//         }
+//       },
       
-  //     ),
-  //   },
-  //     );
+//       ),
+// },
+//     );
   //     };
 
       //_locationService.goToMaps(_latitude, _longitude);
+
+      // _firestore
+      //             .collection("Pilgrims-Account")
+      //             .doc(FirebaseAuth.instance.currentUser?.uid)
+                  
+      //             .update( 
+      //             {
+      //             'GeoPoint': GeoPoint(position.latitude, position.latitude),
+      //             },);
+//Position position = await Geolocator.getCurrentPosition();
                   _firestore
                   .collection("AcceptedCampaigns")
-                  .doc(campaignID)
+                  .doc(ChosenCampaignID)
                   .collection("pilgrimEmrgency")
                   .doc(FirebaseAuth.instance.currentUser?.uid)
                   .set( 
                   {
+                  //'GeoPoint': GeoPoint(position.latitude, position.latitude),
+                  '_latitude': _latitude1,
+                  '_longitude':_longitude1,
                   'name': name,
                   'disease': disease,
                   'pharma': pharma,

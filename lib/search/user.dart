@@ -11,6 +11,7 @@ class Users{
   String? disease;
   String? hajId;
   String? phone;
+  
 
 Users({
   this.email,
@@ -29,7 +30,7 @@ pilgrimID = json['pilgrimID'];
 pharma = json['pharma'];
 disease = json['disease'];
 hajId = json['hajId'];
-phone = json['phone'];
+phone = json['number'];
 }
 
 Map<String, dynamic> toJson(){
@@ -41,7 +42,7 @@ Map<String, dynamic> toJson(){
   data['pharma'] = pharma;
   data['disease'] = disease;
   data['hajId'] = hajId;
-  data['phone'] = phone;
+  data['number'] = phone;
 
 return data;
 }

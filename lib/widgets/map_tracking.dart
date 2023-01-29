@@ -1,41 +1,30 @@
-/*import 'dart:async';
+/*//import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
-import 'package:location/location.dart';
-import 'package:rafad1/screens/constants.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:dio/dio.dart';
 
+import '../screens/directions_model.dart';
+import '../screens/directions_repository.dart';
+//import 'package:location/location.dart';
+//import 'package:rafad1/screens/constants.dart';
+//import 'package:flutter_svg/flutter_svg.dart';
+//import 'package:dio/dio.dart';
+//import 'package:url_launcher/url_launcher.dart';
 
-
-
-
-*/
-
-
-
-
-
-/*
-import 'package:rafad1/screens/directions_model.dart';
-import 'package:rafad1/screens/directions_repository.dart';
-
-class MapTracking extends StatefulWidget {
+class MapScreen extends StatefulWidget {
   @override
-  _MapTrackingState createState() => _MapTrackingState();
+  _MapScreenState createState() => _MapScreenState();
 }
 
-class _MapTrackingState extends State<MapTracking> {
+class _MapScreenState extends State<MapScreen> {
   static const _initialCameraPosition = CameraPosition(
-    target: LatLng(37.773972, -122.431297),
+    target: LatLng(21.3548853, 39.9841160),
     zoom: 11.5,
   );
-
-  late GoogleMapController _googleMapController;
-  late Marker _origin;
-  late Marker _destination;
-  late Directions _info;
+  late GoogleMapController _googleMapController; //حطيت ليت هنا
+  late Marker _origin; //حطيت ليت هنا
+  Marker? _destination; //حطيت ليت هنا
+  Directions? _info;
 
   @override
   void dispose() {
@@ -72,16 +61,15 @@ class _MapTrackingState extends State<MapTracking> {
               onPressed: () => _googleMapController.animateCamera(
                 CameraUpdate.newCameraPosition(
                   CameraPosition(
-                    target: _destination.position,
+                    target: _destination!.position,
                     zoom: 14.5,
                     tilt: 50.0,
                   ),
                 ),
               ),
               style: TextButton.styleFrom(
-                foregroundColor: Colors.blue,
-                textStyle: const TextStyle(
-                    fontWeight: FontWeight.w600), //عدلت هنا من برايمري لهذا
+                primary: Colors.blue,
+                textStyle: const TextStyle(fontWeight: FontWeight.w600),
               ),
               child: const Text('DEST'),
             )
@@ -97,7 +85,7 @@ class _MapTrackingState extends State<MapTracking> {
             onMapCreated: (controller) => _googleMapController = controller,
             markers: {
               if (_origin != null) _origin,
-              if (_destination != null) _destination
+              if (_destination != null) _destination!
             },
             polylines: {
               if (_info != null)
@@ -105,7 +93,7 @@ class _MapTrackingState extends State<MapTracking> {
                   polylineId: const PolylineId('overview_polyline'),
                   color: Colors.red,
                   width: 5,
-                  points: _info.polylinePoints
+                  points: _info!.polylinePoints
                       .map((e) => LatLng(e.latitude, e.longitude))
                       .toList(),
                 ),
@@ -132,7 +120,7 @@ class _MapTrackingState extends State<MapTracking> {
                   ],
                 ),
                 child: Text(
-                  '${_info.totalDistance}, ${_info.totalDuration}',
+                  '${_info!.totalDistance}, ${_info!.totalDuration}',
                   style: const TextStyle(
                     fontSize: 18.0,
                     fontWeight: FontWeight.w600,
@@ -147,7 +135,7 @@ class _MapTrackingState extends State<MapTracking> {
         foregroundColor: Colors.black,
         onPressed: () => _googleMapController.animateCamera(
           _info != null
-              ? CameraUpdate.newLatLngBounds(_info.bounds, 100.0)
+              ? CameraUpdate.newLatLngBounds(_info!.bounds, 100.0)
               : CameraUpdate.newCameraPosition(_initialCameraPosition),
         ),
         child: const Icon(Icons.center_focus_strong),
@@ -188,18 +176,164 @@ class _MapTrackingState extends State<MapTracking> {
       // Get directions
       final directions = await DirectionsRepository()
           .getDirections(origin: _origin.position, destination: pos);
-      setState(() => _info = directions!);
+      setState(() => _info = directions);
     }
   }
-}*/
+}
 
 
 
 
 
-/*
+  /*من هنا طلع فيها ايرورات 
+  @override
+  void dispose() {
+    _googleMapController.dispose();
+    super.dispose();
+  }
 
-class MapTracking extends StatefulWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: false,
+        title: const Text('Google Maps'),
+        actions: [
+          if (_origin != null)
+            TextButton(
+              onPressed: () => _googleMapController.animateCamera(
+                CameraUpdate.newCameraPosition(
+                  CameraPosition(
+                    target: _origin!.position,
+                    zoom: 14.5,
+                    tilt: 50.0,
+                  ),
+                ),
+              ),
+              style: TextButton.styleFrom(
+                primary: Colors.green,
+                textStyle: const TextStyle(fontWeight: FontWeight.w600),
+              ),
+              child: const Text('ORIGIN'),
+            ),
+          if (_destination != null)
+            TextButton(
+              onPressed: () => _googleMapController.animateCamera(
+                CameraUpdate.newCameraPosition(
+                  CameraPosition(
+                    target: _destination!.position,
+                    zoom: 14.5,
+                    tilt: 50.0,
+                  ),
+                ),
+              ),
+              style: TextButton.styleFrom(
+                primary: Colors.blue,
+                textStyle: const TextStyle(fontWeight: FontWeight.w600),
+              ),
+              child: const Text('DEST'),
+            )
+        ],
+      ),
+      body: GoogleMap(
+        myLocationButtonEnabled: false,
+        zoomControlsEnabled: false,
+        initialCameraPosition: _initialCameraPosition,
+        onMapCreated: (controller) => _googleMapController = controller,
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Theme.of(context).primaryColor,
+        foregroundColor: Colors.black,
+        onPressed: () => _googleMapController.animateCamera(
+          CameraUpdate.newCameraPosition(_initialCameraPosition),
+          markers: {
+            if (_origin != null) _origin,
+            if (_destination != null) _destination
+          },
+          onLongPress: _addMarker,
+        ),
+
+ _info != null
+              ? CameraUpdate.newLatLngBounds(_info.bounds, 100.0)
+              : CameraUpdate.newCameraPosition(_initialCameraPosition),
+        ),
+
+        child: const Icon(Icons.center_focus_strong),
+      ),
+    );
+  }
+
+  void _addMarker(LatLng pos) async {
+    if (_origin == null || (_origin != null && _destination != null)) {
+      setState(() {
+        _origin = Marker(
+          markerId: const MarkerId('origin'),
+          infoWindow: const InfoWindow(title: 'Origin'),
+          icon:
+              BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueGreen),
+          position: pos,
+        );
+        // Reset destination
+        _destination = null;
+        // Reset info
+        _info = null;
+      });
+    } else {
+      // Origin is already set
+      // Set destination
+      setState(() {
+        _destination = Marker(
+          markerId: const MarkerId('destination'),
+          infoWindow: const InfoWindow(title: 'Destination'),
+          icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+          position: pos,
+        );
+      });
+
+      // Get directions
+      final directions = await DirectionsRepository()
+          .getDirections(origin: _origin!.position, destination: pos);
+      setState(() => _info = directions);
+    }
+  }
+} // end of widgt 
+
+*/
+
+
+
+
+
+
+
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*class MapTracking extends StatefulWidget {
   const MapTracking({super.key});
 
   @override
@@ -209,8 +343,7 @@ class MapTracking extends StatefulWidget {
 class _MapTrackingState extends State<MapTracking> {
   late GoogleMapController googleMapController;
   final Completer<GoogleMapController> _controller = Completer();
-  static const LatLng sourceLocation = LatLng(
-      21.3548853, 39.9841160); //هذي الارقام هل تعتمد على الموقع اللي ابغاه ؟
+  static const LatLng sourceLocation = LatLng(21.3548853, 39.9841160);
   static const LatLng destination = LatLng(21.3878387, 39.9144660);
 
   List<LatLng> polylineCoordinates = [];
@@ -305,7 +438,7 @@ class _MapTrackingState extends State<MapTracking> {
     return Scaffold(
         appBar: AppBar(
           title: const Text(
-            "Track Campaign",
+            "Map Campaign",
             style: TextStyle(color: Color.fromARGB(255, 5, 0, 0), fontSize: 16),
           ),
         ),
@@ -313,7 +446,9 @@ class _MapTrackingState extends State<MapTracking> {
             ? const Center(child: Text("Loading"))
             : GoogleMap(
                 myLocationButtonEnabled: true,
-  
+                zoomControlsEnabled: true,
+                myLocationEnabled: true,
+                zoomGesturesEnabled: true,
                 initialCameraPosition: CameraPosition(
                   target: LatLng(
                       currentLocation!.latitude!,
@@ -324,14 +459,13 @@ class _MapTrackingState extends State<MapTracking> {
                 //for route Map
                 polylines: {
                   Polyline(
-                    polylineId: PolylineId("route"),
+                    polylineId: const PolylineId("route"),
                     points: polylineCoordinates,
                     color: primaryColor,
                     width: 6,
                   ),
                 },
                 markers: {
-                  // هي العلامة اللي توضع على اللوكيشين
                   Marker(
                     //علامة الموقع الحالي يحدده
                     markerId: const MarkerId("currentLocation"),
@@ -340,12 +474,12 @@ class _MapTrackingState extends State<MapTracking> {
                         currentLocation!.longitude!),
                   ),
                   Marker(
-                    markerId: MarkerId("source"),
+                    markerId: const MarkerId("source"),
                     icon: sourceIcon,
                     position: sourceLocation,
                   ),
                   Marker(
-                    markerId: MarkerId("distnation"),
+                    markerId: const MarkerId("distnation"),
                     icon: destinationIcon,
                     position: destination,
                   ),
@@ -356,4 +490,12 @@ class _MapTrackingState extends State<MapTracking> {
                 }));
   }
 }
+
+
+*/
+
+/*
+import 'package:rafad1/screens/directions_model.dart';
+import 'package:rafad1/screens/directions_repository.dart';
+
 */

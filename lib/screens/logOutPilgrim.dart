@@ -77,7 +77,7 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
 
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text('pilgrim main home page'),
+          title: Text('available campaign to book'),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
           actions: <Widget>[
@@ -100,17 +100,7 @@ Padding(
   child:   Container(
   //margin: EdgeInsets.all(60), 
     color: Color.fromARGB(255, 179, 181, 183),
-  
-    child:   Padding(
-      padding: const EdgeInsets.all(17),
-      child: Text('available campaign' , style: TextStyle(
-        fontSize: 50,
-        fontWeight: FontWeight.w900,
-        fontStyle: FontStyle.normal,
-        color: Color(0xFF455D83),
-      ),
-      ),
-    ),
+
   ),
 ),
             Container(//كود الخلفيه 

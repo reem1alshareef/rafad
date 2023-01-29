@@ -1,14 +1,17 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:rafad1/screens/CampaignViewAccepted.dart';
-import 'package:rafad1/screens/CampaignViewPending.dart';
-import 'package:rafad1/screens/CampaignViewRejected.dart';
-import 'package:rafad1/screens/adminView.dart';
+import 'package:rafad1/pilgrim_view_booking/rate_review.dart';
+import 'package:rafad1/pilgrim_view_booking/viewAccepted.dart';
+import 'package:rafad1/pilgrim_view_booking/viewPending.dart';
+//import 'package:rafad1/screens/CampaignViewAccepted.dart';
+//import 'package:rafad1/screens/CampaignViewPending.dart';
+//import 'package:rafad1/screens/CampaignViewRejected.dart';
+//import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 
-class CampaignView extends StatelessWidget {
-  static const String screenRoute = 'CampaignView';
-  const CampaignView({super.key});
+class PilgrimView extends StatelessWidget {
+  static const String screenRoute = 'PilgrimView';
+  const PilgrimView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +21,7 @@ class CampaignView extends StatelessWidget {
           appBar: AppBar(
             automaticallyImplyLeading: false,
             backgroundColor: const Color(0xFF455D83),
-            title: Text('Pilgrims Bookings'),
+            title: const Text('My Bookings'),
             // actions: <Widget>[
             //   IconButton(
             //     icon: Icon(
@@ -33,7 +36,7 @@ class CampaignView extends StatelessWidget {
             // ],
           ),
           body: Column(
-            children: [
+            children: const [
               TabBar(labelColor: Colors.blueGrey, tabs: [
                 Tab(
                     text: 'Pending',
@@ -48,7 +51,7 @@ class CampaignView extends StatelessWidget {
                       color: Colors.blueGrey,
                     )),
                 Tab(
-                    text: 'Rejected',
+                    text: 'Confirmed',
                     icon: Icon(
                       Icons.assignment_late_outlined,
                       color: Colors.blueGrey,
@@ -58,9 +61,9 @@ class CampaignView extends StatelessWidget {
                 child: TabBarView(
                   children: [
                     //First Tab
-                    ViewPending(),
-                    ViewAccepted(),
-                    ViewRejected(),
+                    viewPending(),
+                    viewAccepted(),
+                    RateReview(),
                     // Second Tab
 
                     //Third Tab
@@ -69,6 +72,7 @@ class CampaignView extends StatelessWidget {
               ),
             ],
           ),
-        ));
+        )
+        );
   }
 }

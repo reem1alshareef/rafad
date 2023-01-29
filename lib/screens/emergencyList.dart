@@ -3,11 +3,13 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:rafad1/screens/PolylineScreen.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
-
+import 'package:rafad1/widgets/emButton.dart';
 import 'package:rafad1/screens/LocationService.dart';
 import 'package:rafad1/screens/emergency.dart';
 import 'package:rafad1/screens/LocationService.dart';
+import 'package:rafad1/screens/pilgLocation.dart';
 
 
 class emergencyList extends StatefulWidget {
@@ -21,8 +23,6 @@ class _emergencyListState extends State<emergencyList> {
   final _firestore = FirebaseFirestore.instance;
 
   final _controller = TextEditingController();
-  late final  double _latitude;
-  late final double  _longitude;
 
 
   //  DocumentSnapshot variable = await _firestore
@@ -66,7 +66,7 @@ void DataStreams() async {
         backgroundColor:  Color.fromARGB(255, 184, 20, 20),
         elevation: 0,
       ),
-
+      
             body: SingleChildScrollView(
             child: Column(children: [
               
@@ -188,50 +188,26 @@ void DataStreams() async {
                                               padding: const EdgeInsets.only(
                                                   bottom: 10),
                                               child: Column(children: [
+                                                Text(
+                                                  'Pilgrim\'s location:  ',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF455D83),
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
                                                 IconButton(
                                                   icon: Icon(
                                                     (Icons.location_history_sharp),
                                                     color: Color.fromARGB(255, 160, 10, 10),
                                                     ),
                                                     onPressed: () async {
+                                                      ///////////توديه للماب 
+                                                      
+Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context){
+                return const pilgLocation();
+              }));
+//////////////////
 
-        //_latitude = storedocs[i]['latitude'];
-        //_longitude = storedocs[i]['longitude'];
-
-    getActivityProfile() async{
-  await _firestore
-  .collection('Pilgrims-Account')
-  .doc(storedocs[i]['UID']).get().then(
-    (doc)=>{
-      setState((){
-        if (doc.data() != null){
-          _latitude = doc.data()!['latitude']??=0;
-          _longitude = doc.data()!['longitude']??=0;
-        }
-      },
-      
-      ),
-    },
-      );
-      };
-    
-  // _firestore
-  // .collection('Pilgrims-Account')
-  // .doc(storedocs[i]['UID']).get().then(
-  //   (doc)=>{
-  //     setState((){
-  //       if (doc.data() != null){
-  //         _latitude = doc.data()!['latitude']??=0;
-  //         _longitude = doc.data()!['longitude']??=0;
-  //       }
-  //     },
-      
-  //     ),
-  //   },
-  //     );
-  LocationService _locationService = LocationService();
-  _locationService.goToMaps(_latitude, _longitude);
-    //////////////////////////////////////////////////
                                                     },
                                                     )
                                               ]),
