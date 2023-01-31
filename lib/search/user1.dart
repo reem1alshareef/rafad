@@ -12,6 +12,9 @@ class Users{
   String? seatingCapacity;
   String? description;
   String? UID;
+  String? numberOfRatings;
+  String? numberOfPeople;
+  String? avrgRating;
 
 Users({
   this.email,
@@ -22,6 +25,9 @@ Users({
   this.seatingCapacity,
   this.description,
   this.UID,
+  this.numberOfRatings,
+  this.numberOfPeople,
+  this.avrgRating
 });
 
 Users.fromJson(Map <String, dynamic> json){
@@ -33,6 +39,9 @@ phoneNumber = json['phoneNumber'];
 seatingCapacity = json['seatingCapacity'];
 description = json['description'];
 UID = json['UID'];
+numberOfRatings = json['numberOfRatings'];
+numberOfPeople = json['numberOfPeople'];
+avrgRating = json['avrgRating'];
 }
 
 Map<String, dynamic> toJson(){
@@ -46,6 +55,9 @@ Map<String, dynamic> toJson(){
   data['seatingCapacity'] = seatingCapacity;
   data['description'] = description;
   data['UID'] = UID;
+  data['numberOfRatings'] = numberOfRatings;
+  data['numberOfPeople'] = numberOfPeople;
+  data['avrgRating'] = avrgRating;
 
 return data;
 }

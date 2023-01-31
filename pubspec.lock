@@ -258,6 +258,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_hooks:
+    dependency: transitive
+    description:
+      name: flutter_hooks
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.18.5+1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -646,6 +653,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
+  rate_in_stars:
+    dependency: "direct main"
+    description:
+      name: rate_in_stars
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3"
   sanitize_html:
     dependency: transitive
     description:

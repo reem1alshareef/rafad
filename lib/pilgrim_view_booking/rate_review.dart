@@ -16,6 +16,7 @@ class RateReview extends StatefulWidget {
 
 class _RateReviewState extends State<RateReview> {
 
+  final _firestore = FirebaseFirestore.instance;
   double rating = 0;
   String? review;
   final _review = GlobalKey<FormState>();
@@ -199,6 +200,28 @@ class _RateReviewState extends State<RateReview> {
                            'review': review,
                            'campaignID': storedocs[i]['campaignID'],
                            'UID': FirebaseAuth.instance.currentUser!.uid,}, SetOptions(merge: true));
+
+                  DocumentSnapshot variable = await _firestore
+                                    .collection('AcceptedCampaigns')
+                                    .doc(storedocs[i]['campaignID'])
+                                    .get();
+                                double numberOfRatings = variable['numberOfRatings'];
+                                double numberOfPeople = variable['numberOfPeople'];
+                                double avrgRating = variable['avrgRating'];
+
+                    numberOfRatings += rating;
+                    numberOfPeople += 1;
+                    avrgRating = numberOfRatings/numberOfPeople;
+
+                    await FirebaseFirestore.instance
+                            .collection("AcceptedCampaigns")
+                            .doc(storedocs[i]['campaignID'])
+                            .update({
+                           'numberOfRatings': numberOfRatings,
+                           'numberOfPeople': numberOfPeople,
+                           'avrgRating': avrgRating,
+                });
+
                     Navigator.pop(context);
                   },
                   child: const Text('Save', style: TextStyle(color: Colors.white , fontSize: 20),),
