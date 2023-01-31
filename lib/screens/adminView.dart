@@ -328,6 +328,9 @@ class _ViewState extends State<View> {
                                                     ['capacity'],
                                                 'description': storedocs[i]
                                                     ['description'],
+                                                'numberOfRates': 0.0,
+                                                'numberOfPeople': 0.0,
+                                                'avrgRate': 0.0,
                                               });
                                                               });
                                                             },
