@@ -328,6 +328,7 @@ class _ViewState extends State<View> {
                                                     ['capacity'],
                                                 'description': storedocs[i]
                                                     ['description'],
+                                                'password': storedocs[i]['password'],
                                                 'numberOfRates': '0',
                                                 'numberOfPeople': '0',
                                                 'avrgRate': '0',
