@@ -20,19 +20,10 @@ class _RateReviewState extends State<RateReview> {
   String? review;
   final _review = GlobalKey<FormState>();
 
-  Future review_rate() async{
-    if (_review.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-      content: Text('Submitting data..')),
-    );
-  }
-
-  
-  }
-
   @override
   Widget build(BuildContext context) {
+
+    
     final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
         .collection("Pilgrims-Account")
         .doc(FirebaseAuth.instance.currentUser?.uid)
@@ -41,14 +32,12 @@ class _RateReviewState extends State<RateReview> {
         .snapshots();
 
     return Scaffold(
-        body: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+        body: SingleChildScrollView(
+            child: Column(children: [
           Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
-              child: StreamBuilder<QuerySnapshot>(
+                  child: StreamBuilder<QuerySnapshot>(
                   stream: dataStream,
                   builder: (BuildContext context,
                       AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -60,9 +49,7 @@ class _RateReviewState extends State<RateReview> {
                         child: CircularProgressIndicator(),
                       );
                     }
-                    //if(snapshot.data!.docs[Index].data()['ChosenCampaignName'] != null){
                     final List storedocs = [];
-                    
                     snapshot.data!.docs.map((DocumentSnapshot document) {
                       Map a = document.data() as Map<String, dynamic>;
                       storedocs.add(a);
@@ -71,75 +58,85 @@ class _RateReviewState extends State<RateReview> {
                     return Column(
                         children: List.generate(
                             storedocs.length,
-                            (i) => 
-                            SingleChildScrollView( 
-                              
-                                                  child: Column(
-                                                    children: <Widget>[
-                                                    Text(
-                                                      'Campaign Name:' 
-                                                        ),
-                                                        Text(
-                                                      storedocs[i]['name'] 
-                                                        ),
-                                                        SizedBox(height: 10,),
-                                                    
-                                      MyButton(
-                                      color: const Color(0xFF455D83),
-                                       title: 'Rate',
-                                       onPressed: () async {
-                                        return showDialog(
-                                         context: context,
-                                         builder: (context) => AlertDialog(
-                                            //title: Text('Rate this campaign'),
-                                            content: Column(
-                                              mainAxisSize: MainAxisSize.min,
-                                              children:  [
-                                                const Text(
-                                                'Please leave a star rating.',
-                                                style: TextStyle(fontSize: 20)),
-
-                                                const SizedBox(height: 32,),
-
-                                                buildRating(),
-                                              ],
-                                            ),
-                                            actions: <Widget>[
-              TextButton(
-                style: TextButton.styleFrom(
-                    backgroundColor: Colors.green,),
-                onPressed: () async {
-                  await FirebaseFirestore.instance
-                            .collection("Rate")
-                            .doc(FirebaseAuth.instance.currentUser!.uid)
-                            .set({
-                           'rating': rating,
-                           //'review': review,
-                           'campaignID': storedocs[i]['campaignID'],
-                           'UID': FirebaseAuth.instance.currentUser!.uid,}, SetOptions(merge: true));
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Save', style: TextStyle(color: Colors.white , fontSize: 20),),
-                  ),
-              TextButton(
-                //color: Colors.red,
-                //title: 'Cancel',
-                style: TextButton.styleFrom(
-                    backgroundColor: Colors.red,),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Cancel', style: TextStyle(color: Colors.white , fontSize: 20),),
-              ),
-            ],
-                                         ),);
-                                       },
+                            (i) => SingleChildScrollView(
+                                  child: ExpansionTileCard(
+                                    elevation: 2,
+                                    initialPadding:
+                                        EdgeInsets.only(bottom: 7, top: 7),
+                                    baseColor: Colors.blueGrey[50],
+                                    expandedColor: Colors.blueGrey[50],
+                                    //key: cardA,
+                                    leading: CircleAvatar(
+                                      child: Image.asset(
+                                          "assests/images/kaaba.png"),
+                                      backgroundColor: Color(0xFF788AA4),
+                                    ),
+                                    title: Text(
+                                      storedocs[i]['name'],
+                                    ),
+                                    subtitle: Text(
+                                      "Click to view",
+                                      style: TextStyle(fontSize: 11),
+                                    ),
+                                    children: [
+                                      Divider(
+                                        thickness: 1.7,
+                                        height: 1.0,
                                       ),
-                        MyButton(
-                  color: const Color(0xFF455D83),
-                  title: 'Review',
-                  onPressed: () async {
-    return showDialog(
+                                      Align(
+                                        alignment: Alignment.centerLeft,
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 16.0,
+                                            vertical: 10.0,
+                                          ),
+                                          child: Center(
+                                            child: Column(children: [
+                                              Column(children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 10),
+                                                  child: Column(children: [
+                                                    Text(
+                                                      'Campaign Name: ',
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xFF455D83),
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                    Text(
+                                                      storedocs[i]
+                                                          ['name'],
+                                                      style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: Color.fromARGB(
+                                                            255, 109, 94, 19),
+                                                      ),
+                                                    ),
+                                                  ]),
+                                                ),
+                                              ]),
+                                            ]),
+                                          ),
+                                        ),
+                                      ),
+                                      ButtonBar(
+                                        alignment:
+                                            MainAxisAlignment.spaceAround,
+                                        buttonHeight: 52.0,
+                                        buttonMinWidth: 90.0,
+                                        children: <Widget>[
+                                          TextButton(
+                                            style: TextButton.styleFrom(
+                                                shape:
+                                                    const RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(2.0)),
+                                            )),
+                                            onPressed: () {
+                                               showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
@@ -148,8 +145,15 @@ class _RateReviewState extends State<RateReview> {
               child: Column(
                 children: <Widget>[
                   const Text(
-                   'Please leave a review.',
-                   style: TextStyle(fontSize: 20)),
+                   'Please rate and review this campaign.',
+                   style: TextStyle(fontSize: 15)),
+
+                  const SizedBox(height: 20,),
+
+                  buildRating(),
+
+                  const SizedBox(height: 20,),
+
                   TextFormField(
                     maxLength: 30,
                     maxLines: 2,
@@ -168,15 +172,15 @@ class _RateReviewState extends State<RateReview> {
                             if(textValue.length<5){
                               return 'Review should be 5 characters at least';
                             }
-                            
-                            //return null;
                             if(textValue.trim().isEmpty){
                             return "Review cannot be empty.";
                             }
-
+                            if(rating == 0){
+                              return "Rating should be greater than 0!"
+                              ;}
                             return null;
                           }
-                  )
+                  ),
                 ],
               ),
             ),
@@ -191,7 +195,7 @@ class _RateReviewState extends State<RateReview> {
                             .collection("Rate")
                             .doc(FirebaseAuth.instance.currentUser!.uid)
                             .set({
-                           //'rating': rating,
+                           'rating': rating,
                            'review': review,
                            'campaignID': storedocs[i]['campaignID'],
                            'UID': FirebaseAuth.instance.currentUser!.uid,}, SetOptions(merge: true));
@@ -212,18 +216,27 @@ class _RateReviewState extends State<RateReview> {
             ],
           );
         });
-  },)
- ]
- ),
- )
-)
-  )
-                        ;
-}
- )
-)
-]))
-); 
+                                            },
+                                            child: Column(
+                                              children: const <Widget>[
+                                                Icon(Icons.star,
+                                                    color:
+                                                              Color(0xFF455D83)),
+                                                Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 2.0),
+                                                ),
+                                                Text('Rate'),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                )));
+                  }))
+        ])));
   }
   Widget buildRating() => RatingBar.builder(
                                                       minRating: 1,
@@ -234,5 +247,8 @@ class _RateReviewState extends State<RateReview> {
                                                       onRatingUpdate: (rating) => setState(() {
                                                       this.rating = rating;
                                                  }),
+                                                 
                                                     );
 }
+
+  

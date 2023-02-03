@@ -188,6 +188,13 @@ void DataStreams() async {
                                               padding: const EdgeInsets.only(
                                                   bottom: 10),
                                               child: Column(children: [
+                                                Text(
+                                                  'Pilgrim\'s location:  ',
+                                                  style: TextStyle(
+                                                      color: Color(0xFF455D83),
+                                                      fontWeight:
+                                                          FontWeight.w500),
+                                                ),
                                                 IconButton(
                                                   icon: Icon(
                                                     (Icons.location_history_sharp),

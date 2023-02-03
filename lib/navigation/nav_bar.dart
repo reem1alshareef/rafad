@@ -3,6 +3,7 @@
 import "package:flutter/material.dart";
 import 'package:rafad1/admin/DeletePilgrim.dart';
 import 'package:rafad1/screens/CampaignView.dart';
+import 'package:rafad1/screens/PiligrimProfile.dart';
 import 'package:rafad1/screens/ViewCampaignPlan.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
@@ -160,12 +161,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
     SearchCampaign(),
     ViewCampaignPlan(),
     emergency(),
-    Center(
-      child: Text(
-        'profile',
-        style: TextStyle(fontSize: 72),
-      ),
-    ),
+    PiligrimProfile()
   ];
 
   void _onItemTapped(int index) {
