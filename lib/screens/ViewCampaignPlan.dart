@@ -81,7 +81,15 @@ class _ViewState extends State<ViewCampaignPlan> {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 17),
                               ),
-                              Icon(Icons.access_time_rounded)
+                              Icon(Icons.access_time_rounded),
+                              Text(
+                                '  ${storedocs[i]['time'].toDate().month} / ${storedocs[i]['time'].toDate().day}',
+                                style: TextStyle(
+                                    color: Color(0xFF455D83),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17),
+                              ),
+                              Icon(Icons.calendar_today_rounded)
                             ]),
                             tileColor: Color.fromARGB(255, 228, 232, 235),
                             contentPadding: EdgeInsets.all(17),
