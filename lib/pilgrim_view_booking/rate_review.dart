@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 
+import '../screens/welcome_screen.dart';
 import '../widgets/my_button.dart';
 
 class RateReview extends StatefulWidget {
@@ -258,6 +259,39 @@ class _RateReviewState extends State<RateReview> {
                                           ),
                                         ],
                                       ),
+                                       ButtonBar(
+                                        alignment:
+                                            MainAxisAlignment.spaceAround,
+                                        buttonHeight: 52.0,
+                                        buttonMinWidth: 90.0,
+                                        children: <Widget>[ 
+                                          TextButton(
+                                            style: TextButton.styleFrom(
+                                                shape:
+                                                     RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(2.0)),
+                                            )),
+                                            onPressed: () {
+                                               Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const WelcomeScreen()));//Report()
+                                            },
+                                      child: Column(
+                                              children: const <Widget>[
+                                                Icon(Icons.report,
+                                                    color: Colors.red,),
+                                                Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 2.0),
+                                                ),
+                                                Text('Report'),
+                                              ],
+                                            ),
+                                          ),]
+                                      )
                                     ],
                                   ),
                                 )));
