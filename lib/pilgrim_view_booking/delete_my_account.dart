@@ -125,6 +125,7 @@ class _Delete_my_accountState extends State<Delete_my_account> {
                           FirebaseAuth.instance.currentUser?.delete();
 
                                               User? user = await FirebaseAuth.instance.currentUser;
+                                              
                                               UserCredential authResult= await user!.reauthenticateWithCredential(
                                                 EmailAuthProvider.credential(
                                                 email: email,
