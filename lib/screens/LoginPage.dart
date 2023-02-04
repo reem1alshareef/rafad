@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_auth/email_auth.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:toast/toast.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
+import 'package:email_otp/email_otp.dart';
 
 class LoginPage extends StatefulWidget {
   static const String screenRoute = 'LoginPage';
@@ -25,6 +27,28 @@ class loginPageState extends State<LoginPage> {
   bool? isAdmin=false;
   bool? isCampaign=false;
   final _signupFormKey = GlobalKey<FormState>();
+  
+  /////////////////////
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _otpController = TextEditingController();
+  Future<void> sendOTP() async {
+    EmailAuth.sessionName = "test Session";
+    var res = await EmailAuth.sendOtp(recieverMail: _emailController.text);
+    if(res){
+      print("OTP sent");
+    }else{
+      print("we could not send the OTP");
+    }
+  }
+  void verifyOTP(){
+    var res = EmailAuth.validate(recieverMail:_emailController.text , userOTP:_otpController.text);
+    if (res){
+      print("OTP verified");
+    }else{
+      print("invalid OTP");
+    }
+  }
+  /////////////////////
 
   @override
   Widget build(BuildContext context) {
@@ -283,6 +307,11 @@ class loginPageState extends State<LoginPage> {
                           innerText: 'Sign in',
                           onPressed: () async {
                             final FirebaseAuth _auth = FirebaseAuth.instance;
+                            ///////////////////////////
+                            TextField(
+                              
+                              )
+                              ///////////////////
       //print('reached create user');
       try {
         if (isAdmin==true) {
@@ -498,6 +527,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: widget.validator,
           ),
+          
         ],
       ),
     );

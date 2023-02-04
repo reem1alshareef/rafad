@@ -4,6 +4,8 @@ import 'package:rafad1/firebase_options.dart';
 import 'package:rafad1/screens/CampaignView.dart';
 
 import 'package:rafad1/screens/CurrentLocationScreen.dart';
+import 'package:rafad1/screens/send_otp.dart';
+
 import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
 
@@ -59,6 +61,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors
               .white, // change it from swatch to colort and from wight to blue , for map
         ),
+        
         initialRoute: WelcomeScreen.screenRoute,
         routes: {
           WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
