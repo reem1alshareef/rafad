@@ -112,23 +112,7 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                              String email = docCustomer['email'];
                              String password = docCustomer['password'];
                              
-                          // final docCustomer = FirebaseFirestore.instance
-                          //     .collection('customers')
-                          //     .doc(uid);
-                          /*AsyncSnapshot snapshot = ;
-                          final customer = snapshot.data;
-
-                          String email = customer.email;
-                          String password = customer.password;
-
-                          // Create a credential
-                          AuthCredential credential =
-                              EmailAuthProvider.credential(
-                                  email: email, password: password);
-
-                          // Reauthenticate
-                          await FirebaseAuth.instance.currentUser!
-                              .reauthenticateWithCredential(credential);*/
+                
 
                           FirebaseAuth.instance.currentUser?.delete();
 

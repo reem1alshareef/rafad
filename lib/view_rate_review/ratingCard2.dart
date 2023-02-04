@@ -35,8 +35,19 @@ class _ratingCard2State extends State<ratingCard2> {
         tileColor: Colors.white,
         minVerticalPadding: 10,
         contentPadding: EdgeInsets.symmetric(horizontal: 20.0),
-        title: Text(
-          widget.ratingItem.review,
+        title: Row(
+          children: [
+        Text(
+            widget.ratingItem.pilgrimName,
+            style: const TextStyle(
+            fontSize: 18.0,
+            fontWeight: FontWeight.w400,
+            color: Colors.black,
+                    ),
+                  ),
+                  SizedBox(width: 5,),
+        Text(
+          ' : "${widget.ratingItem.review}" ',
           style: const TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.w400,
@@ -44,6 +55,8 @@ class _ratingCard2State extends State<ratingCard2> {
             color: Colors.black,
           ),
         ),
+         
+        ]),
         subtitle: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
@@ -62,6 +75,7 @@ class _ratingCard2State extends State<ratingCard2> {
                     ),
                   ),
                 ),
+                SizedBox(width: 20,),
                 //  عدد نجوم هذا التقييم على شكل نجوم ممتلئة نسبيًا
                 RatingStars(
                   editable: false,
@@ -97,18 +111,6 @@ class _ratingCard2State extends State<ratingCard2> {
                 ),
               ],
             ),
-            Padding(
-                  padding: const EdgeInsets.only(top: 9.0, left: 5.0),
-                  child: Text(
-                    "${widget.ratingItem.pilgrimName}",
-                    style: const TextStyle(
-                      fontSize: 19.0,
-                      fontWeight: FontWeight.w600,
-                      //fontFamily: "Tajawal",
-                      //color: kPrimaryColor,
-                    ),
-                  ),
-                ),
           ],
         ),
         isThreeLine: true,
