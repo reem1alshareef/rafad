@@ -194,6 +194,12 @@ class _RateReviewState extends State<RateReview> {
                 style: TextButton.styleFrom(
                     backgroundColor: Colors.green,),
                 onPressed: () async {
+                  
+                  DocumentSnapshot docs = await _firestore
+                                    .collection('Pilgrims-Account')
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .get();
+
                   await FirebaseFirestore.instance
                             .collection("Rate")
                             .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -203,7 +209,9 @@ class _RateReviewState extends State<RateReview> {
                            'campaignID': storedocs[i]['campaignID'],
                            'date': DateFormat("yyyy-MM-dd").format(DateTime.now()),
                            'dateTime': DateTime.now().toString(),
-                           'UID': FirebaseAuth.instance.currentUser!.uid,}, SetOptions(merge: true));
+                           'UID': FirebaseAuth.instance.currentUser!.uid,
+                           'pilgrimName': docs['name'],
+                           }, SetOptions(merge: true));
 
                   DocumentSnapshot variable = await _firestore
                                     .collection('AcceptedCampaigns')
@@ -211,20 +219,19 @@ class _RateReviewState extends State<RateReview> {
                                     .get();
                                 double numberOfRatings = double.parse(variable['numberOfRatings']) + rating;
                                 double numberOfPeople = double.parse(variable['numberOfPeople']) + 1;
-                                //double avrgRating = double.parse(variable['avrgRating']);
-
-                    //numberOfRatings += rating;
-                    //numberOfPeople += 1;
-                    double avrgRating = numberOfRatings/numberOfPeople;
-
+                                double avrgRating = numberOfRatings/numberOfPeople;
+                        
                     await FirebaseFirestore.instance
                             .collection("AcceptedCampaigns")
                             .doc(storedocs[i]['campaignID'])
                             .update({
                            'numberOfRatings': numberOfRatings.toString(),
                            'numberOfPeople': numberOfPeople.toString(),
-                           'avrgRating': avrgRating.toString(),
+                           'avrgRating': avrgRating.toString(), 
                 });
+                
+
+                
 
                     Navigator.pop(context);
                   },

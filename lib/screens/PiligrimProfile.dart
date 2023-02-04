@@ -63,6 +63,127 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                 },
                 child: Text('Get Camapign Directions')),
           ),
+          ButtonBar(
+                  alignment:
+                      MainAxisAlignment.spaceAround,
+                  buttonHeight: 52.0,
+                  buttonMinWidth: 90.0,
+                  children: <Widget>[
+                    TextButton(
+                      style: TextButton.styleFrom(shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2.0)),)),
+                      onPressed: () {
+                        showDialog(
+                             context: context,
+                            builder:
+                                (BuildContext context) {
+                              return AlertDialog(
+                          title: Row(
+                            children:  const [
+                              Text('Delete '),
+                              Text(' account'),
+                            ],
+                          ),
+                          content: 
+                            
+                              Text('This action cannot be undone, Are you sure you want to delete the account?'),
+                            
+                          
+                          actions: <Widget>[
+                            TextButton(
+                              style: TextButton.styleFrom(
+                    backgroundColor: Colors.red,),
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Cancel', style: TextStyle(color: Colors.white , fontSize: 20),),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                
+                                //firebase
+                                try{
+                                  setState(
+                                            () async {
+                                              DocumentSnapshot docCustomer = await FirebaseFirestore.instance
+                              .collection('Pilgrims-Account')
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .get();
+
+                             String email = docCustomer['email'];
+                             String password = docCustomer['password'];
+                             
+                          // final docCustomer = FirebaseFirestore.instance
+                          //     .collection('customers')
+                          //     .doc(uid);
+                          /*AsyncSnapshot snapshot = ;
+                          final customer = snapshot.data;
+
+                          String email = customer.email;
+                          String password = customer.password;
+
+                          // Create a credential
+                          AuthCredential credential =
+                              EmailAuthProvider.credential(
+                                  email: email, password: password);
+
+                          // Reauthenticate
+                          await FirebaseAuth.instance.currentUser!
+                              .reauthenticateWithCredential(credential);*/
+
+                          FirebaseAuth.instance.currentUser?.delete();
+
+                                              User? user = await FirebaseAuth.instance.currentUser;
+                                              
+                                              UserCredential authResult= await user!.reauthenticateWithCredential(
+                                                EmailAuthProvider.credential(
+                                                email: email,
+                                                password: password,
+                                              ),);
+
+                                              authResult.user!.delete();
+
+                                            // ignore: use_build_context_synchronously
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const WelcomeScreen()));
+
+
+                                        });
+                                  //Navigator.pop(context, 'Delete');
+                                  
+                                } catch(e){
+                                  //e.hashCode;
+                                  //print(e.runtimeType);
+
+                                }
+
+                              },
+                              child: const Text('Delete'),
+                            ),
+                          ],
+                        );
+                        }
+                        );
+                        
+                      },
+
+
+
+                      child: Row(
+                        children: const <Widget>[
+                          Icon(Icons.cancel_rounded, color: Colors.redAccent),
+                          Padding(padding: EdgeInsets.symmetric(vertical: 2.0),),
+                          Text(' Delete account'),
+                        ],
+                      ),
+
+
+
+                    ),
+                  ],
+                ),
         ]),
       ),
     );

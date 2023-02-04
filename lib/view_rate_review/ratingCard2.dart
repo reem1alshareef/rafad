@@ -40,7 +40,7 @@ class _ratingCard2State extends State<ratingCard2> {
           style: const TextStyle(
             fontSize: 18.0,
             fontWeight: FontWeight.w400,
-            fontFamily: "Tajawal",
+            //fontFamily: "Tajawal",
             color: Colors.black,
           ),
         ),
@@ -57,7 +57,7 @@ class _ratingCard2State extends State<ratingCard2> {
                     style: const TextStyle(
                       fontSize: 19.0,
                       fontWeight: FontWeight.w600,
-                      fontFamily: "Tajawal",
+                      //fontFamily: "Tajawal",
                       //color: kPrimaryColor,
                     ),
                   ),
@@ -90,13 +90,25 @@ class _ratingCard2State extends State<ratingCard2> {
                     style: const TextStyle(
                       fontSize: 14.0,
                       fontWeight: FontWeight.w500,
-                      fontFamily: "Tajawal",
+                      //fontFamily: NoteSerif,
                       color: Color.fromARGB(255, 93, 91, 91),
                     ),
                   ),
                 ),
               ],
             ),
+            Padding(
+                  padding: const EdgeInsets.only(top: 9.0, left: 5.0),
+                  child: Text(
+                    "${widget.ratingItem.pilgrimName}",
+                    style: const TextStyle(
+                      fontSize: 19.0,
+                      fontWeight: FontWeight.w600,
+                      //fontFamily: "Tajawal",
+                      //color: kPrimaryColor,
+                    ),
+                  ),
+                ),
           ],
         ),
         isThreeLine: true,

@@ -1,6 +1,6 @@
 class ratingModel {
   double rating = 0.0;
-  String UID = "", campaignID = "", review = "", date = "", dateTime = "";
+  String UID = "", campaignID = "", review = "", date = "", dateTime = "", pilgrimName='';
 
   ratingModel({
     required this.rating,
@@ -9,6 +9,7 @@ class ratingModel {
     required this.review,
     required this.date,
     required this.dateTime,
+    required this.pilgrimName,
   });
 
   ratingModel.fromJson(Map<String, dynamic> json) {
@@ -18,6 +19,7 @@ class ratingModel {
     review = json['review'];
     date = json['date'];
     dateTime = json['dateTime'];
+    pilgrimName = json['pilgrimName'];
   }
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
@@ -27,6 +29,7 @@ class ratingModel {
     data['review'] = this.review;
     data['date'] = this.date;
     data['dateTime'] = this.dateTime;
+    data['pilgrimName']= this.pilgrimName;
     return data;
   }
 }
