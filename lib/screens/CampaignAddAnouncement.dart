@@ -14,7 +14,7 @@ class _CampaignAddAnouncement extends State<CampaignAddAnouncement> {
   final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
       .collection('AcceptedCampaigns')
       .doc(FirebaseAuth.instance.currentUser!.uid)
-      .collection('Activities')
+      .collection('Announcements')
       .snapshots();
   late final List storedocs = [];
 
@@ -42,16 +42,16 @@ class _CampaignAddAnouncement extends State<CampaignAddAnouncement> {
       DocumentReference docRef = await FirebaseFirestore.instance
           .collection("AcceptedCampaigns")
           .doc(FirebaseAuth.instance.currentUser!.uid)
-          .collection('Activities')
+          .collection('Announcements')
           .add(
         {
           'title': title,
-          'time': Timestamp.fromDate(date),
+          'time': Timestamp.fromDate(DateTime.now()),
           //'activityID':document.documentID,
         },
       );
       await docRef.set({
-        'activityID': docRef.id,
+        'announcementID': docRef.id,
       }, SetOptions(merge: true));
     }
   }
@@ -61,52 +61,26 @@ class _CampaignAddAnouncement extends State<CampaignAddAnouncement> {
     //int theHour;
 
     return Scaffold(
+      appBar: AppBar(title: Text(
+                      'Announcements',
+                      style:
+                          TextStyle(fontWeight: FontWeight.bold, fontSize: 34),
+                    ),),
         body: Container(
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Center(
-                child: Padding(
-                    padding: EdgeInsets.all(16.0),
-                    child: Text(
-                      'Announcements',
-                      style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 34),
-                    ))),
+
+            // Center(
+            //     child: Padding(
+            //         padding: EdgeInsets.all(16.0),
+            //         child: Text(
+            //           'Announcements',
+            //           style:
+            //               TextStyle(fontWeight: FontWeight.bold, fontSize: 34),
+            //         ))),
+
             const SizedBox(height: 37),
-
-            // Row(
-            //   children: [
-            //     const SizedBox(width: 10),
-            //     Ink(
-            //       decoration: const ShapeDecoration(
-            //         color: const Color(0xFF455D83),
-            //         shape: CircleBorder(),
-            //       ),
-            //       child: IconButton(
-            //         icon: const Icon(Icons.notifications),
-            //         tooltip: 'Show Snackbar',
-            //         color: const Color.fromARGB(255, 255, 255, 255),
-            //         onPressed: () {
-            //           //LocalNotifications().showNotification(title: 'hello from the other side', body: 'hi');
-            //           //NotificationService().showNotification(
-            //           // 1, 'Notification_title.text,' ,'Notification_descrp.text');
-
-            //           // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            //           //     content:
-            //           //         Text('This button is for future improvment')));
-
-            //           Navigator.push(
-            //             context,
-            //             MaterialPageRoute(
-            //                 builder: (context) =>
-            //                     const CampaignAddAnouncement()),
-            //           );
-            //         },
-            //       ),
-            //     ),
-            //   ],
-            // ),
             const SizedBox(
               width: 10,
               height: 30,
@@ -182,8 +156,8 @@ class _CampaignAddAnouncement extends State<CampaignAddAnouncement> {
                                 },
                               ))),
 
-                      Flexible(
-                          child: Form(key: _addDesKey, child: TextFormField())),
+                      //Flexible(
+                        //  child: Form(key: _addDesKey, child: TextFormField())),
 
                       IconButton(
                           onPressed: () {
