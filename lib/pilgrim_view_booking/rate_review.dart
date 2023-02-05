@@ -4,7 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:intl/intl.dart';
 
+import '../screens/welcome_screen.dart';
 import '../widgets/my_button.dart';
 
 class RateReview extends StatefulWidget {
@@ -16,6 +18,7 @@ class RateReview extends StatefulWidget {
 
 class _RateReviewState extends State<RateReview> {
 
+  final _firestore = FirebaseFirestore.instance;
   double rating = 0;
   String? review;
   final _review = GlobalKey<FormState>();
@@ -191,14 +194,45 @@ class _RateReviewState extends State<RateReview> {
                 style: TextButton.styleFrom(
                     backgroundColor: Colors.green,),
                 onPressed: () async {
+                  
+                  DocumentSnapshot docs = await _firestore
+                                    .collection('Pilgrims-Account')
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .get();
+
                   await FirebaseFirestore.instance
                             .collection("Rate")
                             .doc(FirebaseAuth.instance.currentUser!.uid)
                             .set({
-                           'rating': rating,
+                           'rating': rating.toString(),
                            'review': review,
                            'campaignID': storedocs[i]['campaignID'],
-                           'UID': FirebaseAuth.instance.currentUser!.uid,}, SetOptions(merge: true));
+                           'date': DateFormat("yyyy-MM-dd").format(DateTime.now()),
+                           'dateTime': DateTime.now().toString(),
+                           'UID': FirebaseAuth.instance.currentUser!.uid,
+                           'pilgrimName': docs['name'],
+                           }, SetOptions(merge: true));
+
+                  DocumentSnapshot variable = await _firestore
+                                    .collection('AcceptedCampaigns')
+                                    .doc(storedocs[i]['campaignID'])
+                                    .get();
+                                double numberOfRatings = double.parse(variable['numberOfRatings']) + rating;
+                                double numberOfPeople = double.parse(variable['numberOfPeople']) + 1;
+                                double avrgRating = numberOfRatings/numberOfPeople;
+                        
+                    await FirebaseFirestore.instance
+                            .collection("AcceptedCampaigns")
+                            .doc(storedocs[i]['campaignID'])
+                            .update({
+                           'numberOfRatings': numberOfRatings.toString(),
+                           'numberOfPeople': numberOfPeople.toString(),
+                           'avrgRating': avrgRating.toString(), 
+                });
+                
+
+                
+
                     Navigator.pop(context);
                   },
                   child: const Text('Save', style: TextStyle(color: Colors.white , fontSize: 20),),
@@ -232,6 +266,39 @@ class _RateReviewState extends State<RateReview> {
                                           ),
                                         ],
                                       ),
+                                       ButtonBar(
+                                        alignment:
+                                            MainAxisAlignment.spaceAround,
+                                        buttonHeight: 52.0,
+                                        buttonMinWidth: 90.0,
+                                        children: <Widget>[ 
+                                          TextButton(
+                                            style: TextButton.styleFrom(
+                                                shape:
+                                                     RoundedRectangleBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(2.0)),
+                                            )),
+                                            onPressed: () {
+                                               Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const WelcomeScreen()));//Report()
+                                            },
+                                      child: Column(
+                                              children: const <Widget>[
+                                                Icon(Icons.report,
+                                                    color: Colors.red,),
+                                                Padding(
+                                                  padding: EdgeInsets.symmetric(
+                                                      vertical: 2.0),
+                                                ),
+                                                Text('Report'),
+                                              ],
+                                            ),
+                                          ),]
+                                      )
                                     ],
                                   ),
                                 )));

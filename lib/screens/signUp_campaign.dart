@@ -311,9 +311,6 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                             (RegExp(r"\s\s"),)
                           ],
                           
-                          //controller: _descController,
-                          cursorColor: Colors.white,
-                          style: TextStyle(color: Colors.grey[500],) ,
                           textInputAction: TextInputAction.done,
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
@@ -395,6 +392,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                                 'address': address,
                                 'capacity': capacity,
                                 'description': description,
+                                'password': password,
                               });
                             }
                           },
