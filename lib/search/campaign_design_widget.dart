@@ -243,7 +243,11 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                       decoration: TextDecoration.underline,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                                  ),             
+                                                  ), 
+
+                                  const SizedBox(height: 10,),     
+                                  
+                                         
                                                 MyButton(
                               color: const Color(0xFF455D83),
                               title: 'book',
