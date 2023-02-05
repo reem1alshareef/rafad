@@ -28,7 +28,7 @@ class _ViewState extends State<ViewCampaignPlan> {
     // print(ID);
     Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
         .collection("AcceptedCampaigns")
-        .doc(ID)
+        .doc()
         .collection("Activities")
         .snapshots();
     return Scaffold(
