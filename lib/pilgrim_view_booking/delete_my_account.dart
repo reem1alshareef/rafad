@@ -77,13 +77,10 @@ class _Delete_my_accountState extends State<Delete_my_account> {
                               Text(' account'),
                             ],
                           ),
-                          content: Row(
-                            children:  const [
-                              Text('Deleting this account '),
-                              Text('cannot ', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),),
-                              Text('be undone, Are you sure you want to delete the account?')
-                            ],
-                          ),
+                          content: 
+                          const Text(
+                            'Deleting this account cannot be undone, Are you sure you want to delete the account?'
+                            ),
                           actions: <Widget>[
                             TextButton(
                               onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -103,24 +100,11 @@ class _Delete_my_accountState extends State<Delete_my_account> {
 
                              String email = docCustomer['email'];
                              String password = docCustomer['password'];
-                             
-                          // final docCustomer = FirebaseFirestore.instance
-                          //     .collection('customers')
-                          //     .doc(uid);
-                          /*AsyncSnapshot snapshot = ;
-                          final customer = snapshot.data;
 
-                          String email = customer.email;
-                          String password = customer.password;
-
-                          // Create a credential
-                          AuthCredential credential =
-                              EmailAuthProvider.credential(
-                                  email: email, password: password);
-
-                          // Reauthenticate
-                          await FirebaseAuth.instance.currentUser!
-                              .reauthenticateWithCredential(credential);*/
+                             await FirebaseFirestore.instance
+                             .collection('Pilgrims-Account')
+                             .doc(FirebaseAuth.instance.currentUser!.uid)
+                             .delete();
 
                           FirebaseAuth.instance.currentUser?.delete();
 
@@ -151,8 +135,6 @@ class _Delete_my_accountState extends State<Delete_my_account> {
 
                                 }
 
-                               
-
                               },//=> Navigator.pop(context, 'OK'),
                               child: const Text('Delete'),
                             ),
@@ -172,14 +154,9 @@ class _Delete_my_accountState extends State<Delete_my_account> {
                           Text(' Delete account'),
                         ],
                       ),
-
-
-
                     ),
                   ],
                 ),
-
-
               ]
             )
           )
@@ -222,13 +199,10 @@ class _Delete_my_account_campaignState extends State<Delete_my_account_campaign>
                               Text(' account'),
                             ],
                           ),
-                          content: Row(
-                            children:  const [
-                              Text('Deleting this account '),
-                              Text('cannot ', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.red),),
-                              Text('be undone, Are you sure you want to delete the account?')
-                            ],
-                          ),
+                          content: 
+                          const Text(
+                            'Deleting this account cannot be undone, Are you sure you want to delete the account?'
+                            ),
                           actions: <Widget>[
                             TextButton(
                               onPressed: () => Navigator.pop(context, 'Cancel'),
@@ -249,23 +223,10 @@ class _Delete_my_account_campaignState extends State<Delete_my_account_campaign>
                              String email = docCustomer['email'];
                              String password = docCustomer['password'];
                              
-                          // final docCustomer = FirebaseFirestore.instance
-                          //     .collection('customers')
-                          //     .doc(uid);
-                          /*AsyncSnapshot snapshot = ;
-                          final customer = snapshot.data;
-
-                          String email = customer.email;
-                          String password = customer.password;
-
-                          // Create a credential
-                          AuthCredential credential =
-                              EmailAuthProvider.credential(
-                                  email: email, password: password);
-
-                          // Reauthenticate
-                          await FirebaseAuth.instance.currentUser!
-                              .reauthenticateWithCredential(credential);*/
+                          await FirebaseFirestore.instance
+                              .collection('AcceptedCampaigns')
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .delete();
 
                           FirebaseAuth.instance.currentUser?.delete();
 
@@ -285,19 +246,13 @@ class _Delete_my_account_campaignState extends State<Delete_my_account_campaign>
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         const WelcomeScreen()));
-
-
                                         });
                                   //Navigator.pop(context, 'Delete');
                                   
                                 } catch(e){
                                   //e.hashCode;
                                   //print(e.runtimeType);
-
                                 }
-
-                               
-
                               },//=> Navigator.pop(context, 'OK'),
                               child: const Text('Delete'),
                             ),
@@ -305,11 +260,7 @@ class _Delete_my_account_campaignState extends State<Delete_my_account_campaign>
                         );
                         }
                         );
-                        
                       },
-
-
-
                       child: Row(
                         children: const <Widget>[
                           Icon(Icons.cancel_rounded, color: Colors.redAccent),
@@ -317,14 +268,9 @@ class _Delete_my_account_campaignState extends State<Delete_my_account_campaign>
                           Text(' Delete account'),
                         ],
                       ),
-
-
-
                     ),
                   ],
                 ),
-
-
               ]
             )
           )

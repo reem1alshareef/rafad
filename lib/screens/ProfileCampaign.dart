@@ -109,7 +109,101 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
                 Navigator.push(
               context, MaterialPageRoute(builder: (context) =>  ratingsList( campaignId: thisCampaignId, averageShopRating: thisAvrgRating,  numberOfRatings: thisNumberOfPeople )));
               ;}
-              )
+              ),
+
+
+              ButtonBar(
+                  alignment:
+                      MainAxisAlignment.spaceAround,
+                  buttonHeight: 52.0,
+                  buttonMinWidth: 90.0,
+                  children: <Widget>[
+                    TextButton(
+                      style: TextButton.styleFrom(shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2.0)),)),
+                      onPressed: () {
+                        showDialog(
+                             context: context,
+                            builder:
+                                (BuildContext context) {
+                              return AlertDialog(
+                          title: Row(
+                            children:  const [
+                              Text('Delete '),
+                              Text(' account'),
+                            ],
+                          ),
+                          content: 
+                          const Text(
+                            'Deleting this account cannot be undone, Are you sure you want to delete the account?'
+                            ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () => Navigator.pop(context, 'Cancel'),
+                              child:  const Text('Cancel'),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                
+                                //firebase
+                                try{
+                                  setState(
+                                            () async {
+                                              DocumentSnapshot docCustomer = await FirebaseFirestore.instance
+                              .collection('AcceptedCampaigns')
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .get();
+
+                             String email = docCustomer['email'];
+                             String password = docCustomer['password'];
+                             
+                          await FirebaseFirestore.instance
+                              .collection('AcceptedCampaigns')
+                              .doc(FirebaseAuth.instance.currentUser!.uid)
+                              .delete();
+
+                          FirebaseAuth.instance.currentUser?.delete();
+
+                                              User? user = await FirebaseAuth.instance.currentUser;
+                                              
+                                              UserCredential authResult= await user!.reauthenticateWithCredential(
+                                                EmailAuthProvider.credential(
+                                                email: email,
+                                                password: password,
+                                              ),);
+
+                                              authResult.user!.delete();
+
+                                            // ignore: use_build_context_synchronously
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        const WelcomeScreen()));
+                                        });
+                                  //Navigator.pop(context, 'Delete');
+                                  
+                                } catch(e){
+                                  //e.hashCode;
+                                  //print(e.runtimeType);
+                                }
+                              },//=> Navigator.pop(context, 'OK'),
+                              child: const Text('Delete'),
+                            ),
+                          ],
+                        );
+                        }
+                        );
+                      },
+                      child: Row(
+                        children: const <Widget>[
+                          Icon(Icons.cancel_rounded, color: Colors.redAccent),
+                          Padding(padding: EdgeInsets.symmetric(vertical: 2.0),),
+                          Text(' Delete account'),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
           /*  Expanded(
               child: StreamBuilder(
             stream: FirebaseFirestore.instance
