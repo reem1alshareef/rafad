@@ -302,6 +302,21 @@ class loginPageState extends State<LoginPage> {
                         const SizedBox(
                           height: 16,
                         ),
+                        //////////////////////////
+                        TextField(
+                          controller:_emailController,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            hintText: "Enter email",
+                            labelText: "email",
+                            suffixIcon: TextButton(
+                              child: Text("send OTP"),
+                              onPressed: ()=> sendOTP(),
+                            )
+                          )
+                        ),
+                        
+                        /////////////////////////
                         //-------------------------------------------------------------------------------
                         CustomFormButton(
                           innerText: 'Sign in',
