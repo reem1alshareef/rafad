@@ -1,4 +1,4 @@
-import 'dart:html';
+//import 'dart:html';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
@@ -9,7 +9,7 @@ import 'package:rafad1/screens/LoginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../widgets/my_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:rafad1/services/localNotifications.dart';
+//import 'package:rafad1/services/localNotifications.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rafad1/screens/notification_accept.dart';
 class CampaignPlan extends StatefulWidget {
@@ -99,8 +99,8 @@ Row(children: [
                   onPressed: () {
 
                     //LocalNotifications().showNotification(title: 'hello from the other side', body: 'hi');
-                    NotificationService().showNotification(
-                      1, 'Notification_title.text,' ,'Notification_descrp.text');
+                    //NotificationService().showNotification(
+                      // 1, 'Notification_title.text,' ,'Notification_descrp.text');
 
 
 
@@ -211,7 +211,7 @@ const SizedBox(width: 10),
               TextFormField(
                 //key: _addTitleKey,
                 maxLines: 1,
-                          maxLength: 20,
+                          maxLength: 15,
                           
                           inputFormatters: [
                             FilteringTextInputFormatter.deny
@@ -338,11 +338,11 @@ SizedBox(height: 10,),
                                     Center(
                                     child:Text(storedocs[i]['title']),
                                     ),
-                                    SizedBox(width: 40,),
+                                    //SizedBox(width: 40,),
 
                                    const Icon(Icons.calendar_today),
                                    Text(
-                                      ' ${storedocs[i]['time'].toDate().day} / ${storedocs[i]['time'].toDate().month} / ${storedocs[i]['time'].toDate().year} '),
+                                      ' ${storedocs[i]['time'].toDate().day}/${storedocs[i]['time'].toDate().month}/${storedocs[i]['time'].toDate().year} '),
 
                                    const Icon(Icons.timer),
                                    Text(

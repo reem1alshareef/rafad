@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -240,6 +241,7 @@ print (element. data());l
                                         buttonHeight: 52.0,
                                         buttonMinWidth: 90.0,
                                         children: <Widget>[
+                                        
                                           TextButton(
                                             style: TextButton.styleFrom(
                                                 shape:
@@ -313,7 +315,9 @@ print (element. data());l
                                                     );
                                                   });
                                             },
+                                            
                                             child: Column(
+                                              
                                               children: const <Widget>[
                                                 Icon(Icons.cancel_rounded,
                                                     color: Colors.redAccent),
@@ -322,6 +326,7 @@ print (element. data());l
                                                       vertical: 2.0),
                                                 ),
                                                 Text('Cancel'),
+                                                
                                               ],
                                             ),
                                           ),

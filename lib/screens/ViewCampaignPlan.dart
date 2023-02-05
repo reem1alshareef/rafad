@@ -5,56 +5,30 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 
 class ViewCampaignPlan extends StatefulWidget {
-  //static const String screenRoute = 'welcome_screen';
   const ViewCampaignPlan({super.key});
   @override
   _ViewState createState() => _ViewState();
-  String ID;
-
-  Future<void> start() async {
-    DocumentSnapshot variable = await FirebaseFirestore.instance
-          .collection('Pilgrims-Account')
-          .doc(FirebaseAuth.instance.currentUser?.uid)
-          .get();
-      ID = variable["ChosenCampaignID"];
-      print(ID);
-   // }
-
-   //getID();
-    //}
-
-    print(ID);
-    Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
-        .collection("AcceptedCampaigns")
-        .doc(ID)
-        .collection("Activities")
-        .snapshots();
-    print(ID);
-  }
 }
 
 class _ViewState extends State<ViewCampaignPlan> {
   @override
-  Future<Widget> build(BuildContext context) async {
-    String ID = 'blah';
+  Widget build(BuildContext context) {
+    // String ID = '';
+    // <Future>() async {
+    //   DocumentSnapshot variable = await FirebaseFirestore.instance
+    //       .collection('Pilgrims-Account')
+    //       .doc(FirebaseAuth.instance.currentUser?.uid)
+    //       .get();
+    //   ID = variable['ChosenCampaignID'];
+    // };
 
-    
-
-    print(ID);
+    // print(ID);
     Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
         .collection("AcceptedCampaigns")
-        .doc(ID)
+        .doc('4a8v9veM6igptqvtBdq8cZvuczp2')
         .collection("Activities")
         .snapshots();
-    print(ID);
-
     return Scaffold(
-      DocumentSnapshot variable = await FirebaseFirestore.instance
-          .collection('Pilgrims-Account')
-          .doc(FirebaseAuth.instance.currentUser?.uid)
-          .get();
-      ID = variable["ChosenCampaignID"];
-      print(ID);
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Today\'s Campaign plan'),
@@ -81,6 +55,7 @@ class _ViewState extends State<ViewCampaignPlan> {
                   final List storedocs = [];
                   snapshot.data!.docs.map((DocumentSnapshot document) {
                     Map a = document.data() as Map<String, dynamic>;
+                    print('reached list');
                     storedocs.add(a);
                     a['id'] = document.id;
                   }).toList();
@@ -106,7 +81,15 @@ class _ViewState extends State<ViewCampaignPlan> {
                                     fontWeight: FontWeight.bold,
                                     fontSize: 17),
                               ),
-                              Icon(Icons.access_time_rounded)
+                              Icon(Icons.access_time_rounded),
+                              Text(
+                                '  ${storedocs[i]['time'].toDate().month} / ${storedocs[i]['time'].toDate().day}',
+                                style: TextStyle(
+                                    color: Color(0xFF455D83),
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 17),
+                              ),
+                              Icon(Icons.calendar_today_rounded)
                             ]),
                             tileColor: Color.fromARGB(255, 228, 232, 235),
                             contentPadding: EdgeInsets.all(17),
