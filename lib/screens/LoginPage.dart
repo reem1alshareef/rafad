@@ -28,27 +28,11 @@ class loginPageState extends State<LoginPage> {
   bool? isCampaign=false;
   final _signupFormKey = GlobalKey<FormState>();
   
-  /////////////////////
-  final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _otpController = TextEditingController();
-  Future<void> sendOTP() async {
-    EmailAuth.sessionName = "test Session";
-    var res = await EmailAuth.sendOtp(recieverMail: _emailController.text);
-    if(res){
-      print("OTP sent");
-    }else{
-      print("we could not send the OTP");
-    }
-  }
-  void verifyOTP(){
-    var res = EmailAuth.validate(recieverMail:_emailController.text , userOTP:_otpController.text);
-    if (res){
-      print("OTP verified");
-    }else{
-      print("invalid OTP");
-    }
-  }
-  /////////////////////
+  //////////////////////////////////////////
+  TextEditingController emailOTP = new TextEditingController();
+  TextEditingController otp = new TextEditingController();
+  EmailOTP myauth = EmailOTP();
+  /////////////////////////////////////////
 
   @override
   Widget build(BuildContext context) {
@@ -85,12 +69,9 @@ class loginPageState extends State<LoginPage> {
                         // const PageHeading(
                         //   title: 'Sign in',
                         // ),
-
-
                         // const SizedBox(
                         //   height: 16,
                         // ),
-
                         // TextFormField(
                         //   inputFormatters: [
                         //     FilteringTextInputFormatter.allow(
@@ -108,7 +89,6 @@ class loginPageState extends State<LoginPage> {
                         //     } else if (value.length < 8) {
                         //       return 'Please enter valid name';
                         //     }
-
                         //     String patttern =
                         //         (r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$");
                         //     RegExp regExp = RegExp(patttern);
@@ -123,8 +103,6 @@ class loginPageState extends State<LoginPage> {
                         //     isDense: true,
                         //   ),
                         // ),
-
-
                         const SizedBox(
                           height: 16,
                         ),
@@ -302,31 +280,77 @@ class loginPageState extends State<LoginPage> {
                         const SizedBox(
                           height: 16,
                         ),
-                        //////////////////////////
-                        TextField(
-                          controller:_emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          decoration: InputDecoration(
-                            hintText: "Enter email",
-                            labelText: "email",
-                            suffixIcon: TextButton(
-                              child: Text("send OTP"),
-                              onPressed: ()=> sendOTP(),
-                            )
-                          )
-                        ),
-                        
-                        /////////////////////////
                         //-------------------------------------------------------------------------------
+                        ////////////////////////////////////////////////////////////
+                        Card(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                          controller: emailOTP,
+                          decoration:
+                              const InputDecoration(hintText: "enter valid email to verify")),
+                    ),
+                    ElevatedButton(
+                        onPressed: () async {
+                          myauth.setConfig(
+                            appEmail: "reemsh65@gmail.com", 
+                            appName: "Email OTP",
+                            userEmail: emailOTP.text,
+                            otpLength: 6,
+                            otpType: OTPType.digitsOnly
+                          );
+                          if (await myauth.sendOTP() == true) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text("OTP has been sent"),
+                            ));
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text("Oops, OTP send failed"),
+                            ));
+                          }
+                        },
+                        child: const Text("Send OTP")),
+                  ],
+                ),
+              ),
+              Card(
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TextFormField(
+                          controller: otp,
+                          decoration:
+                              const InputDecoration(hintText: "Enter OTP")),
+                    ),
+                    ElevatedButton(
+                        onPressed: () async {
+                          if (await myauth.verifyOTP(otp: otp.text) == true) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text("OTP is verified"),
+                            ));
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text("Invalid OTP"),
+                            ));
+                          }
+                        },
+                        child: const Text("Verify")),
+                  ],
+                ),
+              ),
+                        ///////////////////////////////////////////////////////////
                         CustomFormButton(
                           innerText: 'Sign in',
                           onPressed: () async {
                             final FirebaseAuth _auth = FirebaseAuth.instance;
-                            ///////////////////////////
-                            TextField(
-                              
-                              )
-                              ///////////////////
+                            
       //print('reached create user');
       try {
         if (isAdmin==true) {
