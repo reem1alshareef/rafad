@@ -680,7 +680,7 @@ packages:
       name: sentry
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "6.19.0"
+    version: "6.20.0"
   shared_preferences:
     dependency: "direct dev"
     description:
