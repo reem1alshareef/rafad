@@ -7,6 +7,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:location/location.dart' as loc;
 import 'package:permission_handler/permission_handler.dart';
 import 'package:rafad1/screens/campaignRealMap.dart';
+import 'package:rafad1/widgets/my_button.dart';
+
+import '../view_rate_review/campaign_view_rate.dart';
 
 // from here the 5try
 
@@ -21,6 +24,7 @@ class ProfileCampaign extends StatefulWidget {
 class _ProfileCampaignState extends State<ProfileCampaign> {
   final loc.Location location = loc.Location();
   StreamSubscription<loc.LocationData>? _locationSubscription;
+  String? uid = FirebaseAuth.instance.currentUser?.uid;
 
   @override
   void initState() {
@@ -91,6 +95,21 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
                 style: TextStyle(
                     color: Color(0xFF455D83), fontWeight: FontWeight.w500),
               )),
+
+              MyButton(color: Color(0xFF455D83), title: 'View Rate', onPressed: ()async {
+
+                DocumentSnapshot variable = await FirebaseFirestore.instance
+                                    .collection('AcceptedCampaigns')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .get();
+
+                                    String thisCampaignId = variable['UID'];
+                                    double thisAvrgRating = double.parse(variable['avrgRating']);
+                                    double thisNumberOfPeople = double.parse(variable['numberOfPeople']);
+                Navigator.push(
+              context, MaterialPageRoute(builder: (context) =>  ratingsList( campaignId: thisCampaignId, averageShopRating: thisAvrgRating,  numberOfRatings: thisNumberOfPeople )));
+              ;}
+              )
           /*  Expanded(
               child: StreamBuilder(
             stream: FirebaseFirestore.instance
