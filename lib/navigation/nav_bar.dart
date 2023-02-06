@@ -94,7 +94,7 @@ class _nav_campaignState extends State<nav_campaign> {
     SearchPilgrim(),
     CampaignPlan(),
     emergencyList(),
-                          //AddDescription(),
+    ProfileCampaign(),
     ProfileCampaign(),     
   ];
 
@@ -129,6 +129,10 @@ class _nav_campaignState extends State<nav_campaign> {
                 label: 'Emergencies',
                 backgroundColor: Color.fromARGB(255, 184, 20, 20)),
             BottomNavigationBarItem(
+                icon: Icon(Icons.location_on),
+                label: 'Location',
+                backgroundColor: Color.fromARGB(255, 184, 20, 20)),
+            BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',
                 backgroundColor: Color(0xFF455D83)),
@@ -158,9 +162,10 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     PilgrimView(),
-    SearchCampaign(),
+    logOutPilgrim(),//SearchCampaign(),
     ViewCampaignPlan(),
     emergency(),
+    PiligrimProfile(),
     PiligrimProfile()
   ];
 
@@ -193,6 +198,10 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.emergency_share_sharp),
                 label: 'Emergency',
+                backgroundColor: Color.fromARGB(255, 184, 20, 20)),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.location_on),
+                label: 'Location',
                 backgroundColor: Color.fromARGB(255, 184, 20, 20)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),

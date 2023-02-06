@@ -5,7 +5,10 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
+import 'package:rafad1/search/search_campaign.dart';
+import 'package:rate_in_stars/rate_in_stars.dart';
 
+import '../view_rate_review/campaign_view_rate.dart';
 import '../widgets/my_button.dart';
 
 //import 'package:rafad1/screens/LoginPage.dart';
@@ -77,18 +80,21 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
 
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: Text('available campaign to book'),
+          title: Text('Available campaigns'),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
           actions: <Widget>[
             IconButton(
-              icon: Icon(
-                Icons.logout,
+              icon: const Icon(
+                Icons.search,
                 color: Colors.white,
               ),
               onPressed: () {
-                FirebaseAuth.instance.signOut();
-                Navigator.pushNamed(context, WelcomeScreen.screenRoute);
+                Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                      builder: (context) =>
+                      SearchCampaign()));
               },
             )
           ],
@@ -306,6 +312,27 @@ Padding(
                                           ),
                                         ),
                                       ),
+                                      RatingStars(
+                                                  rating: double.parse(storedocs[i]['avrgRating']), 
+                                                  editable: false,
+                                                  color: Colors.amber,
+                                                  iconSize: 20,
+                                                  ),
+                                                  GestureDetector(
+                                                    onTap: () => {
+                                                        Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                        builder: (context) =>
+                                                      ratingsList( campaignId: storedocs[i]['UID'] , averageShopRating: double.parse(storedocs[i]['avrgRating']),  numberOfRatings: double.parse(storedocs[i]['numberOfPeople']))))
+                                },
+                                child: Text(
+                                   storedocs[i]['numberOfPeople'],
+                                  style: const TextStyle(
+                                      fontSize: 15,
+                                      decoration: TextDecoration.underline,
+                                      fontWeight: FontWeight.bold),
+                                )),
                                       /////////////////buton
                                       
                                       MyButton(
