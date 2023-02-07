@@ -107,7 +107,15 @@ class _CampaignAddAnouncement extends State<CampaignAddAnouncement> {
                       Flexible(
                           child: Form(
                               key: _addTitleKey,
-                              child: //jjjjjjj
+
+                              child: Column(children: [
+                                
+
+
+
+
+
+                                // child: //jjjjjjj
                                   TextFormField(
                                 //key: _addTitleKey,
                                 maxLines: 1,
@@ -154,7 +162,124 @@ class _CampaignAddAnouncement extends State<CampaignAddAnouncement> {
 
                                   return null;
                                 },
-                              ))),
+                              ),
+                              
+                              TextFormField(
+
+                                  maxLines: 1,
+                                maxLength: 15,
+
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.deny(
+                                    RegExp(r"\s\s"),
+                                  )
+                                ],
+
+                                //controller: _descController,
+                                cursorColor: Colors.white,
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 0, 0, 0),
+                                ),
+                                textInputAction: TextInputAction.done,
+                                keyboardType: TextInputType.text,
+                                onChanged: (value) {
+                                  setState(() {
+                                    title = value;
+                                  });
+                                },
+                                decoration:
+                                    const InputDecoration(labelText: 'Description'),
+                                autovalidateMode:
+                                    AutovalidateMode.onUserInteraction,
+                                validator: (textValue) {
+                                  if (textValue == null || textValue.isEmpty) {
+                                    return 'Description is required!';
+                                  }
+                                  if (textValue.length < 5) {
+                                    return 'Description should be 5 characters at least';
+                                  }
+
+                                  //return null;
+                                  if (textValue.trim().isEmpty) {
+                                    return "Description cannot be empty.";
+                                  }
+
+                                  if (!textValue.contains(RegExp(r'[a-z]'))) {
+                                    return ("Description must contain letters");
+                                  }
+
+                                  return null;
+                                },
+
+                                ),
+
+
+
+
+
+
+                              ],), 
+
+
+
+
+
+
+                              // child: //jjjjjjj
+                              //     TextFormField(
+                              //   //key: _addTitleKey,
+                              //   maxLines: 1,
+                              //   maxLength: 15,
+
+                              //   inputFormatters: [
+                              //     FilteringTextInputFormatter.deny(
+                              //       RegExp(r"\s\s"),
+                              //     )
+                              //   ],
+
+                              //   //controller: _descController,
+                              //   cursorColor: Colors.white,
+                              //   style: TextStyle(
+                              //     color: Colors.grey[500],
+                              //   ),
+                              //   textInputAction: TextInputAction.done,
+                              //   keyboardType: TextInputType.text,
+                              //   onChanged: (value) {
+                              //     setState(() {
+                              //       title = value;
+                              //     });
+                              //   },
+                              //   decoration:
+                              //       const InputDecoration(labelText: 'Title'),
+                              //   autovalidateMode:
+                              //       AutovalidateMode.onUserInteraction,
+                              //   validator: (textValue) {
+                              //     if (textValue == null || textValue.isEmpty) {
+                              //       return 'Title is required!';
+                              //     }
+                              //     if (textValue.length < 5) {
+                              //       return 'Title should be 5 characters at least';
+                              //     }
+
+                              //     //return null;
+                              //     if (textValue.trim().isEmpty) {
+                              //       return "Title cannot be empty.";
+                              //     }
+
+                              //     if (!textValue.contains(RegExp(r'[a-z]'))) {
+                              //       return ("Title must contain letters");
+                              //     }
+
+                              //     return null;
+                              //   },
+                              // )
+                              
+                              
+                              
+                              
+                              
+                              )
+                              ),
 
                       //Flexible(
                         //  child: Form(key: _addDesKey, child: TextFormField())),
