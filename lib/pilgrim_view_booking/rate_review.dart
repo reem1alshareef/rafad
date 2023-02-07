@@ -22,10 +22,10 @@ class _RateReviewState extends State<RateReview> {
 
   Future review_rate() async{
     if (_review.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-      content: Text('Submitting data..')),
-    );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      // const SnackBar(
+      // content: Text('Submitting data..')),
+    // );
   }
 
   
@@ -132,8 +132,8 @@ class _RateReviewState extends State<RateReview> {
                   child: const Text('Cancel', style: TextStyle(color: Colors.white , fontSize: 20),),
               ),
             ],
-                                         ),);
-                                       },
+                                        ),);
+                                      },
                                       ),
                         MyButton(
                   color: const Color(0xFF455D83),

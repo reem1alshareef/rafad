@@ -32,8 +32,26 @@ class loginPageState extends State<LoginPage> {
   TextEditingController emailOTP = new TextEditingController();
   TextEditingController otp = new TextEditingController();
   EmailOTP myauth = EmailOTP();
-  /////////////////////////////////////////
 
+void invalidOTP(BuildContext context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext ctx) {
+          return AlertDialog(
+            title: const Text('invalid OTP'),
+            content: const Text('please recheck your email and try again'),
+            actions: [
+              TextButton(
+                  onPressed: () {
+                    // Close the dialog
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('ok'))
+            ],
+          );
+        });
+  }
+  /////////////////////////////////////////
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -281,10 +299,8 @@ class loginPageState extends State<LoginPage> {
                           height: 16,
                         ),
                         //-------------------------------------------------------------------------------
+
                         ////////////////////////////////////////////////////////////
-                        Card(
-                child: Column(
-                  children: [
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
@@ -302,11 +318,13 @@ class loginPageState extends State<LoginPage> {
                             otpType: OTPType.digitsOnly
                           );
                           if (await myauth.sendOTP() == true) {
+                            print("send");
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
                               content: Text("OTP has been sent"),
                             ));
                           } else {
+                            print("unsend");
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
                               content: Text("Oops, OTP send failed"),
@@ -314,12 +332,8 @@ class loginPageState extends State<LoginPage> {
                           }
                         },
                         child: const Text("Send OTP")),
-                  ],
-                ),
-              ),
-              Card(
-                child: Column(
-                  children: [
+
+              
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: TextFormField(
@@ -342,15 +356,15 @@ class loginPageState extends State<LoginPage> {
                           }
                         },
                         child: const Text("Verify")),
-                  ],
-                ),
-              ),
+
+                        
                         ///////////////////////////////////////////////////////////
+                        
                         CustomFormButton(
                           innerText: 'Sign in',
                           onPressed: () async {
                             final FirebaseAuth _auth = FirebaseAuth.instance;
-                            
+
       //print('reached create user');
       try {
         if (isAdmin==true) {
