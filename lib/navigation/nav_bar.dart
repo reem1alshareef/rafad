@@ -14,7 +14,7 @@ import 'package:rafad1/search/search_pilgrim.dart';
 import '../pilgrim_view_booking/pilgrimViewBooking.dart';
 import '../screens/add_description.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
-import 'package:rafad1/screens/logOutPilgrim.dart';
+import 'package:rafad1/screens/available_campaigns.dart';
 import 'package:rafad1/admin/DeleteCampaign.dart';
 import 'package:rafad1/screens/CampaignPlan.dart';
 import 'package:rafad1/screens/emergency.dart';
@@ -131,7 +131,7 @@ class _nav_campaignState extends State<nav_campaign> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.location_on),
                 label: 'Location',
-                backgroundColor: Color.fromARGB(255, 184, 20, 20)),
+                backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',
@@ -162,7 +162,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     PilgrimView(),
-    logOutPilgrim(),//SearchCampaign(),
+    availableCampaigns(),//SearchCampaign(),
     ViewCampaignPlan(),
     emergency(),
     PiligrimProfile(),
@@ -202,7 +202,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.location_on),
                 label: 'Location',
-                backgroundColor: Color.fromARGB(255, 184, 20, 20)),
+                backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',

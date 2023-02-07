@@ -8,24 +8,29 @@ import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/search/search_campaign.dart';
 import 'package:rate_in_stars/rate_in_stars.dart';
 
+//import '../search/campaign_design_widget.dart';
+import '../search/user1.dart';
 import '../view_rate_review/campaign_view_rate.dart';
 import '../widgets/my_button.dart';
+import 'availableCampaignsWidget.dart';
 
 //import 'package:rafad1/screens/LoginPage.dart';
-class logOutPilgrim extends StatefulWidget {
+class availableCampaigns extends StatefulWidget {
 //static const String screenRoute = 'logOutPilgrim.dart';
-const logOutPilgrim({super.key});
+const availableCampaigns({super.key});
 
   @override
-  _logOutPilgrimState createState() => _logOutPilgrimState();
+  _availableCampaignsState createState() => _availableCampaignsState();
 }
 
-class _logOutPilgrimState extends State<logOutPilgrim> {
+class _availableCampaignsState extends State<availableCampaigns> {
   final _firestore = FirebaseFirestore.instance;
   String? rejectionReason;
   bool isButtonActive = true;////// حق شرط البوتون انه مايسمح للحاج يضغط اكثر من مره
   final _controller = TextEditingController();
-  
+  String uid ='';
+  double average= 0;
+  double people =0;
   User? user;
 
 
@@ -74,7 +79,10 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
   @override
   Widget build(BuildContext context) {
     final Stream<QuerySnapshot> dataStream =
-        FirebaseFirestore.instance.collection('AcceptedCampaigns').snapshots();
+        FirebaseFirestore.instance
+        .collection('AcceptedCampaigns')
+        .where('status', isEqualTo: 'accepted')
+        .snapshots();
         
     return Scaffold(
 
@@ -101,20 +109,6 @@ class _logOutPilgrimState extends State<logOutPilgrim> {
         ),
         body: SingleChildScrollView(
             child: Column(children: [
-Padding(
-  padding: const EdgeInsets.only(top: 30),
-  child:   Container(
-  //margin: EdgeInsets.all(60), 
-    color: Color.fromARGB(255, 179, 181, 183),
-
-  ),
-),
-            Container(//كود الخلفيه 
-          decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: AssetImage("assests/images/background.png"),
-                  fit: BoxFit.cover),),),//كود الخلفيه لين هنا بس ما اشتغلت 
-
           Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
@@ -313,12 +307,13 @@ Padding(
                                         ),
                                       ),
                                       RatingStars(
+                                                
                                                   rating: double.parse(storedocs[i]['avrgRating']), 
                                                   editable: false,
                                                   color: Colors.amber,
                                                   iconSize: 20,
                                                   ),
-                                                  GestureDetector(
+                                                GestureDetector(
                                                     onTap: () => {
                                                         Navigator.push(
                                                         context,
@@ -328,43 +323,87 @@ Padding(
                                 },
                                 child: Text(
                                    storedocs[i]['numberOfPeople'],
-                                  style: const TextStyle(
+                                  style: TextStyle(
                                       fontSize: 15,
                                       decoration: TextDecoration.underline,
                                       fontWeight: FontWeight.bold),
-                                )),
+                                ),
+                                                  ),             
+                                                  /*MyButton(color: Color(0xFF455D83), title: 'View Rates', onPressed: ()async {
+
+                DocumentSnapshot variable = await FirebaseFirestore.instance
+                                    .collection('AcceptedCampaigns')
+                                    .doc(storedocs[i]['UID'])
+                                    .get();
+
+                                    String thisCampaignId = variable['UID'];
+                                    double thisAvrgRating = double.parse(variable['avrgRating']);
+                                    double thisNumberOfPeople = double.parse(variable['numberOfPeople']);
+                Navigator.push(
+              context, MaterialPageRoute(builder: (context) =>  ratingsList( campaignId: thisCampaignId, averageShopRating: thisAvrgRating,  numberOfRatings: thisNumberOfPeople )));
+              ;}
+              ),*/
                                       /////////////////buton
-                                      
+                                      const SizedBox(height: 10,),
+
                                       MyButton(
                                         color: const Color(0xFF455D83),
-                                        title: 'book',
-                                        onPressed:  () async  {
-                                        _firestore.collection("AcceptedCampaigns").doc(storedocs[i]['UID']).collection("pilgrimsRequest").add({
-                                                'bookStatus': 'booked',
-                                                ///'pilgrimID': FirebaseAuth.instance.currentUser?.uid,
-                                                
-                                                //User user = FirebaseAuth.instance.currentUser;
-                                               // DocumentSnapshot snap = FirebaseFirestore.instance.collection('Pilgrims-Account').doc(user.uid).get();
-                                                // String 'pilgrinID' = snap['uid'];
-                                                // String 'name' = snap['name'];
-                                                // String 'number' = snap['number'];
-                                                // String 'hajId' = snap['hajId'];
-                                                // String 'pharma' = snap['pharma'];
-                                                // 'name':  storedocsP[i]['name'],
-                                                // 'number': storedocsP[i]['number'],//   في الكولكشن حقها باقي هنا اسوي ريتريف لبيانات الحاج من الكلوكشن حقه واحطها عند الحمله
-                                                // 'hajId': storedocsP[i]['hajId'],
-                                                // 'pharma': storedocsP[i]['pharma'],
-                                              },
-                                              );
-                                        FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).update({'seatingCapacity': FieldValue.increment(-1),});
+                              title: 'book',
+                              onPressed: () async {
+                                int counter =
+                                    int.parse(storedocs[i]['seatingCapacity']) -
+                                        1;
 
-                                        _firestore.collection("Pilgrims-Account").doc(FirebaseAuth.instance.currentUser?.uid).collection("pilgrimCampaigns").add({
-                                                'bookStatus': 'pending',
-                                                'campaignID': storedocs[i]['UID'],
-                                              },
-                                              );
-                                        },
-                                       ) ////////////////buton
+                                FirebaseFirestore.instance
+                                    .collection('AcceptedCampaigns')
+                                    .doc(storedocs[i]['UID'])
+                                    .update({
+                                  'seatingCapacity': counter.toString(),
+                                });
+                                _firestore
+                                    .collection("Pilgrims-Account")
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .collection("pilgrimCampaigns")
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .set(
+                                  {
+                                    'bookStatus': 'pending',
+                                    'campaignID': storedocs[i]['UID'],
+                                    'name': storedocs[i]['name'],
+                                  },
+                                );
+
+                                DocumentSnapshot variable = await _firestore
+                                    .collection('Pilgrims-Account')
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .get();
+                                String name = variable['name'];
+                                String email = variable['email'];
+                                String number = variable['number'];
+                                String disease = variable['disease'];
+                                String hajId = variable['hajId'];
+                                String pharma = variable['pharma'];
+
+                                _firestore
+                                    .collection("AcceptedCampaigns")
+                                    .doc(storedocs[i]['UID'])
+                                    .collection("pilgrimsRequest")
+                                    .doc(FirebaseAuth.instance.currentUser?.uid)
+                                    .set(
+                                  {
+                                    'bookStatus': 'pending',
+                                    'pilgrimID':
+                                        FirebaseAuth.instance.currentUser?.uid,
+                                    'name': name,
+                                    'number': number,
+                                    'email': email,
+                                    'disease': disease,
+                                    'hajId': hajId,
+                                    'pharma': pharma
+                                  },
+                                );
+                              },
+                            ) ////////////////buton
                                 ],
                                 ),
                                 ),
