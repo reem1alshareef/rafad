@@ -15,7 +15,7 @@ import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/signUp_campaign.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:rafad1/screens/logOutPilgrim.dart';
+import 'package:rafad1/screens/available_campaigns.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
