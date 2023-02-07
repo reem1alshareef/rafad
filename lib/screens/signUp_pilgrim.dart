@@ -241,8 +241,8 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                             }
                           },
                           decoration: InputDecoration(
-                            labelText: 'pharmaceutical',
-                            hintText: 'if you are taking any pharmaceutical',
+                            labelText: 'Medication',
+                            hintText: 'if you are taking any medication',
                             isDense: true,
                           ),
                         ),

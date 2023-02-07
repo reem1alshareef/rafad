@@ -5,6 +5,7 @@ import 'package:rafad1/screens/CampaignView.dart';
 
 import 'package:rafad1/screens/CurrentLocationScreen.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
+import 'package:rafad1/screens/Report.dart';
 import 'package:rafad1/screens/adminView.dart';
 
 import 'package:rafad1/screens/notification_accept.dart';
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'haj App',
         debugShowCheckedModeBanner: false,
-        //home: logOutAdmin(),
+        // home: Report(),
         theme: ThemeData(
           primaryColor: Colors
               .white, // change it from swatch to colort and from wight to blue , for map
