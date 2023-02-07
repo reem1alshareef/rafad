@@ -14,7 +14,7 @@ import 'package:rafad1/search/search_pilgrim.dart';
 import '../pilgrim_view_booking/pilgrimViewBooking.dart';
 import '../screens/add_description.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
-import 'package:rafad1/screens/logOutPilgrim.dart';
+import 'package:rafad1/screens/available_campaigns.dart';
 import 'package:rafad1/admin/DeleteCampaign.dart';
 import 'package:rafad1/screens/CampaignPlan.dart';
 import 'package:rafad1/screens/emergency.dart';
@@ -94,7 +94,7 @@ class _nav_campaignState extends State<nav_campaign> {
     SearchPilgrim(),
     CampaignPlan(),
     emergencyList(),
-                          //AddDescription(),
+    ProfileCampaign(),
     ProfileCampaign(),     
   ];
 
@@ -129,6 +129,10 @@ class _nav_campaignState extends State<nav_campaign> {
                 label: 'Emergencies',
                 backgroundColor: Color.fromARGB(255, 184, 20, 20)),
             BottomNavigationBarItem(
+                icon: Icon(Icons.location_on),
+                label: 'Location',
+                backgroundColor: Color(0xFF455D83)),
+            BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',
                 backgroundColor: Color(0xFF455D83)),
@@ -158,9 +162,10 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     PilgrimView(),
-    SearchCampaign(),
+    availableCampaigns(),//SearchCampaign(),
     ViewCampaignPlan(),
     emergency(),
+    PiligrimProfile(),
     PiligrimProfile()
   ];
 
@@ -194,6 +199,10 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
                 icon: Icon(Icons.emergency_share_sharp),
                 label: 'Emergency',
                 backgroundColor: Color.fromARGB(255, 184, 20, 20)),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.location_on),
+                label: 'Location',
+                backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',

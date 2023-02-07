@@ -64,7 +64,7 @@ initSearchingPilgrim(String textEntered){
               )
             ),
           ),
-          automaticallyImplyLeading: false,
+          //automaticallyImplyLeading: false,
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
           actions: const [

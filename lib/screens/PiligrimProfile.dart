@@ -112,6 +112,10 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                              String email = docCustomer['email'];
                              String password = docCustomer['password'];
                              
+                             await FirebaseFirestore.instance
+                             .collection('Pilgrims-Account')
+                             .doc(FirebaseAuth.instance.currentUser!.uid)
+                             .delete();
                 
 
                           FirebaseAuth.instance.currentUser?.delete();
