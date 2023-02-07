@@ -117,15 +117,15 @@ class _nav_campaignState extends State<nav_campaign> {
                 label: 'Home',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: 'Search',
+                icon: Icon(Icons.people_outline),
+                label: 'Pilgrims',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_today_rounded),
                 label: 'Plan',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.emergency_share_sharp),
+                icon: Icon(Icons.health_and_safety_outlined),
                 label: 'Emergencies',
                 backgroundColor: Color.fromARGB(255, 184, 20, 20)),
             BottomNavigationBarItem(
@@ -133,7 +133,7 @@ class _nav_campaignState extends State<nav_campaign> {
                 label: 'Location',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.account_circle_outlined),
                 label: 'Profile',
                 backgroundColor: Color(0xFF455D83)),
             
@@ -188,15 +188,15 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
                 label: 'Home',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: 'Search',
+                icon: Icon(Icons.business),
+                label: 'Campaigns',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_today_rounded),
                 label: 'Plan',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.emergency_share_sharp),
+                icon: Icon(Icons.health_and_safety_outlined),
                 label: 'Emergency',
                 backgroundColor: Color.fromARGB(255, 184, 20, 20)),
             BottomNavigationBarItem(
@@ -204,7 +204,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
                 label: 'Location',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.person),
+                icon: Icon(Icons.account_circle_outlined),
                 label: 'Profile',
                 backgroundColor: Color(0xFF455D83)),
           ],
