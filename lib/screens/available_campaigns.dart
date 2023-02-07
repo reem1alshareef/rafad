@@ -12,7 +12,7 @@ import 'package:rate_in_stars/rate_in_stars.dart';
 import '../search/user1.dart';
 import '../view_rate_review/campaign_view_rate.dart';
 import '../widgets/my_button.dart';
-import 'availableCampaignsWidget.dart';
+
 
 //import 'package:rafad1/screens/LoginPage.dart';
 class availableCampaigns extends StatefulWidget {
