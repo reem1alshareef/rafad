@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
+import 'package:rafad1/pilgrim_view_booking/report.dart';
 
 import '../screens/welcome_screen.dart';
 import '../widgets/my_button.dart';
@@ -288,7 +289,7 @@ class _RateReviewState extends State<RateReview> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        const WelcomeScreen()));//Report()
+                                                        const Report()));//Report()
                                             },
                                       child: Column(
                                               children: const <Widget>[
