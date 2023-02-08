@@ -348,10 +348,12 @@ void invalidOTP(BuildContext context) {
                                 .showSnackBar(const SnackBar(
                               content: Text("OTP is verified"),
                             ));
+                            print("OTP is verified");
                           } else {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
                               content: Text("Invalid OTP"),
+
                             ));
                           }
                         },
