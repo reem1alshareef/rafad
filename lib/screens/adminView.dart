@@ -211,6 +211,26 @@ class _ViewState extends State<View> {
                                                     )
                                                   ]),
                                                 ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          bottom: 10),
+                                                  child: Column(children: [
+                                                    Text(
+                                                      'Campaign\'s Seating Capacity:  ',
+                                                      style: TextStyle(
+                                                          color:
+                                                              Color(0xFF455D83),
+                                                          fontWeight:
+                                                              FontWeight.w500),
+                                                    ),
+                                                    Text(
+                                                      storedocs[i]['description'],
+                                                      style: TextStyle(
+                                                          fontSize: 12),
+                                                    )
+                                                  ]),
+                                                ),
                                               ]),
                                             ]),
                                           ),
@@ -294,7 +314,6 @@ class _ViewState extends State<View> {
                                                   .set({ 
                                                     'UID': storedocs[i]['UID'],// To add it to the accepted collection
                                                 'status': 'accepted',
-                                                'description': 'none',
                                                 'name': storedocs[i]
                                                     ['nameCampaign'],
                                                 'email': storedocs[i]['emailC'],
@@ -306,6 +325,12 @@ class _ViewState extends State<View> {
                                                     ['phoneNumberC'],
                                                 'seatingCapacity': storedocs[i]
                                                     ['capacity'],
+                                                'description': storedocs[i]
+                                                    ['description'],
+                                                'password': storedocs[i]['password'],
+                                                'numberOfRates': '0',
+                                                'numberOfPeople': '0',
+                                                'avrgRate': '0',
                                               });
                                                               });
                                                             },

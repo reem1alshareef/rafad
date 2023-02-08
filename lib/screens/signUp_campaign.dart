@@ -26,6 +26,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
   String? address;
   String? capacity;
   String? password;
+  String? description;
   final _signupFormKey = GlobalKey<FormState>();
 
   @override
@@ -301,6 +302,47 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                         const SizedBox(
                           height: 16,
                         ),
+                        TextFormField(
+                          maxLines: 3,
+                          maxLength: 200,
+                          
+                          inputFormatters: [
+                            FilteringTextInputFormatter.deny
+                            (RegExp(r"\s\s"),)
+                          ],
+                          
+                          textInputAction: TextInputAction.done,
+                          keyboardType: TextInputType.text,
+                          onChanged: (value) {
+                            setState(() {
+                              description = value;
+                            });
+                          },
+                          decoration: const InputDecoration(
+                            labelText: 'Description',
+                            hintText: 'Your description',
+                            isDense: true,
+                            ),
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
+                          validator: (textValue) {
+                            if (textValue == null || textValue.isEmpty) {
+                              return 'Description is required!';
+                            }
+                            if(textValue.length<20){
+                              return 'Describtion should be 20 characters at least';
+                            }
+                            
+                            //return null;
+                            if(textValue.trim().isEmpty){
+                            return "Description cannot be empty.";
+                            }
+
+                            return null;
+                          }
+                           ),
+                    const SizedBox(
+                          height: 20,
+                        ),
                         //-------------------------------------------------------------------------------
                         CustomFormButton(
                           innerText: 'Sign up',
@@ -349,6 +391,8 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                                 'commercialID': commercialID,
                                 'address': address,
                                 'capacity': capacity,
+                                'description': description,
+                                'password': password,
                               });
                             }
                           },
