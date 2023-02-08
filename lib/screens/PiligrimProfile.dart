@@ -224,16 +224,10 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                 );
 
                   }),
-             // ignore: prefer_const_constructors
-             ButtonBar(
-                  alignment:
-                      MainAxisAlignment.spaceAround,
-                  buttonHeight: 52.0,
-                  buttonMinWidth: 90.0,
-                  children: <Widget>[
-                    TextButton(
-                      style: TextButton.styleFrom(shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2.0)),)),
-                      onPressed: () {
+               MyButton(
+                  color: const Color(0xFF455D83),
+                  title: 'Update Profile',
+                  onPressed: () {
                         showDialog(
                              context: context,
                             builder:
@@ -309,25 +303,9 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                           ],
                         );
                         }
-                        );
-                        
-                      },
-
-
-
-                      child: Row(
-                        children: const <Widget>[
-                          Icon(Icons.cancel_rounded, color: Colors.redAccent),
-                          Padding(padding: EdgeInsets.symmetric(vertical: 2.0),),
-                          Text(' Delete account'),
-                        ],
-                      ),
-
-
-
-                    ),
-                  ],
-                ),
+                        );}
+                  ),
+             // ignore: prefer_const_constructors
                  
             ],
           ),
