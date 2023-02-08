@@ -330,7 +330,7 @@ class _ViewState extends State<View> {
                                                 'password': storedocs[i]['password'],
                                                 'numberOfRates': '0',
                                                 'numberOfPeople': '0',
-                                                'avrgRate': '0',
+                                                'avrgRating': '0',
                                               });
                                                               });
                                                             },
