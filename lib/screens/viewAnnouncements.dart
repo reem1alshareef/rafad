@@ -23,7 +23,7 @@ class _viewAnnouncements extends State<viewAnnouncements> {
     
     Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
         .collection("AcceptedCampaigns")
-        .doc()
+        .doc('4a8v9veM6igptqvtBdq8cZvuczp2')
         .collection("Announcements")
         .snapshots();
     return Scaffold(
