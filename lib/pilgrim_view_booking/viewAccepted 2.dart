@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
+import '../screens/Chat_screen.dart';
 import '../widgets/my_button.dart';
 
 class viewAccepted extends StatefulWidget {
@@ -51,6 +52,14 @@ class _viewAcceptedState extends State<viewAccepted> {
         .snapshots();
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton (
+  backgroundColor:  Color.fromARGB(255, 12, 92, 119),
+  tooltip: 'Chat',
+  onPressed: () { Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const Chat_screen()),);},
+  child: Image.asset('assests/images/chat.png', height: 35),
+),
         body: SingleChildScrollView(
             child: Column(children: [
       Padding(

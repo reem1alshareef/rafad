@@ -21,6 +21,7 @@ import 'package:rafad1/screens/CurrentLocationScreen.dart';
 
 import 'package:rafad1/screens/emergencyList.dart';
 
+import 'Chat_screen.dart';
 import 'CurrentLocationScreen.dart';
 
 class emergency extends StatefulWidget {
@@ -46,7 +47,16 @@ class _emergencyState extends State<emergency> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton (
+  backgroundColor:  Color.fromARGB(255, 12, 92, 119),
+  tooltip: 'Chat',
+  onPressed: () { Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const Chat_screen()),);},
+  child: Image.asset('assests/images/chat.png', height: 35),
+),
       appBar: AppBar(
+        
         automaticallyImplyLeading: false,
         title: Text('sending emerency request'),
         backgroundColor: Color.fromARGB(255, 184, 20, 20),

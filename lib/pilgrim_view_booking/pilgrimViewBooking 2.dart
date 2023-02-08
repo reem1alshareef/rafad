@@ -18,9 +18,10 @@ class PilgrimView extends StatelessWidget {
     return DefaultTabController(
         length: 3,
         child: Scaffold(
+          
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: const Color(0xFF455D83),
+            backgroundColor:  Color.fromARGB(255, 12, 92, 119),
             title: const Text('My Bookings'),
             // actions: <Widget>[
             //   IconButton(

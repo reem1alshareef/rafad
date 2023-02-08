@@ -45,7 +45,7 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
           ),
         ],
         title: Text("Piligrim Profile"),
-        backgroundColor: const Color(0xFF455D83),
+        backgroundColor:  Color.fromARGB(255, 12, 92, 119),
         elevation: 0,
       ),
       body: Padding(

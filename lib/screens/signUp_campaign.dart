@@ -35,7 +35,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
       child: Scaffold(
         appBar: AppBar(
           title: Text("sign up as campaign"),
-          backgroundColor: const Color(0xFF455D83),
+          backgroundColor:Color.fromARGB(255, 12, 92, 119),
           elevation: 0,
         ), //عشان سهم رجوع
 

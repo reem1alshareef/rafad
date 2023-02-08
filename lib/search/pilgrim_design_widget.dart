@@ -61,8 +61,7 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                                       const Text(
                                                         'Email:',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
+                                                            color: Color.fromARGB(255, 12, 92, 119),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
@@ -86,8 +85,7 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                                       const Text(
                                                         'Pilgrim ID:',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
+                                                            color:Color.fromARGB(255, 12, 92, 119),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
@@ -111,8 +109,7 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                                       const Text(
                                                         'Pharmaceutical:',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
+                                                            color: Color.fromARGB(255, 12, 92, 119),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
@@ -136,8 +133,7 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                                       const Text(
                                                         'Disease:',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
+                                                            color: Color.fromARGB(255, 12, 92, 119),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
@@ -161,8 +157,7 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                                       const Text(
                                                         'Haj ID:',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
+                                                            color: Color.fromARGB(255, 12, 92, 119),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
@@ -186,8 +181,7 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                                       const Text(
                                                         'Phone:',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
+                                                            color: Color.fromARGB(255, 12, 92, 119),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),

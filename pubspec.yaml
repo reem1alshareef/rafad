@@ -39,6 +39,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   screens: ^2.5.0
+  modal_progress_hud_nsn: ^0.1.0-nullsafety-1
   email_validator: ^2.1.17
   firebase_storage: ^11.0.8
   firebase_auth: ^4.2.1
@@ -53,6 +54,7 @@ dependencies:
   flutter_polyline_points: ^1.0.0
   google_maps_flutter: ^2.2.3
   location: ^4.4.0
+  
   flutter_svg: ^1.1.6
   persistent_bottom_nav_bar: ^5.0.2
   flutter_rating_bar: ^4.0.1

@@ -55,16 +55,16 @@ class _nav_adminState extends State<nav_admin> {
             BottomNavigationBarItem(
               icon: Icon(Icons.remove_moderator_outlined),
               label: 'Campaigns',
-              backgroundColor: Color(0xFF455D83),
+              backgroundColor: Color.fromARGB(255, 12, 92, 119),
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_remove),
                 label: 'Pilgrims',
-                backgroundColor: Color(0xFF455D83)),
+                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.add_moderator_outlined),
                 label: 'Requests',
-                backgroundColor: Color(0xFF455D83)),
+                backgroundColor:Color.fromARGB(255, 12, 92, 119)),
           ],
           type: BottomNavigationBarType.shifting,
           currentIndex: _selectedIndex,
@@ -115,15 +115,15 @@ class _nav_campaignState extends State<nav_campaign> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Home',
-                backgroundColor: Color(0xFF455D83)),
+                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.search),
                 label: 'Search',
-                backgroundColor: Color(0xFF455D83)),
+                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_today_rounded),
                 label: 'Plan',
-                backgroundColor: Color(0xFF455D83)),
+                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.emergency_share_sharp),
                 label: 'Emergencies',
@@ -131,7 +131,7 @@ class _nav_campaignState extends State<nav_campaign> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',
-                backgroundColor: Color(0xFF455D83)),
+                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
             
           ],
           type: BottomNavigationBarType.shifting,
@@ -181,15 +181,15 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Home',
-                backgroundColor: Color(0xFF455D83)),
+                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.search),
                 label: 'Search',
-                backgroundColor: Color(0xFF455D83)),
+                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_today_rounded),
                 label: 'Plan',
-                backgroundColor: Color(0xFF455D83)),
+                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.emergency_share_sharp),
                 label: 'Emergency',
@@ -197,7 +197,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile',
-                backgroundColor: Color(0xFF455D83)),
+                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
           ],
           type: BottomNavigationBarType.shifting,
           currentIndex: _selectedIndex,

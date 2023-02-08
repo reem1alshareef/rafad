@@ -17,7 +17,7 @@ class CampaignView extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: const Color(0xFF455D83),
+            backgroundColor:  Color.fromARGB(255, 12, 92, 119),
             title: Text('Pilgrims Bookings'),
             // actions: <Widget>[
             //   IconButton(

@@ -5,6 +5,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 
+import '../screens/Chat_screen.dart';
+
 //import 'package:rafad1/screens/LoginPage.dart';
 class viewPending extends StatefulWidget {
   //static const String screenRoute = 'welcome_screen';
@@ -105,6 +107,14 @@ print (element. data());l
 });
 ]);*/
     return Scaffold(
+      floatingActionButton: FloatingActionButton (
+  backgroundColor:  Color.fromARGB(255, 12, 92, 119),
+  tooltip: 'Chat',
+  onPressed: () { Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const Chat_screen()),);},
+  child: Image.asset('assests/images/chat.png', height: 35),
+),
         /*appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Booking Requests'),

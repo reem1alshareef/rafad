@@ -29,7 +29,7 @@ class _ViewState extends State<View> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Registration requests'),
-          backgroundColor: const Color(0xFF455D83),
+          backgroundColor: Color.fromARGB(255, 12, 92, 119),
           elevation: 0,
           actions: <Widget>[
             IconButton(

@@ -74,8 +74,7 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                                       const Text(
                                                         'Email:',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
+                                                            color:Color.fromARGB(255, 12, 92, 119),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
@@ -99,8 +98,7 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                                       const Text(
                                                         'Address:',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
+                                                            color:Color.fromARGB(255, 12, 92, 119),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
@@ -124,8 +122,7 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                                       const Text(
                                                         'Commercial ID:',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
+                                                            color: Color.fromARGB(255, 12, 92, 119),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
@@ -149,8 +146,7 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                                       const Text(
                                                         'Phone Number:',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
+                                                            color:Color.fromARGB(255, 12, 92, 119),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
@@ -174,8 +170,7 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                                       const Text(
                                                         'Seating Capacity:',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
+                                                            color: Color.fromARGB(255, 12, 92, 119),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
@@ -199,8 +194,7 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                                       const Text(
                                                         'Description:',
                                                         style: TextStyle(
-                                                            color: Color(
-                                                                0xFF455D83),
+                                                            color: Color.fromARGB(255, 12, 92, 119),
                                                             fontWeight:
                                                                 FontWeight
                                                                     .w500),
@@ -245,7 +239,7 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                 ),
                                                   ),             
                                                 MyButton(
-                              color: const Color(0xFF455D83),
+                              color: const Color.fromARGB(255, 12, 92, 119),
                               title: 'book',
                               onPressed: () async {
                                 int counter =

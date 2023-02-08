@@ -61,7 +61,9 @@ class _CampaignAddAnouncement extends State<CampaignAddAnouncement> {
     //int theHour;
 
     return Scaffold(
-      appBar: AppBar(title: Text(
+      appBar: AppBar(
+        backgroundColor:  Color.fromARGB(255, 12, 92, 119),
+        title: Text(
                       'Announcements',
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 34),

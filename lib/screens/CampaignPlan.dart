@@ -166,7 +166,7 @@ class _CampaignPlan extends State<CampaignPlan> {
                         padding: EdgeInsets.all(0.1),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(100),
-                            color: Color.fromARGB(255, 125, 148, 184)),
+                            color:  Color.fromARGB(255, 12, 92, 119)),
                         child: IconButton(
                           //start time icon
                           icon: const Icon(Icons.timer),

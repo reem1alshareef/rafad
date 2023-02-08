@@ -2,11 +2,10 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:rafad1/firebase_options.dart';
 import 'package:rafad1/screens/CampaignView.dart';
-
+import 'package:rafad1/screens/Chat_screen.dart';
 import 'package:rafad1/screens/CurrentLocationScreen.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
-
 import 'package:rafad1/screens/notification_accept.dart';
 import 'package:rafad1/screens/signUP_pilgrim.dart';
 import 'package:rafad1/screens/welcome_admin.dart';
@@ -59,6 +58,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors
               .white, // change it from swatch to colort and from wight to blue , for map
         ),
+        
         initialRoute: WelcomeScreen.screenRoute,
         routes: {
           WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
@@ -68,6 +68,7 @@ class MyApp extends StatelessWidget {
           //logOutPilgrim.screenRoute: (context) => logOutPilgrim(),
           //logOutCampaign.screenRoute: (context) => logOutCampaign(),
           LoginPage.screenRoute: (context) => const LoginPage(),
-        });
+            }
+       );
   }
 }
