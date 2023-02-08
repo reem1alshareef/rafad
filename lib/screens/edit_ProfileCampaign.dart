@@ -48,7 +48,7 @@ class _edit_CampaignState extends State<edit_Campaign> {
       setState(() {
         map = value.data()!;
       });
-      print(map["name"]);
+      print(map["email"]);
 
       print('00000000000000000000000000000000000000000000000000');
     }).catchError((onError) {
@@ -95,6 +95,8 @@ class _edit_CampaignState extends State<edit_Campaign> {
                             FilteringTextInputFormatter.allow(
                                 RegExp("[a-zA-Z- -]"))
                           ],
+
+                           initialValue: map['email'].toString(),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             setState(() {
@@ -103,7 +105,7 @@ class _edit_CampaignState extends State<edit_Campaign> {
                           },
                         //controller: razan,
 
-                         initialValue: map['name'], //initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+                         //initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (textValue) {
 
                              if (!RegExp(r'^[a-z A-Z]+$').hasMatch(textValue!)) {
