@@ -103,7 +103,7 @@ class _edit_CampaignState extends State<edit_Campaign> {
                           },
                         //controller: razan,
 
-                         initialValue: cname, //initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+                         initialValue: map['name'], //initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (textValue) {
 
                              if (!RegExp(r'^[a-z A-Z]+$').hasMatch(textValue!)) {

@@ -13,9 +13,9 @@ import 'package:rafad1/screens/Card.dart';
 
 // our data
 
-String  name = 'naaamee';
-String hajId  ="" ;
-String email = 'TextEditingController()' ;
+String name = 'naaamee';
+String hajId = "";
+String email = 'TextEditingController()';
 String number = 'TextEditingController()'; // not real number :)
 String address = 'TextEditingController()';
 String description = 'TextEditingController()';
@@ -40,16 +40,13 @@ class PiligrimProfile extends StatefulWidget {
 }
 
 void getData() async {
+  User? user = FirebaseAuth.instance.currentUser;
+  final DocumentSnapshot userDoc = await FirebaseFirestore.instance
+      .collection("Pilgrims-Account")
+      .doc(FirebaseAuth.instance.currentUser?.uid)
+      .get();
 
-User? user = FirebaseAuth.instance.currentUser; 
-final DocumentSnapshot userDoc = await FirebaseFirestore
-.instance.collection("Pilgrims-Account")
-.doc(FirebaseAuth.instance.currentUser?.uid)
-.get();
-
-
-email = userDoc.get('email');
-
+  email = userDoc.get('email');
 }
 
 class _PiligrimProfileState extends State<PiligrimProfile> {
@@ -139,7 +136,7 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
 //String description  = map['description'] ;
 
     return Scaffold(
-       appBar: AppBar(
+        appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Profile View'),
           backgroundColor: const Color(0xFF455D83),
@@ -158,8 +155,8 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
           ],
         ),
         backgroundColor: Color.fromARGB(255, 139, 177, 195),
-        body: SafeArea(
-          minimum: const EdgeInsets.only(top: 50),
+        body: SingleChildScrollView(
+          // const EdgeInsets.only(top: 50),
           child: Column(
             children: <Widget>[
               Text(
@@ -192,8 +189,7 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
               InfoCard(
                   text: map['name'],
                   icon: Icons.account_circle_rounded,
-                  onPressed: () async {
-                   }),
+                  onPressed: () async {}),
               InfoCard(
                   text: map['hajId'],
                   icon: Icons.badge,
@@ -203,7 +199,9 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                   icon: Icons.phone,
                   onPressed: () async {}),
               InfoCard(
-                  text: map['email'], icon: Icons.email, onPressed: () async {}),
+                  text: map['email'],
+                  icon: Icons.email,
+                  onPressed: () async {}),
               InfoCard(
                   text: map['disease'],
                   icon: Icons.add_location_alt_rounded,
@@ -217,118 +215,107 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                   color: const Color(0xFF455D83),
                   title: 'Update Profile',
                   onPressed: () async {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (builder){
-                    return edit_Pilgrim();
-                  })
-                );
-
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (builder) {
+                      return edit_Pilgrim();
+                    }));
                   }),
-             // ignore: prefer_const_constructors
-             ButtonBar(
-                  alignment:
-                      MainAxisAlignment.spaceAround,
-                  buttonHeight: 52.0,
-                  buttonMinWidth: 90.0,
-                  children: <Widget>[
-                    TextButton(
-                      style: TextButton.styleFrom(shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2.0)),)),
-                      onPressed: () {
-                        showDialog(
-                             context: context,
-                            builder:
-                                (BuildContext context) {
-                              return AlertDialog(
-                          title: Row(
-                            children:  const [
-                              Text('Delete '),
-                              Text(' account'),
-                            ],
-                          ),
-                          content: 
-                            
-                              Text('This action cannot be undone, Are you sure you want to delete the account?'),
-                            
-                          
-                          actions: <Widget>[
-                            TextButton(
+              // ignore: prefer_const_constructors
+              ButtonBar(
+                alignment: MainAxisAlignment.spaceAround,
+                buttonHeight: 52.0,
+                buttonMinWidth: 90.0,
+                children: <Widget>[
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(2.0)),
+                    )),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Row(
+                                children: const [
+                                  Text('Delete '),
+                                  Text(' account'),
+                                ],
+                              ),
+                              content: Text(
+                                  'This action cannot be undone, Are you sure you want to delete the account?'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () async {
+                                    //firebase
+                                    try {
+                                      setState(() async {
+                                        DocumentSnapshot docCustomer =
+                                            await FirebaseFirestore.instance
+                                                .collection('Pilgrims-Account')
+                                                .doc(FirebaseAuth
+                                                    .instance.currentUser!.uid)
+                                                .get();
 
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Cancel'),
-                            ),
-                            TextButton(
-                              onPressed: () async {
-                                
-                                //firebase
-                                try{
-                                  setState(
-                                            () async {
-                                              DocumentSnapshot docCustomer = await FirebaseFirestore.instance
-                              .collection('Pilgrims-Account')
-                              .doc(FirebaseAuth.instance.currentUser!.uid)
-                              .get();
+                                        String email = docCustomer['email'];
+                                        String password =
+                                            docCustomer['password'];
 
-                             String email = docCustomer['email'];
-                             String password = docCustomer['password'];
-                             
+                                        FirebaseAuth.instance.currentUser
+                                            ?.delete();
 
-                          FirebaseAuth.instance.currentUser?.delete();
+                                        User? user = await FirebaseAuth
+                                            .instance.currentUser;
 
-                                              User? user = await FirebaseAuth.instance.currentUser;
-                                              
-                                              UserCredential authResult= await user!.reauthenticateWithCredential(
-                                                EmailAuthProvider.credential(
-                                                email: email,
-                                                password: password,
-                                              ),);
+                                        UserCredential authResult = await user!
+                                            .reauthenticateWithCredential(
+                                          EmailAuthProvider.credential(
+                                            email: email,
+                                            password: password,
+                                          ),
+                                        );
 
-                                              authResult.user!.delete();
+                                        authResult.user!.delete();
 
-                                            // ignore: use_build_context_synchronously
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const WelcomeScreen()));
+                                        // ignore: use_build_context_synchronously
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const WelcomeScreen()));
+                                      });
+                                      //Navigator.pop(context, 'Delete');
 
+                                    } catch (e) {
+                                      //e.hashCode;
+                                      //print(e.runtimeType);
 
-                                        });
-                                  //Navigator.pop(context, 'Delete');
-                                  
-                                } catch(e){
-                                  //e.hashCode;
-                                  //print(e.runtimeType);
-
-                                }
-
-                              },
-                              child: const Text('Delete'),
-                            ),
-                          ],
-                        );
-                        }
-                        );
-                        
-                      },
-
-
-
-                      child: Row(
-                        children: const <Widget>[
-                          Icon(Icons.cancel_rounded, color: Colors.redAccent),
-                          Padding(padding: EdgeInsets.symmetric(vertical: 2.0),),
-                          Text(' Delete account'),
-                        ],
-                      ),
-
-
-
+                                    }
+                                  },
+                                  child: const Text('Delete'),
+                                ),
+                              ],
+                            );
+                          });
+                    },
+                    child: Row(
+                      children: const <Widget>[
+                        Icon(Icons.cancel_rounded, color: Colors.redAccent),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 2.0),
+                        ),
+                        Text(' Delete account'),
+                      ],
                     ),
-                  ],
-                ),
-                 
+                  ),
+                ],
+              ),
             ],
           ),
         ));
