@@ -90,12 +90,11 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                           
                           actions: <Widget>[
                             TextButton(
-                              style: TextButton.styleFrom(
-                    backgroundColor: Colors.red,),
+
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text('Cancel', style: TextStyle(color: Colors.white , fontSize: 20),),
+                  child: const Text('Cancel'),
                             ),
                             TextButton(
                               onPressed: () async {
@@ -112,11 +111,6 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                              String email = docCustomer['email'];
                              String password = docCustomer['password'];
                              
-                             await FirebaseFirestore.instance
-                             .collection('Pilgrims-Account')
-                             .doc(FirebaseAuth.instance.currentUser!.uid)
-                             .delete();
-                
 
                           FirebaseAuth.instance.currentUser?.delete();
 

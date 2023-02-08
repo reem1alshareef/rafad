@@ -323,26 +323,12 @@ class _availableCampaignsState extends State<availableCampaigns> {
                                 },
                                 child: Text(
                                    storedocs[i]['numberOfPeople'],
-                                  style: TextStyle(
-                                      fontSize: 15,
+                                  style: const TextStyle(
+                                      fontSize: 20.0,
                                       decoration: TextDecoration.underline,
                                       fontWeight: FontWeight.bold),
                                 ),
                                                   ),             
-                                                  /*MyButton(color: Color(0xFF455D83), title: 'View Rates', onPressed: ()async {
-
-                DocumentSnapshot variable = await FirebaseFirestore.instance
-                                    .collection('AcceptedCampaigns')
-                                    .doc(storedocs[i]['UID'])
-                                    .get();
-
-                                    String thisCampaignId = variable['UID'];
-                                    double thisAvrgRating = double.parse(variable['avrgRating']);
-                                    double thisNumberOfPeople = double.parse(variable['numberOfPeople']);
-                Navigator.push(
-              context, MaterialPageRoute(builder: (context) =>  ratingsList( campaignId: thisCampaignId, averageShopRating: thisAvrgRating,  numberOfRatings: thisNumberOfPeople )));
-              ;}
-              ),*/
                                       /////////////////buton
                                       const SizedBox(height: 10,),
 

@@ -127,6 +127,7 @@ class _RateReviewState extends State<RateReview> {
                                         ),
                                       ),
                                       Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
                                       children: <Widget>[
                                       ButtonBar(
                                         alignment:

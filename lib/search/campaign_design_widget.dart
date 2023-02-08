@@ -238,8 +238,8 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                 },
                                 child: Text(
                                    widget.model!.numberOfPeople!,
-                                  style: TextStyle(
-                                      fontSize: 15,
+                                  style: const TextStyle(
+                                      fontSize: 20.0,
                                       decoration: TextDecoration.underline,
                                       fontWeight: FontWeight.bold),
                                 ),
