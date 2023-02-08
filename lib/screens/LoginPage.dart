@@ -32,25 +32,6 @@ class loginPageState extends State<LoginPage> {
   TextEditingController emailOTP = new TextEditingController();
   TextEditingController otp = new TextEditingController();
   EmailOTP myauth = EmailOTP();
-
-void invalidOTP(BuildContext context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext ctx) {
-          return AlertDialog(
-            title: const Text('invalid OTP'),
-            content: const Text('please recheck your email and try again'),
-            actions: [
-              TextButton(
-                  onPressed: () {
-                    // Close the dialog
-                    Navigator.of(context).pop();
-                  },
-                  child: const Text('ok'))
-            ],
-          );
-        });
-  }
   /////////////////////////////////////////
   @override
   Widget build(BuildContext context) {
@@ -301,63 +282,63 @@ void invalidOTP(BuildContext context) {
                         //-------------------------------------------------------------------------------
 
                         ////////////////////////////////////////////////////////////
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                          controller: emailOTP,
-                          decoration:
-                              const InputDecoration(hintText: "enter valid email to verify")),
-                    ),
-                    ElevatedButton(
-                        onPressed: () async {
-                          myauth.setConfig(
-                            appEmail: "reemsh65@gmail.com", 
-                            appName: "Email OTP",
-                            userEmail: emailOTP.text,
-                            otpLength: 6,
-                            otpType: OTPType.digitsOnly
-                          );
-                          if (await myauth.sendOTP() == true) {
-                            print("send");
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text("OTP has been sent"),
-                            ));
-                          } else {
-                            print("unsend");
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text("Oops, OTP send failed"),
-                            ));
-                          }
-                        },
-                        child: const Text("Send OTP")),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: TextFormField(
+                    //       controller: emailOTP,
+                    //       decoration:
+                    //           const InputDecoration(hintText: "enter valid email to verify")),
+                    // ),
+                    // ElevatedButton(
+                    //     onPressed: () async {
+                    //       myauth.setConfig(
+                    //         appEmail: "reemsh65@gmail.com", 
+                    //         appName: "Email OTP",
+                    //         userEmail: emailOTP.text,
+                    //         otpLength: 6,
+                    //         otpType: OTPType.digitsOnly
+                    //       );
+                    //       if (await myauth.sendOTP() == true) {
+                    //         print("send");
+                    //         ScaffoldMessenger.of(context)
+                    //             .showSnackBar(const SnackBar(
+                    //           content: Text("OTP has been sent"),
+                    //         ));
+                    //       } else {
+                    //         print("unsend");
+                    //         ScaffoldMessenger.of(context)
+                    //             .showSnackBar(const SnackBar(
+                    //           content: Text("Oops, OTP send failed"),
+                    //         ));
+                    //       }
+                    //     },
+                    //     child: const Text("Send OTP")),
 
               
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: TextFormField(
-                          controller: otp,
-                          decoration:
-                              const InputDecoration(hintText: "Enter OTP")),
-                    ),
-                    ElevatedButton(
-                        onPressed: () async {
-                          if (await myauth.verifyOTP(otp: otp.text) == true) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text("OTP is verified"),
-                            ));
-                            print("OTP is verified");
-                          } else {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text("Invalid OTP"),
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: TextFormField(
+                    //       controller: otp,
+                    //       decoration:
+                    //           const InputDecoration(hintText: "Enter OTP")),
+                    // ),
+                    // ElevatedButton(
+                    //     onPressed: () async {
+                    //       if (await myauth.verifyOTP(otp: otp.text) == true) {
+                    //         ScaffoldMessenger.of(context)
+                    //             .showSnackBar(const SnackBar(
+                    //           content: Text("OTP is verified"),
+                    //         ));
+                    //         print("OTP is verified");
+                    //       } else {
+                    //         ScaffoldMessenger.of(context)
+                    //             .showSnackBar(const SnackBar(
+                    //           content: Text("Invalid OTP"),
 
-                            ));
-                          }
-                        },
-                        child: const Text("Verify")),
+                    //         ));
+                    //       }
+                    //     },
+                    //     child: const Text("Verify")),
 
                         
                         ///////////////////////////////////////////////////////////
@@ -365,73 +346,108 @@ void invalidOTP(BuildContext context) {
                         CustomFormButton(
                           innerText: 'Sign in',
                           onPressed: () async {
-                            final FirebaseAuth _auth = FirebaseAuth.instance;
+                            EmailOTP myauth = EmailOTP();
+                            final FirebaseAuth auth = FirebaseAuth.instance;
+                            auth.signInWithEmailAndPassword(
+                            email: email.toString(), password: password.toString());
+                            myauth.setConfig(
+                            appEmail: "me@rohitchouhan.com",
+                            appName: "Email OTP",
+                            userEmail: email,
+                            otpLength: 6,
+                            otpType: OTPType.digitsOnly
+                            );
+        //                     TextEditingController _textFieldController = TextEditingController();
+                            
+        //                   return showDialog(
+        // context: context,
+        // builder: (context) {
+        //   return AlertDialog(
+        //     title: Text('OTP has been sent successfully please check your email'),
+        //     content: TextField(
+        //       controller: _textFieldController,
+        //       textInputAction: TextInputAction.go,
+        //       keyboardType: TextInputType.numberWithOptions(),
+        //       decoration: InputDecoration(hintText: "Enter the OTP here"),
+        //     ),
+        //     actions: <Widget>[
+        //       new ElevatedButton(
+        //         child: new Text('Submit'),
+        //         onPressed: () async {
 
-      //print('reached create user');
-      try {
-        if (isAdmin==true) {
-          //in case of an admin
-          isAdmin = false;
-          await _auth.signInWithEmailAndPassword(
-              email: email.toString(), password: password.toString());
-          email = '';
-          password = '';
-          //Navigator.push(
-          //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => nav_admin()));
+        //         },
+        //       )
+        //     ],
+        //   );
+        // });
+              
+                            
+    //                         final FirebaseAuth _auth = FirebaseAuth.instance;
 
-          ///home_screen_owner
-        } else{
-          await _auth.signInWithEmailAndPassword(
-              email: email.toString(), password: password.toString());
+    //   //print('reached create user');
+    //   try {
+    //     if (isAdmin==true) {
+    //       //in case of an admin
+    //       isAdmin = false;
+    //       await _auth.signInWithEmailAndPassword(
+    //           email: email.toString(), password: password.toString());
+    //       email = '';
+    //       password = '';
+    //       //Navigator.push(
+    //       //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
+    //       Navigator.push(
+    //           context, MaterialPageRoute(builder: (context) => nav_admin()));
+
+    //       ///home_screen_owner
+    //     } else{
+    //       await _auth.signInWithEmailAndPassword(
+    //           email: email.toString(), password: password.toString());
 
 
 
 
-          await FirebaseFirestore.instance
-    .collection('AcceptedCampaigns')
-    .doc(FirebaseAuth.instance.currentUser?.uid)
-    .get()
-    .then((DocumentSnapshot documentSnapshot) {
-      if (documentSnapshot.exists) {
-        isCampaign=true;
-        print('reached campaign');
-        print(isCampaign);
-      }
-    });//check if the user has account on AcceptedCampaign collection
-          //on case of campaign
-          //isCampaign = false;
-          print('object');
-          if(isCampaign!=false){
-            print('i hate uni');
-          }
-          if(isCampaign!){
-            print('reached capaign222222222');
-          email = '';
-          password = '';
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => nav_campaign()));
+    //       await FirebaseFirestore.instance
+    // .collection('AcceptedCampaigns')
+    // .doc(FirebaseAuth.instance.currentUser?.uid)
+    // .get()
+    // .then((DocumentSnapshot documentSnapshot) {
+    //   if (documentSnapshot.exists) {
+    //     isCampaign=true;
+    //     print('reached campaign');
+    //     print(isCampaign);
+    //   }
+    // });//check if the user has account on AcceptedCampaign collection
+    //       //on case of campaign
+    //       //isCampaign = false;
+    //       print('object');
+    //       if(isCampaign!=false){
+    //         print('i hate uni');
+    //       }
+    //       if(isCampaign!){
+    //         print('reached capaign222222222');
+    //       email = '';
+    //       password = '';
+    //       Navigator.push(context,
+    //           MaterialPageRoute(builder: (context) => nav_campaign()));
 
-          isCampaign = false;
-          }
-          else{
-          email = '';
-          password = '';
-          Navigator.push(context,
-              MaterialPageRoute(builder: (context) => nav_pilgrim()));}
+    //       isCampaign = false;
+    //       }
+    //       else{
+    //       email = '';
+    //       password = '';
+    //       Navigator.push(context,
+    //           MaterialPageRoute(builder: (context) => nav_pilgrim()));}
         
-      }} on FirebaseAuthException catch (e) {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return const AlertDialog(
-                content:
-                    Text('Email or Password is not correct, try again please.'),
-              );
-            });
-      }
-
+    //   }} on FirebaseAuthException catch (e) {
+    //     showDialog(
+    //         context: context,
+    //         builder: (context) {
+    //           return const AlertDialog(
+    //             content:
+    //                 Text('Email or Password is not correct, try again please.'),
+    //           );
+    //         });
+    //   }
                           },
                         ),
                         const SizedBox(
@@ -513,6 +529,7 @@ class CustomFormButton extends StatelessWidget {
     );
   }
 }
+
 
 class CustomInputField extends StatefulWidget {
   final String labelText;
@@ -619,4 +636,6 @@ class PageHeading extends StatelessWidget {
 ),
 );
 }
+
 }
+
