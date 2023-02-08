@@ -117,8 +117,8 @@ print('999999999999999999999999999999999999999999999999999');
 
      return Scaffold(
         backgroundColor: Color.fromARGB(255, 139, 177, 195),
-        body: SafeArea(
-          minimum: const EdgeInsets.only(top: 100),
+        body: SingleChildScrollView(
+          //minimum: const EdgeInsets.only(top: 100),
           child: Column(
             children: <Widget>[
             
@@ -178,16 +178,9 @@ print('999999999999999999999999999999999999999999999999999');
               ;}
               ),
 
-
-              ButtonBar(
-                  alignment:
-                      MainAxisAlignment.spaceAround,
-                  buttonHeight: 52.0,
-                  buttonMinWidth: 90.0,
-                  children: <Widget>[
-                    TextButton(
-                      style: TextButton.styleFrom(shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2.0)),)),
-                      onPressed: () {
+               MyButton(color: const Color(0xFF455D83),
+                                        title: 'Delete account',
+                                       onPressed: () {
                         showDialog(
                              context: context,
                             builder:
@@ -260,19 +253,8 @@ print('999999999999999999999999999999999999999999999999999');
                         );
                         }
                         );
-                      },
-                      child: Row(
-                        children: const <Widget>[
-                          Icon(Icons.cancel_rounded, color: Colors.redAccent),
-                          Padding(padding: EdgeInsets.symmetric(vertical: 2.0),),
-                          Text(' Delete account'),
-                        ],
-                      ),
-                    ),
-                  ],
-                ), 
-             
-
+                      }), 
+        
             ],
             
           ),

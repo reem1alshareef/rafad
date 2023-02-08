@@ -7,7 +7,6 @@ import 'package:rafad1/navigation/nav_bar.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:rafad1/screens/PiligrimProfile.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
-import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:toast/toast.dart';
