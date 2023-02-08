@@ -31,7 +31,7 @@ initSearchingPilgrim(String textEntered){
         .collection('AcceptedCampaigns')
         .doc(FirebaseAuth.instance.currentUser!.uid)
         .collection('AcceptedPilgrims')
-        .where('name', isGreaterThanOrEqualTo: textEntered)
+        .where('name', isEqualTo: textEntered)
         .get();
 
         setState(() {

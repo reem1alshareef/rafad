@@ -7,7 +7,9 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 
 import 'package:rafad1/search/user1.dart';
+import 'package:rate_in_stars/rate_in_stars.dart';
 
+import '../view_rate_review/campaign_view_rate.dart';
 import '../widgets/my_button.dart';
 
 class UsersDesignWidget extends StatefulWidget {
@@ -27,9 +29,13 @@ class UsersDesignWidget extends StatefulWidget {
 
 class _UsersDesignWidgetState extends State<UsersDesignWidget> {
   final _firestore = FirebaseFirestore.instance;
+
   
   @override
   Widget build(BuildContext context) {
+    double average = double.parse(widget.model!.avrgRating!);
+    double people = double.parse(widget.model!.numberOfPeople!);
+      
     return ExpansionTileCard(
                                     elevation: 2,
                                     initialPadding:
@@ -216,6 +222,32 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                                 )
                                                 )
                                                 ),
+                                                RatingStars(
+                                                  rating: double.parse(widget.model!.avrgRating!), 
+                                                  editable: false,
+                                                  color: Colors.amber,
+                                                  iconSize: 20,
+                                                  ),
+                                                  GestureDetector(
+                                                    onTap: () => {
+                                                        Navigator.push(
+                                                        context,
+                                                        MaterialPageRoute(
+                                                        builder: (context) =>
+                                                      ratingsList( campaignId: widget.model!.UID! , averageShopRating: average,  numberOfRatings: people)))
+                                },
+                                child: Text(
+                                   widget.model!.numberOfPeople!,
+                                  style: const TextStyle(
+                                      fontSize: 20.0,
+                                      decoration: TextDecoration.underline,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                                  ), 
+
+                                  const SizedBox(height: 10,),     
+                                  
+                                         
                                                 MyButton(
                               color: const Color(0xFF455D83),
                               title: 'book',
