@@ -118,7 +118,7 @@ class _ReportState extends State<Report> {
               CustomFormButton(
                 innerText: 'Submit',
                 onPressed: () async {
-                  //if (_reportFormKey.currentState!.validate()) {
+                  if (_reportFormKey.currentState!.validate()) {
 
                   // هنا مفروض يودي لمكان آخر بعدله مع ليلى
                   //اضفت هنا ارسال رسالة تأكيد
@@ -156,7 +156,7 @@ class _ReportState extends State<Report> {
                     'CUID': widget.campaignId,
                     'Cname': widget.campaignName
                   });
-                  // }
+                   }
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => WelcomeScreen()));
                 },

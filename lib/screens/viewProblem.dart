@@ -275,12 +275,16 @@ class _ViewProblemState extends State<ViewProblem> {
                                                               setState(
                                                                   () async {
                                                                 //removes from UI when pressed Yes for cancellation
-                                                                var campUID = storedocs[i]['CUID'];
+                                                                var campUID =
+                                                                    storedocs[i]
+                                                                        [
+                                                                        'CUID'];
                                                                 await FirebaseFirestore
                                                                     .instance
                                                                     .collection(
                                                                         "AcceptedCampaigns")
-                                                                    .doc(campUID)
+                                                                    .doc(
+                                                                        campUID)
                                                                     .delete();
                                                               });
                                                             },
