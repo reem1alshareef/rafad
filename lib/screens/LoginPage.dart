@@ -382,72 +382,72 @@ class loginPageState extends State<LoginPage> {
         // });
               
                             
-    //                         final FirebaseAuth _auth = FirebaseAuth.instance;
+                            final FirebaseAuth _auth = FirebaseAuth.instance;
 
-    //   //print('reached create user');
-    //   try {
-    //     if (isAdmin==true) {
-    //       //in case of an admin
-    //       isAdmin = false;
-    //       await _auth.signInWithEmailAndPassword(
-    //           email: email.toString(), password: password.toString());
-    //       email = '';
-    //       password = '';
-    //       //Navigator.push(
-    //       //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
-    //       Navigator.push(
-    //           context, MaterialPageRoute(builder: (context) => nav_admin()));
+      //print('reached create user');
+      try {
+        if (isAdmin==true) {
+          //in case of an admin
+          isAdmin = false;
+          await _auth.signInWithEmailAndPassword(
+              email: email.toString(), password: password.toString());
+          email = '';
+          password = '';
+          //Navigator.push(
+          //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => nav_admin()));
 
-    //       ///home_screen_owner
-    //     } else{
-    //       await _auth.signInWithEmailAndPassword(
-    //           email: email.toString(), password: password.toString());
-
-
+          ///home_screen_owner
+        } else{
+          await _auth.signInWithEmailAndPassword(
+              email: email.toString(), password: password.toString());
 
 
-    //       await FirebaseFirestore.instance
-    // .collection('AcceptedCampaigns')
-    // .doc(FirebaseAuth.instance.currentUser?.uid)
-    // .get()
-    // .then((DocumentSnapshot documentSnapshot) {
-    //   if (documentSnapshot.exists) {
-    //     isCampaign=true;
-    //     print('reached campaign');
-    //     print(isCampaign);
-    //   }
-    // });//check if the user has account on AcceptedCampaign collection
-    //       //on case of campaign
-    //       //isCampaign = false;
-    //       print('object');
-    //       if(isCampaign!=false){
-    //         print('i hate uni');
-    //       }
-    //       if(isCampaign!){
-    //         print('reached capaign222222222');
-    //       email = '';
-    //       password = '';
-    //       Navigator.push(context,
-    //           MaterialPageRoute(builder: (context) => nav_campaign()));
 
-    //       isCampaign = false;
-    //       }
-    //       else{
-    //       email = '';
-    //       password = '';
-    //       Navigator.push(context,
-    //           MaterialPageRoute(builder: (context) => nav_pilgrim()));}
+
+          await FirebaseFirestore.instance
+    .collection('AcceptedCampaigns')
+    .doc(FirebaseAuth.instance.currentUser?.uid)
+    .get()
+    .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        isCampaign=true;
+        print('reached campaign');
+        print(isCampaign);
+      }
+    });//check if the user has account on AcceptedCampaign collection
+          //on case of campaign
+          //isCampaign = false;
+          print('object');
+          if(isCampaign!=false){
+            print('i hate uni');
+          }
+          if(isCampaign!){
+            print('reached capaign222222222');
+          email = '';
+          password = '';
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => nav_campaign()));
+
+          isCampaign = false;
+          }
+          else{
+          email = '';
+          password = '';
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => nav_pilgrim()));}
         
-    //   }} on FirebaseAuthException catch (e) {
-    //     showDialog(
-    //         context: context,
-    //         builder: (context) {
-    //           return const AlertDialog(
-    //             content:
-    //                 Text('Email or Password is not correct, try again please.'),
-    //           );
-    //         });
-    //   }
+      }} on FirebaseAuthException catch (e) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const AlertDialog(
+                content:
+                    Text('Email or Password is not correct, try again please.'),
+              );
+            });
+      }
                           },
                         ),
                         const SizedBox(
