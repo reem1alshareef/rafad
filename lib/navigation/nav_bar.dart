@@ -8,6 +8,7 @@ import 'package:rafad1/screens/ViewCampaignPlan.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/forget_pw.dart';
+import 'package:rafad1/screens/profile.dart';
 import 'package:rafad1/screens/view_booking.dart';
 import 'package:rafad1/search/search_campaign.dart';
 import 'package:rafad1/search/search_pilgrim.dart';
@@ -95,7 +96,7 @@ class _nav_campaignState extends State<nav_campaign> {
     CampaignPlan(),
     emergencyList(),
     ProfileCampaign(),
-    ProfileCampaign(),     
+    PProfile(),     
   ];
 
   void _onItemTapped(int index) {

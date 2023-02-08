@@ -29,7 +29,7 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
   @override
   void initState() {
     super.initState();
-    _requestPermission();
+    //_requestPermission();
     location.changeSettings(interval: 300, accuracy: loc.LocationAccuracy.high);
     location.enableBackgroundMode(enable: true);
   }
@@ -62,7 +62,7 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
           const SizedBox(
             height: 16,
           ),
-          TextButton(
+          /*TextButton(
               onPressed: () {
                 _getLocation();
               },
@@ -70,10 +70,11 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
                 'Add my location',
                 style: TextStyle(
                     color: Color(0xFF455D83), fontWeight: FontWeight.w500),
-              )),
+              )),*/
           const SizedBox(
             height: 16,
           ),
+/*
           TextButton(
               onPressed: () {
                 _listenLocation();
@@ -95,7 +96,7 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
                 style: TextStyle(
                     color: Color(0xFF455D83), fontWeight: FontWeight.w500),
               )),
-
+*/
               MyButton(color: Color(0xFF455D83), title: 'View Rate', onPressed: ()async {
 
                 DocumentSnapshot variable = await FirebaseFirestore.instance
@@ -247,7 +248,7 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
       ),
     );
   }
-
+/*
   _getLocation() async {
     try {
       final loc.LocationData _locationResult = await location.getLocation();
@@ -299,7 +300,7 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
     } else if (status.isPermanentlyDenied) {
       openAppSettings();
     }
-  }
+  }*/
 } // end of class
 
 /* child: Column(
