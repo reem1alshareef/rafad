@@ -239,9 +239,9 @@ class _ViewProblemState extends State<ViewProblem> {
                                                       (BuildContext context) {
                                                     return AlertDialog(
                                                       title: const Text(
-                                                          "Cancel Request"),
+                                                          "Delete the reported Campaign"),
                                                       content: Text(
-                                                          "Are you sure you want to Cancel This Campaign's Booking?"),
+                                                          "Are you sure you want to Delete This Campaign?"),
                                                       actions: [
                                                         ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
@@ -258,7 +258,7 @@ class _ViewProblemState extends State<ViewProblem> {
                                                                   .pop();
                                                             },
                                                             child: const Text(
-                                                                "Cancel")),
+                                                                "No")),
                                                         ElevatedButton(
                                                             style: ElevatedButton.styleFrom(
                                                                 shape: RoundedRectangleBorder(
@@ -275,20 +275,12 @@ class _ViewProblemState extends State<ViewProblem> {
                                                               setState(
                                                                   () async {
                                                                 //removes from UI when pressed Yes for cancellation
-
+                                                                var campUID = storedocs[i]['CUID'];
                                                                 await FirebaseFirestore
                                                                     .instance
                                                                     .collection(
-                                                                        "Pilgrims-Account")
-                                                                    .doc(FirebaseAuth
-                                                                        .instance
-                                                                        .currentUser
-                                                                        ?.uid)
-                                                                    .collection(
-                                                                        "pilgrimCampaigns")
-                                                                    .doc(storedocs[
-                                                                            i][
-                                                                        'campaignID'])
+                                                                        "AcceptedCampaigns")
+                                                                    .doc(campUID)
                                                                     .delete();
                                                               });
                                                             },
@@ -306,7 +298,7 @@ class _ViewProblemState extends State<ViewProblem> {
                                                   padding: EdgeInsets.symmetric(
                                                       vertical: 2.0),
                                                 ),
-                                                Text('Cancel'),
+                                                Text('Delete Campagin'),
                                               ],
                                             ),
                                           ),
