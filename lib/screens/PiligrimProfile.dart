@@ -1,26 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:rafad1/screens/PiligrimProfile.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart'; // for 5 try
-import 'package:location/location.dart' as loc; // for 5 try
+import 'package:rafad1/screens/edit_PiligrimProfile.dart';
+import 'package:rafad1/screens/edit_ProfileCampaign.dart';
+// for 5 try
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/src/widgets/editable_text.dart';
 
-import 'navigation_screen.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import '../widgets/my_button.dart';
 import 'package:rafad1/screens/Card.dart';
 
 // our data
 
-String  name = "meshivanshsingh.me";
-String commercial_ID  = "" ;
-String email = '' ;
-String phone = "90441539202"; // not real number :)
-String address = "Lucknow, India";
-String description = "Lucknow, India";
+String  name = 'naaamee';
+String hajId  ="" ;
+String email = 'TextEditingController()' ;
+String number = 'TextEditingController()'; // not real number :)
+String address = 'TextEditingController()';
+String description = 'TextEditingController()';
 
 /*import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +43,7 @@ void getData() async {
 
 User? user = FirebaseAuth.instance.currentUser; 
 final DocumentSnapshot userDoc = await FirebaseFirestore
-.instance.collection("AcceptedCampaigns")
+.instance.collection("Pilgrims-Account")
 .doc(FirebaseAuth.instance.currentUser?.uid)
 .get();
 
@@ -55,29 +53,119 @@ email = userDoc.get('email');
 }
 
 class _PiligrimProfileState extends State<PiligrimProfile> {
-  double latController = (24.7232056); //ضبطت هذي الحركة
-  double lngController = (46.636731); //ضبطت هذي الحركة
+  final _firestore = FirebaseFirestore.instance;
+  String? rejectionReason;
+
+  final _controller = TextEditingController();
+
+  @override
+  void initState() {
+    getData();
+
+    super.initState();
+  }
+
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  bool card = false;
+  bool isVisible = true;
+  bool _submitted = false;
+
+  void _submit() {
+    setState(() => _submitted = true);
+    if (_errorText == null) {}
+  }
+
+  String? get _errorText {
+    // at any time, we can get the text from _controller.value.text
+    final text = _controller.value.text;
+    // Note: you can do your own custom validation here
+    // Move this logic this outside the widget for more testable code
+    if (text.isEmpty) {
+      return 'Can\'t be empty ';
+    }
+    if (text.length < 4) {
+      return 'Too short';
+    }
+    // return null if the text is valid
+    return null;
+  }
+
+  //data streeeeeeeeeeeeeemmmms
+
+  void DataStreams() async {
+    await for (var snapshot
+        in _firestore.collection('Pilgrims-Account').snapshots()) {
+      for (var campaign in snapshot.docs) {
+        print(campaign.data());
+      }
+    }
+  }
+
+  Map<String, dynamic> map = {};
+
+  void getData() async {
+    await FirebaseFirestore.instance
+        .collection('Pilgrims-Account')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .get()
+        .then((value) {
+      setState(() {
+        map = value.data()!;
+      });
+      print(map["name"]);
+
+      print('00000000000000000000000000000000000000000000000000');
+    }).catchError((onError) {
+      print(onError);
+      print('999999999999999999999999999999999999999999999999999');
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final Stream<QuerySnapshot> dataStream =
+        FirebaseFirestore.instance.collection('Pilgrims-Account').snapshots();
 
-    
+//String name  = map['name'] ;
+
+//String commercialID  = map['commercial_ID'] ;
+//String email  = map['email'] ;
+//String phone  = map['phoneNumber'] ;
+//String address  = map['address'] ;
+//String description  = map['description'] ;
 
     return Scaffold(
-      
-        backgroundColor: Colors.blueGrey[800],
+       appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text('Profile View'),
+          backgroundColor: const Color(0xFF455D83),
+          elevation: 0,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushNamed(context, WelcomeScreen.screenRoute);
+              },
+            )
+          ],
+        ),
+        backgroundColor: Color.fromARGB(255, 139, 177, 195),
         body: SafeArea(
-          minimum: const EdgeInsets.only(top: 100),
+          minimum: const EdgeInsets.only(top: 50),
           child: Column(
             children: <Widget>[
-              CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage('assets/avatar.jpg'),
-              ),
               Text(
-                "Campaign",
+                "Piligrim",
                 style: TextStyle(
-                  fontSize: 40.0,
+                  fontSize: 25.0,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontFamily: "",
@@ -86,32 +174,59 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
               Text(
                 "Profile",
                 style: TextStyle(
-                    fontSize: 30,
+                    fontSize: 15,
                     color: Colors.blueGrey[200],
-                    letterSpacing: 2.5,
+                    letterSpacing: 1.5,
                     fontWeight: FontWeight.bold,
                     fontFamily: "Source Sans Pro"),
               ),
               SizedBox(
-                height: 20,
-                width: 200,
+                height: 10,
+                width: 150,
                 child: Divider(
                   color: Colors.white,
                 ),
               ),
 
               // we will be creating a new widget name info carrd
-              InfoCard(text: name, icon: Icons.email, onPressed: () async {}),
-              InfoCard(text: commercial_ID, icon: Icons.email, onPressed: () async {}),
-              InfoCard(text: phone, icon: Icons.nat, onPressed: () async {}),
               InfoCard(
-                  text: address,
-                  icon: Icons.location_city,
+                  text: map['name'],
+                  icon: Icons.account_circle_rounded,
+                  onPressed: () async {
+                   }),
+              InfoCard(
+                  text: map['hajId'],
+                  icon: Icons.badge,
                   onPressed: () async {}),
-              InfoCard(text: email, icon: Icons.email, onPressed: () async {}),
-              InfoCard(text: description, icon: Icons.email, onPressed: () async {}),
+              InfoCard(
+                  text: map['number'],
+                  icon: Icons.phone,
+                  onPressed: () async {}),
+              InfoCard(
+                  text: map['email'], icon: Icons.email, onPressed: () async {}),
+              InfoCard(
+                  text: map['disease'],
+                  icon: Icons.add_location_alt_rounded,
+                  onPressed: () async {}),
+              InfoCard(
+                  text: map['pharma'],
+                  icon: Icons.app_registration_rounded,
+                  onPressed: () async {}),
 
+              MyButton(
+                  color: const Color(0xFF455D83),
+                  title: 'Update Profile',
+                  onPressed: () async {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (builder){
+                    return edit_Pilgrim();
+                  })
+                );
 
+                  }),
+             // ignore: prefer_const_constructors
+             
+                 
             ],
           ),
         ));

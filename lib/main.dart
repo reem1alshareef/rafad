@@ -4,10 +4,11 @@ import 'package:rafad1/firebase_options.dart';
 import 'package:rafad1/screens/CampaignView.dart';
 
 import 'package:rafad1/screens/CurrentLocationScreen.dart';
+import 'package:rafad1/screens/PiligrimProfile.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/Profile_View.dart';
-import 'package:rafad1/screens/View_Profile.dart';
 import 'package:rafad1/screens/adminView.dart';
+import 'package:rafad1/screens/edit_ProfileCampaign.dart';
 
 import 'package:rafad1/screens/notification_accept.dart';
 import 'package:rafad1/screens/signUP_pilgrim.dart';
@@ -63,7 +64,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Colors
               .white, // change it from swatch to colort and from wight to blue , for map
         ),
-       //home: const ProfileCampaign(),
+       //home: const edit_Campaign(),
        initialRoute: WelcomeScreen.screenRoute,
         routes: {
           WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
