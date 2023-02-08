@@ -3,11 +3,12 @@
 import "package:flutter/material.dart";
 import 'package:rafad1/admin/DeletePilgrim.dart';
 import 'package:rafad1/screens/CampaignView.dart';
-import 'package:rafad1/screens/PiligrimProfile.dart';
+import 'package:rafad1/screens/MapPilgrim.dart';
 import 'package:rafad1/screens/ViewCampaignPlan.dart';
-import 'package:rafad1/screens/ProfileCampaign.dart';
+import 'package:rafad1/screens/MapCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/forget_pw.dart';
+import 'package:rafad1/screens/viewProblem.dart';
 import 'package:rafad1/screens/view_booking.dart';
 import 'package:rafad1/search/search_campaign.dart';
 import 'package:rafad1/search/search_pilgrim.dart';
@@ -35,6 +36,7 @@ class _nav_adminState extends State<nav_admin> {
   static final List<Widget> _widgetOptions = <Widget>[
     const DeleteCampaign(),
     const DeletePilgrim(),
+    ViewProblem(),
     View()
   ];
 
@@ -65,6 +67,10 @@ class _nav_adminState extends State<nav_admin> {
                 icon: Icon(Icons.add_moderator_outlined),
                 label: 'Requests',
                 backgroundColor: Color(0xFF455D83)),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.report),
+                label: 'Report',
+                backgroundColor: Color(0xFF455D83)),
           ],
           type: BottomNavigationBarType.shifting,
           currentIndex: _selectedIndex,
@@ -94,8 +100,8 @@ class _nav_campaignState extends State<nav_campaign> {
     SearchPilgrim(),
     CampaignPlan(),
     emergencyList(),
-    ProfileCampaign(),
-    ProfileCampaign(),     
+    MapCampaign(),
+    // ProfileCampaign(), رزان هنا صفحتك
   ];
 
   void _onItemTapped(int index) {
@@ -136,7 +142,6 @@ class _nav_campaignState extends State<nav_campaign> {
                 icon: Icon(Icons.account_circle_outlined),
                 label: 'Profile',
                 backgroundColor: Color(0xFF455D83)),
-            
           ],
           type: BottomNavigationBarType.shifting,
           currentIndex: _selectedIndex,
@@ -162,11 +167,11 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     PilgrimView(),
-    availableCampaigns(),//SearchCampaign(),
+    availableCampaigns(), //SearchCampaign(),
     ViewCampaignPlan(),
     emergency(),
-    PiligrimProfile(),
-    PiligrimProfile()
+    MapPilgrim(),
+    // PiligrimProfile()  رزان هنا اسم صفحتك
   ];
 
   void _onItemTapped(int index) {
