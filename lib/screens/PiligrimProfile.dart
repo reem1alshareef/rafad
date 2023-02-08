@@ -226,7 +226,7 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                   }),
                MyButton(
                   color: const Color(0xFF455D83),
-                  title: 'Update Profile',
+                  title: 'Delete Account',
                   onPressed: () {
                         showDialog(
                              context: context,
