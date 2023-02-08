@@ -4,7 +4,9 @@ import 'package:rafad1/firebase_options.dart';
 import 'package:rafad1/screens/CampaignView.dart';
 import 'package:rafad1/screens/Chat_screen.dart';
 import 'package:rafad1/screens/CurrentLocationScreen.dart';
+import 'package:rafad1/screens/PiligrimProfile.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
+import 'package:rafad1/screens/Profile_View.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/notification_accept.dart';
 import 'package:rafad1/screens/signUP_pilgrim.dart';
@@ -13,12 +15,14 @@ import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/screens/signUp_campaign.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:rafad1/screens/logOutPilgrim.dart';
+import 'package:rafad1/screens/available_campaigns.dart';
 import 'package:rafad1/screens/logOutCampaign.dart';
 import 'package:rafad1/screens/LoginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:rafad1/widgets/map_tracking.dart';
 import '../firebase_options.dart';
+import 'package:rafad1/screens/ViewProfile.dart';
+
 //import 'package:rafad1/screens/newAcc.dart';
 
 // ...

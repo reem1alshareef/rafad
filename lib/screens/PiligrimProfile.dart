@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:rafad1/screens/PiligrimProfile.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart'; // for 5 try
-import 'package:location/location.dart' as loc; // for 5 try
+import 'package:rafad1/screens/edit_PiligrimProfile.dart';
+import 'package:rafad1/screens/edit_ProfileCampaign.dart';
+// for 5 try
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/src/widgets/editable_text.dart';
 
-import 'navigation_screen.dart';
+import '../widgets/my_button.dart';
+import 'package:rafad1/screens/Card.dart';
+
+// our data
+
+String  name = 'naaamee';
+String hajId  ="" ;
+String email = 'TextEditingController()' ;
+String number = 'TextEditingController()'; // not real number :)
+String address = 'TextEditingController()';
+String description = 'TextEditingController()';
 
 /*import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -26,12 +38,106 @@ class PiligrimProfile extends StatefulWidget {
   @override
   _PiligrimProfileState createState() => _PiligrimProfileState();
 }
-//(21.3878387)(39.9144660)
+
+void getData() async {
+
+User? user = FirebaseAuth.instance.currentUser; 
+final DocumentSnapshot userDoc = await FirebaseFirestore
+.instance.collection("Pilgrims-Account")
+.doc(FirebaseAuth.instance.currentUser?.uid)
+.get();
+
+
+email = userDoc.get('email');
+
+}
+
 class _PiligrimProfileState extends State<PiligrimProfile> {
-  double latController = (24.7232056); //ضبطت هذي الحركة
-  double lngController = (46.636731); //ضبطت هذي الحركة
+  final _firestore = FirebaseFirestore.instance;
+  String? rejectionReason;
+
+  final _controller = TextEditingController();
+
+  @override
+  void initState() {
+    getData();
+
+    super.initState();
+  }
+
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  bool card = false;
+  bool isVisible = true;
+  bool _submitted = false;
+
+  void _submit() {
+    setState(() => _submitted = true);
+    if (_errorText == null) {}
+  }
+
+  String? get _errorText {
+    // at any time, we can get the text from _controller.value.text
+    final text = _controller.value.text;
+    // Note: you can do your own custom validation here
+    // Move this logic this outside the widget for more testable code
+    if (text.isEmpty) {
+      return 'Can\'t be empty ';
+    }
+    if (text.length < 4) {
+      return 'Too short';
+    }
+    // return null if the text is valid
+    return null;
+  }
+
+  //data streeeeeeeeeeeeeemmmms
+
+  void DataStreams() async {
+    await for (var snapshot
+        in _firestore.collection('Pilgrims-Account').snapshots()) {
+      for (var campaign in snapshot.docs) {
+        print(campaign.data());
+      }
+    }
+  }
+
+  Map<String, dynamic> map = {};
+
+  void getData() async {
+    await FirebaseFirestore.instance
+        .collection('Pilgrims-Account')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .get()
+        .then((value) {
+      setState(() {
+        map = value.data()!;
+      });
+      print(map["name"]);
+
+      print('00000000000000000000000000000000000000000000000000');
+    }).catchError((onError) {
+      print(onError);
+      print('999999999999999999999999999999999999999999999999999');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    final Stream<QuerySnapshot> dataStream =
+        FirebaseFirestore.instance.collection('Pilgrims-Account').snapshots();
+
+//String name  = map['name'] ;
+
+//String commercialID  = map['commercial_ID'] ;
+//String email  = map['email'] ;
+//String phone  = map['phoneNumber'] ;
+//String address  = map['address'] ;
+//String description  = map['description'] ;
+
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -90,12 +196,11 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                           
                           actions: <Widget>[
                             TextButton(
-                              style: TextButton.styleFrom(
-                    backgroundColor: Colors.red,),
+
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Text('Cancel', style: TextStyle(color: Colors.white , fontSize: 20),),
+                  child: const Text('Cancel'),
                             ),
                             TextButton(
                               onPressed: () async {
@@ -112,7 +217,6 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                              String email = docCustomer['email'];
                              String password = docCustomer['password'];
                              
-                
 
                           FirebaseAuth.instance.currentUser?.delete();
 
@@ -149,27 +253,12 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                           ],
                         );
                         }
-                        );
-                        
-                      },
-
-
-
-                      child: Row(
-                        children: const <Widget>[
-                          Icon(Icons.cancel_rounded, color: Colors.redAccent),
-                          Padding(padding: EdgeInsets.symmetric(vertical: 2.0),),
-                          Text(' Delete account'),
-                        ],
-                      ),
-
-
-
-                    ),
-                  ],
-                ),
-        ]),
-      ),
-    );
+                        );}
+                  ),
+             // ignore: prefer_const_constructors
+                 
+            ],
+          ),
+        ));
   }
 }

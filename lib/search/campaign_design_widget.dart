@@ -232,12 +232,16 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                                 },
                                 child: Text(
                                    widget.model!.numberOfPeople!,
-                                  style: TextStyle(
-                                      fontSize: 15,
+                                  style: const TextStyle(
+                                      fontSize: 20.0,
                                       decoration: TextDecoration.underline,
                                       fontWeight: FontWeight.bold),
                                 ),
-                                                  ),             
+                                                  ), 
+
+                                  const SizedBox(height: 10,),     
+                                  
+                                         
                                                 MyButton(
                               color: const Color.fromARGB(255, 12, 92, 119),
                               title: 'book',

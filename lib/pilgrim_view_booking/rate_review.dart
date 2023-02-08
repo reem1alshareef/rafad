@@ -23,6 +23,7 @@ class _RateReviewState extends State<RateReview> {
   double rating = 0;
   String? review;
   final _review = GlobalKey<FormState>();
+  bool isButtonDisabled = false;
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +135,9 @@ class _RateReviewState extends State<RateReview> {
                                           ),
                                         ),
                                       ),
+                                      Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: <Widget>[
                                       ButtonBar(
                                         alignment:
                                             MainAxisAlignment.spaceAround,
@@ -147,7 +151,7 @@ class _RateReviewState extends State<RateReview> {
                                               borderRadius: BorderRadius.all(
                                                   Radius.circular(2.0)),
                                             )),
-                                            onPressed: () {
+                                            onPressed: isButtonDisabled ? null : () {
                                                showDialog(
         context: context,
         builder: (BuildContext context) {
@@ -238,14 +242,14 @@ class _RateReviewState extends State<RateReview> {
                            'numberOfPeople': numberOfPeople.toString(),
                            'avrgRating': avrgRating.toString(), 
                 });
-                
-
-                
-
+                  setState(() {
+                    isButtonDisabled = true;
+                  });
                     Navigator.pop(context);
                   },
                   child: const Text('Save', style: TextStyle(color: Colors.white , fontSize: 20),),
                   ),
+                  
               TextButton(
                 //color: Colors.red,
                 //title: 'Cancel',
@@ -310,7 +314,7 @@ class _RateReviewState extends State<RateReview> {
                                       )
                                     ],
                                   ),
-                                )));
+             ]))));
                   }))
         ])));
   }

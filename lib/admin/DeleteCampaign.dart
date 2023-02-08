@@ -52,7 +52,7 @@ class deleteCampaign extends State<DeleteCampaign> {
 
   void DataStreams() async {
     await for (var snapshot
-        in _firestore.collection('AcceptedCampaigns').snapshots()) {
+        in _firestore.collection('AcceptedCampaigns').where('status', isEqualTo: 'accepted').snapshots()) {
       for (var campaign in snapshot.docs) {
         print(campaign.data());
       }
