@@ -9,6 +9,8 @@ import 'package:rafad1/screens/LoginPage.dart';
 import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:rafad1/screens/otp_screen.dart';
+import 'package:rafad1/screens/send_otp.dart';
 import 'package:toast/toast.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:email_otp/email_otp.dart';
@@ -27,10 +29,12 @@ class loginPageState extends State<LoginPage> {
   bool? isAdmin=false;
   bool? isCampaign=false;
   final _signupFormKey = GlobalKey<FormState>();
+  final _firestore = FirebaseFirestore.instance;
   
   //////////////////////////////////////////
-  TextEditingController emailOTP = new TextEditingController();
-  TextEditingController otp = new TextEditingController();
+TextEditingController otp1Controller = TextEditingController();
+TextEditingController emailOTP =  TextEditingController();
+  // TextEditingController otp = new TextEditingController();
   EmailOTP myauth = EmailOTP();
   /////////////////////////////////////////
   @override
@@ -65,47 +69,11 @@ class loginPageState extends State<LoginPage> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        // const PageHeading(
-                        //   title: 'Sign in',
-                        // ),
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-                        // TextFormField(
-                        //   inputFormatters: [
-                        //     FilteringTextInputFormatter.allow(
-                        //         RegExp("[a-zA-Z- -]"))
-                        //   ],
-                        //   keyboardType: TextInputType.text,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       name = value;
-                        //     });
-                        //   },
-                        //   validator: (value) {
-                        //     if (value == null || value.isEmpty) {
-                        //       return 'Name field is required!';
-                        //     } else if (value.length < 8) {
-                        //       return 'Please enter valid name';
-                        //     }
-                        //     String patttern =
-                        //         (r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$");
-                        //     RegExp regExp = RegExp(patttern);
-                        //     if (!regExp.hasMatch(value)) {
-                        //       return 'Please enter valid name';
-                        //     }
-                        //     return null;
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'Pilgrim Name *',
-                        //     hintText: 'Your full name',
-                        //     isDense: true,
-                        //   ),
-                        // ),
                         const SizedBox(
                           height: 16,
                         ),
                         TextFormField(
+                          controller: emailOTP,
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             setState(() {
@@ -138,119 +106,6 @@ class loginPageState extends State<LoginPage> {
                           ),
                         ),
 
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-
-                        // TextFormField(
-                        //   maxLength: 10,
-                        //   inputFormatters: <TextInputFormatter>[
-                        //     FilteringTextInputFormatter.digitsOnly
-                        //   ],
-                        //   keyboardType: TextInputType.text,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       number = value;
-                        //     });
-                        //   },
-                        //   validator: (value) {
-                        //     if (value == null || value.isEmpty) {
-                        //       return 'Phone number is required!';
-                        //     }
-                        //     String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-                        //     RegExp regExp = new RegExp(patttern);
-                        //     if (!regExp.hasMatch(value)) {
-                        //       return 'Please enter valid Phone number';
-                        //     }
-                        //     if (value.length != 10) {
-                        //       return 'Phone Number must be of 10 digit';
-                        //     }
-
-                        //     return null;
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'Phone number *',
-                        //     hintText: 'Your phone number',
-                        //     isDense: true,
-                        //   ),
-                        // ),
-                        
-                        
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-
-                        // TextFormField(
-                        //   maxLength: 10,
-                        //   inputFormatters: [
-                        //     FilteringTextInputFormatter.allow(RegExp("[0-9]"))
-                        //   ],
-                        //   keyboardType: TextInputType.text,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       hajId = value;
-                        //     });
-                        //   },
-                        //   validator: (textValue) {
-                        //     if (textValue == null || textValue.isEmpty) {
-                        //       return 'ID is required!';
-                        //     }
-                        //     if (!textValue.contains(RegExp(r'[0-9]'))) {
-                        //       return 'Please enter valid ID';
-                        //     }
-                        //     if (textValue.length != 10) {
-                        //       return 'ID must be of 10 digit';
-                        //     }
-                        //     return null;
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'haj permission ID*',
-                        //     hintText: 'your haj permission ID',
-                        //     isDense: true,
-                        //   ),
-                        // ),
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-
-                        // TextFormField(
-                        //   inputFormatters: [
-                        //     FilteringTextInputFormatter.allow(
-                        //         RegExp("[a-zA-Z- -]"))
-                        //   ],
-                        //   keyboardType: TextInputType.text,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       disease = value;
-                        //     });
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'chronic disease',
-                        //     hintText: 'if you suffer from any chronic disease',
-                        //     isDense: true,
-                        //   ),
-                        //),
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-
-                        // TextFormField(
-                        //   inputFormatters: [
-                        //     FilteringTextInputFormatter.allow(
-                        //         RegExp("[a-zA-Z- -]"))
-                        //   ],
-                        //   keyboardType: TextInputType.text,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       pharma = value;
-                        //     });
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'pharmaceutical',
-                        //     hintText: 'if you are taking any pharmaceutical',
-                        //     isDense: true,
-                        //   ),
-                        // ),
                         const SizedBox(
                           height: 16,
                         ),
@@ -279,8 +134,7 @@ class loginPageState extends State<LoginPage> {
                         const SizedBox(
                           height: 16,
                         ),
-                        //-------------------------------------------------------------------------------
-
+                        
                         ////////////////////////////////////////////////////////////
                     // Padding(
                     //   padding: const EdgeInsets.all(8.0),
@@ -346,17 +200,18 @@ class loginPageState extends State<LoginPage> {
                         CustomFormButton(
                           innerText: 'Sign in',
                           onPressed: () async {
-                            EmailOTP myauth = EmailOTP();
-                            final FirebaseAuth auth = FirebaseAuth.instance;
-                            auth.signInWithEmailAndPassword(
-                            email: email.toString(), password: password.toString());
-                            myauth.setConfig(
-                            appEmail: "reemsh65@gmail.com",
-                            appName: "Rafad",
-                            userEmail: email,
-                            otpLength: 6,
-                            otpType: OTPType.digitsOnly
-                            );
+                            // EmailOTP myauth = EmailOTP();
+                            // final FirebaseAuth auth = FirebaseAuth.instance;
+                            //  auth.signInWithEmailAndPassword(
+                            // email: email.toString(), password: password.toString());
+                            // myauth.setConfig(
+                            // appEmail: "reemsh65@gmail.com",
+                            // appName: "Rafad",
+                            // userEmail: email,
+                            // otpLength: 6,
+                            // otpType: OTPType.digitsOnly
+                            // );
+                            
         //                     TextEditingController _textFieldController = TextEditingController();
                             
         //                   return showDialog(
@@ -380,74 +235,119 @@ class loginPageState extends State<LoginPage> {
         //     ],
         //   );
         // });
-              
+
                             
-    //                         final FirebaseAuth _auth = FirebaseAuth.instance;
+                            final FirebaseAuth _auth = FirebaseAuth.instance;
 
-    //   //print('reached create user');
-    //   try {
-    //     if (isAdmin==true) {
-    //       //in case of an admin
-    //       isAdmin = false;
-    //       await _auth.signInWithEmailAndPassword(
-    //           email: email.toString(), password: password.toString());
-    //       email = '';
-    //       password = '';
-    //       //Navigator.push(
-    //       //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
-    //       Navigator.push(
-    //           context, MaterialPageRoute(builder: (context) => nav_admin()));
+      //print('reached create user');
+      try {
 
-    //       ///home_screen_owner
-    //     } else{
-    //       await _auth.signInWithEmailAndPassword(
-    //           email: email.toString(), password: password.toString());
+        if (isAdmin==true) {
+          //in case of an admin
+          isAdmin = false;
+          await _auth.signInWithEmailAndPassword(
+              email: email.toString(), password: password.toString());
+              
+          email = '';
+          password = '';
+          //Navigator.push(
+          //  context, MaterialPageRoute(builder: (context) => logOutAdmin()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => nav_admin()));
 
+          ///home_screen_owner
+        } else{
+          await _auth.signInWithEmailAndPassword(
+              email: email.toString(), password: password.toString());
+                        
 
-
-
-    //       await FirebaseFirestore.instance
-    // .collection('AcceptedCampaigns')
-    // .doc(FirebaseAuth.instance.currentUser?.uid)
-    // .get()
-    // .then((DocumentSnapshot documentSnapshot) {
-    //   if (documentSnapshot.exists) {
-    //     isCampaign=true;
-    //     print('reached campaign');
-    //     print(isCampaign);
-    //   }
-    // });//check if the user has account on AcceptedCampaign collection
-    //       //on case of campaign
-    //       //isCampaign = false;
-    //       print('object');
-    //       if(isCampaign!=false){
-    //         print('i hate uni');
-    //       }
-    //       if(isCampaign!){
-    //         print('reached capaign222222222');
-    //       email = '';
-    //       password = '';
-    //       Navigator.push(context,
-    //           MaterialPageRoute(builder: (context) => nav_campaign()));
-
-    //       isCampaign = false;
-    //       }
-    //       else{
-    //       email = '';
-    //       password = '';
-    //       Navigator.push(context,
-    //           MaterialPageRoute(builder: (context) => nav_pilgrim()));}
+          await FirebaseFirestore.instance
+    .collection('AcceptedCampaigns')
+    .doc(FirebaseAuth.instance.currentUser?.uid)
+    .get()
+    .then((DocumentSnapshot documentSnapshot) {
+      if (documentSnapshot.exists) {
+        isCampaign=true;
+        print('reached campaign');
+        print(isCampaign);
         
-    //   }} on FirebaseAuthException catch (e) {
-    //     showDialog(
-    //         context: context,
-    //         builder: (context) {
-    //           return const AlertDialog(
-    //             content:
-    //                 Text('Email or Password is not correct, try again please.'),
-    //           );
-    //         });
-    //   }
+        TextEditingController _textFieldController = TextEditingController();
+                            
+                          return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('please verify your email'),
+            // content: TextField(
+            //   controller: _textFieldController,
+            //   textInputAction: TextInputAction.go,
+            //   keyboardType: TextInputType.numberWithOptions(),
+            //   decoration: InputDecoration(hintText: "Enter the OTP here"),
+            // ),
+            actions: <Widget>[
+              new ElevatedButton(
+                child: new Text('ok'),
+                onPressed: () async {
+                   Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MyApp()));
+                          
+                            // myauth.setConfig(
+                            //   appEmail: "441200087@student.ksu.edu.sa",
+                            //   appName: "Rafad",
+                            //   userEmail: emailOTP,
+                            //   otpLength: 4,
+                            //   otpType: OTPType.digitsOnly);
+                            //   print("send Otp");
+                },
+              ),
+              // new ElevatedButton(
+              //   child: new Text('verify OTP'),
+              //   onPressed: () async {
+              //     if (await myauth.verifyOTP(otp: otp1Controller.text) == true) ;
+              //     {
+              //       print("ok");
+              //     }
+              //   },
+              // )
+            ],
+          );
+        });
+
+      }
+    });//check if the user has account on AcceptedCampaign collection
+          //on case of campaign
+          //isCampaign = false;
+          print('object');
+          if(isCampaign!=false){
+            print('i hate uni');
+          }
+          if(isCampaign!){
+            print('reached capaign222222222');
+          email = '';
+          password = '';
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => nav_campaign()));
+
+          isCampaign = false;
+          }
+          else{
+          email = '';
+          password = '';
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => nav_pilgrim()));}
+        
+      }
+
+      } on FirebaseAuthException catch (e) {
+        showDialog(
+            context: context,
+            builder: (context) {
+              return const AlertDialog(
+                content:
+                    Text('Email or Password is not correct, try again please.'),
+              );
+            });
+      }
                           },
                         ),
                         const SizedBox(
