@@ -211,10 +211,16 @@ class _RateReviewState extends State<RateReview> {
             ),
             actions: <Widget>[
               TextButton(
+                //color: Colors.red,
+                //title: 'Cancel',
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  child: const Text('Cancel'),
+              ),
+              TextButton(
                 //color:  Colors.green,
                 //title: 'Save',
-                style: TextButton.styleFrom(
-                    backgroundColor: Colors.green,),
                 onPressed: () async {
                   
                   DocumentSnapshot docs = await _firestore
@@ -260,27 +266,16 @@ class _RateReviewState extends State<RateReview> {
                                                                               context,
                                                                           builder:
                                                                               (BuildContext context) {
-                                                                            return AlertDialog(
+                                                                            return const AlertDialog(
                                                                               title: Text(
                                                                                 'Success',
                                                                               ),
-                                                                              content:Text('The data was sent successfuly'),
+                                                                              content:Text('Submitted successfuly'),
                                                               );
                                                                           });
                   },
-                  child: const Text('Save', style: TextStyle(color: Colors.white , fontSize: 20),),
+                  child: const Text('Save'),
                   ),
-                  
-              TextButton(
-                //color: Colors.red,
-                //title: 'Cancel',
-                style: TextButton.styleFrom(
-                    backgroundColor: Colors.red,),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Cancel', style: TextStyle(color: Colors.white , fontSize: 20),),
-              ),
             ],
           );
         });

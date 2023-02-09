@@ -266,12 +266,6 @@ class _ViewState extends State<ProfileCampaign> {
                                       String email = docCustomer['email'];
                                       String password = docCustomer['password'];
 
-                                      await FirebaseFirestore.instance
-                                          .collection('AcceptedCampaigns')
-                                          .doc(FirebaseAuth
-                                              .instance.currentUser!.uid)
-                                          .delete();
-
                                       //FirebaseAuth.instance.currentUser
                                         //  ?.delete();
 
