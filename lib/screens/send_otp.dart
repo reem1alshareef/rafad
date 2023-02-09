@@ -1,6 +1,7 @@
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:rafad1/screens/CampaignView.dart';
+import 'package:rafad1/widgets/my_button.dart';
 
 import 'otp_screen.dart';
 
@@ -46,22 +47,23 @@ class _MyAppState extends State<MyApp> {
                               userEmail: email.text,
                               otpLength: 4,
                               otpType: OTPType.digitsOnly);
-                          if ( myauth.sendOTP() == true) {
+                          // if ( myauth.sendOTP() == true) {
                             
-                            // ignore: use_build_context_synchronously
+                          //   // ignore: use_build_context_synchronously
                             
-                            // ignore: use_build_context_synchronously
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>   OtpScreen()));
-                          } else {
-                            // ignore: use_build_context_synchronously
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text("Oops, OTP send failed"),
-                            ));
-                          }
+                          //   // ignore: use_build_context_synchronously
+                          //   // Navigator.push(
+                          //   //     context,
+                          //   //     MaterialPageRoute(
+                          //   //         builder: (context) =>   OtpScreen()));
+                          // } else {
+                          //   // ignore: use_build_context_synchronously
+                          //   ScaffoldMessenger.of(context)
+                          //       .showSnackBar(const SnackBar(
+                          //     content: Text("Oops, OTP send failed"),
+                          //   ));
+                          // }
+                         
                         },
                         
                         icon: const Icon(
@@ -75,6 +77,10 @@ class _MyAppState extends State<MyApp> {
                     ),
                   ),
                 ),
+                MyButton(color: Colors.blue, title: 'Verify OTP', onPressed: (){Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>   OtpScreen()));})
               ],
             ),
           ),

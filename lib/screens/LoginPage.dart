@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rafad1/navigation/nav_bar.dart';
 import 'package:rafad1/screens/LoginPage.dart';
-import 'package:rafad1/screens/logOutPilgrim.dart';
+//import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:rafad1/screens/otp_screen.dart';

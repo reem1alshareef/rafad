@@ -69,6 +69,8 @@ dependencies:
   rate_in_stars: ^0.0.3
   intl: ^0.18.0
   get: ^4.6.5
+  email_otp: ^1.0.4
+  email_auth: ^1.0.0
 
   #firebase:
   #cloud_firestore: ^3.1.5
