@@ -6,6 +6,7 @@ import 'package:location/location.dart' as loc; // for 5 try
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'Chat_screen.dart';
 import 'navigation_screen.dart';
 
 class MapPilgrim extends StatefulWidget {
@@ -23,6 +24,18 @@ class _MapPilgrimState extends State<MapPilgrim> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF455D83),
+          tooltip: 'Chat',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Chat_screen()),
+            );
+          },
+          child: Image.asset('assests/images/chat.png', height: 35),
+        ),
+
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
@@ -51,7 +64,10 @@ class _MapPilgrimState extends State<MapPilgrim> {
                           latController, //double.parse(latController.text),
                           lngController))); //double.parse(lngController.text))));
                 },
-                child: Text('Get Camapign Directions')),
+                child: Text('Get Camapign Directions'),
+                style: ButtonStyle(
+                 backgroundColor: MaterialStateProperty.all<Color>(
+                                const Color(0xFF455D83)),)),
           ),
         ]),
       ),

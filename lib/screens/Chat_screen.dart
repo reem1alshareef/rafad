@@ -165,9 +165,7 @@ class messageStream extends StatelessWidget {
         List<messageLine> messageWidgets = [];
         if (!snapshot.hasData) {
           return Center(
-            child: CircularProgressIndicator(
-              backgroundColor: Color.fromARGB(255, 82, 107, 128),
-            ),
+            child:  CircularProgressIndicator()
           );
         }
         final messages = snapshot.data!.docs;

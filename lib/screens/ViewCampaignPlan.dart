@@ -49,7 +49,7 @@ class _ViewState extends State<ViewCampaignPlan> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Today\'s Campaign plan'),
-          backgroundColor: Color.fromARGB(255, 12, 92, 119),
+          backgroundColor:Color(0xFF455D83),
           elevation: 0,
         ),
         body: SingleChildScrollView(

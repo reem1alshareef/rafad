@@ -183,7 +183,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
     PolylineId id = PolylineId('poly');
     Polyline polyline = Polyline(
       polylineId: id,
-      color: Colors.blue,
+      color:  Color(0xFF455D83),
       points: polylineCoordinates,
       width: 5,
     );
