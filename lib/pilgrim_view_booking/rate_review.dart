@@ -237,7 +237,21 @@ class _RateReviewState extends State<RateReview> {
                   setState(() {
                     isButtonDisabled = true;
                   });
-                    Navigator.pop(context);
+                    Navigator.of(
+                                                                            context)
+                                                                        .pop();
+                                                                      showDialog(
+                                                                          context:
+                                                                              context,
+                                                                          builder:
+                                                                              (BuildContext context) {
+                                                                            return AlertDialog(
+                                                                              title: Text(
+                                                                                'Success',
+                                                                              ),
+                                                                              content:Text('The data was sent successfuly'),
+                                                              );
+                                                                          });
                   },
                   child: const Text('Save', style: TextStyle(color: Colors.white , fontSize: 20),),
                   ),
