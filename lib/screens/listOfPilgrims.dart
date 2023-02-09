@@ -100,7 +100,7 @@ floatingActionButton: FloatingActionButton(
         ),
 
         appBar: AppBar(
-          //automaticallyImplyLeading: false,
+          automaticallyImplyLeading: false,
           title: Text('Your Pilgrims'),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,

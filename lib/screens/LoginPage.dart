@@ -9,6 +9,7 @@ import 'package:rafad1/screens/LoginPage.dart';
 //import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:rafad1/screens/forget_pw.dart';
 import 'package:rafad1/screens/otp_screen.dart';
 import 'package:rafad1/screens/send_otp.dart';
 import 'package:toast/toast.dart';
@@ -358,23 +359,16 @@ TextEditingController emailOTP =  TextEditingController();
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              const Text(
-                                'New user ? ',
-                                style: TextStyle(
-                                    fontSize: 13,
-                                    color: Color(0xff939393),
-                                    fontWeight: FontWeight.bold),
-                              ),
                               GestureDetector(
                                 onTap: () => {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const WelcomeScreen()))
+                                              const ForgotPasswordPage()))
                                 },
                                 child: const Text(
-                                  'Sign-up',
+                                  'Forgot password',
                                   style: TextStyle(
                                       fontSize: 15,
                                       color: Colors.blue,
