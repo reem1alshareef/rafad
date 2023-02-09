@@ -1,16 +1,19 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:email_auth/email_auth.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:rafad1/navigation/nav_bar.dart';
 import 'package:rafad1/screens/LoginPage.dart';
-import 'package:rafad1/screens/available_campaigns.dart';
+import 'package:rafad1/screens/logOutPilgrim.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:rafad1/screens/forget_pw.dart';
+import 'package:rafad1/screens/otp_screen.dart';
+import 'package:rafad1/screens/send_otp.dart';
 import 'package:toast/toast.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
+import 'package:email_otp/email_otp.dart';
 
 class LoginPage extends StatefulWidget {
   static const String screenRoute = 'LoginPage';
@@ -26,7 +29,14 @@ class loginPageState extends State<LoginPage> {
   bool? isAdmin=false;
   bool? isCampaign=false;
   final _signupFormKey = GlobalKey<FormState>();
-
+  final _firestore = FirebaseFirestore.instance;
+  
+  //////////////////////////////////////////
+TextEditingController otp1Controller = TextEditingController();
+TextEditingController emailOTP =  TextEditingController();
+  // TextEditingController otp = new TextEditingController();
+  EmailOTP myauth = EmailOTP();
+  /////////////////////////////////////////
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -59,53 +69,11 @@ class loginPageState extends State<LoginPage> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        // const PageHeading(
-                        //   title: 'Sign in',
-                        // ),
-
-
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-
-                        // TextFormField(
-                        //   inputFormatters: [
-                        //     FilteringTextInputFormatter.allow(
-                        //         RegExp("[a-zA-Z- -]"))
-                        //   ],
-                        //   keyboardType: TextInputType.text,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       name = value;
-                        //     });
-                        //   },
-                        //   validator: (value) {
-                        //     if (value == null || value.isEmpty) {
-                        //       return 'Name field is required!';
-                        //     } else if (value.length < 8) {
-                        //       return 'Please enter valid name';
-                        //     }
-
-                        //     String patttern =
-                        //         (r"^\s*([A-Za-z]{1,}([\.,] |[-']| ))+[A-Za-z]+\.?\s*$");
-                        //     RegExp regExp = RegExp(patttern);
-                        //     if (!regExp.hasMatch(value)) {
-                        //       return 'Please enter valid name';
-                        //     }
-                        //     return null;
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'Pilgrim Name *',
-                        //     hintText: 'Your full name',
-                        //     isDense: true,
-                        //   ),
-                        // ),
-
-
                         const SizedBox(
                           height: 16,
                         ),
                         TextFormField(
+                          controller: emailOTP,
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             setState(() {
@@ -138,119 +106,6 @@ class loginPageState extends State<LoginPage> {
                           ),
                         ),
 
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-
-                        // TextFormField(
-                        //   maxLength: 10,
-                        //   inputFormatters: <TextInputFormatter>[
-                        //     FilteringTextInputFormatter.digitsOnly
-                        //   ],
-                        //   keyboardType: TextInputType.text,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       number = value;
-                        //     });
-                        //   },
-                        //   validator: (value) {
-                        //     if (value == null || value.isEmpty) {
-                        //       return 'Phone number is required!';
-                        //     }
-                        //     String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
-                        //     RegExp regExp = new RegExp(patttern);
-                        //     if (!regExp.hasMatch(value)) {
-                        //       return 'Please enter valid Phone number';
-                        //     }
-                        //     if (value.length != 10) {
-                        //       return 'Phone Number must be of 10 digit';
-                        //     }
-
-                        //     return null;
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'Phone number *',
-                        //     hintText: 'Your phone number',
-                        //     isDense: true,
-                        //   ),
-                        // ),
-                        
-                        
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-
-                        // TextFormField(
-                        //   maxLength: 10,
-                        //   inputFormatters: [
-                        //     FilteringTextInputFormatter.allow(RegExp("[0-9]"))
-                        //   ],
-                        //   keyboardType: TextInputType.text,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       hajId = value;
-                        //     });
-                        //   },
-                        //   validator: (textValue) {
-                        //     if (textValue == null || textValue.isEmpty) {
-                        //       return 'ID is required!';
-                        //     }
-                        //     if (!textValue.contains(RegExp(r'[0-9]'))) {
-                        //       return 'Please enter valid ID';
-                        //     }
-                        //     if (textValue.length != 10) {
-                        //       return 'ID must be of 10 digit';
-                        //     }
-                        //     return null;
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'haj permission ID*',
-                        //     hintText: 'your haj permission ID',
-                        //     isDense: true,
-                        //   ),
-                        // ),
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-
-                        // TextFormField(
-                        //   inputFormatters: [
-                        //     FilteringTextInputFormatter.allow(
-                        //         RegExp("[a-zA-Z- -]"))
-                        //   ],
-                        //   keyboardType: TextInputType.text,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       disease = value;
-                        //     });
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'chronic disease',
-                        //     hintText: 'if you suffer from any chronic disease',
-                        //     isDense: true,
-                        //   ),
-                        //),
-                        // const SizedBox(
-                        //   height: 16,
-                        // ),
-
-                        // TextFormField(
-                        //   inputFormatters: [
-                        //     FilteringTextInputFormatter.allow(
-                        //         RegExp("[a-zA-Z- -]"))
-                        //   ],
-                        //   keyboardType: TextInputType.text,
-                        //   onChanged: (value) {
-                        //     setState(() {
-                        //       pharma = value;
-                        //     });
-                        //   },
-                        //   decoration: InputDecoration(
-                        //     labelText: 'pharmaceutical',
-                        //     hintText: 'if you are taking any pharmaceutical',
-                        //     isDense: true,
-                        //   ),
-                        // ),
                         const SizedBox(
                           height: 16,
                         ),
@@ -279,18 +134,120 @@ class loginPageState extends State<LoginPage> {
                         const SizedBox(
                           height: 16,
                         ),
-                        //-------------------------------------------------------------------------------
+                        
+                        ////////////////////////////////////////////////////////////
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: TextFormField(
+                    //       controller: emailOTP,
+                    //       decoration:
+                    //           const InputDecoration(hintText: "enter valid email to verify")),
+                    // ),
+                    // ElevatedButton(
+                    //     onPressed: () async {
+                    //       myauth.setConfig(
+                    //         appEmail: "reemsh65@gmail.com", 
+                    //         appName: "Email OTP",
+                    //         userEmail: emailOTP.text,
+                    //         otpLength: 6,
+                    //         otpType: OTPType.digitsOnly
+                    //       );
+                    //       if (await myauth.sendOTP() == true) {
+                    //         print("send");
+                    //         ScaffoldMessenger.of(context)
+                    //             .showSnackBar(const SnackBar(
+                    //           content: Text("OTP has been sent"),
+                    //         ));
+                    //       } else {
+                    //         print("unsend");
+                    //         ScaffoldMessenger.of(context)
+                    //             .showSnackBar(const SnackBar(
+                    //           content: Text("Oops, OTP send failed"),
+                    //         ));
+                    //       }
+                    //     },
+                    //     child: const Text("Send OTP")),
+
+              
+                    // Padding(
+                    //   padding: const EdgeInsets.all(8.0),
+                    //   child: TextFormField(
+                    //       controller: otp,
+                    //       decoration:
+                    //           const InputDecoration(hintText: "Enter OTP")),
+                    // ),
+                    // ElevatedButton(
+                    //     onPressed: () async {
+                    //       if (await myauth.verifyOTP(otp: otp.text) == true) {
+                    //         ScaffoldMessenger.of(context)
+                    //             .showSnackBar(const SnackBar(
+                    //           content: Text("OTP is verified"),
+                    //         ));
+                    //         print("OTP is verified");
+                    //       } else {
+                    //         ScaffoldMessenger.of(context)
+                    //             .showSnackBar(const SnackBar(
+                    //           content: Text("Invalid OTP"),
+
+                    //         ));
+                    //       }
+                    //     },
+                    //     child: const Text("Verify")),
+
+                        
+                        ///////////////////////////////////////////////////////////
+                        
                         CustomFormButton(
                           innerText: 'Sign in',
                           onPressed: () async {
+                            // EmailOTP myauth = EmailOTP();
+                            // final FirebaseAuth auth = FirebaseAuth.instance;
+                            //  auth.signInWithEmailAndPassword(
+                            // email: email.toString(), password: password.toString());
+                            // myauth.setConfig(
+                            // appEmail: "reemsh65@gmail.com",
+                            // appName: "Rafad",
+                            // userEmail: email,
+                            // otpLength: 6,
+                            // otpType: OTPType.digitsOnly
+                            // );
+                            
+        //                     TextEditingController _textFieldController = TextEditingController();
+                            
+        //                   return showDialog(
+        // context: context,
+        // builder: (context) {
+        //   return AlertDialog(
+        //     title: Text('OTP has been sent successfully please check your email'),
+        //     content: TextField(
+        //       controller: _textFieldController,
+        //       textInputAction: TextInputAction.go,
+        //       keyboardType: TextInputType.numberWithOptions(),
+        //       decoration: InputDecoration(hintText: "Enter the OTP here"),
+        //     ),
+        //     actions: <Widget>[
+        //       new ElevatedButton(
+        //         child: new Text('Submit'),
+        //         onPressed: () async {
+
+        //         },
+        //       )
+        //     ],
+        //   );
+        // });
+
+                            
                             final FirebaseAuth _auth = FirebaseAuth.instance;
+
       //print('reached create user');
       try {
+
         if (isAdmin==true) {
           //in case of an admin
           isAdmin = false;
           await _auth.signInWithEmailAndPassword(
               email: email.toString(), password: password.toString());
+              
           email = '';
           password = '';
           //Navigator.push(
@@ -302,9 +259,7 @@ class loginPageState extends State<LoginPage> {
         } else{
           await _auth.signInWithEmailAndPassword(
               email: email.toString(), password: password.toString());
-
-
-
+                        
 
           await FirebaseFirestore.instance
     .collection('AcceptedCampaigns')
@@ -315,6 +270,49 @@ class loginPageState extends State<LoginPage> {
         isCampaign=true;
         print('reached campaign');
         print(isCampaign);
+        
+        TextEditingController _textFieldController = TextEditingController();
+                            
+                          return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text('please verify your email'),
+            // content: TextField(
+            //   controller: _textFieldController,
+            //   textInputAction: TextInputAction.go,
+            //   keyboardType: TextInputType.numberWithOptions(),
+            //   decoration: InputDecoration(hintText: "Enter the OTP here"),
+            // ),
+            actions: <Widget>[
+              new ElevatedButton(
+                child: new Text('ok'),
+                onPressed: () async {
+                   Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => MyApp()));
+                          
+                            // myauth.setConfig(
+                            //   appEmail: "441200087@student.ksu.edu.sa",
+                            //   appName: "Rafad",
+                            //   userEmail: emailOTP,
+                            //   otpLength: 4,
+                            //   otpType: OTPType.digitsOnly);
+                            //   print("send Otp");
+                },
+              ),
+              // new ElevatedButton(
+              //   child: new Text('verify OTP'),
+              //   onPressed: () async {
+              //     if (await myauth.verifyOTP(otp: otp1Controller.text) == true) ;
+              //     {
+              //       print("ok");
+              //     }
+              //   },
+              // )
+            ],
+          );
+        });
+
       }
     });//check if the user has account on AcceptedCampaign collection
           //on case of campaign
@@ -338,7 +336,9 @@ class loginPageState extends State<LoginPage> {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => nav_pilgrim()));}
         
-      }} on FirebaseAuthException catch (e) {
+      }
+
+      } on FirebaseAuthException catch (e) {
         showDialog(
             context: context,
             builder: (context) {
@@ -348,7 +348,6 @@ class loginPageState extends State<LoginPage> {
               );
             });
       }
-
                           },
                         ),
                         const SizedBox(
@@ -359,23 +358,23 @@ class loginPageState extends State<LoginPage> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
-                              /*const Text(
+                              const Text(
                                 'New user ? ',
                                 style: TextStyle(
                                     fontSize: 13,
                                     color: Color(0xff939393),
                                     fontWeight: FontWeight.bold),
-                              ),*/
+                              ),
                               GestureDetector(
                                 onTap: () => {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              const ForgotPasswordPage()))
+                                              const WelcomeScreen()))
                                 },
                                 child: const Text(
-                                  'Forgot password',
+                                  'Sign-up',
                                   style: TextStyle(
                                       fontSize: 15,
                                       color: Colors.blue,
@@ -430,6 +429,7 @@ class CustomFormButton extends StatelessWidget {
     );
   }
 }
+
 
 class CustomInputField extends StatefulWidget {
   final String labelText;
@@ -499,6 +499,7 @@ class _CustomInputFieldState extends State<CustomInputField> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: widget.validator,
           ),
+          
         ],
       ),
     );
@@ -535,4 +536,6 @@ class PageHeading extends StatelessWidget {
 ),
 );
 }
+
 }
+
