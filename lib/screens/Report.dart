@@ -27,10 +27,17 @@ class Report extends StatefulWidget {
 }
 
 class _ReportState extends State<Report> {
-  //final TextEditingController _Textcontroller = TextEditingController();
+  final TextEditingController _Textcontroller =
+      TextEditingController(); //كان نوت بجربه بدون
   String? tilte;
   String? problem;
   final _reportFormKey = GlobalKey<FormState>();
+  //اضفت هذي  من ليلى جديد
+  @override
+  void dispose() {
+    _Textcontroller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +53,8 @@ class _ReportState extends State<Report> {
         child: Form(
           key: _reportFormKey,
           child: Column(
-            mainAxisAlignment:
-                MainAxisAlignment.center, //ارجعي له في حال خرب علينا
+            /*  mainAxisAlignment:
+                MainAxisAlignment.center,*/ //ارجعي له في حال خرب علينا
             children: [
               const SizedBox(
                 height: 16,
@@ -57,18 +64,40 @@ class _ReportState extends State<Report> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
-                  onChanged: (value) {
-                    setState(() {
-                      tilte = value;
-                    });
-                  },
-                  decoration: InputDecoration(
-                      hintText: 'Enter the title of problem',
-                      hintStyle: TextStyle(color: Colors.grey),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      )),
-                ),
+                    inputFormatters: [
+                      FilteringTextInputFormatter.deny(
+                        RegExp(r"\s\s"),
+                      )
+                    ],
+                    textInputAction: TextInputAction.done,
+                    keyboardType: TextInputType.text,
+                    onChanged: (value) {
+                      setState(() {
+                        tilte = value;
+                      });
+                    },
+                    decoration: InputDecoration(
+                        hintText: 'Enter the title of problem',
+                        hintStyle: TextStyle(color: Colors.grey),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        )),
+                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    validator: (textValue) {
+                      if (textValue == null || textValue.isEmpty) {
+                        return 'Title is required!';
+                      }
+                      if (textValue.length < 5) {
+                        return 'Title should be 5 characters at least';
+                      }
+
+                      //return null;
+                      if (textValue.trim().isEmpty) {
+                        return "Title can not be empty!";
+                      }
+
+                      return null;
+                    }),
               ),
               const SizedBox(
                 height: 16,
@@ -77,12 +106,13 @@ class _ReportState extends State<Report> {
               //بعد السايز بوكس نحط الفور يفلد بحط الباقي نوت
               Text("Enter the problem description"),
               // : Text('Sent Message: ${_Textcontroller.value.text}'),
+
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
                     // controller: _Textcontroller,
-                    minLines: 2,
-                    maxLines: 5,
+                    minLines: 3,
+                    maxLines: 200,
                     keyboardType: TextInputType.multiline,
                     inputFormatters: [
                       FilteringTextInputFormatter.deny(
@@ -90,7 +120,6 @@ class _ReportState extends State<Report> {
                       )
                     ],
                     textInputAction: TextInputAction.done,
-                    // keyboardType: TextInputType.text, هل له تأثير في  الفالديتير
                     onChanged: (value) {
                       setState(() {
                         problem = value;
@@ -99,15 +128,24 @@ class _ReportState extends State<Report> {
                     decoration: InputDecoration(
                         hintText: 'Enter your problem here',
                         hintStyle: TextStyle(color: Colors.grey),
-                        isDense: true, //اضفت هذي عشان الفالديتير
+                        // isDense: true,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         )),
                     autovalidateMode: AutovalidateMode.onUserInteraction,
                     validator: (textValue) {
                       if (textValue == null || textValue.isEmpty) {
-                        return 'Problem can not be empty!';
+                        return 'Problem description is required!';
                       }
+                      if (textValue.length < 20) {
+                        return 'Problem describtion should be 20 characters at least';
+                      }
+
+                      //return null;
+                      if (textValue.trim().isEmpty) {
+                        return "Problem describtion can not be empty!";
+                      }
+
                       return null;
                     }),
               ),
@@ -119,46 +157,44 @@ class _ReportState extends State<Report> {
                 innerText: 'Submit',
                 onPressed: () async {
                   if (_reportFormKey.currentState!.validate()) {
-
-                  // هنا مفروض يودي لمكان آخر بعدله مع ليلى
-                  //اضفت هنا ارسال رسالة تأكيد
-                  showDialog(
-                    context: context,
-                    builder: (ctx) => AlertDialog(
-                      icon: Icon(
-                        Icons.check,
-                        color: Colors.green,
-                      ),
-                      //تأكدي لو صح او لا
-                      title: const Text("Report problem Successfully"),
-                      content:
-                          const Text("your report was successfully submitted"),
-                      actions: <Widget>[
-                        TextButton(
-                          onPressed: () {
-                            Navigator.of(ctx).pop();
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.all(14),
-                            child: const Text("Ok"),
-                          ),
+                    showDialog(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                        icon: Icon(
+                          Icons.check,
+                          color: Colors.green,
                         ),
-                      ],
-                    ),
-                  );
-                  await FirebaseFirestore.instance
-                      .collection("Problem-Report")
-                      .doc(FirebaseAuth.instance.currentUser!.uid)
-                      .set({
-                    'tilte': tilte,
-                    'problem': problem,
-                    'UID': FirebaseAuth.instance.currentUser!.uid,
-                    'CUID': widget.campaignId,
-                    'Cname': widget.campaignName
-                  });
-                   }
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => WelcomeScreen()));
+                        title: const Text("Report problem Successfully"),
+                        content: const Text(
+                            "your report was successfully submitted"),
+                        actions: <Widget>[
+                          TextButton(
+                            onPressed: () {
+                              Navigator.of(ctx).pop();
+                            },
+                            child: Container(
+                              padding: const EdgeInsets.all(14),
+                              child: const Text("Ok"),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                    await FirebaseFirestore.instance
+                        .collection("Problem-Report")
+                        .doc(FirebaseAuth.instance.currentUser!.uid)
+                        .set({
+                      'tilte': tilte,
+                      'problem': problem,
+                      'UID': FirebaseAuth.instance.currentUser!.uid,
+                      'CUID': widget.campaignId,
+                      'Cname': widget.campaignName
+                    });
+                  }
+                  Navigator.pop(context,
+                      'Ok'); //Navigator.pop(context, 'Report');//يرجع للريبورت افضل
+                  /*Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => WelcomeScreen()));*/
                 },
               ),
             ],
