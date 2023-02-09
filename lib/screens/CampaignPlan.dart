@@ -14,6 +14,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rafad1/screens/notification_accept.dart';
 import 'package:rafad1/screens/CampaignAddAnouncement.dart';
 
+import 'Chat_screen.dart';
+
 class CampaignPlan extends StatefulWidget {
   const CampaignPlan({super.key});
 
@@ -71,6 +73,18 @@ class _CampaignPlan extends State<CampaignPlan> {
     //int theHour;
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF455D83),
+          tooltip: 'Chat',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Chat_screen()),
+            );
+          },
+          child: Image.asset('assests/images/chat.png', height: 35),
+        ),
+
         body: Container(
       child: SingleChildScrollView(
         child: Column(
@@ -94,9 +108,9 @@ class _CampaignPlan extends State<CampaignPlan> {
                       //NotificationService().showNotification(
                       // 1, 'Notification_title.text,' ,'Notification_descrp.text');
 
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content:
-                              Text('This button is for future improvment')));
+                      //ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        //  content:
+                          //    Text('This button is for future improvment')));
 
                       Navigator.push(
                         context,
@@ -166,7 +180,7 @@ class _CampaignPlan extends State<CampaignPlan> {
                         padding: EdgeInsets.all(0.1),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(100),
-                            color:  Color.fromARGB(255, 12, 92, 119)),
+                            color:  Color(0xFF455D83)),
                         child: IconButton(
                           //start time icon
                           icon: const Icon(Icons.timer),
@@ -255,7 +269,7 @@ class _CampaignPlan extends State<CampaignPlan> {
                             print('reached submition');
                             addActivity();
                           },
-                          icon: const Icon(Icons.arrow_forward))
+                          icon: const Icon(Icons.add_circle))
                     ]),
 
                     SizedBox(

@@ -3,6 +3,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
+import 'package:rafad1/screens/CampaignAddAnouncement.dart';
+import 'package:rafad1/screens/viewAnnouncements.dart';
 
 import 'Chat_screen.dart';
 
@@ -15,41 +17,64 @@ class ViewCampaignPlan extends StatefulWidget {
 class _ViewState extends State<ViewCampaignPlan> {
   @override
 
-  Future<String> callAsyncFetch() => Future.delayed(Duration(seconds: 2), () => "hi");
-
   Widget build(BuildContext context) {
-    // String ID = '';
-    // <Future>() async {
-    //   DocumentSnapshot variable = await FirebaseFirestore.instance
-    //       .collection('Pilgrims-Account')
-    //       .doc(FirebaseAuth.instance.currentUser?.uid)
-    //       .get();
-    //   ID = variable['ChosenCampaignID'];
-    // };
-
-    // print(ID);
     Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
         .collection("AcceptedCampaigns")
         .doc()
         .collection("Activities")
         .snapshots();
     return Scaffold(
-      floatingActionButton: FloatingActionButton (
-  backgroundColor:  Color.fromARGB(255, 12, 92, 119),
-  tooltip: 'Chat',
-  onPressed: () { Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const Chat_screen()),);},
-  child: Image.asset('assests/images/chat.png', height: 35),
-),
+     floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF455D83),
+          tooltip: 'Chat',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Chat_screen()),
+            );
+          },
+          child: Image.asset('assests/images/chat.png', height: 35),
+        ),
+
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Today\'s Campaign plan'),
-          backgroundColor: Color.fromARGB(255, 12, 92, 119),
+          backgroundColor:Color(0xFF455D83),
           elevation: 0,
         ),
         body: SingleChildScrollView(
             child: Column(children: [
+              const SizedBox(height: 37),
+
+            Row(
+              children: [
+                const SizedBox(width: 10),
+                Ink(
+                  decoration: const ShapeDecoration(
+                    color: const Color(0xFF455D83),
+                    shape: CircleBorder(),
+                  ),
+                  child: IconButton(
+                    icon: const Icon(Icons.notifications),
+                    tooltip: 'Show Snackbar',
+                    color: const Color.fromARGB(255, 255, 255, 255),
+                    onPressed: () {
+
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                const viewAnnouncements()),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              width: 10,
+              height: 30,
+            ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20),
             child: StreamBuilder<QuerySnapshot>(

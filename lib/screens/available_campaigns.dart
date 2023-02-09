@@ -12,6 +12,7 @@ import 'package:rate_in_stars/rate_in_stars.dart';
 import '../search/user1.dart';
 import '../view_rate_review/campaign_view_rate.dart';
 import '../widgets/my_button.dart';
+import 'Chat_screen.dart';
 
 
 //import 'package:rafad1/screens/LoginPage.dart';
@@ -85,6 +86,17 @@ class _availableCampaignsState extends State<availableCampaigns> {
         .snapshots();
         
     return Scaffold(
+floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF455D83),
+          tooltip: 'Chat',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Chat_screen()),
+            );
+          },
+          child: Image.asset('assests/images/chat.png', height: 35),
+        ),
 
         appBar: AppBar(
           automaticallyImplyLeading: false,

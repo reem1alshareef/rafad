@@ -9,6 +9,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 
+import 'Chat_screen.dart';
 import 'LoginPage.dart';
 
 //شغل ليلى انحذف
@@ -42,6 +43,18 @@ class _ReportState extends State<Report> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF455D83),
+          tooltip: 'Chat',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Chat_screen()),
+            );
+          },
+          child: Image.asset('assests/images/chat.png', height: 35),
+        ),
+
       appBar: AppBar(
         title: Text("Report A Problem"),
         backgroundColor: const Color(0xFF455D83),

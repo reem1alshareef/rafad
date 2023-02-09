@@ -294,9 +294,6 @@ class deleteCampaign extends State<DeleteCampaign> {
                                                       
                                                       //firebase
                                                       try{
-                                                        //await FirebaseFirestore.instance
-                                                        //.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).delete();
-                                                        //.then((doc) => print("Document deleted"));
                                                         setState(
                                                                   () async {
                                                                 await FirebaseFirestore
@@ -305,52 +302,6 @@ class deleteCampaign extends State<DeleteCampaign> {
                                                                         'AcceptedCampaigns')
                                                                     .doc(storedocs[i]['UID'])
                                                                     .delete();
-                                                                    
-
-
-
-
-
-
-                                                                    //start of deleting pilgrims
-                                                                    // await for (var snapshot in _firestore.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).collection('pilgrimsRequest').snapshots()); 
-                                                                    // final Stream<QuerySnapshot> dataStream =FirebaseFirestore.instance.collection('AcceptedCampaigns').doc(storedocs[i]['UID']).collection('pilgrimsRequest').snapshots();
-                                                                    // final List storedocss = [];
-                                                                    // snapshot.data!.docs.map((DocumentSnapshot document) {
-                                                                    //   Map a = document.data() as Map<String, dynamic>;
-                                                                    //   storedocss.add(a);
-                                                                    //   a['id'] = document.id;
-                                                                    //   }).toList();
-                                                                      
-                                                                    //   var l;
-                                                                    //   List.generate(
-                                                                    //     storedocss.length,
-                                                                    //     (l) async {
-                                                                    //       await FirebaseFirestore.instance
-                                                                    // .collection('AcceptedCampaigns')
-                                                                    // .doc(storedocs[i]['UID'])
-                                                                    // .collection('pilgrimsRequest')
-                                                                    // .doc(storedocss[l]['UID'])
-                                                                    // .delete();
-                                                                    //     }
-                                                                    //     );
-                                                                    //end of deleting pilgrims
-
-
-
-
-
-
-
-
-
-                                                                    // await FirebaseFirestore
-                                                                    // .instance
-                                                                    // .collection(
-                                                                    //     'AcceptedCampaigns')
-                                                                    // .doc(storedocs[i]['UID'])
-                                                                    // .collection('pilgrimsRequest')
-                                                                    // .batch.delete();
                                                               });
                                                         Navigator.pop(context, 'Delete');
                                                         showDialog(
@@ -363,8 +314,6 @@ class deleteCampaign extends State<DeleteCampaign> {
                                                               });
                                                         
                                                       } catch(e){
-                                                        //e.hashCode;
-                                                        //print(e.runtimeType);
                                                         
                                                         Navigator.pop(context, 'Delete');
                                                         showDialog(
@@ -375,19 +324,8 @@ class deleteCampaign extends State<DeleteCampaign> {
                                                               Text('Account been deleted succesfully', style: TextStyle(color: Colors.green),),
                                                               );
                                                               });
-
-                                                        
-                                                        // showDialog(
-                                                        //   context: context,
-                                                        //   builder: (context) {
-                                                        //    //var m=e.message;
-                                                        //     return const AlertDialog(
-                                                        //       content:
-                                                        //       Text('Account could not be deleted, try again.' , style: TextStyle(color: Colors.red,)));
-                                                        //       //print(m);
-                                                        //       });
                                                       }
-                                                    },//=> Navigator.pop(context, 'OK'),
+                                                    },
                                                     child: Text('Delete'),
                                                   ),
                                                 ],
