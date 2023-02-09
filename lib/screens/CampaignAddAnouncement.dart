@@ -200,7 +200,7 @@ class _CampaignAddAnouncement extends State<CampaignAddAnouncement> {
 
                                 TextFormField(
                                   maxLines: 1,
-                                  maxLength: 15,
+                                  maxLength: 100,
 
                                   inputFormatters: [
                                     FilteringTextInputFormatter.deny(
