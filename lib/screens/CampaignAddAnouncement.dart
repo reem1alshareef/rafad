@@ -1,7 +1,12 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
+import 'package:rafad1/screens/announcementLocation.dart';
+import 'package:rafad1/widgets/my_button.dart';
+
+import '../services/local_push_notification.dart';
 
 class CampaignAddAnouncement extends StatefulWidget {
   const CampaignAddAnouncement({super.key});
@@ -11,6 +16,31 @@ class CampaignAddAnouncement extends StatefulWidget {
 }
 
 class _CampaignAddAnouncement extends State<CampaignAddAnouncement> {
+  bool isLoading = false;
+  
+  storeNotificationToken()async{
+    String? token = await FirebaseMessaging.instance.getToken();
+    FirebaseFirestore.instance.collection('users').doc(FirebaseAuth.instance.currentUser!.uid).set(
+        {
+          'token': token
+        },SetOptions(merge: true));
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+      FirebaseMessaging.instance.getInitialMessage();
+    FirebaseMessaging.onMessage.listen((event) {
+      LocalNotificationService.display(event);
+    });
+    storeNotificationToken();
+
+ //   FirebaseMessaging.instance.subscribeToTopic('subscription');
+
+  }
+
+
   final Stream<QuerySnapshot> dataStream = FirebaseFirestore.instance
       .collection('AcceptedCampaigns')
       .doc(FirebaseAuth.instance.currentUser!.uid)
@@ -213,6 +243,33 @@ class _CampaignAddAnouncement extends State<CampaignAddAnouncement> {
 
                                 ),
 
+                                Container(
+                                  margin: const EdgeInsets.all(15.0),
+                                  padding: const EdgeInsets.all(3.0),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.blueAccent)
+                                  ),
+                                  child: Row(children: [
+                                    Text('Choose Location'),
+                                    IconButton(onPressed:() async {
+                                  final List<String> location = await Navigator
+                                  .push(context,MaterialPageRoute(builder: (context) => 
+                                  announcementLocation(),));
+
+                                }, icon: Icon(Icons.pin_drop_rounded))
+
+                                  ],)//Text('My Awesome Border'),
+                                  ),
+
+                                MyButton(
+                                  color: Color.fromARGB(255, 48, 48, 122), 
+                                  title: 'Submit', onPressed: (){
+                                  addActivity();
+                                })
+
+
+                                
+
 
 
 
@@ -284,12 +341,12 @@ class _CampaignAddAnouncement extends State<CampaignAddAnouncement> {
                       //Flexible(
                         //  child: Form(key: _addDesKey, child: TextFormField())),
 
-                      IconButton(
-                          onPressed: () {
-                            print('reached submition');
-                            addActivity();
-                          },
-                          icon: const Icon(Icons.add_circle))
+                      // IconButton(
+                      //     onPressed: () {
+                      //       print('reached submition');
+                      //       addActivity();
+                      //     },
+                      //     icon: const Icon(Icons.add_circle))
                     ]),
 
                     SizedBox(

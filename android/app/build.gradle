@@ -30,12 +30,14 @@ android {
     compileSdkVersion 33
     ndkVersion flutter.ndkVersion
     
-    /*defaultConfig{
-        minSdkVersion 21
+    defaultConfig{
+        applicationId "com.dotcoder.rafad"
+        minSdkVersion 19
         targetSdkVersion 30
-        versionCode flutterVersionCode 
-        versionCode flutterVersionName 
-    }*/
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true
+    }
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

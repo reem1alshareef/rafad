@@ -20,7 +20,10 @@ import 'package:rafad1/screens/LoginPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:rafad1/widgets/map_tracking.dart';
 import '../firebase_options.dart';
+import 'package:flutter/foundation.dart';
 //import 'package:rafad1/screens/newAcc.dart';
+import 'firebase_options.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 // ...
 /*هذي حطيتها من المقطع الاول ممكن تكون حقت الاشعار اللي من الفايربيس
@@ -42,6 +45,24 @@ Future main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+
+  final messaging = FirebaseMessaging.instance;
+
+final settings = await messaging.requestPermission(
+ alert: true,
+ announcement: false,
+ badge: true,
+ carPlay: false,
+ criticalAlert: false,
+ provisional: false,
+ sound: true,
+);
+if (kDebugMode) {
+   print('Permission granted: ${settings.authorizationStatus}');
+ }
+
+ FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
+
   runApp(const MyApp());
 }
 
@@ -70,4 +91,8 @@ class MyApp extends StatelessWidget {
           LoginPage.screenRoute: (context) => const LoginPage(),
         });
   }
+}
+
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  
 }
