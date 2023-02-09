@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 final _firestore = FirebaseFirestore.instance;
 late User sender;
-
+//  String? messageTimeH;
 class Chat_screen extends StatefulWidget {
   static const String screenRoute = 'chat_screen';
 
