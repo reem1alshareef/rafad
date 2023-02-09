@@ -40,14 +40,18 @@ class _ViewState extends State<ViewCampaignPlan> {
     print(ID);
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton (
-  backgroundColor:  Color.fromARGB(255, 12, 92, 119),
-  tooltip: 'Chat',
-  onPressed: () { Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => const Chat_screen()),);},
-  child: Image.asset('assests/images/chat.png', height: 35),
-),
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF455D83),
+          tooltip: 'Chat',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Chat_screen()),
+            );
+          },
+          child: Image.asset('assests/images/chat.png', height: 35),
+        ),
+
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Today\'s Campaign plan'),

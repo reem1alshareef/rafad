@@ -11,6 +11,8 @@ import 'package:flutter/src/widgets/editable_text.dart';
 import '../widgets/my_button.dart';
 import 'package:rafad1/screens/Card.dart';
 
+import 'Chat_screen.dart';
+
 // our data
 
 String name = 'naaamee';
@@ -136,6 +138,18 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
 //String description  = map['description'] ;
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF455D83),
+          tooltip: 'Chat',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Chat_screen()),
+            );
+          },
+          child: Image.asset('assests/images/chat.png', height: 35),
+        ),
+
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Profile View'),

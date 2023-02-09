@@ -11,6 +11,7 @@ import 'package:rafad1/screens/Card.dart';
 
 import '../view_rate_review/campaign_view_rate.dart';
 import '../widgets/my_button.dart';
+import 'Chat_screen.dart';
 //import 'package:rafad1/screens/LoginPage.dart';
 
 class ProfileCampaign extends StatefulWidget {
@@ -107,7 +108,20 @@ class _ViewState extends State<ProfileCampaign> {
 //String description  = map['description'] ;
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF455D83),
+          tooltip: 'Chat',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Chat_screen()),
+            );
+          },
+          child: Image.asset('assests/images/chat.png', height: 35),
+        ),
+
         appBar: AppBar(
+          
           automaticallyImplyLeading: false,
           title: Text('Profile View'),
           backgroundColor: const Color(0xFF455D83),

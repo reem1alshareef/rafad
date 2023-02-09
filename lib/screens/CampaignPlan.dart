@@ -14,6 +14,8 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:rafad1/screens/notification_accept.dart';
 import 'package:rafad1/screens/CampaignAddAnouncement.dart';
 
+import 'Chat_screen.dart';
+
 class CampaignPlan extends StatefulWidget {
   const CampaignPlan({super.key});
 
@@ -71,6 +73,18 @@ class _CampaignPlan extends State<CampaignPlan> {
     //int theHour;
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF455D83),
+          tooltip: 'Chat',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Chat_screen()),
+            );
+          },
+          child: Image.asset('assests/images/chat.png', height: 35),
+        ),
+
         body: Container(
       child: SingleChildScrollView(
         child: Column(
