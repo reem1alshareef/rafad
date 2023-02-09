@@ -247,10 +247,12 @@ class messageLine extends StatelessWidget {
               ]),
             ),
           ),
-          Text('$timeH'),
-          Text('$timeM')
-        ],
-      ),
-    );
+          SizedBox(height: 4,),
+          Text('$timeM:$timeH',
+          style: TextStyle(fontSize: 10),),
+         ] ,) 
+        ,
+      );
+    
   }
 }
