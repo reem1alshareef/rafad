@@ -169,15 +169,7 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                 },
                 child: Text('Get Camapign Directions')),
           ),
-          ButtonBar(
-                  alignment:
-                      MainAxisAlignment.spaceAround,
-                  buttonHeight: 52.0,
-                  buttonMinWidth: 90.0,
-                  children: <Widget>[
-                    TextButton(
-                      style: TextButton.styleFrom(shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2.0)),)),
-                      onPressed: () {
+          MyButton(color: const Color(0xFF455D83), title: 'Delete Account', onPressed: (){ 
                         showDialog(
                              context: context,
                             builder:
@@ -218,7 +210,7 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                              String password = docCustomer['password'];
                              
 
-                          FirebaseAuth.instance.currentUser?.delete();
+                          //FirebaseAuth.instance.currentUser?.delete();
 
                                               User? user = await FirebaseAuth.instance.currentUser;
                                               
@@ -253,12 +245,7 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                           ],
                         );
                         }
-                        );}
-                  ),
-             // ignore: prefer_const_constructors
-                 
-            ],
-          ),
+                        );})
         ));
   }
 }

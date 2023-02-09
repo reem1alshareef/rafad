@@ -268,7 +268,7 @@ print('999999999999999999999999999999999999999999999999999');
                              
                           
 
-                          FirebaseAuth.instance.currentUser?.delete();
+                          //FirebaseAuth.instance.currentUser?.delete();
 
                                               User? user = await FirebaseAuth.instance.currentUser;
                                               
