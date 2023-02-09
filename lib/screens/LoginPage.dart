@@ -351,8 +351,8 @@ class loginPageState extends State<LoginPage> {
                             auth.signInWithEmailAndPassword(
                             email: email.toString(), password: password.toString());
                             myauth.setConfig(
-                            appEmail: "me@rohitchouhan.com",
-                            appName: "Email OTP",
+                            appEmail: "reemsh65@gmail.com",
+                            appName: "Rafad",
                             userEmail: email,
                             otpLength: 6,
                             otpType: OTPType.digitsOnly
