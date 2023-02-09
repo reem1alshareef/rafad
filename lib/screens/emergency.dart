@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
+//import 'package:rafad1/services/firebase_helper.dart';
 import 'package:rafad1/widgets/emButton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -21,6 +22,7 @@ import 'package:rafad1/screens/CurrentLocationScreen.dart';
 
 import 'package:rafad1/screens/emergencyList.dart';
 
+import 'Chat_screen.dart';
 import 'CurrentLocationScreen.dart';
 
 class emergency extends StatefulWidget {
@@ -46,18 +48,31 @@ class _emergencyState extends State<emergency> {
   Widget build(BuildContext context) {
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton (
+  backgroundColor:  Color.fromARGB(255, 184, 20, 20),
+  tooltip: 'Chat',
+  onPressed: () { Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const Chat_screen()),);},
+  child: Image.asset('assests/images/chat.png', height: 35),
+),
       appBar: AppBar(
+        
         automaticallyImplyLeading: false,
         title: Text('sending emerency request'),
         backgroundColor: Color.fromARGB(255, 184, 20, 20),
         elevation: 0,
         actions: <Widget>[
+          
+          
           IconButton(
             icon: Icon(
               Icons.logout,
               color: Colors.white,
             ),
-            onPressed: () {
+            
+            onPressed: (){
+
               FirebaseAuth.instance.signOut();
               Navigator.pushNamed(context, WelcomeScreen.screenRoute);
             },

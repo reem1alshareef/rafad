@@ -3,13 +3,15 @@ import 'package:expansion_tile_card/expansion_tile_card.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:rafad1/screens/PolylineScreen.dart';
+
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:rafad1/widgets/emButton.dart';
 import 'package:rafad1/screens/LocationService.dart';
 import 'package:rafad1/screens/emergency.dart';
 import 'package:rafad1/screens/LocationService.dart';
 import 'package:rafad1/screens/pilgLocation.dart';
+
+import 'Chat_screen.dart';
 
 
 class emergencyList extends StatefulWidget {
@@ -60,6 +62,14 @@ void DataStreams() async {
         .snapshots();
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton (
+  backgroundColor:   Color.fromARGB(255, 184, 20, 20),
+  tooltip: 'Chat',
+  onPressed: () { Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => const Chat_screen()),);},
+  child: Image.asset('assests/images/chat.png', height: 35),
+),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Text('list of requesting pilgrims emergency'),

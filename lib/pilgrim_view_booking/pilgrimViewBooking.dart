@@ -20,7 +20,7 @@ class PilgrimView extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             automaticallyImplyLeading: false,
-            backgroundColor: const Color(0xFF455D83),
+            backgroundColor:  Color(0xFF455D83),
             title: const Text('My Bookings'),
             // actions: <Widget>[
             //   IconButton(

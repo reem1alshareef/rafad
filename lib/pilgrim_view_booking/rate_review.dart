@@ -5,8 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
-import 'package:rafad1/pilgrim_view_booking/report.dart';
+import 'package:rafad1/screens/Report.dart';
 
+import '../screens/Chat_screen.dart';
 import '../screens/welcome_screen.dart';
 import '../widgets/my_button.dart';
 
@@ -22,6 +23,10 @@ class _RateReviewState extends State<RateReview> {
   final _firestore = FirebaseFirestore.instance;
   double rating = 0;
   String? review;
+  String? campaignId;
+  String? campaignName;
+
+
   final _review = GlobalKey<FormState>();
   bool isButtonDisabled = false;
 
@@ -37,6 +42,18 @@ class _RateReviewState extends State<RateReview> {
         .snapshots();
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF455D83),
+          tooltip: 'Chat',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Chat_screen()),
+            );
+          },
+          child: Image.asset('assests/images/chat.png', height: 35),
+        ),
+
         body: SingleChildScrollView(
             child: Column(children: [
           Padding(
@@ -237,10 +254,8 @@ class _RateReviewState extends State<RateReview> {
                   setState(() {
                     isButtonDisabled = true;
                   });
-                    Navigator.of(
-                                                                            context)
-                                                                        .pop();
-                                                                      showDialog(
+                    Navigator.pop(context);
+                     showDialog(
                                                                           context:
                                                                               context,
                                                                           builder:
@@ -303,7 +318,15 @@ class _RateReviewState extends State<RateReview> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        const Report()));//Report()
+                                                       
+                                                              Report(
+                                                              campaignId:
+                                                                  storedocs[i][
+                                                                      'campaignID'],
+                                                              campaignName:
+                                                                  storedocs[i]
+                                                                      ['name'],
+                                                            ))); //Report()));//Report()
                                             },
                                       child: Column(
                                               children: const <Widget>[

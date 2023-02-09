@@ -5,7 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:location/location.dart' as loc;
 import 'package:location/location.dart';
-import 'package:rafad1/screens/PiligrimProfile.dart';
+import 'package:rafad1/screens/MapPilgrim.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:math' show cos, sqrt, asin;
 
@@ -71,8 +71,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                   child: GestureDetector(
                     onTap: () {
                       Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(
-                              builder: (context) => PiligrimProfile()),
+                          MaterialPageRoute(builder: (context) => MapPilgrim()),
                           (route) => false);
                     },
                     child: Icon(Icons.arrow_back),
@@ -184,7 +183,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
     PolylineId id = PolylineId('poly');
     Polyline polyline = Polyline(
       polylineId: id,
-      color: Colors.blue,
+      color:  Color(0xFF455D83),
       points: polylineCoordinates,
       width: 5,
     );

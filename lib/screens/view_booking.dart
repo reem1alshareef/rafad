@@ -6,6 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/src/widgets/editable_text.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 
+import 'Chat_screen.dart';
+
 //import 'package:rafad1/screens/LoginPage.dart';
 class ViewBooking extends StatefulWidget {
   //static const String screenRoute = 'welcome_screen';
@@ -105,10 +107,22 @@ print (element. data());l
 });
 ]);*/
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF455D83),
+          tooltip: 'Chat',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Chat_screen()),
+            );
+          },
+          child: Image.asset('assests/images/chat.png', height: 35),
+        ),
+
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Booking Requests'),
-          backgroundColor: const Color(0xFF455D83),
+          backgroundColor:Color(0xFF455D83),
           elevation: 0,
           actions: <Widget>[
             IconButton(

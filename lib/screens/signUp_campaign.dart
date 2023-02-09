@@ -35,7 +35,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
       child: Scaffold(
         appBar: AppBar(
           title: Text("sign up as campaign"),
-          backgroundColor: const Color(0xFF455D83),
+          backgroundColor:Color.fromARGB(255, 12, 92, 119),
           elevation: 0,
         ), //عشان سهم رجوع
 
@@ -79,6 +79,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                               nameCampaign = value;
                             });
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Name field is required!';
@@ -107,6 +108,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                               emailC = value;
                             });
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Email is required!';
@@ -138,6 +140,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                               phoneNumberC = value;
                             });
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Phone number is required!';
@@ -174,6 +177,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                               commercialID = value;
                             });
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'ID is required!';
@@ -208,6 +212,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                               address = value;
                             });
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (textValue) {
                             //يقبل من3 بشرط يكون فيها حرف عالاقل +رقم
                             if (textValue == null || textValue.isEmpty) {
@@ -245,6 +250,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                               capacity = value;
                             });
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'number of campaign capacity is required!';
@@ -274,6 +280,7 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                             });
                           },
                           obscureText: true,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Password is required!';
@@ -303,98 +310,96 @@ class _SignUpCampaignState extends State<SignUpCampaign> {
                           height: 16,
                         ),
                         TextFormField(
-                          maxLines: 3,
-                          maxLength: 200,
-                          
-                          inputFormatters: [
-                            FilteringTextInputFormatter.deny
-                            (RegExp(r"\s\s"),)
-                          ],
-                          
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {
-                            setState(() {
-                              description = value;
-                            });
-                          },
-                          decoration: const InputDecoration(
-                            labelText: 'Description',
-                            hintText: 'Your description',
-                            isDense: true,
+                            maxLines: 3,
+                            maxLength: 200,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.deny(
+                                RegExp(r"\s\s"),
+                              )
+                            ],
+                            textInputAction: TextInputAction.done,
+                            keyboardType: TextInputType.text,
+                            onChanged: (value) {
+                              setState(() {
+                                description = value;
+                              });
+                            },
+                            decoration: const InputDecoration(
+                              labelText: 'Description',
+                              hintText: 'Your description',
+                              isDense: true,
                             ),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (textValue) {
-                            if (textValue == null || textValue.isEmpty) {
-                              return 'Description is required!';
-                            }
-                            if(textValue.length<20){
-                              return 'Describtion should be 20 characters at least';
-                            }
-                            
-                            //return null;
-                            if(textValue.trim().isEmpty){
-                            return "Description cannot be empty.";
-                            }
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (textValue) {
+                              if (textValue == null || textValue.isEmpty) {
+                                return 'Description is required!';
+                              }
+                              if (textValue.length < 20) {
+                                return 'Describtion should be 20 characters at least';
+                              }
 
-                            return null;
-                          }
-                           ),
-                    const SizedBox(
+                              //return null;
+                              if (textValue.trim().isEmpty) {
+                                return "Description cannot be empty.";
+                              }
+
+                              return null;
+                            }),
+                        const SizedBox(
                           height: 20,
                         ),
                         //-------------------------------------------------------------------------------
                         CustomFormButton(
                           innerText: 'Sign up',
                           onPressed: () async {
-                            if (_signupFormKey.currentState!.validate()) {
+                            // if (_signupFormKey.currentState!.validate()) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('Submitting data..')),
+                            );
+                            //  Firebase method creating user account
+                            await FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                                    email: emailC.toString(),
+                                    password: password.toString())
+                                .then((value) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Submitting data..')),
+                                SnackBar(
+                                  content: Text(
+                                      'Registeration request been sent to the admin, you will receive an email soon with the statusof your request.'),
+                                  backgroundColor: Colors.green,
+                                ),
                               );
-                              //  Firebase method creating user account
-                              await FirebaseAuth.instance
-                                  .createUserWithEmailAndPassword(
-                                      email: emailC.toString(),
-                                      password: password.toString())
-                                  .then((value) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                        'Registeration request been sent to the admin, you will receive an email soon with the statusof your request.'),
-                                    backgroundColor: Colors.green,
-                                  ),
-                                );
 
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            logOutCampaign()));
-                              }).catchError((onError) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('$onError'),
-                                    backgroundColor: Colors.red,
-                                  ),
-                                );
-                              });// 
-                              // Firestore method -- assign a sub dir from Campaign-Account doc for the current user
-                              await FirebaseFirestore.instance
-                                  .collection("Campaign-Account")
-                                  .doc(FirebaseAuth.instance.currentUser!.uid)
-                                  .set({
-                                'nameCampaign': nameCampaign,
-                                'emailC': emailC,
-                                'UID': FirebaseAuth.instance.currentUser!.uid,
-                                'phoneNumberC': phoneNumberC,
-                                'commercialID': commercialID,
-                                'address': address,
-                                'capacity': capacity,
-                                'description': description,
-                                'password': password,
-                              });
-                            }
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => logOutCampaign()));
+                            }).catchError((onError) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('$onError'),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            }); //
+                            // Firestore method -- assign a sub dir from Campaign-Account doc for the current user
+                            await FirebaseFirestore.instance
+                                .collection("Campaign-Account")
+                                .doc(FirebaseAuth.instance.currentUser!.uid)
+                                .set({
+                              'nameCampaign': nameCampaign,
+                              'emailC': emailC,
+                              'UID': FirebaseAuth.instance.currentUser!.uid,
+                              'phoneNumberC': phoneNumberC,
+                              'commercialID': commercialID,
+                              'address': address,
+                              'capacity': capacity,
+                              'description': description,
+                              'password': password,
+                            });
+                            //}
                           },
                         ),
                         const SizedBox(
