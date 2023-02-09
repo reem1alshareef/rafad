@@ -78,7 +78,7 @@ initSearchingPilgrim(String textEntered){
             ),
           ),
           automaticallyImplyLeading: false,
-          backgroundColor:  Color.fromARGB(255, 12, 92, 119),
+          backgroundColor:   Color(0xFF455D83),
           elevation: 0,
           actions: const [
             SizedBox(height: 30),
