@@ -230,7 +230,7 @@ class _ViewState extends State<ProfileCampaign> {
                   }),
 
               MyButton(
-                  color: const Color(0xFF455D83),
+                  color:  Colors.red,
                   title: 'Delete account',
                   onPressed: () {
                     showDialog(
@@ -272,8 +272,8 @@ class _ViewState extends State<ProfileCampaign> {
                                               .instance.currentUser!.uid)
                                           .delete();
 
-                                      FirebaseAuth.instance.currentUser
-                                          ?.delete();
+                                      //FirebaseAuth.instance.currentUser
+                                        //  ?.delete();
 
                                       User? user = await FirebaseAuth
                                           .instance.currentUser;

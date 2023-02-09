@@ -108,9 +108,9 @@ class _CampaignPlan extends State<CampaignPlan> {
                       //NotificationService().showNotification(
                       // 1, 'Notification_title.text,' ,'Notification_descrp.text');
 
-                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content:
-                              Text('This button is for future improvment')));
+                      //ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        //  content:
+                          //    Text('This button is for future improvment')));
 
                       Navigator.push(
                         context,
@@ -269,7 +269,7 @@ class _CampaignPlan extends State<CampaignPlan> {
                             print('reached submition');
                             addActivity();
                           },
-                          icon: const Icon(Icons.arrow_forward))
+                          icon: const Icon(Icons.add_circle))
                     ]),
 
                     SizedBox(
