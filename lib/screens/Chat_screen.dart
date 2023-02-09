@@ -178,8 +178,8 @@ class messageStream extends StatelessWidget {
           final messageWidget = messageLine(
             sender: messageSender,
             message: messageText,
-            timeH: int.parse(messageTimeM),
-            timeM: int.parse(messageTimeH),
+            timeH: messageTimeM,//int.parse(messageTimeM),
+            timeM: messageTimeH,//int.parse(messageTimeH),
             isMe: currentUser == messageSender,
           );
           messageWidgets.add(messageWidget);
