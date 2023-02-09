@@ -61,7 +61,7 @@ initSearchingPilgrim(String textEntered){
         appBar: AppBar(
           title: TextField(
             onChanged: (textEntered){
-              setState(() {
+              setState(() { 
                 userNameText = textEntered;
               });
               initSearchingPilgrim(textEntered);
