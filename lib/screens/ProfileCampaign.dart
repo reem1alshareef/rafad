@@ -116,7 +116,7 @@ class _ViewState extends State<ProfileCampaign> {
             IconButton(
               icon: Icon(
                 Icons.logout,
-                color: Colors.white,
+                color: Color.fromARGB(255, 255, 255, 255),
               ),
               onPressed: () {
                 FirebaseAuth.instance.signOut();
@@ -125,7 +125,7 @@ class _ViewState extends State<ProfileCampaign> {
             )
           ],
         ),
-        backgroundColor: Color.fromARGB(255, 139, 177, 195),
+        backgroundColor: Color.fromARGB(255, 202, 217, 238),
         body: SingleChildScrollView(
           //minimum: const EdgeInsets.only(top: 100),
           child: Column(
@@ -143,7 +143,7 @@ class _ViewState extends State<ProfileCampaign> {
                 "Profile",
                 style: TextStyle(
                     fontSize: 15,
-                    color: Colors.blueGrey[200],
+                    color: Color.fromARGB(255, 139, 149, 153),
                     letterSpacing: 1.5,
                     fontWeight: FontWeight.bold,
                     fontFamily: "Source Sans Pro"),

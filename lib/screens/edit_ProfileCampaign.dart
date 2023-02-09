@@ -64,7 +64,7 @@ class _edit_CampaignState extends State<edit_Campaign> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Edit Profile"),
+          title: Text(map['name']+' Profile'),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
         ), //عشان سهم رجوع
@@ -76,6 +76,7 @@ class _edit_CampaignState extends State<edit_Campaign> {
             key: _signupFormKey,
             child: Column(
               children: [
+                
               //  const PageHeader(),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 50),
@@ -84,7 +85,7 @@ class _edit_CampaignState extends State<edit_Campaign> {
                     child: Column(
                       children: [
                         const PageHeading(
-                          title: 'edit your Profile',
+                          title: 'Edit Profile',
                         ),
                         const SizedBox(
                           height: 16,
@@ -96,7 +97,7 @@ class _edit_CampaignState extends State<edit_Campaign> {
                                 RegExp("[a-zA-Z- -]"))
                           ],
 
-                           initialValue: map['email'].toString(),
+                          // initialValue: map['email'].toString(),
                           keyboardType: TextInputType.text,
                           onChanged: (value) {
                             setState(() {
@@ -105,7 +106,7 @@ class _edit_CampaignState extends State<edit_Campaign> {
                           },
                         //controller: razan,
 
-                         //initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+                        initialValue : map['name'],//initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (textValue) {
 
                              if (!RegExp(r'^[a-z A-Z]+$').hasMatch(textValue!)) {
@@ -144,7 +145,7 @@ class _edit_CampaignState extends State<edit_Campaign> {
                             });
                           },
 
-                          initialValue: '4352555252', //initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+                          initialValue: map['commercial_ID'], //initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (textValue) {
 
                             
@@ -183,7 +184,7 @@ class _edit_CampaignState extends State<edit_Campaign> {
                             });
                           },
 
-                           initialValue: '0545058120',  //initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+                           initialValue: map['phoneNumber'],  //initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (value) {
                             
                             String patttern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
@@ -217,7 +218,7 @@ class _edit_CampaignState extends State<edit_Campaign> {
                           },
 
 
-                          initialValue: 'reem@camp.com',  //initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+                          initialValue: map['email'],  //initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (textValue) {
                            
                             if (!EmailValidator.validate(textValue!)) {
@@ -251,7 +252,7 @@ class _edit_CampaignState extends State<edit_Campaign> {
                             });
                           },
 
-                          initialValue: 'B60', //initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+                          initialValue: map['address'], //initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (textValue) {
                             //يقبل من3 بشرط يكون فيها حرف عالاقل +رقم
                             if (textValue == null || textValue.isEmpty) {
@@ -290,7 +291,7 @@ class _edit_CampaignState extends State<edit_Campaign> {
                               description = value;
                             });
                           },
-                          initialValue: 'we are a nice Campagin and privide the best services',  //initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
+                          initialValue: map['description'],  //initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           decoration: InputDecoration(
                            // labelText: 'Campaign Name ',
                             hintText: 'descrition',
@@ -313,12 +314,12 @@ class _edit_CampaignState extends State<edit_Campaign> {
                               );
                               //  Firebase method creating user account
                               
-                               
+                               Navigator.pop(context);/*
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            const ProfileCampaign()));
+                                            const ProfileCampaign()));*/
                               // 
                               // Firestore method -- assign a sub dir from Campaign-Account doc for the current user
 

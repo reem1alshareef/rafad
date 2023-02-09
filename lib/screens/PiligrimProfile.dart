@@ -139,7 +139,7 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Profile View'),
-          backgroundColor: const Color(0xFF455D83),
+          backgroundColor:const Color(0xFF455D83),
           elevation: 0,
           actions: <Widget>[
             IconButton(
@@ -154,11 +154,12 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
             )
           ],
         ),
-        backgroundColor: Color.fromARGB(255, 139, 177, 195),
+        backgroundColor: Color.fromARGB(255, 202, 217, 238),
         body: SingleChildScrollView(
           // const EdgeInsets.only(top: 50),
           child: Column(
             children: <Widget>[
+              
               Text(
                 "Piligrim",
                 style: TextStyle(
@@ -172,7 +173,7 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                 "Profile",
                 style: TextStyle(
                     fontSize: 15,
-                    color: Colors.blueGrey[200],
+                    color: Color.fromARGB(255, 139, 149, 153),
                     letterSpacing: 1.5,
                     fontWeight: FontWeight.bold,
                     fontFamily: "Source Sans Pro"),

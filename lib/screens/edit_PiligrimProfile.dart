@@ -62,7 +62,7 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(map['name']),
+          title: Text(map['name']+' Profile'),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
         ), //عشان سهم رجوع
@@ -80,9 +80,9 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        // const PageHeading(
-                        //   title: 'Sign up as Pilgrim',
-                        // ),
+                        const PageHeading(
+                          title: 'Edit Profile',
+                        ),
                         const SizedBox(
                           height: 16,
                         ),
@@ -130,7 +130,7 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
                               email = value;
                             });
                           },
-                          initialValue: map['email'],
+                          initialValue: map['email'],// intiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Email is required!';
@@ -162,7 +162,7 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
                               number = value;
                             });
                           },
-                          initialValue: map['number'],
+                          initialValue: map['number'],//intiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Phone number is required!';
@@ -199,7 +199,7 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
                               hajId = value;
                             });
                           },
-                          initialValue: map['hajId'],
+                          initialValue: map['hajId'],// intiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'ID is required!';
@@ -233,7 +233,7 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
                               disease = value;
                             });
                           },
-                          initialValue: map['disease'],
+                          initialValue: map['disease'],//initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'please enter none if there isn\'t any!';
@@ -260,7 +260,7 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
                               pharma = value;
                             });
                           },
-                          initialValue: map['pharma'],
+                          initialValue: map['pharma'],//intiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'please enter none if there isn\'t any!';

@@ -4,6 +4,8 @@ import "package:flutter/material.dart";
 import 'package:rafad1/admin/DeletePilgrim.dart';
 import 'package:rafad1/screens/CampaignView.dart';
 import 'package:rafad1/screens/MapPilgrim.dart';
+import 'package:rafad1/screens/PiligrimProfile.dart';
+import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/ViewCampaignPlan.dart';
 import 'package:rafad1/screens/MapCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
@@ -101,7 +103,7 @@ class _nav_campaignState extends State<nav_campaign> {
     CampaignPlan(),
     emergencyList(),
     MapCampaign(),
-    // ProfileCampaign(), رزان هنا صفحتك
+    ProfileCampaign(),
   ];
 
   void _onItemTapped(int index) {
@@ -171,7 +173,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
     ViewCampaignPlan(),
     emergency(),
     MapPilgrim(),
-    // PiligrimProfile()  رزان هنا اسم صفحتك
+    PiligrimProfile() ,
   ];
 
   void _onItemTapped(int index) {
