@@ -95,7 +95,7 @@ class _nav_campaignState extends State<nav_campaign> {
     SearchPilgrim(),
     CampaignPlan(),
     emergencyList(),
-    ProfileCampaign(),
+    PProfile(),
     PProfile(),     
   ];
 

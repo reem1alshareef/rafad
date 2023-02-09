@@ -5,6 +5,7 @@ import 'package:cloud_firestore/cloud_firestore.dart'; // for 5 try
 import 'package:location/location.dart' as loc; // for 5 try
 import 'package:rafad1/screens/welcome_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:rafad1/widgets/my_button.dart';
 
 import 'navigation_screen.dart';
 
@@ -63,15 +64,8 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                 },
                 child: Text('Get Camapign Directions')),
           ),
-          ButtonBar(
-                  alignment:
-                      MainAxisAlignment.spaceAround,
-                  buttonHeight: 52.0,
-                  buttonMinWidth: 90.0,
-                  children: <Widget>[
-                    TextButton(
-                      style: TextButton.styleFrom(shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2.0)),)),
-                      onPressed: () {
+        
+                MyButton(color: const Color(0xFF455D83), title: 'Delete Account', onPressed: (){ 
                         showDialog(
                              context: context,
                             builder:
@@ -112,7 +106,7 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                              String password = docCustomer['password'];
                              
 
-                          FirebaseAuth.instance.currentUser?.delete();
+                          //FirebaseAuth.instance.currentUser?.delete();
 
                                               User? user = await FirebaseAuth.instance.currentUser;
                                               
@@ -147,25 +141,7 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                           ],
                         );
                         }
-                        );
-                        
-                      },
-
-
-
-                      child: Row(
-                        children: const <Widget>[
-                          Icon(Icons.cancel_rounded, color: Colors.redAccent),
-                          Padding(padding: EdgeInsets.symmetric(vertical: 2.0),),
-                          Text(' Delete account'),
-                        ],
-                      ),
-
-
-
-                    ),
-                  ],
-                ),
+                        );})
         ]),
       ),
     );

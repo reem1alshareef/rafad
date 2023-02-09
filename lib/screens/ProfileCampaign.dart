@@ -1,4 +1,4 @@
-import 'dart:async';
+/*import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
@@ -12,7 +12,7 @@ import 'package:rafad1/widgets/my_button.dart';
 import '../view_rate_review/campaign_view_rate.dart';
 
 // from here the 5try
-
+ 
 class ProfileCampaign extends StatefulWidget {
   static const String screenRoute = 'ProfileCampaign.dart';
   const ProfileCampaign({super.key});
@@ -27,17 +27,72 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
   String? uid = FirebaseAuth.instance.currentUser?.uid;
 
   @override
-  void initState() {
-    super.initState();
-    //_requestPermission();
-    location.changeSettings(interval: 300, accuracy: loc.LocationAccuracy.high);
-    location.enableBackgroundMode(enable: true);
-  }
-  /*final _firestore = FirebaseFirestore.instance;
+void initState() {
+    getData();
 
-  final _controller = TextEditingController();
-  late final double _latitude;
-  late final double _longitude;*/
+
+    super.initState();
+  }
+
+
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  bool card = false;
+  bool isVisible = true;
+  bool _submitted = false;
+
+  void _submit() {
+    setState(() => _submitted = true);
+    if (_errorText == null) {}
+  }
+
+  String? get _errorText {
+    // at any time, we can get the text from _controller.value.text
+    final text = _controller.value.text;
+    // Note: you can do your own custom validation here
+    // Move this logic this outside the widget for more testable code
+    if (text.isEmpty) {
+      return 'Can\'t be empty ';
+    }
+    if (text.length < 4) {
+      return 'Too short';
+    }
+    // return null if the text is valid
+    return null;
+  }
+
+  //data streeeeeeeeeeeeeemmmms
+
+  void DataStreams() async {
+    await for (var snapshot
+        in _firestore.collection('AcceptedCampaigns').snapshots()) {
+      for (var campaign in snapshot.docs) {
+        print(campaign.data());
+      }
+    }
+  }
+Map<String, dynamic>  map ={} ;
+
+
+void getData() async{
+await
+FirebaseFirestore.instance.collection('AcceptedCampaigns')
+.doc(FirebaseAuth.instance.currentUser?.uid).get().then((value) {
+setState(() {
+  map = value.data()! ; 
+
+});
+print(map["name"]);
+
+print('00000000000000000000000000000000000000000000000000');
+}).catchError((onError){
+print(onError);
+print('999999999999999999999999999999999999999999999999999');
+});
+}
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +109,7 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
           ),
         ],
         title: const Text("campaign profile"),
-        backgroundColor: const Color(0xFF455D83),
+        backgroundColor:  Color.fromARGB(255, 12, 92, 119),
         elevation: 0,
       ),
       body: Column(
@@ -62,19 +117,18 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
           const SizedBox(
             height: 16,
           ),
-          /*TextButton(
+          TextButton(
               onPressed: () {
                 _getLocation();
               },
               child: const Text(
                 'Add my location',
                 style: TextStyle(
-                    color: Color(0xFF455D83), fontWeight: FontWeight.w500),
-              )),*/
+                    color: Color.fromARGB(255, 12, 92, 119), fontWeight: FontWeight.w500),
+              )),
           const SizedBox(
             height: 16,
           ),
-/*
           TextButton(
               onPressed: () {
                 _listenLocation();
@@ -82,7 +136,7 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
               child: const Text(
                 'Enable live location',
                 style: TextStyle(
-                    color: Color(0xFF455D83), fontWeight: FontWeight.w500),
+                    color: Color.fromARGB(255, 12, 92, 119), fontWeight: FontWeight.w500),
               )),
           const SizedBox(
             height: 16,
@@ -94,9 +148,65 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
               child: const Text(
                 'Stop live location',
                 style: TextStyle(
-                    color: Color(0xFF455D83), fontWeight: FontWeight.w500),
+                    color: Color.fromARGB(255, 12, 92, 119), fontWeight: FontWeight.w500),
               )),
-*/
+
+//String commercialID  = map['commercial_ID'] ;
+//String email  = map['email'] ;
+//String phone  = map['phoneNumber'] ;
+//String address  = map['address'] ;
+//String description  = map['description'] ;
+
+
+
+     return Scaffold(
+        backgroundColor: Color.fromARGB(255, 139, 177, 195),
+        body: SingleChildScrollView(
+          //minimum: const EdgeInsets.only(top: 100),
+          child: Column(
+            children: <Widget>[
+            
+              Text(
+                "Campaign",
+                style: TextStyle(
+                  fontSize: 25.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "",
+                ),
+              ),
+              Text(
+                "Profile",
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Colors.blueGrey[200],
+                    letterSpacing: 1.5,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Source Sans Pro"),
+              ),
+              SizedBox(
+                height: 10,
+                width: 150,
+                child: Divider(
+                  color: Colors.white,
+                ),
+              ),
+
+              // we will be creating a new widget name info carrd
+              InfoCard(text: map['name'], icon: Icons.account_circle_rounded, onPressed: () async {}),
+              InfoCard(text: map['commercial_ID'], icon: Icons.badge, onPressed: () async {}),
+              InfoCard(text: map['phoneNumber'], icon: Icons.phone, onPressed: () async {}),
+              InfoCard(text: map['email'], icon: Icons.email, onPressed: () async {}),
+              InfoCard(
+                  text: map['address'],
+                  icon: Icons.add_location_alt_rounded,
+                  onPressed: () async {}),
+              InfoCard(text: map['description'], icon: Icons.app_registration_rounded, onPressed: () async {}),
+
+
+              MyButton(color: const Color(0xFF455D83),
+                                        title: 'Update Profile',
+                                        onPressed:  () async  {}), 
               MyButton(color: Color(0xFF455D83), title: 'View Rate', onPressed: ()async {
 
                 DocumentSnapshot variable = await FirebaseFirestore.instance
@@ -112,16 +222,9 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
               ;}
               ),
 
-
-              ButtonBar(
-                  alignment:
-                      MainAxisAlignment.spaceAround,
-                  buttonHeight: 52.0,
-                  buttonMinWidth: 90.0,
-                  children: <Widget>[
-                    TextButton(
-                      style: TextButton.styleFrom(shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2.0)),)),
-                      onPressed: () {
+               MyButton(color: const Color(0xFF455D83),
+                                        title: 'Delete account',
+                                       onPressed: () {
                         showDialog(
                              context: context,
                             builder:
@@ -157,12 +260,9 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
                              String email = docCustomer['email'];
                              String password = docCustomer['password'];
                              
-                          await FirebaseFirestore.instance
-                              .collection('AcceptedCampaigns')
-                              .doc(FirebaseAuth.instance.currentUser!.uid)
-                              .delete();
+                          
 
-                          FirebaseAuth.instance.currentUser?.delete();
+                          //FirebaseAuth.instance.currentUser?.delete();
 
                                               User? user = await FirebaseAuth.instance.currentUser;
                                               
@@ -194,141 +294,12 @@ class _ProfileCampaignState extends State<ProfileCampaign> {
                         );
                         }
                         );
-                      },
-                      child: Row(
-                        children: const <Widget>[
-                          Icon(Icons.cancel_rounded, color: Colors.redAccent),
-                          Padding(padding: EdgeInsets.symmetric(vertical: 2.0),),
-                          Text(' Delete account'),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-          /*  Expanded(
-              child: StreamBuilder(
-            stream: FirebaseFirestore.instance
-                .collection('AcceptedCampaigns')
-                .snapshots(),
-            builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              if (!snapshot.hasData) {
-                return Center(child: CircularProgressIndicator());
-              }
-              return ListView.builder(
-                  itemCount: snapshot.data?.docs.length,
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title:
-                          Text(snapshot.data!.docs[index]['name'].toString()),
-                      subtitle: Row(
-                        children: [
-                          Text(snapshot.data!.docs[index]['latitude']
-                              .toString()),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text(snapshot.data!.docs[index]['longitude']
-                              .toString()),
-                        ],
-                      ),
-                      trailing: IconButton(
-                        icon: Icon(Icons.directions),
-                        onPressed: () {
-                          //هذا المكان اللي اذا ضغط عليه يوديه للموقع
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (context) => campaignRealMap(
-                                  snapshot.data!.docs[index].id)));
-                        },
-                      ),
-                    );
-                  });
-            },
-          )),*/
-        ],
-      ),
-    );
+                      }), 
+        
+            ],
+            
+          ),
+          
+        ));
   }
-/*
-  _getLocation() async {
-    try {
-      final loc.LocationData _locationResult = await location.getLocation();
-      await FirebaseFirestore.instance
-          .collection('AcceptedCampaigns')
-          .doc(FirebaseAuth.instance.currentUser?.uid)
-          .set({
-        'latitude': _locationResult.latitude,
-        'longitude': _locationResult.longitude,
-        //'name': 'john'
-      }, SetOptions(merge: true));
-    } catch (e) {
-      print(e);
-    }
-  }
-
-  Future<void> _listenLocation() async {
-    _locationSubscription = location.onLocationChanged.handleError((onError) {
-      print(onError);
-      _locationSubscription?.cancel();
-      setState(() {
-        _locationSubscription = null;
-      });
-    }).listen((loc.LocationData currentlocation) async {
-      await FirebaseFirestore.instance
-          .collection('AcceptedCampaigns')
-          .doc(FirebaseAuth.instance.currentUser?.uid)
-          .set({
-        'latitude': currentlocation.latitude,
-        'longitude': currentlocation.longitude,
-        // 'name': 'john'
-      }, SetOptions(merge: true));
-    });
-  }
-
-  _stopListening() {
-    _locationSubscription?.cancel();
-    setState(() {
-      _locationSubscription = null;
-    });
-  }
-
-  _requestPermission() async {
-    var status = await Permission.location.request();
-    if (status.isGranted) {
-      print('done');
-    } else if (status.isDenied) {
-      _requestPermission();
-    } else if (status.isPermanentlyDenied) {
-      openAppSettings();
-    }
-  }*/
-} // end of class
-
-/* child: Column(
-          children: [
-            MyButton(
-              color: Color.fromARGB(55, 4, 66, 55),
-              title: 'click here to udpate your Location',
-              onPressed: () async {
-//////////////////////////الكود اللي بيرسل اللوكيشن الحالي لليوزر
-
-                LocationService _LocationService = LocationService();
-                _LocationService.CampsendLocationToDataBase(context);
-
-///////////////////////////////
-              },
-            ),
-            MyButton(
-              color: Color.fromARGB(55, 4, 66, 55),
-              title: 'click here to udpate your Location',
-              onPressed: () async {
-//////////////////////////هذا اللي يعرض الماب الحين يابتول حطيته عشان تجربين الخريطة تطلع ولا لا
-
-                LocationService _locationService = LocationService();
-                _locationService.goToMaps(24.7231819, 46.6367413);
-
-///////////////////////////////
-              },
-            ),
-          ],
-        ),
-          ),*/
+}*/
