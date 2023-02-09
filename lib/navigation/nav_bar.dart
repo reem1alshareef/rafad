@@ -10,6 +10,7 @@ import 'package:rafad1/screens/ViewCampaignPlan.dart';
 import 'package:rafad1/screens/MapCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/forget_pw.dart';
+import 'package:rafad1/screens/listOfPilgrims.dart';
 import 'package:rafad1/screens/viewProblem.dart';
 import 'package:rafad1/screens/view_booking.dart';
 import 'package:rafad1/search/search_campaign.dart';
@@ -99,7 +100,7 @@ class _nav_campaignState extends State<nav_campaign> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     CampaignView(),
-    SearchPilgrim(),
+    ListOfPilgrim(),
     CampaignPlan(),
     emergencyList(),
     MapCampaign(),
@@ -195,7 +196,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
                 label: 'Home',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.business),
+                icon: Icon(Icons.mosque_outlined),
                 label: 'Campaigns',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(

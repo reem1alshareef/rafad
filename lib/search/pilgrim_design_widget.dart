@@ -73,24 +73,6 @@ class _UsersDesignWidgetState extends State<UsersDesignWidget> {
                         child: Column(
                           children: [
                             const Text(
-                              'Pilgrim ID:',
-                              style: TextStyle(
-                                  color: Color(0xFF455D83),
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            Text(
-                              widget.model!.pilgrimID!,
-                              style: const TextStyle(fontSize: 12),
-                              textAlign: TextAlign.center,
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10),
-                        child: Column(
-                          children: [
-                            const Text(
                               'Pharmaceutical:',
                               style: TextStyle(
                                   color: Color(0xFF455D83),
