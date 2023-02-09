@@ -62,7 +62,7 @@ class _CampaignAddAnouncement extends State<CampaignAddAnouncement> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor:  Color.fromARGB(255, 12, 92, 119),
+        backgroundColor:  Color(0xFF455D83),
         title: Text(
                       'Announcements',
                       style:
