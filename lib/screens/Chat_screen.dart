@@ -1,11 +1,10 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 final _firestore = FirebaseFirestore.instance;
 late User sender;
-
+//  String? messageTimeH;
 class Chat_screen extends StatefulWidget {
   static const String screenRoute = 'chat_screen';
 
@@ -137,7 +136,8 @@ class _Chat_screenState extends State<Chat_screen> {
                                 Color.fromARGB(255, 255, 255, 255)),
                             backgroundColor: MaterialStateProperty.all<Color>(
                                 const Color(0xFF455D83)),
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(18.0),
                                     side: BorderSide(
@@ -164,19 +164,21 @@ class messageStream extends StatelessWidget {
       builder: (context, snapshot) {
         List<messageLine> messageWidgets = [];
         if (!snapshot.hasData) {
-          return Center(
-            child:  CircularProgressIndicator()
-          );
+          return Center(child: CircularProgressIndicator());
         }
         final messages = snapshot.data!.docs;
-        for (var message in messages) {
+        for (var message in messages)  {
           final messageText = message.get('message');
           final messageSender = message.get('sender');
           final currentUser = sender.email;
+          final messageTimeH =  message.get('time').toDate().hour;
+          final messageTimeM =  message.get('time').toDate().minute;
 
           final messageWidget = messageLine(
             sender: messageSender,
             message: messageText,
+            timeH: int.parse(messageTimeM),
+            timeM: int.parse(messageTimeH),
             isMe: currentUser == messageSender,
           );
           messageWidgets.add(messageWidget);
@@ -193,10 +195,18 @@ class messageStream extends StatelessWidget {
 }
 
 class messageLine extends StatelessWidget {
-  const messageLine({this.message, this.sender, required this.isMe, Key? key})
+  const  messageLine(
+      {this.message,
+      this.timeH,
+      this.timeM,
+      this.sender,
+      required this.isMe,
+      Key? key})
       : super(key: key);
   final String? sender;
   final String? message;
+  final int? timeH;
+  final int? timeM;
   final bool isMe;
   @override
   Widget build(BuildContext context) {
@@ -207,7 +217,7 @@ class messageLine extends StatelessWidget {
             isMe ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Text(
-            '',
+            '$sender',
             style: TextStyle(fontSize: 12, color: Colors.black45),
           ),
           Material(
@@ -222,19 +232,30 @@ class messageLine extends StatelessWidget {
                     topRight: Radius.circular(30),
                     bottomLeft: Radius.circular(30),
                     bottomRight: Radius.circular(30)),
-            color: isMe ? const Color(0xFF455D83) : Color.fromARGB(255, 179, 193, 215),
+            color: isMe
+                ? const Color(0xFF455D83)
+                : Color.fromARGB(255, 179, 193, 215),
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              child: Text(
-                '$message',
-                style: TextStyle(
-                    fontSize: 17, color: isMe ? Colors.white : Colors.black45),
-              ),
+              child: Column(children: [
+                Text(
+                  '$message',
+                  style: TextStyle(
+                      fontSize: 17,
+                      color: isMe ? Colors.white : Colors.black45),
+                ),
+              ]),
             ),
+          ),
+          SizedBox(
+            height: 4,
+          ),
+          Text(
+            '$timeM:$timeH',
+            style: TextStyle(fontSize: 10),
           ),
         ],
       ),
     );
   }
 }
-
