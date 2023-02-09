@@ -47,7 +47,7 @@ class _MapPilgrimState extends State<MapPilgrim> {
             icon: const Icon(Icons.logout),
           ),
         ],
-        title: Text("Piligrim Profile"),
+        title: Text("Current Campaign Directions"),
         backgroundColor: const Color(0xFF455D83),
         elevation: 0,
       ),
