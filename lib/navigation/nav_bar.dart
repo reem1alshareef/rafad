@@ -3,11 +3,14 @@
 import "package:flutter/material.dart";
 import 'package:rafad1/admin/DeletePilgrim.dart';
 import 'package:rafad1/screens/CampaignView.dart';
+import 'package:rafad1/screens/MapPilgrim.dart';
 import 'package:rafad1/screens/PiligrimProfile.dart';
-import 'package:rafad1/screens/ViewCampaignPlan.dart';
 import 'package:rafad1/screens/ProfileCampaign.dart';
+import 'package:rafad1/screens/ViewCampaignPlan.dart';
+import 'package:rafad1/screens/MapCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/forget_pw.dart';
+import 'package:rafad1/screens/viewProblem.dart';
 import 'package:rafad1/screens/view_booking.dart';
 import 'package:rafad1/search/search_campaign.dart';
 import 'package:rafad1/search/search_pilgrim.dart';
@@ -35,6 +38,7 @@ class _nav_adminState extends State<nav_admin> {
   static final List<Widget> _widgetOptions = <Widget>[
     const DeleteCampaign(),
     const DeletePilgrim(),
+    ViewProblem(),
     View()
   ];
 
@@ -55,16 +59,20 @@ class _nav_adminState extends State<nav_admin> {
             BottomNavigationBarItem(
               icon: Icon(Icons.remove_moderator_outlined),
               label: 'Campaigns',
-              backgroundColor: Color.fromARGB(255, 12, 92, 119),
+              backgroundColor: Color(0xFF455D83),
             ),
             BottomNavigationBarItem(
                 icon: Icon(Icons.person_remove),
                 label: 'Pilgrims',
-                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
+                backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.add_moderator_outlined),
                 label: 'Requests',
-                backgroundColor:Color.fromARGB(255, 12, 92, 119)),
+                backgroundColor: Color(0xFF455D83)),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.report),
+                label: 'Report',
+                backgroundColor: Color(0xFF455D83)),
           ],
           type: BottomNavigationBarType.shifting,
           currentIndex: _selectedIndex,
@@ -94,8 +102,8 @@ class _nav_campaignState extends State<nav_campaign> {
     SearchPilgrim(),
     CampaignPlan(),
     emergencyList(),
+    MapCampaign(),
     ProfileCampaign(),
-    ProfileCampaign(),     
   ];
 
   void _onItemTapped(int index) {
@@ -115,15 +123,15 @@ class _nav_campaignState extends State<nav_campaign> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Home',
-                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
+                backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: 'Search',
-                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
+                icon: Icon(Icons.people_outline),
+                label: 'Pilgrims',
+                backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_today_rounded),
                 label: 'Plan',
-                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
+                backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.health_and_safety_outlined),
                 label: 'Emergencies',
@@ -135,8 +143,7 @@ class _nav_campaignState extends State<nav_campaign> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle_outlined),
                 label: 'Profile',
-                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
-            
+                backgroundColor: Color(0xFF455D83)),
           ],
           type: BottomNavigationBarType.shifting,
           currentIndex: _selectedIndex,
@@ -162,11 +169,11 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     PilgrimView(),
-    availableCampaigns(),//SearchCampaign(),
+    availableCampaigns(), //SearchCampaign(),
     ViewCampaignPlan(),
     emergency(),
-    PiligrimProfile(),
-    PiligrimProfile()
+    MapPilgrim(),
+    PiligrimProfile() ,
   ];
 
   void _onItemTapped(int index) {
@@ -186,15 +193,15 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Home',
-                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
+                backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.search),
-                label: 'Search',
-                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
+                icon: Icon(Icons.business),
+                label: 'Campaigns',
+                backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_today_rounded),
                 label: 'Plan',
-                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
+                backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
                 icon: Icon(Icons.health_and_safety_outlined),
                 label: 'Emergency',
@@ -206,7 +213,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
             BottomNavigationBarItem(
                 icon: Icon(Icons.account_circle_outlined),
                 label: 'Profile',
-                backgroundColor: Color.fromARGB(255, 12, 92, 119)),
+                backgroundColor: Color(0xFF455D83)),
           ],
           type: BottomNavigationBarType.shifting,
           currentIndex: _selectedIndex,

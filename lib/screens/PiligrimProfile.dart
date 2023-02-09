@@ -13,9 +13,9 @@ import 'package:rafad1/screens/Card.dart';
 
 // our data
 
-String  name = 'naaamee';
-String hajId  ="" ;
-String email = 'TextEditingController()' ;
+String name = 'naaamee';
+String hajId = "";
+String email = 'TextEditingController()';
 String number = 'TextEditingController()'; // not real number :)
 String address = 'TextEditingController()';
 String description = 'TextEditingController()';
@@ -40,16 +40,13 @@ class PiligrimProfile extends StatefulWidget {
 }
 
 void getData() async {
+  User? user = FirebaseAuth.instance.currentUser;
+  final DocumentSnapshot userDoc = await FirebaseFirestore.instance
+      .collection("Pilgrims-Account")
+      .doc(FirebaseAuth.instance.currentUser?.uid)
+      .get();
 
-User? user = FirebaseAuth.instance.currentUser; 
-final DocumentSnapshot userDoc = await FirebaseFirestore
-.instance.collection("Pilgrims-Account")
-.doc(FirebaseAuth.instance.currentUser?.uid)
-.get();
-
-
-email = userDoc.get('email');
-
+  email = userDoc.get('email');
 }
 
 class _PiligrimProfileState extends State<PiligrimProfile> {
@@ -139,124 +136,187 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
 //String description  = map['description'] ;
 
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        actions: [
-          IconButton(
-            onPressed: () {
-              FirebaseAuth.instance.signOut();
-              Navigator.pushNamed(context, WelcomeScreen.screenRoute);
-            },
-            icon: const Icon(Icons.logout),
-          ),
-        ],
-        title: Text("Piligrim Profile"),
-        backgroundColor:  Color.fromARGB(255, 12, 92, 119),
-        elevation: 0,
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(18.0),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          // ممتاز هنا بجرب احضر اللوكيشن من الفايربيس وبيضبط ان شاء الله
-          Container(
-            width: double.infinity,
-            child: ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) => NavigationScreen(
-                          latController, //double.parse(latController.text),
-                          lngController))); //double.parse(lngController.text))));
-                },
-                child: Text('Get Camapign Directions')),
-          ),
-          ButtonBar(
-                  alignment:
-                      MainAxisAlignment.spaceAround,
-                  buttonHeight: 52.0,
-                  buttonMinWidth: 90.0,
-                  children: <Widget>[
-                    TextButton(
-                      style: TextButton.styleFrom(shape:const RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(2.0)),)),
-                      onPressed: () {
-                        showDialog(
-                             context: context,
-                            builder:
-                                (BuildContext context) {
-                              return AlertDialog(
-                          title: Row(
-                            children:  const [
-                              Text('Delete '),
-                              Text(' account'),
-                            ],
-                          ),
-                          content: 
-                            
-                              Text('This action cannot be undone, Are you sure you want to delete the account?'),
-                            
-                          
-                          actions: <Widget>[
-                            TextButton(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          title: Text('Profile View'),
+          backgroundColor:const Color(0xFF455D83),
+          elevation: 0,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ),
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+                Navigator.pushNamed(context, WelcomeScreen.screenRoute);
+              },
+            )
+          ],
+        ),
+        backgroundColor: Color.fromARGB(255, 202, 217, 238),
+        body: SingleChildScrollView(
+          // const EdgeInsets.only(top: 50),
+          child: Column(
+            children: <Widget>[
+              
+              Text(
+                "Piligrim",
+                style: TextStyle(
+                  fontSize: 25.0,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: "",
+                ),
+              ),
+              Text(
+                "Profile",
+                style: TextStyle(
+                    fontSize: 15,
+                    color: Color.fromARGB(255, 139, 149, 153),
+                    letterSpacing: 1.5,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: "Source Sans Pro"),
+              ),
+              SizedBox(
+                height: 10,
+                width: 150,
+                child: Divider(
+                  color: Colors.white,
+                ),
+              ),
 
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text('Cancel'),
-                            ),
-                            TextButton(
-                              onPressed: () async {
-                                
-                                //firebase
-                                try{
-                                  setState(
-                                            () async {
-                                              DocumentSnapshot docCustomer = await FirebaseFirestore.instance
-                              .collection('Pilgrims-Account')
-                              .doc(FirebaseAuth.instance.currentUser!.uid)
-                              .get();
+              // we will be creating a new widget name info carrd
+              InfoCard(
+                  text: map['name'],
+                  icon: Icons.account_circle_rounded,
+                  onPressed: () async {}),
+              InfoCard(
+                  text: map['hajId'],
+                  icon: Icons.badge,
+                  onPressed: () async {}),
+              InfoCard(
+                  text: map['number'],
+                  icon: Icons.phone,
+                  onPressed: () async {}),
+              InfoCard(
+                  text: map['email'],
+                  icon: Icons.email,
+                  onPressed: () async {}),
+              InfoCard(
+                  text: map['disease'],
+                  icon: Icons.add_location_alt_rounded,
+                  onPressed: () async {}),
+              InfoCard(
+                  text: map['pharma'],
+                  icon: Icons.app_registration_rounded,
+                  onPressed: () async {}),
 
-                             String email = docCustomer['email'];
-                             String password = docCustomer['password'];
-                             
+              MyButton(
+                  color: const Color(0xFF455D83),
+                  title: 'Update Profile',
+                  onPressed: () async {
+                    Navigator.of(context)
+                        .push(MaterialPageRoute(builder: (builder) {
+                      return edit_Pilgrim();
+                    }));
+                  }),
+              // ignore: prefer_const_constructors
+              ButtonBar(
+                alignment: MainAxisAlignment.spaceAround,
+                buttonHeight: 52.0,
+                buttonMinWidth: 90.0,
+                children: <Widget>[
+                  TextButton(
+                    style: TextButton.styleFrom(
+                        shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(2.0)),
+                    )),
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: Row(
+                                children: const [
+                                  Text('Delete '),
+                                  Text(' account'),
+                                ],
+                              ),
+                              content: Text(
+                                  'This action cannot be undone, Are you sure you want to delete the account?'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text('Cancel'),
+                                ),
+                                TextButton(
+                                  onPressed: () async {
+                                    //firebase
+                                    try {
+                                      setState(() async {
+                                        DocumentSnapshot docCustomer =
+                                            await FirebaseFirestore.instance
+                                                .collection('Pilgrims-Account')
+                                                .doc(FirebaseAuth
+                                                    .instance.currentUser!.uid)
+                                                .get();
 
-                          FirebaseAuth.instance.currentUser?.delete();
+                                        String email = docCustomer['email'];
+                                        String password =
+                                            docCustomer['password'];
 
-                                              User? user = await FirebaseAuth.instance.currentUser;
-                                              
-                                              UserCredential authResult= await user!.reauthenticateWithCredential(
-                                                EmailAuthProvider.credential(
-                                                email: email,
-                                                password: password,
-                                              ),);
+                                        FirebaseAuth.instance.currentUser
+                                            ?.delete();
 
-                                              authResult.user!.delete();
+                                        User? user = await FirebaseAuth
+                                            .instance.currentUser;
 
-                                            // ignore: use_build_context_synchronously
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        const WelcomeScreen()));
+                                        UserCredential authResult = await user!
+                                            .reauthenticateWithCredential(
+                                          EmailAuthProvider.credential(
+                                            email: email,
+                                            password: password,
+                                          ),
+                                        );
 
+                                        authResult.user!.delete();
 
-                                        });
-                                  //Navigator.pop(context, 'Delete');
-                                  
-                                } catch(e){
-                                  //e.hashCode;
-                                  //print(e.runtimeType);
+                                        // ignore: use_build_context_synchronously
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    const WelcomeScreen()));
+                                      });
+                                      //Navigator.pop(context, 'Delete');
 
-                                }
+                                    } catch (e) {
+                                      //e.hashCode;
+                                      //print(e.runtimeType);
 
-                              },
-                              child: const Text('Delete'),
-                            ),
-                          ],
-                        );
-                        }
-                        );}
+                                    }
+                                  },
+                                  child: const Text('Delete'),
+                                ),
+                              ],
+                            );
+                          });
+                    },
+                    child: Row(
+                      children: const <Widget>[
+                        Icon(Icons.cancel_rounded, color: Colors.redAccent),
+                        Padding(
+                          padding: EdgeInsets.symmetric(vertical: 2.0),
+                        ),
+                        Text(' Delete account'),
+                      ],
+                    ),
                   ),
-             // ignore: prefer_const_constructors
-                 
+                ],
+              ),
             ],
           ),
         ));

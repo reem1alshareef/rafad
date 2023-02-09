@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 
 class InfoCard extends StatelessWidget {
- 
   // the values we need
   final String text;
   final IconData icon;
   Function onPressed;
 
-  InfoCard(
-      {required this.text, required this.icon, required this.onPressed});
+  InfoCard({required this.text, required this.icon, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-    
       child: Card(
         color: Colors.white,
         margin: EdgeInsets.symmetric(vertical: 7, horizontal: 17),

@@ -1,4 +1,3 @@
-
 import 'package:email_validator/email_validator.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:toast/toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 class edit_Pilgrim extends StatefulWidget {
   static const String screenRoute = 'signUP_pilgrim';
   const edit_Pilgrim({Key? key}) : super(key: key);
@@ -27,6 +27,34 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
   String? disease;
   String? pharma;
   //String? password;
+   @override
+  void initState() {
+    getData();
+
+    super.initState();
+  }
+
+
+ Map<String, dynamic> map = {};
+
+  void getData() async {
+    await FirebaseFirestore.instance
+        .collection('Pilgrims-Account')
+        .doc(FirebaseAuth.instance.currentUser?.uid)
+        .get()
+        .then((value) {
+      setState(() {
+        map = value.data()!;
+      });
+      print(map["name"]);
+
+      print('00000000000000000000000000000000000000000000000000');
+    }).catchError((onError) {
+      print(onError);
+      print('999999999999999999999999999999999999999999999999999');
+    });
+  }
+
   final _signupFormKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -34,7 +62,7 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Edit Profile"),
+          title: Text(map['name']+' Profile'),
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
         ), //عشان سهم رجوع
@@ -46,16 +74,15 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
             key: _signupFormKey,
             child: Column(
               children: [
-              //  const PageHeader(),
+                //  const PageHeader(),
                 Container(
                   padding: EdgeInsets.symmetric(horizontal: 50),
-                 
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        // const PageHeading(
-                        //   title: 'Sign up as Pilgrim',
-                        // ),
+                        const PageHeading(
+                          title: 'Edit Profile',
+                        ),
                         const SizedBox(
                           height: 16,
                         ),
@@ -71,6 +98,7 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
                               name = value;
                             });
                           },
+                          initialValue: map['name'],
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Name field is required!';
@@ -102,7 +130,7 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
                               email = value;
                             });
                           },
-                          initialValue: 'reem@camp.com',
+                          initialValue: map['email'],// intiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Email is required!';
@@ -134,6 +162,7 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
                               number = value;
                             });
                           },
+                          initialValue: map['number'],//intiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Phone number is required!';
@@ -170,6 +199,7 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
                               hajId = value;
                             });
                           },
+                          initialValue: map['hajId'],// intiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'ID is required!';
@@ -203,6 +233,7 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
                               disease = value;
                             });
                           },
+                          initialValue: map['disease'],//initiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'please enter none if there isn\'t any!';
@@ -229,6 +260,7 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
                               pharma = value;
                             });
                           },
+                          initialValue: map['pharma'],//intiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'please enter none if there isn\'t any!';
@@ -240,10 +272,10 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
                             isDense: true,
                           ),
                         ),
-                        
+
                         const SizedBox(
                           height: 16,
-                        ),//-------------------------------------------------------------------------------
+                        ), //-------------------------------------------------------------------------------
                         CustomFormButton(
                           innerText: 'Save',
                           onPressed: () async {
@@ -253,102 +285,70 @@ class _edit_PilgrimState extends State<edit_Pilgrim> {
                                     content: Text('Submitting data..')),
                               );
                               //  Firebase method creating user account
+                             //Navigator.pushNamed(context, PiligrimProfile.screenRoute);
+                              Navigator.pop(context);
+
                               
 
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            const PiligrimProfile()));
-                                            
-                              // 
-                            
                               // Firestore method -- assign a sub dir from Campaign-Account doc for the current user
-                              if(name != null){
-                              await FirebaseFirestore.instance
-                                  .collection("Pilgrims-Account")
-                                  .doc(FirebaseAuth.instance.currentUser!.uid)
-                                  .update({
+                              if (name != null) {
+                                await FirebaseFirestore.instance
+                                    .collection("Pilgrims-Account")
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .update({
+                                  'name': name,
+                                });
+                              }
+                              if (email != null) {
+                                await FirebaseFirestore.instance
+                                    .collection("Pilgrims-Account")
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .update({
+                                  'email': email,
+                                });
+                              }
 
-                                'name': name  ,
-                               
-                              });
+                              if (number != null) {
+                                await FirebaseFirestore.instance
+                                    .collection("Pilgrims-Account")
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .update({
+                                  'number': number,
+                                });
+                              }
 
-                            }
-                             if(email != null){
-                              await FirebaseFirestore.instance
-                                  .collection("Pilgrims-Account")
-                                  .doc(FirebaseAuth.instance.currentUser!.uid)
-                                  .update({
+                              if (hajId != null) {
+                                await FirebaseFirestore.instance
+                                    .collection("Pilgrims-Account")
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .update({
+                                  'hajId': hajId,
+                                });
+                              }
+                              if (disease != null) {
+                                await FirebaseFirestore.instance
+                                    .collection("Pilgrims-Account")
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .update({
+                                  'disease': disease,
+                                });
+                              }
 
-                                'email': email,
-                               
-
-                              });
-
-                            }
-
-                            if(number != null){
-                              await FirebaseFirestore.instance
-                                  .collection("Pilgrims-Account")
-                                  .doc(FirebaseAuth.instance.currentUser!.uid)
-                                  .update({
-
-                                
-                                'number': number,
-                               
-
-                              });
-
-                            }
-
-                            if(hajId != null){
-                              await FirebaseFirestore.instance
-                                  .collection("Pilgrims-Account")
-                                  .doc(FirebaseAuth.instance.currentUser!.uid)
-                                  .update({
-
-                              
-                                'hajId': hajId,
-                               
-
-                              });
-
-                            }
-                            if(disease != null){
-                              await FirebaseFirestore.instance
-                                  .collection("Pilgrims-Account")
-                                  .doc(FirebaseAuth.instance.currentUser!.uid)
-                                  .update({
-
-                                'disease': disease,
-                               
-
-                              });
-
-                            }
-
-                            if(pharma != null){
-                              await FirebaseFirestore.instance
-                                  .collection("Pilgrims-Account")
-                                  .doc(FirebaseAuth.instance.currentUser!.uid)
-                                  .update({
-
-                                
-                                'pharma': pharma,
-
-                              });
-
-                            }
-
-
+                              if (pharma != null) {
+                                await FirebaseFirestore.instance
+                                    .collection("Pilgrims-Account")
+                                    .doc(FirebaseAuth.instance.currentUser!.uid)
+                                    .update({
+                                  'pharma': pharma,
+                                });
+                              }
                             }
                           },
                         ),
                         const SizedBox(
                           height: 18,
                         ),
-                        
+
                         const SizedBox(
                           height: 30,
                         ),
@@ -395,5 +395,4 @@ class PageHeading extends StatelessWidget {
       ),
     );
   }
-
 }

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
+import 'package:rafad1/screens/Report.dart';
 
 import '../screens/Chat_screen.dart';
 import '../screens/welcome_screen.dart';
@@ -22,6 +23,10 @@ class _RateReviewState extends State<RateReview> {
   final _firestore = FirebaseFirestore.instance;
   double rating = 0;
   String? review;
+  String? campaignId;
+  String? campaignName;
+
+
   final _review = GlobalKey<FormState>();
   bool isButtonDisabled = false;
 
@@ -297,7 +302,15 @@ class _RateReviewState extends State<RateReview> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        const WelcomeScreen()));//Report()
+                                                       
+                                                              Report(
+                                                              campaignId:
+                                                                  storedocs[i][
+                                                                      'campaignID'],
+                                                              campaignName:
+                                                                  storedocs[i]
+                                                                      ['name'],
+                                                            ))); //Report()));//Report()
                                             },
                                       child: Column(
                                               children: const <Widget>[

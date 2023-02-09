@@ -78,6 +78,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                               name = value;
                             });
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Name field is required!';
@@ -109,6 +110,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                               email = value;
                             });
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Email is required!';
@@ -140,6 +142,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                               number = value;
                             });
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (value) {
                             if (value == null || value.isEmpty) {
                               return 'Phone number is required!';
@@ -176,6 +179,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                               hajId = value;
                             });
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'ID is required!';
@@ -209,6 +213,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                               disease = value;
                             });
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'please enter none if there isn\'t any!';
@@ -235,14 +240,15 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                               pharma = value;
                             });
                           },
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'please enter none if there isn\'t any!';
                             }
                           },
                           decoration: InputDecoration(
-                            labelText: 'pharmaceutical',
-                            hintText: 'if you are taking any pharmaceutical',
+                            labelText: 'Medication',
+                            hintText: 'if you are taking any medication',
                             isDense: true,
                           ),
                         ),
@@ -257,6 +263,7 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                             });
                           },
                           obscureText: true,
+                          autovalidateMode: AutovalidateMode.onUserInteraction,
                           validator: (textValue) {
                             if (textValue == null || textValue.isEmpty) {
                               return 'Password is required!';
@@ -289,50 +296,50 @@ class _SignUpPilgrimState extends State<SignUpPilgrim> {
                         CustomFormButton(
                           innerText: 'Sign up',
                           onPressed: () async {
-                            if (_signupFormKey.currentState!.validate()) {
+                            // if (_signupFormKey.currentState!.validate()) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                  content: Text('Submitting data..')),
+                            );
+                            await FirebaseAuth.instance
+                                .createUserWithEmailAndPassword(
+                                    email: email.toString(),
+                                    password: password.toString())
+                                .then((value) {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                    content: Text('Submitting data..')),
+                                SnackBar(
+                                  content: Text('success regestraion'),
+                                  backgroundColor: Colors.green,
+                                ),
                               );
-                              await FirebaseAuth.instance
-                                  .createUserWithEmailAndPassword(
-                                      email: email.toString(),
-                                      password: password.toString())
-                                  .then((value) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('success regestraion'),
-                                    backgroundColor: Colors.green,
-                                  ),
-                                );
 
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => nav_pilgrim()));
-                              }).catchError((onError) {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text('$onError'),
-                                    backgroundColor: Colors.red,
-                                  ),
-                                );
-                              });
-                              await FirebaseFirestore.instance
-                                  .collection("Pilgrims-Account")
-                                  .doc(FirebaseAuth.instance.currentUser!.uid)
-                                  .set({
-                                'name': name,
-                                'UID': FirebaseAuth.instance.currentUser!
-                                    .uid, ////////هذا يا شادن ضبطناه
-                                'email': email,
-                                'number': number,
-                                'hajId': hajId,
-                                'disease': disease,
-                                'pharma': pharma,
-                                'password': password,
-                              });
-                            }
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => nav_pilgrim()));
+                            }).catchError((onError) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('$onError'),
+                                  backgroundColor: Colors.red,
+                                ),
+                              );
+                            });
+                            await FirebaseFirestore.instance
+                                .collection("Pilgrims-Account")
+                                .doc(FirebaseAuth.instance.currentUser!.uid)
+                                .set({
+                              'name': name,
+                              'UID': FirebaseAuth.instance.currentUser!
+                                  .uid, ////////هذا يا شادن ضبطناه
+                              'email': email,
+                              'number': number,
+                              'hajId': hajId,
+                              'disease': disease,
+                              'pharma': pharma,
+                              'password': password,
+                            });
+                            // }
                           },
                         ),
                         const SizedBox(
