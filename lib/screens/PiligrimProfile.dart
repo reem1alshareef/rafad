@@ -236,16 +236,10 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                     }));
                   }),
               // ignore: prefer_const_constructors
-              ButtonBar(
-                alignment: MainAxisAlignment.spaceAround,
-                buttonHeight: 52.0,
-                buttonMinWidth: 90.0,
-                children: <Widget>[
-                  TextButton(
-                    style: TextButton.styleFrom(
-                        shape: const RoundedRectangleBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(2.0)),
-                    )),
+              MyButton(
+                  color:  Colors.red,
+                  title: 'Delete Account',
+                  onPressed: () async {
                     onPressed: () {
                       showDialog(
                           context: context,
@@ -282,8 +276,8 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                                         String password =
                                             docCustomer['password'];
 
-                                        FirebaseAuth.instance.currentUser
-                                            ?.delete();
+                                        //FirebaseAuth.instance.currentUser
+                                          //  ?.delete();
 
                                         User? user = await FirebaseAuth
                                             .instance.currentUser;
@@ -318,7 +312,7 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                               ],
                             );
                           });
-                    },
+                    
                     child: Row(
                       children: const <Widget>[
                         Icon(Icons.cancel_rounded, color: Colors.redAccent),
@@ -327,12 +321,13 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                         ),
                         Text(' Delete account'),
                       ],
-                    ),
-                  ),
+                    );
+  };}),
                 ],
               ),
-            ],
-          ),
-        ));
+        )
+        );
+          
   }
+           
 }

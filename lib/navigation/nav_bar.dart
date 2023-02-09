@@ -38,8 +38,8 @@ class _nav_adminState extends State<nav_admin> {
   static final List<Widget> _widgetOptions = <Widget>[
     const DeleteCampaign(),
     const DeletePilgrim(),
+    View(),
     ViewProblem(),
-    View()
   ];
 
   void _onItemTapped(int index) {
