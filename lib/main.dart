@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
         ),
         
         initialRoute: WelcomeScreen.screenRoute,
-       
+      //home: MyApp(),
         routes: {
           WelcomeScreen.screenRoute: (context) => const WelcomeScreen(),
           SignUpPilgrim.screenRoute: (context) => const SignUpPilgrim(),
