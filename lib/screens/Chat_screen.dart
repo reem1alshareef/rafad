@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 final _firestore = FirebaseFirestore.instance;
 late User sender;
+
 //  String? messageTimeH;
 class Chat_screen extends StatefulWidget {
   static const String screenRoute = 'chat_screen';
@@ -167,12 +168,12 @@ class messageStream extends StatelessWidget {
           return Center(child: CircularProgressIndicator());
         }
         final messages = snapshot.data!.docs;
-        for (var message in messages)  {
+        for (var message in messages) {
           final messageText = message.get('message');
           final messageSender = message.get('sender');
           final currentUser = sender.email;
-          final messageTimeH =  message.get('time').toDate().hour;
-          final messageTimeM =  message.get('time').toDate().minute;
+          final messageTimeH = message.get('time').toDate().hour;
+          final messageTimeM = message.get('time').toDate().minute;
 
           final messageWidget = messageLine(
             sender: messageSender,
@@ -195,7 +196,7 @@ class messageStream extends StatelessWidget {
 }
 
 class messageLine extends StatelessWidget {
-  const  messageLine(
+  const messageLine(
       {this.message,
       this.timeH,
       this.timeM,
