@@ -218,7 +218,7 @@ class _PiligrimProfileState extends State<PiligrimProfile> {
                   onPressed: () async {
                     Navigator.of(context)
                         .push(MaterialPageRoute(builder: (builder) {
-                      return edit_Pilgrim();
+                      return const edit_Pilgrim();
                     }));
                   }),
               // ignore: prefer_const_constructors
