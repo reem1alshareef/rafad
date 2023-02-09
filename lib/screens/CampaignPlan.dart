@@ -255,7 +255,7 @@ class _CampaignPlan extends State<CampaignPlan> {
                             print('reached submition');
                             addActivity();
                           },
-                          icon: const Icon(Icons.arrow_forward))
+                          icon: const Icon(Icons.add_circle))
                     ]),
 
                     SizedBox(
