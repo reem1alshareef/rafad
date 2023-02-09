@@ -118,12 +118,10 @@ appBar: AppBar(
                 ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                   content: Text("OTP is verified"),
                 ));
+                
+              } else {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => const CampaignView()));
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                  content: Text("Invalid OTP"),
-                ));
               }
             },
             child: const Text(
