@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:rafad1/search/campaign_design_widget.dart';
 import 'package:rafad1/search/user1.dart';
 
+import '../screens/Chat_screen.dart';
+
 class SearchCampaign extends StatefulWidget {
   const SearchCampaign({super.key});
 
@@ -45,6 +47,18 @@ initSearchingPilgrim(String textEntered){
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF455D83),
+          tooltip: 'Chat',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Chat_screen()),
+            );
+          },
+          child: Image.asset('assests/images/chat.png', height: 35),
+        ),
+
         appBar: AppBar(
           title: TextField(
             onChanged: (textEntered){
@@ -65,7 +79,7 @@ initSearchingPilgrim(String textEntered){
             ),
           ),
           //automaticallyImplyLeading: false,
-          backgroundColor: const Color(0xFF455D83),
+          backgroundColor:   Color(0xFF455D83),
           elevation: 0,
           actions: const [
             SizedBox(height: 30),

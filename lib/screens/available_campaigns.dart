@@ -12,6 +12,7 @@ import 'package:rate_in_stars/rate_in_stars.dart';
 import '../search/user1.dart';
 import '../view_rate_review/campaign_view_rate.dart';
 import '../widgets/my_button.dart';
+import 'Chat_screen.dart';
 
 
 //import 'package:rafad1/screens/LoginPage.dart';
@@ -85,6 +86,17 @@ class _availableCampaignsState extends State<availableCampaigns> {
         .snapshots();
         
     return Scaffold(
+floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF455D83),
+          tooltip: 'Chat',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Chat_screen()),
+            );
+          },
+          child: Image.asset('assests/images/chat.png', height: 35),
+        ),
 
         appBar: AppBar(
           automaticallyImplyLeading: false,
@@ -323,26 +335,12 @@ class _availableCampaignsState extends State<availableCampaigns> {
                                 },
                                 child: Text(
                                    storedocs[i]['numberOfPeople'],
-                                  style: TextStyle(
-                                      fontSize: 15,
+                                  style: const TextStyle(
+                                      fontSize: 20.0,
                                       decoration: TextDecoration.underline,
                                       fontWeight: FontWeight.bold),
                                 ),
                                                   ),             
-                                                  /*MyButton(color: Color(0xFF455D83), title: 'View Rates', onPressed: ()async {
-
-                DocumentSnapshot variable = await FirebaseFirestore.instance
-                                    .collection('AcceptedCampaigns')
-                                    .doc(storedocs[i]['UID'])
-                                    .get();
-
-                                    String thisCampaignId = variable['UID'];
-                                    double thisAvrgRating = double.parse(variable['avrgRating']);
-                                    double thisNumberOfPeople = double.parse(variable['numberOfPeople']);
-                Navigator.push(
-              context, MaterialPageRoute(builder: (context) =>  ratingsList( campaignId: thisCampaignId, averageShopRating: thisAvrgRating,  numberOfRatings: thisNumberOfPeople )));
-              ;}
-              ),*/
                                       /////////////////buton
                                       const SizedBox(height: 10,),
 

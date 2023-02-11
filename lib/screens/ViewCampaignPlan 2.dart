@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/services.dart';
 
+import 'Chat_screen.dart';
+
 class ViewCampaignPlan extends StatefulWidget {
   //static const String screenRoute = 'welcome_screen';
   const ViewCampaignPlan({super.key});
@@ -38,10 +40,22 @@ class _ViewState extends State<ViewCampaignPlan> {
     print(ID);
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Color(0xFF455D83),
+          tooltip: 'Chat',
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const Chat_screen()),
+            );
+          },
+          child: Image.asset('assests/images/chat.png', height: 35),
+        ),
+
         appBar: AppBar(
           automaticallyImplyLeading: false,
           title: Text('Today\'s Campaign plan'),
-          backgroundColor: const Color(0xFF455D83),
+          backgroundColor:Color(0xFF455D83),
           elevation: 0,
         ),
         body: SingleChildScrollView(

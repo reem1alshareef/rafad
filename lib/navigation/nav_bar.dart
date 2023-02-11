@@ -4,10 +4,13 @@ import "package:flutter/material.dart";
 import 'package:rafad1/admin/DeletePilgrim.dart';
 import 'package:rafad1/screens/CampaignView.dart';
 import 'package:rafad1/screens/MapPilgrim.dart';
+import 'package:rafad1/screens/PiligrimProfile.dart';
+import 'package:rafad1/screens/ProfileCampaign.dart';
 import 'package:rafad1/screens/ViewCampaignPlan.dart';
 import 'package:rafad1/screens/MapCampaign.dart';
 import 'package:rafad1/screens/adminView.dart';
 import 'package:rafad1/screens/forget_pw.dart';
+import 'package:rafad1/screens/listOfPilgrims.dart';
 import 'package:rafad1/screens/viewProblem.dart';
 import 'package:rafad1/screens/view_booking.dart';
 import 'package:rafad1/search/search_campaign.dart';
@@ -36,8 +39,8 @@ class _nav_adminState extends State<nav_admin> {
   static final List<Widget> _widgetOptions = <Widget>[
     const DeleteCampaign(),
     const DeletePilgrim(),
+    View(),
     ViewProblem(),
-    View()
   ];
 
   void _onItemTapped(int index) {
@@ -97,11 +100,11 @@ class _nav_campaignState extends State<nav_campaign> {
 
   static const List<Widget> _widgetOptions = <Widget>[
     CampaignView(),
-    SearchPilgrim(),
+    ListOfPilgrim(),
     CampaignPlan(),
     emergencyList(),
     MapCampaign(),
-    // ProfileCampaign(), رزان هنا صفحتك
+    ProfileCampaign(),
   ];
 
   void _onItemTapped(int index) {
@@ -171,7 +174,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
     ViewCampaignPlan(),
     emergency(),
     MapPilgrim(),
-    // PiligrimProfile()  رزان هنا اسم صفحتك
+    PiligrimProfile() ,
   ];
 
   void _onItemTapped(int index) {
@@ -193,7 +196,7 @@ class _nav_pilgrimState extends State<nav_pilgrim> {
                 label: 'Home',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
-                icon: Icon(Icons.business),
+                icon: Icon(Icons.mosque_outlined),
                 label: 'Campaigns',
                 backgroundColor: Color(0xFF455D83)),
             BottomNavigationBarItem(
