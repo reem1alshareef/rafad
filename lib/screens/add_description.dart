@@ -8,7 +8,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:rafad1/screens/welcome_screen.dart';
 import '../widgets/my_button.dart';
 
-
 class AddDescription extends StatefulWidget {
   const AddDescription({super.key});
 
@@ -36,44 +35,39 @@ class _AddDescriptionState extends State<AddDescription> {
     super.dispose();
   }
 
-  Future addDescription() async{
+  Future addDescription() async {
     if (_addDescKey.currentState!.validate()) {
       ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-      content: Text('Submitting data..')),
-    );
+        const SnackBar(content: Text('Submitting data..')),
+      );
       await FirebaseFirestore.instance
-            .collection("AcceptedCampaigns")
-            .doc(FirebaseAuth.instance.currentUser!.uid)
-            .update({
-              'description': description,
+          .collection("AcceptedCampaigns")
+          .doc(FirebaseAuth.instance.currentUser!.uid)
+          .update({
+        'description': description,
+      });
 
-            });
-
-            showDialog(
+      showDialog(
           context: context,
           builder: (context) {
             return const AlertDialog(
-              content: Text(
-                  'Submitted successfully!'),
+              content: Text('Submitted successfully!'),
             );
           });
-            /*Navigator.push(
+      /*Navigator.push(
               context, MaterialPageRoute(builder: (context) => ViewDescription()));*/
-  }
-
-  
+    }
   }
 
   @override
-  Widget build(BuildContext context) {  
-        return Scaffold(
+  Widget build(BuildContext context) {
+    return Scaffold(
         appBar: AppBar(
           title: const Text("Profile"),
           automaticallyImplyLeading: false,
           backgroundColor: const Color(0xFF455D83),
           elevation: 0,
-           actions: <Widget>[
+          actions: <Widget>[
             IconButton(
               icon: Icon(
                 Icons.logout,
@@ -112,81 +106,73 @@ class _AddDescriptionState extends State<AddDescription> {
             label: 'Profile',),
 
         ],),*/
-       
-          body: Container(
-         /* decoration: const BoxDecoration(
+
+        body: Container(
+          /* decoration: const BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assests/images/background.png"),
                   fit: BoxFit.cover)),*/
           child: Form(
-            key: _addDescKey,
+              key: _addDescKey,
               //mainAxisAlignment: MainAxisAlignment.center,
               //crossAxisAlignment: CrossAxisAlignment.stretch,
-              child: 
-                Column(
-                  children: [ 
-                       Container(
-                      
-                   child: SingleChildScrollView(
-                    child: Column (
-                      children: [
-                        //SizedBox(height: 40,),
-                    TextFormField(
-                          maxLines: 3,
-                          maxLength: 200,
-                          
-                          inputFormatters: [
-                            FilteringTextInputFormatter.deny
-                            (RegExp(r"\s\s"),)
-                          ],
-                          
-                          //controller: _descController,
-                          cursorColor: Colors.white,
-                          style: TextStyle(color: Colors.grey[500],) ,
-                          textInputAction: TextInputAction.done,
-                          keyboardType: TextInputType.text,
-                          onChanged: (value) {
-                            setState(() {
-                              description = value;
-                            });
-                          },
-                          decoration: const InputDecoration(labelText: 'Description'),
-                          autovalidateMode: AutovalidateMode.onUserInteraction,
-                          validator: (textValue) {
-                            if (textValue == null || textValue.isEmpty) {
-                              return 'Description is required!';
-                            }
-                            if(textValue.length<20){
-                              return 'Describtion should be 20 characters at least';
-                            }
-                            
-                            //return null;
-                            if(textValue.trim().isEmpty){
-                            return "Description cannot be empty.";
-                            }
+              child: Column(children: [
+                Container(
+                    child: SingleChildScrollView(
+                        child: Column(children: [
+                  //SizedBox(height: 40,),
+                  TextFormField(
+                      maxLines: 3,
+                      maxLength: 200,
+                      inputFormatters: [
+                        FilteringTextInputFormatter.deny(
+                          RegExp(r"\s\s"),
+                        )
+                      ],
 
-                            return null;
-                          }
-                           ),
-                    const SizedBox(
-                          height: 20,
-                        ),
-                    MyButton(
-                          color: const Color(0xFF455D83),
-                          title: 'Add Description',
-                          onPressed: addDescription,
-                        ),
-                  ]
-                  )
-                ))]
-                )
-              ),
-              )
-            
-          
-        );
+                      //controller: _descController,
+                      cursorColor: Colors.white,
+                      style: TextStyle(
+                        color: Colors.grey[500],
+                      ),
+                      textInputAction: TextInputAction.done,
+                      keyboardType: TextInputType.text,
+                      onChanged: (value) {
+                        setState(() {
+                          description = value;
+                        });
+                      },
+                      decoration:
+                          const InputDecoration(labelText: 'Description'),
+                      autovalidateMode: AutovalidateMode.onUserInteraction,
+                      validator: (textValue) {
+                        if (textValue == null || textValue.isEmpty) {
+                          return 'Description is required!';
+                        }
+                        if (textValue.length < 20) {
+                          return 'Describtion should be 20 characters at least';
+                        }
+
+                        //return null;
+                        if (textValue.trim().isEmpty) {
+                          return "Description cannot be empty.";
+                        }
+
+                        return null;
+                      }),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  MyButton(
+                    color: const Color(0xFF455D83),
+                    title: 'Add Description',
+                    onPressed: addDescription,
+                  ),
+                ])))
+              ])),
+        ));
   }
-  }
+}
   
 /*class ViewDescription extends StatefulWidget {
   const ViewDescription({super.key});
