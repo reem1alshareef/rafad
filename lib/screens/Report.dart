@@ -106,7 +106,6 @@ class _ReportState extends State<Report> {
               //بعد السايز بوكس نحط الفور يفلد بحط الباقي نوت
               Text("Enter the problem description"),
               // : Text('Sent Message: ${_Textcontroller.value.text}'),
-
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: TextFormField(
